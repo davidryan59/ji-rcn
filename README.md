@@ -13,6 +13,5 @@ Unlike the contemporary scale of 12-tone equal temperament (12TET), there are an
 The purpose of the `ji-rcn` npm package is to make available calculations related to converting between rational numbers and these notations from RCN.
 
 ## API
-- primeToComma(p, type) where type is "DR" (default), "SAG", "KG2"
-- primeToCommaDR(p)
-- commaToText([num, denom]) returns a text version of comma, e.g. "num/denom"
+- `primeToComma(p, type)` where type is "DR" (default), "SAG", "KG2"
+- `commaToText([num, denom])` returns a text version of comma, e.g. "num/denom"

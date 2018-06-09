@@ -1,4 +1,4 @@
-var primeToCommaDR = require('./primeToCommaDR')
+var primeToCommaDR = require('./private/primeToCommaDR')
 
 var primeToComma = function(p, type) {
 
