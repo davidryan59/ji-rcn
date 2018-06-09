@@ -1,6 +1,6 @@
 {
   "name": "ji-rcn",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Functions for converting between numbers and notations",
   "author": "David Ryan",
   "main": "index.js",
