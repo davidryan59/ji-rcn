@@ -1,4 +1,5 @@
-# Just Intonation - Rational Comma Notation (JI-RCN, `ji-rcn`)
+# Just Intonation - Rational Comma Notation
+## (JI-RCN, `ji-rcn`)
 
 **Just Intonation** (JI) is a system of musical tuning where intervals can be expressed as ratios between whole numbers.
 
@@ -12,6 +13,19 @@ Unlike the contemporary scale of 12-tone equal temperament (12TET), there are an
 
 The purpose of the `ji-rcn` npm package is to make available calculations related to converting between rational numbers and these notations from RCN.
 
+## To use `ji-rcn` package
+- Install npm on your machine, access it via your command line / terminal
+- `npm i ji-rcn` in your JavaScript project directory to install this package
+- `var ji = require("ji-rcn")` at top of each JavaScript file to access the functions
+- Then object `ji` can be used to access all functions in this package.
+- But it doesn't have to be called `ji`; the shorthand `_` is used below, which represents your own variable name.
+
+## Examples
+- `_.primeToComma(5)` returns `[80, 81]`
+- `_.commaToText([80, 81])` returns `"80/81"`
+- `_.primeToComma(7)` returns `[63, 64]`
+- `_.commaToText([63, 64])` returns `"63/64"`
+
 ## API
-- `primeToComma(p, type)` where type is "DR" (default), "SAG", "KG2"
-- `commaToText([num, denom])` returns a text version of comma, e.g. "num/denom"
+- `_.primeToComma(p, type)` where type is `"DR"` (default), `"SAG"`, `"KG2"` for alternative algorithms. Returns an array `[num, denom]`.
+- `_.commaToText([num, denom])` returns a text version of the comma array.
