@@ -3,3 +3,4 @@ bundle.js
 bundle.js.map
 removed
 .DS_Store
+.nyc_output

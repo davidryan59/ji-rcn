@@ -1,7 +1,4 @@
-var commaToText = require('./functions/commaToText')
-var primeToComma = require('./functions/primeToComma')
-
 module.exports = {
-  primeToComma: primeToComma,
-  commaToText: commaToText
+  primeToComma: require('./functions/primeToComma')
+, commaToText: require('./functions/commaToText')
 }
