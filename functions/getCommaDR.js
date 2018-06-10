@@ -1,9 +1,18 @@
-var primeToCommaDR = function(p) {
+var Fraction = require('fraction.js')
+var tripleToFraction = require('./tripleToFraction.js')
+var calcExp2 = require('./calcExp2.js')
+
+var getCommaDR = function(p) {
   // This function maps a prime number
   // to a 2-element array containing its prime comma
 
   // DR algorithm implemented here
 
+  // Some constants
+  var cmmin = 1e20                // Unrealisticly high number
+  var result = Fraction(1, 1)
+
+  // Calcs start
   var log3 = Math.log(3)
   var log2 = Math.log(2)
   var log23 = log3/log2
@@ -19,10 +28,8 @@ var primeToCommaDR = function(p) {
   var bmin = Math.min(bmin1, bmin2)
   var bmax = Math.max(bmax1, bmax2)
 
-  var cmmin = 1e20                // Unrealisticly high number
-  var result = [0, 0]
   for (var b=bmin; b<=bmax; b++) {
-    var a = Math.round(-log2p - b*log23)
+    var a = calcExp2(p, b)
     var exp2a = Math.pow(2, a)
     var exp3b = Math.pow(3, b)
     var pcand =  exp2a * exp3b * p
@@ -32,12 +39,10 @@ var primeToCommaDR = function(p) {
     // console.log(b + ", " + a + ", " + pcand + ", " + ao + ", " + lcy + ", " + cm)
     if (cm<cmmin) {
       cmmin = cm
-      var num = p * Math.pow(2, Math.max(0, a)) * Math.pow(3, Math.max(0, b))
-      var denom = Math.pow(2, Math.max(0, -a)) * Math.pow(3, Math.max(0, -b))
-      result = [num, denom]
+      result = tripleToFraction(p,a,b)
     }
   }
   return result
 }
 
-module.exports = primeToCommaDR
+module.exports = getCommaDR
