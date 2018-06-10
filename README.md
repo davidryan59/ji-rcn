@@ -14,13 +14,13 @@ Unlike the contemporary scale of 12-tone equal temperament (12TET), there are an
 The purpose of the `ji-rcn` npm package is to make available calculations related to converting between rational numbers and these notations from RCN.
 
 ## API
-- `_.primeToComma(p, type)` returns `Fraction(n, m)` where `n/m` is the comma for `p`, under the algorithm `type` which is one of `"DR"`, `"SAG"`, `"KG2"`; `type` is optional, and if omitted, defaults to `"DR"`
+- `_.getComma(p, type)` returns `Fraction(n, m)` where `n/m` is the comma for `p`, under the algorithm `type` which is one of `"DR"`, `"SAG"`, `"KG2"`; `type` is optional, and if omitted, defaults to `"DR"`
 
 ## To use `ji-rcn` package
 - `npm i ji-rcn` in your JavaScript project directory to install this package
 - `var ji = require("ji-rcn")` at top of each JavaScript file to access the functions
-- `ji.primeToComma` to access the function in your scripts
+- `ji.getComma` to access the function in your scripts
 
 ## Examples
-- `_.primeToComma(5)` returns `[80, 81]`
-- `_.primeToComma(7)` returns `[63, 64]`
+- `_.getComma(5)` returns `[80, 81]`
+- `_.getComma(7)` returns `[63, 64]`
