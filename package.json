@@ -7,10 +7,12 @@
   "repository": "git@github.com:daveryan23/ji-rcn.git",
   "license": "ISC",
   "scripts": {
-    "test": "nyc mocha ./functions/tests/*.js",
+    "test": "nyc mocha ./functions/specs/*.spec.js",
     "examples": "cd ./examples && node run.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "fraction.js": "^4.0.8"
+  },
   "devDependencies": {
     "mocha": "^5.2.0",
     "nyc": "^12.0.2"

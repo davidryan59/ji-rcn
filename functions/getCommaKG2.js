@@ -1,0 +1,31 @@
+var Fraction = require('fraction.js')
+var tripleToFraction = require('./tripleToFraction.js')
+var calcExp2 = require('./calcExp2.js')
+
+var getCommaKG2 = function(p) {
+
+  var logp = Math.log(p)
+  var log2 = Math.log(2)
+  var log2p = logp/log2   // Octaves
+  var octFloor = Math.floor(log2p)
+  var fractPart = log2p - octFloor
+  var halfSemitones = Math.floor(24 * fractPart)
+
+  var exponents3 = [
+    0,
+    5, 5, -2, -2,
+    3, 3, -4, -4,
+    1, 1, -6,
+    6, -1, -1,
+    4, 4, -3, -3,
+    2, 2, -5, -5,
+    0
+  ]
+
+  var b = exponents3[halfSemitones]
+  var a = calcExp2(p, b)
+
+  return tripleToFraction(p, a, b)
+}
+
+module.exports = getCommaKG2

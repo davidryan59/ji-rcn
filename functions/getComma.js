@@ -1,8 +1,11 @@
-var primeToCommaDR = require('./private/primeToCommaDR')
+var Fraction = require('fraction.js')
+var getCommaDR = require('./getCommaDR')
+var getCommaSAG = require('./getCommaSAG')
+var getCommaKG2 = require('./getCommaKG2')
 
-var primeToComma = function(p, type) {
+var getComma = function(p, type) {
 
-  var defaultResult = [1, 1]
+  var defaultResult = Fraction(1,1)
 
   // p has got to be a number
   if (!(typeof(p)==="number")) {
@@ -28,16 +31,14 @@ var primeToComma = function(p, type) {
   var lowerType = (type || "DR").toLowerCase()
 
   if (lowerType.includes("sag")) {
-    // console.log("Algorithm SAG not implemented yet")
-    return primeToCommaDR(p)
+    return getCommaSAG(p)
   } else if (lowerType.includes("kg")) {
-    // console.log("Algorithm KG2 not implemented yet")
-    return primeToCommaDR(p)
+    return getCommaKG2(p)
   } else {
     // Use algorithm DR by default
-    return primeToCommaDR(p)
+    return getCommaDR(p)
   }
 
 }
 
-module.exports = primeToComma
+module.exports = getComma
