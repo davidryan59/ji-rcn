@@ -49,7 +49,6 @@ describe(fnName, function() {
   , [2499949, [67498623, 67108864]]
   ]
 
-  // Run all of these test cases
   for (var i=0; i<testArray.length; i++) {
     runTest(testArray[i][0], testArray[i][1])
   }

@@ -3,10 +3,6 @@ var tripleToFraction = require('./tripleToFraction.js')
 var calcExp2 = require('./calcExp2.js')
 
 var getCommaDR = function(p) {
-  // This function maps a prime number
-  // to a 2-element array containing its prime comma
-
-  // DR algorithm implemented here
 
   // Some constants
   var cmmin = 1e20                // Unrealisticly high number
@@ -36,7 +32,6 @@ var getCommaDR = function(p) {
     var ao = Math.abs(a + b * log23 + log2p)
     var lcy = Math.abs(a) + Math.abs(b) * log23 + log2p
     var cm = ao * lcy
-    // console.log(b + ", " + a + ", " + pcand + ", " + ao + ", " + lcy + ", " + cm)
     if (cm<cmmin) {
       cmmin = cm
       result = tripleToFraction(p,a,b)

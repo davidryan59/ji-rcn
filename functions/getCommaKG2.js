@@ -21,6 +21,7 @@ var getCommaKG2 = function(p) {
     2, 2, -5, -5,
     0
   ]
+  // Note this array has 24 elements, and is skew-symmetric about its middle.
 
   var b = exponents3[halfSemitones]
   var a = calcExp2(p, b)
