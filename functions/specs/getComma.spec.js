@@ -30,9 +30,10 @@ describe(fnName, function() {
   , [3, defaultFractionArray]
   , [-1, defaultFractionArray]
   , [-2003, defaultFractionArray]
-  , [139, [2224, 2187]]
+  , [139, [2224, 2187]]         // Default algorithm is DR
   , [139, [2224, 2187], "DR"]
   , [139, [139, 144], "SAG"]
+  , [139, [139, 144], "DK"]     // DK (Dave Keenan) is an alias for SAG
   , [139, [33777, 32768], "KG2"]
   ]
 

@@ -28,9 +28,10 @@ var getComma = function(p, type) {
   // However, the function will succeed if p is prime.
 
   // Types include: DR (default), SAG, KG2
+  // Also have DK as an alias for SAG
   var lowerType = (type || "DR").toLowerCase()
 
-  if (lowerType.includes("sag")) {
+  if (lowerType.includes("sag") || lowerType.includes("dk")) {
     return getCommaSAG(p)
   } else if (lowerType.includes("kg")) {
     return getCommaKG2(p)
