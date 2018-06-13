@@ -1,14 +1,14 @@
 var assert = require('assert')
 var Fraction = require('fraction.js')
-var getComma = require('../getComma.js')
+var getCommaP = require('../getCommaP.js')
 
 var defaultFractionArray = [1, 1]
 
-var fnName = 'getComma'
+var fnName = 'getCommaP'
 describe(fnName, function() {
 
   var runTest = function(prime, fractionArray, type) {
-    var actualResult = getComma(prime, type)
+    var actualResult = getCommaP(prime, type)
     var expectedResult = new Fraction(fractionArray)
     var typeText = ""
     if (type) {

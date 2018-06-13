@@ -7,7 +7,7 @@ var defaultResult = function() {
   return new Fraction(1, 1)
 }
 
-var getComma = function(p, type) {
+var getCommaP = function(p, type) {
 
   // p has got to be a number
   if (!(typeof(p)==="number")) {
@@ -44,4 +44,4 @@ var getComma = function(p, type) {
 
 }
 
-module.exports = getComma
+module.exports = getCommaP
