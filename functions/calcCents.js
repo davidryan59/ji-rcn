@@ -1,3 +1,5 @@
+// fraction is a Fraction (from fraction.js package)
+
 var calcCents = function(fraction) {
 
   var val = Math.abs(fraction.valueOf())

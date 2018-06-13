@@ -7,7 +7,7 @@ describe(fnName, function() {
 
   var runTest = function(prime, fractionArray) {
     var actualResult = getCommaDR(prime)
-    var expectedResult = Fraction(fractionArray)
+    var expectedResult = new Fraction(fractionArray)
     var label = fnName + "(" + prime + ") returns " + expectedResult.toFraction()
     it(label, function() {
       assert.deepStrictEqual(actualResult, expectedResult)
