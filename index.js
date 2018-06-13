@@ -1,3 +1,4 @@
 module.exports = {
-  getCommaP: require('./functions/getCommaP')
+  getComma: require('./functions/getComma')
+, getPythag: require('./functions/getPythag')
 }

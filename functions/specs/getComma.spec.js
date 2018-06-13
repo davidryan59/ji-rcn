@@ -7,11 +7,13 @@ var fnName = 'getComma'
 describe(fnName, function() {
 
   var runTest = function(input, fractionArray, algType, comment) {
+    var inputFraction = new Fraction(input)
     var actualResult = getComma(input, algType)
     var expectedResult = new Fraction(fractionArray)
     var typeText = (algType) ? ", " + algType : ""
     var commentText = (comment) ? "   (" + comment + ")" : ""
-    var label = fnName + "(" + input + typeText + ") returns " + expectedResult.toFraction() + commentText
+    var pythagText = "   (remaining pythagorean is " + inputFraction.div(actualResult).toFraction() + ")"
+    var label = fnName + "(" + input + typeText + ") returns " + expectedResult.toFraction() + commentText + pythagText
     it(label, function() {
       assert.deepStrictEqual(actualResult, expectedResult)
     })
