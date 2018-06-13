@@ -1,4 +1,5 @@
 var assert = require('assert')
+
 var calcExp2 = require('../calcExp2.js')
 var tripleToFraction = require('../tripleToFraction.js')
 

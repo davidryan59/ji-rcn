@@ -3,6 +3,7 @@ var calcExp2 = require('./calcExp2.js')
 var calcCents = require('./calcCents.js')
 
 var getCommaSAG = function(p) {
+  // Calculate a prime comma, according to the SAG algorithm
 
   var cutoff = 68.5725082211804     // (3^19/2^30)^0.5 in cents
 

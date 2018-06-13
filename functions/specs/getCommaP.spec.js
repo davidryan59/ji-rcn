@@ -1,11 +1,11 @@
 var assert = require('assert')
 var Fraction = require('fraction.js')
-var getCommaP = require('../getCommaP.js')
 
-var defaultFractionArray = [1, 1]
+var getCommaP = require('../getCommaP.js')
 
 var fnName = 'getCommaP'
 describe(fnName, function() {
+  var defaultFractionArray = [1, 1]
 
   var runTest = function(prime, fractionArray, algType) {
     var actualResult = getCommaP(prime, algType)

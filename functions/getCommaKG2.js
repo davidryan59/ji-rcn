@@ -2,6 +2,7 @@ var tripleToFraction = require('./tripleToFraction.js')
 var calcExp2 = require('./calcExp2.js')
 
 var getCommaKG2 = function(p) {
+  // Calculate a prime comma, according to the KG2 algorithm
 
   var logp = Math.log(p)
   var log2 = Math.log(2)

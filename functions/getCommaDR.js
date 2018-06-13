@@ -1,8 +1,10 @@
 var Fraction = require('fraction.js')
+
 var tripleToFraction = require('./tripleToFraction.js')
 var calcExp2 = require('./calcExp2.js')
 
 var getCommaDR = function(p) {
+  // Calculate a prime comma, according to the DR algorithm
 
   // Some constants
   var cmmin = 1e20                // Unrealisticly high number

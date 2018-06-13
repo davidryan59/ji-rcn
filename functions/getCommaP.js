@@ -1,13 +1,13 @@
 var Fraction = require('fraction.js')
+
 var getCommaDR = require('./getCommaDR')
 var getCommaSAG = require('./getCommaSAG')
 var getCommaKG2 = require('./getCommaKG2')
 
-var defaultResult = function() {
-  return new Fraction(1, 1)
-}
-
 var getCommaP = function(p, algType) {
+  // Calculate a prime comma, according to the specified algorithm
+
+  var defaultResult = function() {return new Fraction(1, 1)}
 
   // p has got to be a number
   if (!(typeof(p)==="number")) {
@@ -25,11 +25,11 @@ var getCommaP = function(p, algType) {
     return defaultResult()
   }
 
-  // Currently assuming that if p>=5 then its prime
-  // In fact it might not be.
-  // However, the function will succeed if p is prime.
+  // Although non-prime p could potentially be inputted,
+  // this function is private and will only be passed
+  // values in the list 1, 2, 3, 5, 7, 11, 13... (primes continue)
 
-  // Types include: DR (default), SAG, KG2
+  // Algorithm types include: DR (default), SAG, KG2
   // Also have DK as an alias for SAG
   var lowerAlgType = (algType || "DR").toLowerCase()
 
