@@ -7,7 +7,7 @@ var defaultResult = function() {
   return new Fraction(1, 1)
 }
 
-var getCommaP = function(p, type) {
+var getCommaP = function(p, algType) {
 
   // p has got to be a number
   if (!(typeof(p)==="number")) {
@@ -31,11 +31,11 @@ var getCommaP = function(p, type) {
 
   // Types include: DR (default), SAG, KG2
   // Also have DK as an alias for SAG
-  var lowerType = (type || "DR").toLowerCase()
+  var lowerAlgType = (algType || "DR").toLowerCase()
 
-  if (lowerType.includes("sag") || lowerType.includes("dk")) {
+  if (lowerAlgType.includes("sag") || lowerAlgType.includes("dk")) {
     return getCommaSAG(p)
-  } else if (lowerType.includes("kg")) {
+  } else if (lowerAlgType.includes("kg")) {
     return getCommaKG2(p)
   } else {
     // Use algorithm DR by default
