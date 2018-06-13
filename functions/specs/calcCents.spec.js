@@ -8,7 +8,7 @@ var fnName = 'calcCents'
 describe(fnName, function() {
 
   var runTest = function(fractionArray, cents) {
-    var fraction = Fraction(fractionArray)
+    var fraction = new Fraction(fractionArray)
     var actualResult = calcCents(fraction)
     var expectedResult = cents
     var label = fnName + "(" + fraction.toFraction() + ") returns " + expectedResult

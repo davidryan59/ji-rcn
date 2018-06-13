@@ -9,7 +9,7 @@ describe(fnName, function() {
 
   var runTest = function(prime, fractionArray, type) {
     var actualResult = getComma(prime, type)
-    var expectedResult = Fraction(fractionArray)
+    var expectedResult = new Fraction(fractionArray)
     var typeText = ""
     if (type) {
       typeText = ", " + type

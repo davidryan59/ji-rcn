@@ -6,7 +6,7 @@ var getCommaDR = function(p) {
 
   // Some constants
   var cmmin = 1e20                // Unrealisticly high number
-  var result = Fraction(1, 1)
+  var result = tripleToFraction(1, 1, 1)
 
   // Calcs start
   var log3 = Math.log(3)
@@ -33,8 +33,9 @@ var getCommaDR = function(p) {
     var lcy = Math.abs(a) + Math.abs(b) * log23 + log2p
     var cm = ao * lcy
     if (cm<cmmin) {
+      // This always gets called at least once
       cmmin = cm
-      result = tripleToFraction(p,a,b)
+      result = tripleToFraction(p, a, b)
     }
   }
   return result

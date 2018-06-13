@@ -3,13 +3,15 @@ var getCommaDR = require('./getCommaDR')
 var getCommaSAG = require('./getCommaSAG')
 var getCommaKG2 = require('./getCommaKG2')
 
-var getComma = function(p, type) {
+var defaultResult = function() {
+  return new Fraction(1, 1)
+}
 
-  var defaultResult = Fraction(1,1)
+var getComma = function(p, type) {
 
   // p has got to be a number
   if (!(typeof(p)==="number")) {
-    return defaultResult
+    return defaultResult()
   }
 
   // p forced to integer
@@ -17,10 +19,10 @@ var getComma = function(p, type) {
 
   // p ought to be between 5 and upper limit of integer precision
   if (p<5) {
-    return defaultResult
+    return defaultResult()
   } else if (p>5e15) {
     // Integer arithmetic starts failing above this number
-    return defaultResult
+    return defaultResult()
   }
 
   // Currently assuming that if p>=5 then its prime

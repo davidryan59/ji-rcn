@@ -1,4 +1,3 @@
-var Fraction = require('fraction.js')
 var tripleToFraction = require('./tripleToFraction.js')
 var calcExp2 = require('./calcExp2.js')
 var calcCents = require('./calcCents.js')

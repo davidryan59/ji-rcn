@@ -7,7 +7,7 @@ describe(fnName, function() {
 
   var runTest = function(inputArray, fractionArray) {
     var actualResult = tripleToFraction(inputArray[0], inputArray[1], inputArray[2])
-    var expectedResult = Fraction(fractionArray)
+    var expectedResult = new Fraction(fractionArray)
     var label = fnName + "(" + inputArray + ") returns " + expectedResult.toFraction()
     it(label, function() {
       assert.deepStrictEqual(actualResult, expectedResult)
