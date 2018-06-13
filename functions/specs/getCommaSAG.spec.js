@@ -1,5 +1,6 @@
 var assert = require('assert')
 var Fraction = require('fraction.js')
+
 var getCommaSAG = require('../getCommaSAG.js')
 
 var fnName = 'getCommaSAG'
@@ -17,7 +18,10 @@ describe(fnName, function() {
   // Lots of tests (SAG algorithm)
   // Many of these inputs are listed in the online paper
   var testArray = [
-    [5, [80, 81]]
+    [1, [1, 1]]
+  , [2, [1, 1]]
+  , [3, [1, 1]]
+  , [5, [80, 81]]
   , [7, [63, 64]]
   , [11, [33, 32]]
   , [13, [26, 27]]

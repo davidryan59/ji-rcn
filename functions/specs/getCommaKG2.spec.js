@@ -1,5 +1,6 @@
 var assert = require('assert')
 var Fraction = require('fraction.js')
+
 var getCommaKG2 = require('../getCommaKG2.js')
 
 var fnName = 'getCommaKG2'
@@ -17,7 +18,10 @@ describe(fnName, function() {
   // Lots of tests (KG2 algorithm)
   // Many of these inputs are listed in the online paper
   var testArray = [
-    [5, [80, 81]]
+    [1, [1, 1]]
+  , [2, [1, 1]]
+  , [3, [1, 1]]
+  , [5, [80, 81]]
   , [7, [63, 64]]
   , [11, [704, 729]]
   , [13, [1053, 1024]]

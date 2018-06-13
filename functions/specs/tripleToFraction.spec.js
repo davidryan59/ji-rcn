@@ -1,5 +1,6 @@
 var assert = require('assert')
 var Fraction = require('fraction.js')
+
 var tripleToFraction = require('../tripleToFraction.js')
 
 var fnName = 'tripleToFraction'

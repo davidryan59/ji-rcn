@@ -1,47 +1,42 @@
 var Fraction = require('fraction.js')
-var getCommaDR = require('./getCommaDR')
-var getCommaSAG = require('./getCommaSAG')
-var getCommaKG2 = require('./getCommaKG2')
+var paf = require('primes-and-factors')
 
-var defaultResult = function() {
-  return new Fraction(1, 1)
-}
+var getCommaP = require('./getCommaP')
 
-var getComma = function(p, type) {
+var getComma = function(input, algType) {
+  // Calculate a comma for any rational number (any fraction), and any fraction
+  // Part of the public API
 
-  // p has got to be a number
-  if (!(typeof(p)==="number")) {
-    return defaultResult()
+  var fraction = (input instanceof Fraction) ? input : new Fraction(input)
+  // Throws an error for non-numeric string input,
+  // but parses very nicely in other circumstances.
+
+  var numFactors = paf.getFrequency(fraction.n)
+  var denomFactors = paf.getFrequency(fraction.d)
+  // e.g. paf.getFrequency(12) returns [{factor:2,times:2},{factor:3,times:1}]
+
+  var gatherPrimeCommas = function(arrayOfObjs, algType) {
+    // arrayOfObjs is outputted from paf.getFrequency(N)
+    // Each array item is of form {factor:A, times:B}
+    var result = new Fraction(1, 1)
+    for (var i=0; i<arrayOfObjs.length; i++) {
+      var factObj = arrayOfObjs[i]
+      var prime = factObj.factor    // 1 or prime 2, 3, ...
+      var exponent = factObj.times
+      if (prime>1) {
+        var primeComma = getCommaP(prime, algType)
+        var primeCommaPower = primeComma.pow(exponent)
+        result = result.mul(primeCommaPower)
+      }
+    }
+    return result
   }
 
-  // p forced to integer
-  p = Math.round(p)
+  var result = new Fraction(1, 1)
+  result = result.mul(gatherPrimeCommas(numFactors, algType))
+  result = result.div(gatherPrimeCommas(denomFactors, algType))
 
-  // p ought to be between 5 and upper limit of integer precision
-  if (p<5) {
-    return defaultResult()
-  } else if (p>5e15) {
-    // Integer arithmetic starts failing above this number
-    return defaultResult()
-  }
-
-  // Currently assuming that if p>=5 then its prime
-  // In fact it might not be.
-  // However, the function will succeed if p is prime.
-
-  // Types include: DR (default), SAG, KG2
-  // Also have DK as an alias for SAG
-  var lowerType = (type || "DR").toLowerCase()
-
-  if (lowerType.includes("sag") || lowerType.includes("dk")) {
-    return getCommaSAG(p)
-  } else if (lowerType.includes("kg")) {
-    return getCommaKG2(p)
-  } else {
-    // Use algorithm DR by default
-    return getCommaDR(p)
-  }
-
+  return result
 }
 
 module.exports = getComma

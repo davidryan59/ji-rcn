@@ -1,4 +1,6 @@
 var calcExp2 = function(p, exp3) {
+  // For a given prime and power of 3,
+  // find the power of 2 which gets the whole fraction closest to 1/1
 
   var log3 = Math.log(3)
   var log2 = Math.log(2)

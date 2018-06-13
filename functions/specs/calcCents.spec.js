@@ -1,11 +1,11 @@
 var assert = require('assert')
 var Fraction = require('fraction.js')
-var calcCents = require('../calcCents.js')
 
-var tolerance = 1e-3
+var calcCents = require('../calcCents.js')
 
 var fnName = 'calcCents'
 describe(fnName, function() {
+  var tolerance = 1e-3
 
   var runTest = function(fractionArray, cents) {
     var fraction = new Fraction(fractionArray)

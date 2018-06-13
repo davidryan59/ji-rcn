@@ -1,14 +1,14 @@
 var Fraction = require('fraction.js')
 // var ji = require('ji-rcn')                     // npm
-var getComma = require('../index.js').getComma    // Locally
+var getCommaP = require('../index.js').getCommaP    // Locally
 
 var p_arr = [5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 5.1, 5.99, 3, 2, 1, 0, -1, -2, 21, 35, 257, 65537, 149, 151, 179, 181, 45077, 59051, 2499949]
 for (var p of p_arr) {
   // Find RCN comma (DR algorithm) for each prime
-  console.log(p + ": " + getComma(p, "DR"))
+  console.log(p + ": " + getCommaP(p, "DR"))
 }
 
-getComma(5,"KG2")
+getCommaP(5,"KG2")
 
 var arr = [
   [5, [80, 81]]
@@ -37,7 +37,7 @@ var arr = [
 ]
 for (var i=0; i<arr.length; i++) {
   var p = arr[i][0]
-  var actualValue = getComma(p, "KG2")
+  var actualValue = getCommaP(p, "KG2")
   var expectedValue = Fraction(arr[i][1])
   console.log("")
   console.log(p)
