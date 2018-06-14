@@ -14,12 +14,13 @@ describe(fnName, function() {
   }
 
   var testArray = [
-    ["aString", "NaN"]
-  , [null, "NaN"]
-  , [undefined, "NaN"]
-  , [["array"], "NaN"]
-  , [{an:"object"}, "NaN"]
-  , [-1e20, "Lo"]
+    ["aString", "Na"]   // Not A (Number)
+  , [null, "Na"]
+  , [undefined, "Na"]
+  , [["array"], "Na"]
+  , [{an:"object"}, "Na"]
+  , [-1e15-1, "Na"]
+  , [-1e15, "Lo"]
   , [-100.232, "Lo"]
   , [-2, "Lo"]
   , [-1.500001, "Lo"]
@@ -37,7 +38,8 @@ describe(fnName, function() {
   , [5.5, "Hi"]
   , [6, "Hi"]
   , [100, "Hi"]
-  , [1e20, "Hi"]
+  , [1e15, "Hi"]
+  , [1e15+1, "Na"]
   ]
 
   for (var i=0; i<testArray.length; i++) {

@@ -1,12 +1,14 @@
+var chk = require('./checkNumber')
+
 var getDiatonicScaleLabel = function(exp3) {
 
   // Turns an exponent of 3 between -1 and 6
   // into a standard scale note name
 
   // Deal with error cases
-  if (!(typeof(exp3)==='number')) {
+  if (!chk(exp3, 1e15)) {
     // Error output
-    return "NaN"
+    return "Na"
   }
   // Have a number
   exp3 = Math.round(exp3)
