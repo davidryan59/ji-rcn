@@ -11,7 +11,7 @@ describe(fnName, function() {
     var fraction = new Fraction(fractionArray)
     var actualResult = calcCents(fraction)
     var expectedResult = cents
-    var label = fnName + "(" + fraction.toFraction() + ") returns " + expectedResult
+    var label = fnName + "(" + fraction.toFraction() + ") = " + expectedResult
     it(label, function() {
       assert(Math.abs(expectedResult-actualResult)<tolerance)
     })

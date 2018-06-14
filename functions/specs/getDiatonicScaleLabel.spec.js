@@ -7,7 +7,7 @@ describe(fnName, function() {
 
   var runTest = function(input, expected) {
     var actual = getDiatonicScaleLabel(input)
-    var label = fnName + "(" + input + ") returns " + expected
+    var label = fnName + "(" + input + ") = " + expected
     it(label, function() {
       assert.strictEqual(actual, expected)
     })

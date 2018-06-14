@@ -9,7 +9,7 @@ describe(fnName, function() {
   var runTest = function(prime, fractionArray) {
     var actualResult = getCommaKG2(prime)
     var expectedResult = new Fraction(fractionArray)
-    var label = fnName + "(" + prime + ") returns " + expectedResult.toFraction()
+    var label = fnName + "(" + prime + ") = " + expectedResult.toFraction()
     it(label, function() {
       assert.deepStrictEqual(actualResult, expectedResult)
     })

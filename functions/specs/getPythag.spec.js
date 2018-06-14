@@ -12,7 +12,7 @@ describe(fnName, function() {
     var expectedResult = new Fraction(fractionArray)
     var typeText = (algType) ? ", " + algType : ""
     var commentText = (comment) ? "   (" + comment + ")" : ""
-    var label = fnName + "(" + input + typeText + ") returns " + expectedResult.toFraction() + commentText
+    var label = fnName + "(" + input + typeText + ") = " + expectedResult.toFraction() + commentText
     it(label, function() {
       assert.deepStrictEqual(actualResult, expectedResult)
     })

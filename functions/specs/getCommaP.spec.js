@@ -14,7 +14,7 @@ describe(fnName, function() {
     if (algType) {
       typeText = ", " + algType
     }
-    var label = fnName + "(" + prime + typeText + ") returns " + expectedResult.toFraction()
+    var label = fnName + "(" + prime + typeText + ") = " + expectedResult.toFraction()
     it(label, function() {
       assert.deepStrictEqual(actualResult, expectedResult)
     })

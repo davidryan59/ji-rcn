@@ -5,7 +5,7 @@ describe("checkNumber", function() {
 
   var runTest = function(input, expectedResult) {
     var actualResult = chk(input)
-    var label = "chk(" + input + ") returns " + expectedResult
+    var label = "chk(" + input + ") = " + expectedResult
     it(label, function() {
       assert.strictEqual(actualResult, expectedResult)
     })
