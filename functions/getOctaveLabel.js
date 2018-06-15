@@ -11,17 +11,17 @@ var getOctaveLabel = function(exp2) {
     return "(o.Err)"
   }
   // Its a valid number
-  octaves = Math.round(exp2)
-  if (octaves >= 1e6) {
+  standardOctaveNumber = Math.round(exp2)+4     // For 1/1, exp2=0, and octave is 4 (e.g. C4)
+  if (standardOctaveNumber >= 1e6) {
     return "(o+LOTS)"
-  } else if (octaves >= 10) {
-    return "(o+" + octaves + ")"
-  } else if (octaves >= 0) {
-    return "" + octaves
-  } else if (octaves <= -1e6) {
+  } else if (standardOctaveNumber >= 10) {
+    return "(o+" + standardOctaveNumber + ")"
+  } else if (standardOctaveNumber >= 0) {
+    return "" + standardOctaveNumber
+  } else if (standardOctaveNumber <= -1e6) {
     return "(o-LOTS)"
   } else {
-    return "(o" + octaves + ")"
+    return "(o" + standardOctaveNumber + ")"
   }
 }
 
