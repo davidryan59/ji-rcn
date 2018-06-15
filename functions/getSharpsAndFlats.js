@@ -11,19 +11,19 @@ var getSharpsAndFlats = function(exp3) {
     // Error output
     return "N"
   }
-  // Have a number
+  // Its a valid number
   var offset = Math.round(exp3) - 2
   var sharps = Math.round(offset/7)
   if (sharps >= 1e6) {
-    return "(#^LOTS)"
-  } else if (sharps >= 6) {
-    return "(#^" + sharps + ")"
+    return "(#LOTS)"
+  } else if (sharps >= 5) {
+    return "(#" + sharps + ")"
   } else if (sharps > 0) {
     return "#".repeat(sharps)
   } else if (sharps <= -1e6) {
-    return "(b^LOTS)"
-  } else if (sharps <= -6) {
-    return "(b^" + -sharps + ")"
+    return "(bLOTS)"
+  } else if (sharps <= -5) {
+    return "(b" + -sharps + ")"
   } else if (sharps < 0) {
     return "b".repeat(-sharps)
   } else {
