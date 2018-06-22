@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "fraction.js": "^4.0.8",
+    "peo": "^1.4.2",
     "primes-and-factors": "^0.1.4"
   },
   "devDependencies": {
