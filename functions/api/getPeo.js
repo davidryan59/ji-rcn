@@ -1,6 +1,6 @@
 var getPeo = function() {
-  // Public API - jn immutable
-  // - have to return a copy of Peo object!
+  // Its a Peo object.
+  // Need to copy it before releasing
   return this.peo.copy()
 }
 
