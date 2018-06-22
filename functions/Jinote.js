@@ -4,9 +4,12 @@ var initialise = require('./initialisers/initialise')
 function Jinote() {
   // Object's purpose is to translate between a fraction (in Peo format)
   // and a notation (text)
+
   this.peo = null
-  this.split = null
-  this.notation = null
+  this.alg = ""
+  // this.split = null
+  // this.notation = null
+
   // Initialise the Jinote
   initialise(this, arguments)
 }
