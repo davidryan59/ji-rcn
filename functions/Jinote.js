@@ -23,6 +23,7 @@ function Jinote() {
 // Type of instance method
 Jinote.prototype.getPeo = require('./api/getPeo')
 Jinote.prototype.getAlg = require('./api/getAlg')
-Jinote.prototype.getText = require('./api/getText')
+Jinote.prototype.getPitch = require('./api/getPitch')
+Jinote.prototype.getPitchClass = require('./api/getPitchClass')
 
 module.exports = Jinote

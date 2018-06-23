@@ -1,7 +1,7 @@
 var privateGetPeo = require('../private/privateGetPeo')
 var getCommaP = require('../commas/getCommaP')
 
-var getHigherPrimesLabel = require('../notation/getHigherPrimesLabel')
+var getHigherPrimesArray = require('../notation/getHigherPrimesArray')
 var get5Label = require('../notation/get5Label')
 var getSharpFlatArray = require('../notation/getSharpFlatArray')
 var getDiatonicArray = require('../notation/getDiatonicArray')
@@ -39,7 +39,9 @@ var setNotation = function(jn) {
 
   // Get labels for the prime components 5+
   var prime5Text = get5Label(prime5Peo.getPrimeExp(5))
-  var primes7PlusText = getHigherPrimesLabel(primes7PlusPeo)
+  var primes7PlusArray = getHigherPrimesArray(primes7PlusPeo)
+  var primes7PlusText = primes7PlusArray[0]
+  var commaSpacer = primes7PlusArray[1]
 
   // The Pythagorean component has a 3-exponent.
   // Use it first to get sharps and flats.
@@ -70,10 +72,20 @@ var setNotation = function(jn) {
   jn.txt.saf = safText
   jn.txt.pr5 = prime5Text
   jn.txt.prHi = primes7PlusText
+  jn.txt.spc = commaSpacer
 
   // Put all these text components together for a final notation
-  var allText = diatonicText + safText + prime5Text + primes7PlusText + octaveText
-  jn.txt.all = allText
+  var pitchText = ""
+  var pitchClassText = ""
+  if (commaSpacer) {
+    pitchText = diatonicText + safText + prime5Text + octaveText + commaSpacer + primes7PlusText
+    pitchClassText = diatonicText + safText + prime5Text + commaSpacer + primes7PlusText
+  } else {
+    pitchText = diatonicText + safText + prime5Text + primes7PlusText + octaveText
+    pitchClassText = diatonicText + safText + prime5Text + primes7PlusText
+  }
+  jn.txt.pitch = pitchText
+  jn.txt.pclass = pitchClassText
 
   // Set the Peos that multiply to original myPeo
   jn.comp = {}
