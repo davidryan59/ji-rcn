@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "fraction.js": "^4.0.8",
-    "peo": "^1.4.2",
-    "primes-and-factors": "^0.1.4"
+    "peo": "^1.4.3",
+    "primes-and-factors": "^0.2.1"
   },
   "devDependencies": {
     "mocha": "^5.2.0",
