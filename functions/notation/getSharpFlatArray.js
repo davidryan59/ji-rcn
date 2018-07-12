@@ -1,6 +1,5 @@
+var ibn = require('is-bounded-number')
 var Peo = require('peo')
-
-var chk = require('../maths/checkNumber')
 
 var getSharpFlatArray = function(exp3) {
   // Diatonic scale is between -1 and +5
@@ -9,7 +8,7 @@ var getSharpFlatArray = function(exp3) {
   // to get number of sharps (+ve) or flats (-ve)
 
   // Deal with error cases
-  if (!chk(exp3, 1e15)) {
+  if (!ibn(exp3, 1e15)) {
     // Error output
     return ["N", new Peo(), 0]
   }

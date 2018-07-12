@@ -1,6 +1,5 @@
+var ibn = require('is-bounded-number')
 var Peo = require('peo')
-
-var chk = require('../maths/checkNumber')
 
 var getOctaveArray = function(exp2) {
 
@@ -8,7 +7,7 @@ var getOctaveArray = function(exp2) {
   // into a standard scale note name
 
   // Deal with error cases
-  if (!chk(exp2, 1e15)) {
+  if (!ibn(exp2, 1e15)) {
     // Error output
     return ["(o.Err)", new Peo()]
   }

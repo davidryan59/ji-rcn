@@ -1,6 +1,5 @@
+var ibn = require('is-bounded-number')
 var Peo = require('peo')
-
-var chk = require('../maths/checkNumber')
 
 var fPeo = new Peo(4, 3)
 var cPeo = new Peo()
@@ -16,7 +15,7 @@ var getDiatonicArray = function(exp3) {
   // into a standard scale note name
 
   // Deal with error cases
-  if (!chk(exp3, 1e15)) {
+  if (!ibn(exp3, 1e15)) {
     // Error output
     return ["Na", cPeo]
   }

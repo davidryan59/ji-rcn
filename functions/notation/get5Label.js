@@ -1,4 +1,4 @@
-var chk = require('../maths/checkNumber')
+var ibn = require('is-bounded-number')
 
 var get5Label = function(exp5) {
   // Shorthand for exponent of 5 is
@@ -6,7 +6,7 @@ var get5Label = function(exp5) {
   // positive or negative exponents respectively
 
   // Deal with error cases
-  if (!chk(exp5, 1e15)) {
+  if (!ibn(exp5, 1e15)) {
     // Error output
     return "N"
   }

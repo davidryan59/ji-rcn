@@ -1,6 +1,4 @@
 var assert = require('assert')
-// var Peo = require('peo')
-
 var Jinote = require('../Jinote')
 
 describe('pitch and pitch class API', function() {
@@ -101,27 +99,5 @@ describe('pitch and pitch class API', function() {
   for (var i=0; i<testArray.length; i++) {
     runTest(testArray[i][0], testArray[i][1], testArray[i][2], testArray[i][3], testArray[i][4])
   }
-
-
-
-  // it("can calculate notation for new Jinote() as C4", function() {
-  //   var jn = new Jinote()
-  //   assert.deepStrictEqual(jn.getPitch(), "C4")
-  // })
-  //
-  // it("can calculate notation for new Jinote(5, 2) as E'5", function() {
-  //   var jn = new Jinote(5, 2)
-  //   assert.deepStrictEqual(jn.getPitch(), "E'5")
-  // })
-  //
-  // it('can calculate notation for new Jinote("1/9") as Bb0', function() {
-  //   var jn = new Jinote("1/9")
-  //   assert.deepStrictEqual(jn.getPitch(), "Bb0")
-  // })
-  //
-  // it('can calculate notation for new Jinote({3:12, 5:-8}) as Gbbb(.8)4', function() {
-  //   var jn = new Jinote({3:12, 5:-8})
-  //   assert.deepStrictEqual(jn.getPitch(), "Gbbb(.8)4")
-  // })
 
 })
