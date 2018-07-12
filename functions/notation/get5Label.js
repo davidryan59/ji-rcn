@@ -8,7 +8,7 @@ var get5Label = function(exp5) {
   // Deal with error cases
   if (!ibn(exp5, 1e15)) {
     // Error output
-    return "N"
+    return "(5ERR)"
   }
   // Its a valid number
   exp5 = Math.round(exp5)

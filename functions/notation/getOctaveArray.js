@@ -3,8 +3,8 @@ var Peo = require('peo')
 
 var getOctaveArray = function(exp2) {
 
-  // Turns an exponent of 3 between -1 and 6
-  // into a standard scale note name
+  // Returns an octave number corresponding to a 2-exponent.
+  // Note: 1 = 2^0 is in octave 4
 
   // Deal with error cases
   if (!ibn(exp2, 1e15)) {

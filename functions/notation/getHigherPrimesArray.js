@@ -24,7 +24,9 @@ var getHigherPrimesArray = function(peo) {
       } else {
         numText = thisLabel
       }
-    } else if (exp<0) {
+    } else {
+      // exp<=0
+      // In fact, since Peo has no zero exponents, exp<0
       if (denomText) {
         spacer = " "
         denomText = denomText + spacer + thisLabel
