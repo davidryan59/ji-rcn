@@ -4,6 +4,17 @@ var getHigherPrimesArray = function(peo) {
   var result = ""
   var spacer = ""
 
+  // If both numerator and denominator are less than 1000,
+  // use the text representation of the fraction instead of
+  // splitting into prime factors
+  if (peo.getLogNum(10)<3 && peo.getLogDenom(10)<3) {
+    if (peo.getLog(10)===0) {
+      return ["", spacer]
+    } else {
+      return ["[" + peo.getText() + "]", spacer]
+    }
+  }
+
   var numText = ""
   var denomText = ""
   var obj = peo.getPrimeExps()
@@ -36,18 +47,18 @@ var getHigherPrimesArray = function(peo) {
     }
   }
 
-  if (numText || denomText) {
-    if (denomText) {
-      if (numText) {
-        result = numText + spacer + "/" + spacer + denomText
-      } else {
-        result = "1" + spacer + "/" + spacer + denomText
-      }
+  // Must have at least one of numText, denomText populated
+  // since cases of less than 4 digits already taken care of
+  if (denomText) {
+    if (numText) {
+      result = numText + spacer + "/" + spacer + denomText
     } else {
-      result = numText
+      result = "1" + spacer + "/" + spacer + denomText
     }
-    result = "[" + result + "]"
+  } else {
+    result = numText
   }
+  result = "[" + result + "]"
 
   return [result, spacer]
 
