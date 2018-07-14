@@ -1,6 +1,4 @@
-module.exports = require('./functions/Jinote')
-
-// module.exports = {
-//   getComma: require('./functions/api/getComma')
-// , getPythag: require('./functions/api/getPythag')
-// }
+module.exports = {
+  jinote: require('./functions/Jinote')
+, getComma: require('./functions/api/class/getComma')
+}

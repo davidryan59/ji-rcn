@@ -1,4 +1,4 @@
-var setNotation = require('../setters/setNotation')
+var setNotation = require('../../setters/setNotation')
 
 var getPitchClass = function() {
   setNotation(this)

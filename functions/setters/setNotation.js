@@ -1,5 +1,5 @@
 var privateGetPeo = require('../private/privateGetPeo')
-var getCommaP = require('../commas/getCommaP')
+var getComma = require('../api/class/getComma')
 
 var getHigherPrimesArray = require('../notation/getHigherPrimesArray')
 var get5Label = require('../notation/get5Label')
@@ -30,7 +30,7 @@ var setNotation = function(jn) {
     var val = obj[key]
     var prime = Number.parseInt(key)
     var exp = Number.parseInt(val)
-    var thisComma = getCommaP(prime, alg)
+    var thisComma = getComma(prime, alg)
     comma5PlusPeo = comma5PlusPeo.mult(thisComma, exp)
   }
   // Divide comma5PlusPeo out of original Peo
