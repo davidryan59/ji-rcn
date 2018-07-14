@@ -1,14 +1,14 @@
 var Fraction = require('fraction.js')
 
-var tripleToFraction = require('./tripleToFraction.js')
-var calcExp2 = require('./calcExp2.js')
+var tripleToPeo = require('../maths/tripleToPeo')
+var calcExp2 = require('../maths/calcExp2')
 
 var getCommaDR = function(p) {
   // Calculate a prime comma, according to the DR algorithm
 
   // Some constants
   var cmmin = 1e20                // Unrealisticly high number
-  var result = tripleToFraction(1, 1, 1)
+  var result = tripleToPeo(1, 0, 0)
 
   // Calcs start
   var log3 = Math.log(3)
@@ -37,7 +37,7 @@ var getCommaDR = function(p) {
     if (cm<cmmin) {
       // This always gets called at least once
       cmmin = cm
-      result = tripleToFraction(p, a, b)
+      result = tripleToPeo(p, a, b)
     }
   }
   return result

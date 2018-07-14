@@ -1,4 +1,4 @@
 module.exports = {
-  getComma: require('./functions/getComma')
-, getPythag: require('./functions/getPythag')
+  jinote: require('./functions/Jinote')
+, getComma: require('./functions/api/class/getComma')
 }

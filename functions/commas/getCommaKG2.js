@@ -1,5 +1,5 @@
-var tripleToFraction = require('./tripleToFraction.js')
-var calcExp2 = require('./calcExp2.js')
+var tripleToPeo = require('../maths/tripleToPeo')
+var calcExp2 = require('../maths/calcExp2')
 
 var getCommaKG2 = function(p) {
   // Calculate a prime comma, according to the KG2 algorithm
@@ -26,7 +26,7 @@ var getCommaKG2 = function(p) {
   var b = exponents3[halfSemitones]
   var a = calcExp2(p, b)
 
-  return tripleToFraction(p, a, b)
+  return tripleToPeo(p, a, b)
 }
 
 module.exports = getCommaKG2

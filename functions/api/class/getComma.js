@@ -1,13 +1,13 @@
-var Fraction = require('fraction.js')
+var Peo = require('peo')
 
-var getCommaDR = require('./getCommaDR')
-var getCommaSAG = require('./getCommaSAG')
-var getCommaKG2 = require('./getCommaKG2')
+var getCommaDR = require('../../commas/getCommaDR')
+var getCommaSAG = require('../../commas/getCommaSAG')
+var getCommaKG2 = require('../../commas/getCommaKG2')
 
-var getCommaP = function(p, algType) {
+var getComma = function(p, algType) {
   // Calculate a prime comma, according to the specified algorithm
 
-  var defaultResult = function() {return new Fraction(1, 1)}
+  var defaultResult = function() {return new Peo(1)}
 
   // p has got to be a number
   if (!(typeof(p)==="number")) {
@@ -44,4 +44,4 @@ var getCommaP = function(p, algType) {
 
 }
 
-module.exports = getCommaP
+module.exports = getComma

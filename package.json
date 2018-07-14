@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "fraction.js": "^4.0.8",
-    "primes-and-factors": "^0.1.4"
+    "is-bounded-number": "^1.0.1",
+    "peo": "^1.4.4",
+    "primes-and-factors": "^0.2.1"
   },
   "devDependencies": {
     "mocha": "^5.2.0",
