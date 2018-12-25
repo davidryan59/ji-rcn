@@ -1,6 +1,8 @@
 # Just Intonation - Rational Comma Notation
 ## (JI-RCN, `ji-rcn`)
 
+[![npm version](https://badge.fury.io/js/ji-rcn.png)](https://badge.fury.io/js/ji-rcn)
+
 **Just Intonation** (JI) is a system of musical tuning where intervals can be expressed as ratios between whole numbers.
 
 Examples include: an octave (1:2), a major fourth (3:4), a major triad (4:5:6).
@@ -128,6 +130,6 @@ getComma(2499949, "KG2")  // returns 67498623/67108864
 (new Jinote({2:66, 5:40, 7:-40, 11:20, 13:-30})).getNotation() // returns "E(#18)('40)4 [11^20 / 7^40 13^30]" which is in octave 4
 ```
 
-These higher prime commas and notations are being made available to enable writing beautiful JI music that goes way outside the 12 notes of the standard scale. A piece of music written at the prime limit of 2499949 is available [here](https://soundcloud.com/daveryan23/ryan-example-primenumberedblues) (which used the `"DR"` comma given above), and the rest of the author's music is available [here](https://soundcloud.com/daveryan23/tracks).
+These higher prime commas and notations are being made available to enable writing beautiful JI music that goes way outside the 12 notes of the standard scale. A piece of music written at the prime limit of 2499949 is available [here](https://soundcloud.com/davidryan59/ryan-example-primenumberedblues) (which used the `"DR"` comma given above), and the rest of the author's music is available [here](https://soundcloud.com/davidryan59/tracks).
 
 *Hope you will enjoy the infinite possibilities of justly intoned music!*

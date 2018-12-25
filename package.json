@@ -2,9 +2,13 @@
   "name": "ji-rcn",
   "version": "5.0.0",
   "description": "Functions for converting between numbers and notations",
-  "author": "David Ryan",
+  "author": {
+    "name": "David Ryan",
+    "email": "davidryan1998@hotmail.com",
+    "url": "https://github.com/davidryan59"
+  },
   "main": "index.js",
-  "repository": "git@github.com:daveryan23/ji-rcn.git",
+  "repository": "git@github.com:davidryan59/ji-rcn.git",
   "license": "ISC",
   "scripts": {
     "test": "nyc mocha ./functions/specs/*.spec.js",
