@@ -111,4 +111,27 @@ describe(fnName, function() {
     assert.strictEqual(jnp, "Bb[7]5")
     assert.strictEqual(jn1p, "C4")
   })
+
+  it('can provide a pitch and a string', function() {
+    var jn = new Jinote(35, 12)
+    assert.strictEqual(jn.getPitch(), "G'[7]5")
+    assert.strictEqual(jn.toString(), "G'[7]5")
+  })
+
+  it('can raise to a power', function() {
+    var jn = new Jinote(3, 2)              // G4
+    assert.strictEqual(jn.pow(3).getPitch(), "A5")   // 27/8
+  })
+
+  it('can multiply', function() {
+    var jn1 = new Jinote(5, 3)              // A'5
+    var jn2 = new Jinote(9, 4)              // D5
+    assert.strictEqual(jn1.mult(jn2).getPitch(), "B'5")   // 15/4
+  })
+
+  it('can multiply by a power', function() {
+    var jn1 = new Jinote(5, 4)              // E'4
+    var jn2 = new Jinote(3, 2)              // G4
+    assert.strictEqual(jn1.mult(jn2, 2).getPitch(), "F#'5")   // 45/16
+  })
 })

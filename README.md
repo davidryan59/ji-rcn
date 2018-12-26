@@ -68,14 +68,20 @@ var jn = new Jinote(peo, alg)
 var jn = new Jinote(fraction, alg)
 var jn = new Jinote(object, alg)
 
-// Instance methods
-jn.get1()              // Return a new identity Jinote (from any Jinote)
+// General methods
 jn.copy()              // Return a deep copy of a Jinote
 jn.getAlg()            // Return algorithm for the Jinote
-jn.getNotation()       // Return a notation for the Jinote, e.g. "E'4" for new Jinote(5/4)
-jn.getPitch()          // Equivalent to getNotation()
+jn.getNotation()       // Equivalent to getPitch
+jn.getPitch()          // Return a pitch notation for the Jinote, e.g. "E'4" for new Jinote(5/4)
 jn.getPitchClass()     // Return a pitch class for the Jinote, e.g. "E'" for new Jinote(5/4). Octave information is discarded.
 jn.getPeo()            // Returns the underlying Peo for this Jinote
+jn.toString()          // Equivalent to getPitch
+
+// Maths methods
+jn.get1()              // Return a new identity Jinote (from any Jinote)
+jn.mult(jn2)           // Returns new Jinote based on peo of jn multiplied by peo of jn2
+jn.mult(jn2, pow)      // Same as previous, but jn2 is first raised to power 'pow'
+jn.pow(pow)            // Return new Jinote based on its peo being raised to power 'pow'
 ```
 
 ## Examples
