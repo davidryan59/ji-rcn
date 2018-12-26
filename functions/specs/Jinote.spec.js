@@ -91,4 +91,24 @@ describe(fnName, function() {
     assert.strictEqual(jn.getAlg(), "")
   })
 
+  it('can provide a deep copy', function() {
+    var jn = new Jinote("7/2")
+    var jnc = jn.copy()
+    var jnp = jn.getPitch()
+    var jncp = jnc.getPitch()
+    assert(jn !== jnc)                  // Objects different
+    assert(jn.peo !== jnc.peo)
+    assert.strictEqual(jnp, "Bb[7]5")   // Represents same Jinote
+    assert.strictEqual(jncp, "Bb[7]5")
+  })
+
+  it('can return an identity Jinote', function() {
+    var jn = new Jinote("7/2")
+    var jn1 = jn.get1()
+    var jnp = jn.getPitch()
+    var jn1p = jn1.getPitch()
+    assert(jn !== jn1)
+    assert.strictEqual(jnp, "Bb[7]5")
+    assert.strictEqual(jn1p, "C4")
+  })
 })

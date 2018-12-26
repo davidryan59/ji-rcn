@@ -15,6 +15,8 @@ Jinote.getComma = require('./api/class/getComma')
 // --------- Instance methods ---------
 
 // Type of instance method
+Jinote.prototype.get1 = require('./api/instance/get1')
+Jinote.prototype.copy = require('./api/instance/copy')
 Jinote.prototype.getPeo = require('./api/instance/getPeo')
 Jinote.prototype.getAlg = require('./api/instance/getAlg')
 Jinote.prototype.getNotation = require('./api/instance/getNotation')

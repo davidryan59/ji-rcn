@@ -69,6 +69,8 @@ var jn = new Jinote(fraction, alg)
 var jn = new Jinote(object, alg)
 
 // Instance methods
+jn.get1()              // Return a new identity Jinote (from any Jinote)
+jn.copy()              // Return a deep copy of a Jinote
 jn.getAlg()            // Return algorithm for the Jinote
 jn.getNotation()       // Return a notation for the Jinote, e.g. "E'4" for new Jinote(5/4)
 jn.getPitch()          // Equivalent to getNotation()
