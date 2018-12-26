@@ -55,3 +55,8 @@ console.log("")
 console.log(jn)
 console.log("")
 console.log("")
+
+for (var i=256; i<=320; i++) {
+  var jn = new Jinote(i, 256)
+  console.log(`${i}/256 maps to ${jn.getPitch()}`)
+}

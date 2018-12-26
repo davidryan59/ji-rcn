@@ -85,12 +85,6 @@ describe(fnName, function() {
     assert.deepStrictEqual(jn.peo.getPrimeExps(), {2:-2, 3:1})
   })
 
-  it('can initialise from new Jinote("Eb.4") (DO THIS ONE LATER)', function() {
-    var jn = new Jinote("Eb.4")
-    assert.deepStrictEqual(jn.peo.getPrimeExps(), {})
-    assert.strictEqual(jn.getAlg(), "")
-  })
-
   it('can provide a deep copy', function() {
     var jn = new Jinote("7/2")
     var jnc = jn.copy()
@@ -134,4 +128,56 @@ describe(fnName, function() {
     var jn2 = new Jinote(3, 2)              // G4
     assert.strictEqual(jn1.mult(jn2, 2).getPitch(), "F#'5")   // 45/16
   })
+
+  it('can initialise from parsing "A7" in new Jinote("A7")', function() {
+    var jn = new Jinote("A7")
+    assert.deepStrictEqual(jn.peo.getPrimeExps(), {2:0,3:3})
+  })
+
+  it('can initialise from parsing "B9" in new Jinote("B9")', function() {
+    var jn = new Jinote("B9")
+    assert.deepStrictEqual(jn.peo.getPrimeExps(), {2:0,3:5})
+  })
+
+  it('can initialise from parsing "C4" in new Jinote("C4")', function() {
+    var jn = new Jinote("C4")
+    assert.deepStrictEqual(jn.peo.getPrimeExps(), {2:0,3:0})
+  })
+
+  it('can initialise from parsing "C5" in new Jinote("C5")', function() {
+    var jn = new Jinote("C5")
+    assert.deepStrictEqual(jn.peo.getPrimeExps(), {2:1,3:0})
+  })
+
+  it('can initialise from parsing "D2" in new Jinote("D2")', function() {
+    var jn = new Jinote("D2")
+    assert.deepStrictEqual(jn.peo.getPrimeExps(), {2:0,3:2})
+  })
+
+  it('can initialise from parsing "E0" in new Jinote("E0")', function() {
+    var jn = new Jinote("E0")
+    assert.deepStrictEqual(jn.peo.getPrimeExps(), {2:0,3:4})
+  })
+
+  it('can initialise from parsing "F3" in new Jinote("F3")', function() {
+    var jn = new Jinote("F3")
+    assert.deepStrictEqual(jn.peo.getPrimeExps(), {2:0,3:-1})
+  })
+
+  it('can initialise from parsing "G4" in new Jinote("G4")', function() {
+    var jn = new Jinote("G4")
+    assert.deepStrictEqual(jn.peo.getPrimeExps(), {2:0,3:1})
+  })
+
+  it('can initialise from parsing "E\'6" in new Jinote("E\'6")', function() {
+    var jn = new Jinote("E'6")
+    assert.deepStrictEqual(jn.peo.getPrimeExps(), {2:0,3:0,5:1})
+  })
+
+  it('can initialise from parsing "Eb.3" in new Jinote("Eb.3")', function() {
+    var jn = new Jinote("Eb.3")
+    assert.deepStrictEqual(jn.peo.getPrimeExps(), {2:0,3:0,5:-1})
+  })
+
+
 })
