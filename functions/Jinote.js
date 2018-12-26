@@ -14,13 +14,18 @@ Jinote.getComma = require('./api/class/getComma')
 
 // --------- Instance methods ---------
 
-// Type of instance method
-Jinote.prototype.get1 = require('./api/instance/get1')
-Jinote.prototype.copy = require('./api/instance/copy')
-Jinote.prototype.getPeo = require('./api/instance/getPeo')
-Jinote.prototype.getAlg = require('./api/instance/getAlg')
-Jinote.prototype.getNotation = require('./api/instance/getNotation')
-Jinote.prototype.getPitch = require('./api/instance/getPitch')
-Jinote.prototype.getPitchClass = require('./api/instance/getPitchClass')
+// General
+Jinote.prototype.copy = require('./api/general/copy')
+Jinote.prototype.getPeo = require('./api/general/getPeo')
+Jinote.prototype.getAlg = require('./api/general/getAlg')
+Jinote.prototype.getNotation = require('./api/general/getNotation')
+Jinote.prototype.getPitch = require('./api/general/getPitch')
+Jinote.prototype.getPitchClass = require('./api/general/getPitchClass')
+Jinote.prototype.toString = require('./api/general/toString')
+
+// Maths
+Jinote.prototype.get1 = require('./api/maths/get1')
+Jinote.prototype.mult = require('./api/maths/mult')
+Jinote.prototype.pow = require('./api/maths/pow')
 
 module.exports = Jinote
