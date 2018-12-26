@@ -134,4 +134,44 @@ describe(fnName, function() {
     var jn2 = new Jinote(3, 2)              // G4
     assert.strictEqual(jn1.mult(jn2, 2).getPitch(), "F#'5")   // 45/16
   })
+
+  it('default Jinote has frequency Hz and text of 256 Hz', function() {
+    var jn = new Jinote()
+    assert.strictEqual(jn.getFreqHz(), 256)
+    assert.strictEqual(jn.getFreqText(), "256 Hz")
+  })
+
+  it('new Jinote(5, 4) is 320 Hz', function() {
+    var jn = new Jinote(5, 4)
+    assert.strictEqual(jn.getFreqHz(), 320)
+    assert.strictEqual(jn.getFreqText(), "320 Hz")
+  })
+
+  it('new Jinote("42") is 10752 Hz', function() {
+    var jn = new Jinote("42")
+    assert.strictEqual(jn.getFreqHz(), 10752)
+    assert.strictEqual(jn.getFreqText(), "10752 Hz")
+  })
+
+  it('new Jinote("6/7") has correct frequency Hz and text approx 219.43 Hz', function() {
+    var jn = new Jinote("6/7")       // 256 * 6 / 7 = 219.42857143
+    assert(jn.getFreqHz() > 219.428570)
+    assert(jn.getFreqHz() < 219.428572)
+    assert.strictEqual(jn.getFreqText(), "219.43 Hz")
+  })
+
+  it('new Jinote("6/7") and setBaseFreqHz(252) is 216 Hz', function() {
+    var jn = new Jinote("6/7")
+    jn.setBaseFreqHz(252)           // 252 * 6 / 7 = 216
+    assert.strictEqual(jn.getFreqHz(), 216)
+    assert.strictEqual(jn.getFreqText(), "216 Hz")
+  })
+
+  it('new Jinote("42") and setBaseFreqHz() still gives 10752 Hz', function() {
+    var jn = new Jinote("42")
+    jn.setBaseFreqHz()
+    assert.strictEqual(jn.getFreqHz(), 10752)
+    assert.strictEqual(jn.getFreqText(), "10752 Hz")
+  })
+
 })
