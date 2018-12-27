@@ -21,6 +21,10 @@ Jinote.prototype.getAlg = require('./api/general/getAlg')
 Jinote.prototype.getNotation = require('./api/general/getNotation')
 Jinote.prototype.getPitch = require('./api/general/getPitch')
 Jinote.prototype.getPitchClass = require('./api/general/getPitchClass')
+Jinote.prototype.getBaseFreqHz = require('./api/general/getBaseFreqHz')
+Jinote.prototype.getFreqHz = require('./api/general/getFreqHz')
+Jinote.prototype.getFreqText = require('./api/general/getFreqText')
+Jinote.prototype.setBaseFreqHz = require('./api/general/setBaseFreqHz')
 Jinote.prototype.toString = require('./api/general/toString')
 
 // Maths
