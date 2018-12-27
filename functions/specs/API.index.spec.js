@@ -1,15 +1,23 @@
 var assert = require('assert')
 
-var jircn = require('../../index')
+var ji = require('../../index')
 
-describe('API (index object) for ji-rcn', function() {
+describe('API (index object) for ji-rcn (via variable `ji`)', function() {
 
-  it('jircn.jinote works', function() {
-    assert.strictEqual(jircn.jinote.getComma(5).getText(), "80/81")
+  it('ji.jinote makes Jinote class available', function() {
+    assert.strictEqual(ji.jinote.getComma(5).getText(), "80/81")
   })
 
-  it('jircn.getComma works', function() {
-    assert.strictEqual(jircn.getComma(7).getText(), "63/64")
+  it('ji.Jinote makes Jinote class available', function() {
+    assert.strictEqual(ji.Jinote.getComma(5).getText(), "80/81")
+  })
+
+  it('ji.getComma function available', function() {
+    assert.strictEqual(ji.getComma(7).getText(), "63/64")
+  })
+
+  it('ji.parseNotation function available', function() {
+    assert.strictEqual(ji.parseNotation("E'5").getText(), "5/2")
   })
 
 })

@@ -11,6 +11,7 @@ function Jinote() {
 
 // Static or Class methods
 Jinote.getComma = require('./api/class/getComma')
+Jinote.parseNotation = require('./api/class/parseNotation')
 
 // --------- Instance methods ---------
 
