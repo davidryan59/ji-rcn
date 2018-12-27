@@ -3,6 +3,14 @@ var Peo = require('peo')
 
 var constants = require('../constants')
 
+var bl = constants.BRACKET_2_OCTAVE_LEFT
+var on = constants.NAME_2_OCTAVE
+var su = constants.SYMBOL_2_OCTAVE_UP
+var sd = constants.SYMBOL_2_OCTAVE_DOWN
+var br = constants.BRACKET_2_OCTAVE_RIGHT
+var ot = constants.OVERFLOW_TEXT
+
+var numOverflow = constants.MAX_OVERFLOW_2_OCTAVE
 
 var getOctaveArray = function(exp2) {
 
@@ -14,28 +22,28 @@ var getOctaveArray = function(exp2) {
   // Deal with error cases
   if (!ibn(exp2, constants.MAX_ERROR_2_OCTAVE)) {
     // Error output
-    return ["(" + constants.ERROR_TEXT_2_OCTAVE + ")", new Peo()]
+    return ["" + bl + constants.ERROR_TEXT_2_OCTAVE + br, new Peo()]
   }
 
   // Its a valid number
   exp2 = Math.round(exp2)
   var peo = new Peo(constants.PEO_2_OCTAVE, exp2)
   standardOctaveNumber = exp2 + 4     // For 1/1, exp2=0, and octave is 4 (e.g. C4)
-  if (standardOctaveNumber >= constants.MAX_OVERFLOW_2_OCTAVE) {
+  if (standardOctaveNumber >= numOverflow) {
     // Case 1000000...
-    return ["(" + constants.NAME_2_OCTAVE + "+" + constants.OVERFLOW_TEXT + ")", peo]
+    return ["" + bl + on + su + ot + br, peo]
   } else if (standardOctaveNumber > 9) {
     // Case 10...999999
-    return ["(" + constants.NAME_2_OCTAVE + "+" + standardOctaveNumber + ")", peo]
+    return ["" + bl + on + su + standardOctaveNumber + br, peo]
   } else if (standardOctaveNumber >= 0) {
     // Case 0..9
     return ["" + standardOctaveNumber, peo]
-  } else if (standardOctaveNumber <= -constants.MAX_OVERFLOW_2_OCTAVE) {
+  } else if (standardOctaveNumber <= -numOverflow) {
     // Case ...-1000000
-    return ["(" + constants.NAME_2_OCTAVE + "-" + constants.OVERFLOW_TEXT + ")", peo]
+    return ["" + bl + on + sd + ot + br, peo]
   } else {
-    // Case -999999...-1. Minus sign already there!
-    return ["(" + constants.NAME_2_OCTAVE + standardOctaveNumber + ")", peo]
+    // Case -999999...-1. Minus sign already there! Don't need sd in middle
+    return ["" + bl + on + standardOctaveNumber + br, peo]
   }
 }
 

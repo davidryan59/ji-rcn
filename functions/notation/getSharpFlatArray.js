@@ -3,6 +3,15 @@ var Peo = require('peo')
 
 var constants = require('../constants')
 
+var bl = constants.BRACKET_3_SHARP_FLAT_LEFT
+var br = constants.BRACKET_3_SHARP_FLAT_RIGHT
+var ot = constants.OVERFLOW_TEXT
+var st = constants.NAME_3_SHARP
+var ft = constants.NAME_3_FLAT
+
+var numOverflow = constants.MAX_OVERFLOW_3_SHARPS_FLATS
+var numRepeats = constants.MAX_REPEATS_3_SHARPS_FLATS
+
 
 var getSharpFlatArray = function(exp3) {
   // Diatonic scale is between -1 and +5
@@ -24,18 +33,18 @@ var getSharpFlatArray = function(exp3) {
     return [txt, peo, sharps]
   }
 
-  if (sharps >= constants.MAX_OVERFLOW_3_SHARPS_FLATS) {
-    return getResult("(" + constants.NAME_3_SHARP + constants.OVERFLOW_TEXT + ")")
-  } else if (sharps > constants.MAX_REPEATS_3_SHARPS_FLATS) {
-    return getResult("(" + constants.NAME_3_SHARP + sharps + ")")
+  if (sharps >= numOverflow) {
+    return getResult("" + bl + st + ot + br)
+  } else if (sharps > numRepeats) {
+    return getResult("" + bl + st + sharps + br)
   } else if (sharps > 0) {
-    return getResult(constants.NAME_3_SHARP.repeat(sharps))
-  } else if (sharps <= -constants.MAX_OVERFLOW_3_SHARPS_FLATS) {
-    return getResult("(" + constants.NAME_3_FLAT + constants.OVERFLOW_TEXT + ")")
-  } else if (sharps < -constants.MAX_REPEATS_3_SHARPS_FLATS) {
-    return getResult("(" + constants.NAME_3_FLAT + -sharps + ")")
+    return getResult(st.repeat(sharps))
+  } else if (sharps <= -numOverflow) {
+    return getResult("" + bl + ft + ot + br)
+  } else if (sharps < -numRepeats) {
+    return getResult("" + bl + ft + -sharps + br)
   } else if (sharps < 0) {
-    return getResult(constants.NAME_3_FLAT.repeat(-sharps))
+    return getResult(ft.repeat(-sharps))
   } else {
     return getResult("")
   }
