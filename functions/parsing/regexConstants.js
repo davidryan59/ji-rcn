@@ -1,6 +1,6 @@
 var esc = require('escape-string-regexp')
 
-var constants = require('../../constants')
+var constants = require('../constants')
 
 var bl2 = constants.BRACKET_2_OCTAVE_LEFT
 var octaveText = constants.NAME_2_OCTAVE
@@ -16,8 +16,8 @@ var dig3 = constants.MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS
 var br3 = constants.BRACKET_3_SHARP_FLAT_RIGHT
 
 var bl5 = constants.BRACKET_5_SYNTONIC_LEFT
-var syntonicUpText = constants.NAME_5_SYNTONIC_COMMA_UP
-var syntonicDownText = constants.NAME_5_SYNTONIC_COMMA_DOWN
+var syntonicUpText = constants.NAME_5_SYNTONIC_COMMA_ADD
+var syntonicDownText = constants.NAME_5_SYNTONIC_COMMA_REMOVE
 var dig5 = constants.MAX_OVERFLOW_DIGITS_5_SYNTONIC_COMMA
 var br5 = constants.BRACKET_5_SYNTONIC_RIGHT
 
@@ -59,8 +59,8 @@ var result = {
   REGEX_BRACKETED_OCTAVES_DOWN: new RegExp(stringBracketedOctavesDown, flags),
   REGEX_BRACKETED_SHARPS: new RegExp(stringBracketedSharps, flags),
   REGEX_BRACKETED_FLATS: new RegExp(stringBracketedFlats, flags),
-  REGEX_BRACKETED_SYNTONIC_UP: new RegExp(stringBracketedSyntonicUp, flags),
-  REGEX_BRACKETED_SYNTONIC_DOWN: new RegExp(stringBracketedSyntonicDown, flags),
+  REGEX_BRACKETED_SYNTONIC_COMMA_ADD: new RegExp(stringBracketedSyntonicUp, flags),
+  REGEX_BRACKETED_SYNTONIC_COMMA_REMOVE: new RegExp(stringBracketedSyntonicDown, flags),
 
   REGEX_BRACKETED_OCTAVE_ERROR: new RegExp(stringBracketedOctaveError, flags),
   REGEX_BRACKETED_OCTAVE_UP_OVERFLOW: new RegExp(stringBracketedOctaveUpOverflow, flags),
@@ -68,8 +68,15 @@ var result = {
   REGEX_BRACKETED_SHARP_OVERFLOW: new RegExp(stringBracketedSharpOverflow, flags),
   REGEX_BRACKETED_FLAT_OVERFLOW: new RegExp(stringBracketedFlatOverflow, flags),
   REGEX_BRACKETED_SYNTONIC_ERROR: new RegExp(stringBracketedSyntonicError, flags),
-  REGEX_BRACKETED_SYNTONIC_UP_OVERFLOW: new RegExp(stringBracketedSyntonicUpOverflow, flags),
-  REGEX_BRACKETED_SYNTONIC_DOWN_OVERFLOW: new RegExp(stringBracketedSyntonicDownOverflow, flags),
+  REGEX_BRACKETED_SYNTONIC_COMMA_ADD_OVERFLOW: new RegExp(stringBracketedSyntonicUpOverflow, flags),
+  REGEX_BRACKETED_SYNTONIC_COMMA_REMOVE_OVERFLOW: new RegExp(stringBracketedSyntonicDownOverflow, flags),
+
+  REGEX_CHAR_OCTAVE: new RegExp("[0-9]", flags),
+  REGEX_CHAR_DIATONIC: new RegExp("[A-G]", flags),
+  REGEX_CHAR_SHARP: new RegExp(esc(constants.NAME_3_SHARP), flags),
+  REGEX_CHAR_FLAT: new RegExp(esc(constants.NAME_3_FLAT), flags),
+  REGEX_CHAR_SYNTONIC_COMMA_ADD: new RegExp(esc(constants.NAME_5_SYNTONIC_COMMA_ADD), flags),
+  REGEX_CHAR_SYNTONIC_COMMA_REMOVE: new RegExp(esc(constants.NAME_5_SYNTONIC_COMMA_REMOVE), flags),
 
   DUMMY: "DUMMY"
 }

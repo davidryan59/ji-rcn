@@ -27,13 +27,13 @@ var getDiatonicArray = function(exp3) {
   // Give some output
   var result = null
   switch (exp3) {
-    case -1: return [constants.NAME_3_DIATONIC_F, constants.PEO_3_DIATONIC_F.copy()]
-    case 0: return [constants.NAME_3_DIATONIC_C, constants.PEO_3_DIATONIC_C.copy()]
-    case 1: return [constants.NAME_3_DIATONIC_G, constants.PEO_3_DIATONIC_G.copy()]
-    case 2: return [constants.NAME_3_DIATONIC_D, constants.PEO_3_DIATONIC_D.copy()]
-    case 3: return [constants.NAME_3_DIATONIC_A, constants.PEO_3_DIATONIC_A.copy()]
-    case 4: return [constants.NAME_3_DIATONIC_E, constants.PEO_3_DIATONIC_E.copy()]
-    case 5: return [constants.NAME_3_DIATONIC_B, constants.PEO_3_DIATONIC_B.copy()]
+    case -1: return ["F", constants.PEO_3_DIATONIC_F.copy()]
+    case 0: return ["C", constants.PEO_3_DIATONIC_C.copy()]
+    case 1: return ["G", constants.PEO_3_DIATONIC_G.copy()]
+    case 2: return ["D", constants.PEO_3_DIATONIC_D.copy()]
+    case 3: return ["A", constants.PEO_3_DIATONIC_A.copy()]
+    case 4: return ["E", constants.PEO_3_DIATONIC_E.copy()]
+    case 5: return ["B", constants.PEO_3_DIATONIC_B.copy()]
   }
 }
 

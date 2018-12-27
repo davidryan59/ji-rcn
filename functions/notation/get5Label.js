@@ -4,8 +4,8 @@ var constants = require('../constants')
 
 var bl = constants.BRACKET_5_SYNTONIC_LEFT
 var br = constants.BRACKET_5_SYNTONIC_RIGHT
-var scu = constants.NAME_5_SYNTONIC_COMMA_UP
-var scd = constants.NAME_5_SYNTONIC_COMMA_DOWN
+var scu = constants.NAME_5_SYNTONIC_COMMA_ADD
+var scd = constants.NAME_5_SYNTONIC_COMMA_REMOVE
 var ot = constants.OVERFLOW_TEXT
 
 var numError = 10 ** constants.MAX_ERROR_DIGITS_5_SYNTONIC_COMMA
