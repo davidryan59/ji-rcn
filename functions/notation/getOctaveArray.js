@@ -10,7 +10,8 @@ var sd = constants.SYMBOL_2_OCTAVE_DOWN
 var br = constants.BRACKET_2_OCTAVE_RIGHT
 var ot = constants.OVERFLOW_TEXT
 
-var numOverflow = constants.MAX_OVERFLOW_2_OCTAVE
+var numError = 10 ** constants.MAX_ERROR_DIGITS_2_OCTAVE
+var numOverflow = 10 ** constants.MAX_OVERFLOW_DIGITS_2_OCTAVE
 
 var getOctaveArray = function(exp2) {
 
@@ -20,7 +21,7 @@ var getOctaveArray = function(exp2) {
   // Full format for outside of this range, like (o+10) or (o-4321)
 
   // Deal with error cases
-  if (!ibn(exp2, constants.MAX_ERROR_2_OCTAVE)) {
+  if (!ibn(exp2, numError)) {
     // Error output
     return ["" + bl + constants.ERROR_TEXT_2_OCTAVE + br, new Peo()]
   }

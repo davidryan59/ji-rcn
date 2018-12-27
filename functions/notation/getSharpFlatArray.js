@@ -9,7 +9,8 @@ var ot = constants.OVERFLOW_TEXT
 var st = constants.NAME_3_SHARP
 var ft = constants.NAME_3_FLAT
 
-var numOverflow = constants.MAX_OVERFLOW_3_SHARPS_FLATS
+var numError = 10 ** constants.MAX_ERROR_DIGITS_3_SHARPS_FLATS
+var numOverflow = 10 ** constants.MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS
 var numRepeats = constants.MAX_REPEATS_3_SHARPS_FLATS
 
 
@@ -20,7 +21,7 @@ var getSharpFlatArray = function(exp3) {
   // to get number of sharps (+ve) or flats (-ve)
 
   // Deal with error cases
-  if (!ibn(exp3, constants.MAX_ERROR_3_SHARPS_FLATS)) {
+  if (!ibn(exp3, numError)) {
     // Error output
     return [constants.ERROR_TEXT_3_SHARPS_FLATS, new Peo(), 0]
   }

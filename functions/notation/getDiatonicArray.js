@@ -2,6 +2,8 @@ var ibn = require('is-bounded-number')
 
 var constants = require('../constants')
 
+var numError = 10 ** constants.MAX_ERROR_DIGITS_3_DIATONIC
+
 
 var getDiatonicArray = function(exp3) {
 
@@ -9,7 +11,7 @@ var getDiatonicArray = function(exp3) {
   // into a standard scale note name (F, C... B)
 
   // Deal with error cases
-  if (!ibn(exp3, constants.MAX_ERROR_3_DIATONIC)) {
+  if (!ibn(exp3, numError)) {
     // Error output
     return [constants.ERROR_TEXT_3_DIATONIC_NA, constants.PEO_3_DIATONIC_C]
   }

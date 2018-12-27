@@ -8,7 +8,8 @@ var scu = constants.NAME_5_SYNTONIC_COMMA_UP
 var scd = constants.NAME_5_SYNTONIC_COMMA_DOWN
 var ot = constants.OVERFLOW_TEXT
 
-var numOverflow = constants.MAX_OVERFLOW_5_SYNTONIC_COMMA
+var numError = 10 ** constants.MAX_ERROR_DIGITS_5_SYNTONIC_COMMA
+var numOverflow = 10 ** constants.MAX_OVERFLOW_DIGITS_5_SYNTONIC_COMMA
 var numRepeats = constants.MAX_REPEATS_5_SYNTONIC_COMMA
 
 
@@ -18,7 +19,7 @@ var get5Label = function(exp5) {
   // positive or negative exponents respectively
 
   // Deal with error cases
-  if (!ibn(exp5, constants.MAX_ERROR_5_SYNTONIC_COMMA)) {
+  if (!ibn(exp5, numError)) {
     // Error output
     return "" + bl + constants.ERROR_TEXT_5_SYNTONIC_COMMA + br
   }
