@@ -1,6 +1,6 @@
 var ibn = require('is-bounded-number')
 
-var constants = require('../constants')
+var constants = require('../constants/general')
 
 var numError = 10 ** constants.MAX_ERROR_DIGITS_3_DIATONIC
 

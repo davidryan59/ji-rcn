@@ -1,6 +1,6 @@
 var Peo = require('peo')
 
-var constants = {
+var result = {
   OVERFLOW_TEXT: "LOTS",
 
   PEO_2_OCTAVE: new Peo(2),
@@ -56,4 +56,4 @@ var constants = {
   DUMMY: "DUMMY"
 }
 
-module.exports = constants
+module.exports = result

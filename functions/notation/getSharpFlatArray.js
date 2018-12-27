@@ -1,7 +1,7 @@
 var ibn = require('is-bounded-number')
 var Peo = require('peo')
 
-var constants = require('../constants')
+var constants = require('../constants/general')
 
 var bl = constants.BRACKET_3_SHARP_FLAT_LEFT
 var br = constants.BRACKET_3_SHARP_FLAT_RIGHT

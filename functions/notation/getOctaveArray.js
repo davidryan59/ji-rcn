@@ -1,7 +1,7 @@
 var ibn = require('is-bounded-number')
 var Peo = require('peo')
 
-var constants = require('../constants')
+var constants = require('../constants/general')
 
 var bl = constants.BRACKET_2_OCTAVE_LEFT
 var on = constants.NAME_2_OCTAVE

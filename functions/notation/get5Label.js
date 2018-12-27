@@ -1,6 +1,6 @@
 var ibn = require('is-bounded-number')
 
-var constants = require('../constants')
+var constants = require('../constants/general')
 
 var bl = constants.BRACKET_5_SYNTONIC_LEFT
 var br = constants.BRACKET_5_SYNTONIC_RIGHT

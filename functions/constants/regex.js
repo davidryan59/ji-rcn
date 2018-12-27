@@ -1,6 +1,6 @@
 var esc = require('escape-string-regexp')
 
-var constants = require('../constants')
+var constants = require('../constants/general')
 
 var bl2 = constants.BRACKET_2_OCTAVE_LEFT
 var octaveText = constants.NAME_2_OCTAVE

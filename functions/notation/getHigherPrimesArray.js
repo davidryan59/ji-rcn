@@ -1,4 +1,4 @@
-var constants = require('../constants')
+var constants = require('../constants/general')
 
 var bl = constants.BRACKET_HIGHER_COMMA_LEFT
 var bmid = constants.SYMBOL_HIGHER_COMMA_MID
