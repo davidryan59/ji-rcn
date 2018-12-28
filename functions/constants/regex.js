@@ -40,7 +40,7 @@ var stringBracketedSyntonicUp = makeRegexStringForVariableDigits(bl5, syntonicUp
 var stringBracketedSyntonicDown = makeRegexStringForVariableDigits(bl5, syntonicDownText, "", dig5, br5)
 
 
-var stringNumbers = "[ " + esc("^") + "0-9]+"
+var stringNumbers = "[ " + esc("^") + "0-9]*"
 var stringBracketedCommaFraction = esc("[") + stringNumbers + esc("/") + stringNumbers + esc("]")
 var stringBracketedCommaInteger = esc("[") + stringNumbers + esc("]")
 

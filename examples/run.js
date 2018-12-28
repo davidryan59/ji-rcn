@@ -1,8 +1,8 @@
-// var jircn = require('ji-rcn')           // via npm
-var jircn = require('../index.js')       // locally
-
-var Jinote = jircn.jinote
+// var ji = require('ji-rcn')           // via npm
+var ji = require('../index.js')       // locally
+var Jinote = ji.jinote
 var jn = null
+var peo = null
 
 console.log("")
 console.log("Example of newly created Jinote:")
@@ -56,7 +56,37 @@ console.log(jn)
 console.log("")
 console.log("")
 
-for (var i=256; i<=320; i++) {
+console.log("")
+console.log("Example of getting a comma:")
+console.log("`Jinote.getComma(7)`")
+console.log("")
+console.log(Jinote.getComma(7))
+console.log("")
+console.log("")
+
+console.log("")
+console.log("Example of parsing notation text:")
+console.log("`Jinote.parseNotation(\"D'[7]6\")`")
+console.log("")
+peo = Jinote.parseNotation("D'[7]6")
+console.log(peo)
+console.log("")
+console.log(peo.getText())
+console.log("")
+console.log("")
+
+console.log("")
+console.log("Creation of Jinote on same notation text:")
+console.log("`new Jinote(\"D'[7]6\")`")
+console.log("")
+jn = new Jinote("D'[7]6")
+console.log(jn)
+console.log("")
+console.log(jn.getFraction())
+console.log("")
+console.log("")
+
+for (var i=256; i<=275; i++) {
   var jn = new Jinote(i, 256)
   console.log(`${i}/256 maps to ${jn.getPitch()}`)
 }

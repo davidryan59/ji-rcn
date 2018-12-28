@@ -1,5 +1,6 @@
 var Peo = require('peo')
 
+var getComma = require('./getComma')
 var constants = require('../../constants/general')
 var rxs = require('../../constants/regex')
 
@@ -10,12 +11,67 @@ var getIntFromChars = function(theText) {
   return theInt
 }
 
+var removeSpacesAroundPowerSymbol = function(theText) {
+  var regex = / *\^ */g
+  var substr = "^"
+  return theText.replace(regex, substr)
+}
+
+var addSpacesAroundDivideSymbol = function(theText) {
+  var regex = /\//g
+  var substr = " / "
+  return theText.replace(regex, substr)
+}
+
+var processCommaText = function(commaText) {
+  var tempText = commaText
+  tempText = removeSpacesAroundPowerSymbol(tempText)
+  tempText = addSpacesAroundDivideSymbol(tempText)
+  var textSplitBySpacesArray = tempText.split(/[ \[\]]/g)
+  var sign = 1      // -1 after divide symbol
+  var firstPeo = new Peo()
+  for (var i=0; i<textSplitBySpacesArray.length; i++) {
+    var elt = textSplitBySpacesArray[i]
+    if (elt==="") {
+      // do nothing
+    } else if (elt==="/") {
+      sign = -1
+    } else {
+      var num = 1
+      var pow = sign
+      var nextSplitArray = elt.split(/\^/g)
+      for (var j=0; j<nextSplitArray.length; j++) {
+        var elt2 = parseInt(nextSplitArray[j])
+        if (j===0) {
+          num = elt2
+        } else {
+          pow *= elt2
+        }
+      }
+      var tempPeo = new Peo(num, 1, pow)
+      firstPeo = firstPeo.mult(tempPeo)
+    }
+  }
+  // firstPeo specifies which commas to multiply together
+  // secondPeo actually does the multiplication
+  var primeExps = firstPeo.getPrimeExps()    // Object like {'2':3, '3':-2}
+  var keyArray = Object.keys(primeExps)      // Text - need a parseInt on elts
+  var secondPeo = new Peo()
+  for (var i=0; i<keyArray.length; i++) {
+    var prime = parseInt(keyArray[i])
+    var power = primeExps[prime]
+    var commaPeo = getComma(prime)
+    secondPeo = secondPeo.mult(commaPeo, power)
+  }
+  return secondPeo
+}
+
+var reduceCommasToPeo = function(acc, elt) {return acc.mult(processCommaText(elt))}
+
 var reduceToSumOrConcatenation = function(acc, elt) {return acc + elt}
 var reduceToCount = function(acc, elt) {return acc + 1}
 var reduceToSumOfInts = function(acc, elt) {return acc + getIntFromChars(elt)}
 var reduceToSumOfIntsMinus4 = function(acc, elt) {return acc + getIntFromChars(elt) - 4}
-
-var identityPeoDUMMY = function(theInt) {return new Peo()}
 
 var sharpsPeo = function(theInt) {return new Peo({3:(7*theInt),2:(-11*theInt)})}
 var flatsPeo = function(theInt) {return new Peo({3:(-7*theInt),2:(11*theInt)})}
@@ -28,10 +84,6 @@ var identityFunction = function(anything) {return anything}
 
 
 var parseNotation = function(notation) {
-
-  // console.log("")
-  // console.log("Starting to parse:")
-  // console.log(notation)
 
   // Variables to iterate on
   var tempResult = 0
@@ -46,10 +98,6 @@ var parseNotation = function(notation) {
 
   var analyseNotation = function(options) {
     tempRx = options.rgx
-    // console.log("")
-    // console.log("Applying regex:")
-    // console.log(tempRx)
-
     tempReduceMatch = options.reduceMatch
     tempMapReducerResultToPeo = options.mapReducerResultToPeo
     tempInitialValue = options.initialValue || 0
@@ -59,25 +107,10 @@ var parseNotation = function(notation) {
       if (Array.isArray(tempMatch)) tempResult = tempMatch.reduce(tempReduceMatch, tempInitialValue)
       tempPeo = tempMapReducerResultToPeo(tempResult)
       resultsPeo = resultsPeo.mult(tempPeo)
-      // console.log("Match results:")
-      // console.log(tempMatch)
-      // console.log("Temp count:")
-      // console.log(tempResult)
-      // console.log("Temp Peo:")
-      // console.log(tempPeo)
-      // // console.log(tempPeo.getText())
-      // console.log("Total Peo so far:")
-      // console.log(resultsPeo)
-      // // console.log(resultsPeo.getText())
     }
     tempSplit = tempNotation.split(tempRx)
     tempNotation = tempSplit.reduce(reduceToSumOrConcatenation, "")
-    // // console.log("Split results:")
-    // // console.log(tempSplit)
-    // console.log("New Notation:")
-    // console.log(tempNotation)
   }
-
 
   // Remove error conditions from the text to parse
   analyseNotation({rgx: rxs.REGEX_BRACKETED_OCTAVE_ERROR})
@@ -129,14 +162,16 @@ var parseNotation = function(notation) {
   // Do the commas next
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_COMMA_FRACTION,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: identityPeoDUMMY
+    reduceMatch: reduceCommasToPeo,
+    initialValue: new Peo(),
+    mapReducerResultToPeo: identityFunction
   })
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_COMMA_INTEGER,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: identityPeoDUMMY
+    reduceMatch: reduceCommasToPeo,
+    initialValue: new Peo(),
+    mapReducerResultToPeo: identityFunction
   })
 
   // Analyse and remove some valid single characters from the text

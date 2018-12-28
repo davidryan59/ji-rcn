@@ -23,6 +23,7 @@ describe(fnName, function() {
     assert.deepStrictEqual(jnPeoPriv, jnPeoPub)
     assert.deepStrictEqual(jnPeoPriv, origPeo)
     assert.deepStrictEqual(jnPrimeExps, origPrimeExps)
+    assert.strictEqual(jn.getFraction(), "14/15")
     assert.strictEqual(jn.getAlg(), "KG2")
   })
 

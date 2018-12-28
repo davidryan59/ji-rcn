@@ -75,12 +75,13 @@ var jn = new Jinote(object, alg)
 jn.copy()              // Return a deep copy of a Jinote
 jn.getAlg()            // Return algorithm for the Jinote
 jn.getBaseFreqHz()     // Returns the base frequency for Jinote on 1/1, defaults to 256 Hz
+jn.getFraction()       // Returns a text representation of fraction for this Jinote
 jn.getFreqHz()         // Returns the frequency of a specific Jinote, e.g. 320 for Jinote on 5/4
 jn.getFreqText()       // Returns the frequency text of a specific Jinote, e.g. "320 Hz" for Jinote on 5/4
 jn.getNotation()       // Equivalent to getPitch
+jn.getPeo()            // Returns the underlying Peo for this Jinote
 jn.getPitch()          // Return a pitch notation for the Jinote, e.g. "E'4" for new Jinote(5/4)
 jn.getPitchClass()     // Return a pitch class for the Jinote, e.g. "E'" for new Jinote(5/4). Octave information is discarded.
-jn.getPeo()            // Returns the underlying Peo for this Jinote
 jn.setBaseFreqHz(num)  // Sets the base frequency for a Jinote
 jn.toString()          // Equivalent to getPitch
 
