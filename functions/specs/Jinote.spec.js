@@ -168,4 +168,10 @@ describe(fnName, function() {
     assert.strictEqual(jn.getFreqText(), "10752 Hz")
   })
 
+  it('new Jinote("Eb.5") gives 12/5', function() {
+    var jn = new Jinote("Eb.5")
+    var peo = new Peo(12, 5)
+    assert.strictEqual(jn.getPeo().getText(), peo.getText())
+  })
+
 })

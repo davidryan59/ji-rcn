@@ -7,7 +7,6 @@ var initialiseFromNotation = function(jn, notationText) {
   // Comma algorithm other than default
 
   jn.peo = parseNotation(notationText)
-  console.log(jn.peo)        // DEBUG ONLY - REMOVE ME!
   jn.alg = null
 }
 

@@ -1,17 +1,35 @@
 var Peo = require('peo')
 
+var peoOctave = new Peo(2)
+var peoF = new Peo(4, 3)
+var peoC = new Peo()
+var peoG = new Peo(3, 2)
+var peoD = new Peo(9, 8)
+var peoA = new Peo(27, 16)
+var peoE = new Peo(81, 64)
+var peoB = new Peo(243, 128)
+var peoSharp = new Peo({3:7, 2:-11})
+
 var result = {
   OVERFLOW_TEXT: "LOTS",
 
-  PEO_2_OCTAVE: new Peo(2),
-  PEO_3_DIATONIC_F: new Peo(4, 3),
-  PEO_3_DIATONIC_C: new Peo(),
-  PEO_3_DIATONIC_G: new Peo(3, 2),
-  PEO_3_DIATONIC_D: new Peo(9, 8),
-  PEO_3_DIATONIC_A: new Peo(27, 16),
-  PEO_3_DIATONIC_E: new Peo(81, 64),
-  PEO_3_DIATONIC_B: new Peo(243, 128),
-  PEO_3_SHARP: new Peo({3:7, 2:-11}),
+  A: peoA,
+  B: peoB,
+  C: peoC,
+  D: peoD,
+  E: peoE,
+  F: peoF,
+  G: peoG,
+
+  PEO_2_OCTAVE: peoOctave,
+  PEO_3_DIATONIC_F: peoF,
+  PEO_3_DIATONIC_C: peoC,
+  PEO_3_DIATONIC_G: peoG,
+  PEO_3_DIATONIC_D: peoD,
+  PEO_3_DIATONIC_A: peoA,
+  PEO_3_DIATONIC_E: peoE,
+  PEO_3_DIATONIC_B: peoB,
+  PEO_3_SHARP: peoSharp,
 
   NAME_2_OCTAVE: "o",
   NAME_3_SHARP: "#",

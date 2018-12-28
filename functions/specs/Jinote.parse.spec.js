@@ -2,47 +2,47 @@ var assert = require('assert')
 var Jinote = require('../Jinote')
 var Peo = require('peo')
 
-describe('parsing API', function() {
+describe('Notation parsing API', function() {
 
   var testArray = [
-    ["", "1/1", "empty string"]
-  , ["C4", "1/1", "C4, default note"]
-  , ["E(#20)('13)(o-9)[103/109]", {3:4}, "complicated note"]
+    ["", "", "empty string"],
+    ["F", "4/3", ""],
+    ["C", "1", ""],
+    ["G", "3/2", ""],
+    ["D", "9/8", ""],
+    ["A", "27/16", ""],
+    ["E", "81/64", ""],
+    ["B", "243/128", ""],
+    ["0", "1/16", ""],
+    ["1", "1/8", ""],
+    ["2", "1/4", ""],
+    ["3", "1/2", ""],
+    ["4", "1/1", ""],
+    ["5", "2/1", ""],
+    ["6", "4/1", ""],
+    ["7", "8/1", ""],
+    ["8", "16/1", ""],
+    ["9", "32/1", ""],
+    ["#", {3:7,2:-11}, ""],
+    ["b", {3:-7,2:11}, ""],
+    ["'", "80/81", ""],
+    [".", "81/80", ""],
+
+    ["", "1", ""]
   ]
 
   var runTest = function(notationToParse, peoConstructorData, comment) {
-
-    console.log("")
-    console.log(notationToParse)
-    console.log(peoConstructorData)
     var peoFromParsing = Jinote.parseNotation(notationToParse)
     var peoFromSpec = new Peo(peoConstructorData)
-    console.log(peoFromParsing)
-    console.log(peoFromSpec)
-    console.log("")
-
-
-    // DEBUG
-    // Need a proper comparison here
-
-    // var actualNotationText = jn.getNotation()
-    // var actualPitchText = jn.getPitch()
-    // var actualPitchClassText = jn.getPitchClass()
-    // var algText = (alg) ? ", " + alg : ""
-    // var commentText = (comment) ? ", " + comment : ""
-    // var labelPitch = "(new Jinote(" + JSON.stringify(jnInput) + algText + ")).getPitch() = " + expectPitchText + commentText
-    // it(labelPitch, function() {
-    //   assert.strictEqual(actualPitchText, expectPitchText)
-    //   assert.strictEqual(actualNotationText, expectPitchText)
-    // })
-    // var labelPitchClass = "(new Jinote(" + JSON.stringify(jnInput) + algText + ")).getPitchClass() = " + expectPitchClassText + commentText
-    it("heres a test", function() {
-      assert.strictEqual(1, 1)
-    })
+    var parseText = peoFromParsing.getText()
+    var specText = peoFromSpec.getText()
+    var commentText = (comment) ? ", " + comment : ""
+    var label = "Jinote.parseNotation( " + notationToParse + " ).getText() = " + specText + commentText
+    it(label, function() {assert.strictEqual(parseText, specText)})
   }
 
   for (var i=0; i<testArray.length; i++) {
-    runTest(testArray[i][0], testArray[i][1])
+    runTest(testArray[i][0], testArray[i][1], testArray[i][2])
   }
 
 })

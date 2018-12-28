@@ -40,6 +40,11 @@ var stringBracketedSyntonicUp = makeRegexStringForVariableDigits(bl5, syntonicUp
 var stringBracketedSyntonicDown = makeRegexStringForVariableDigits(bl5, syntonicDownText, "", dig5, br5)
 
 
+var stringNumbers = "[ " + esc("^") + "0-9]+"
+var stringBracketedCommaFraction = esc("[") + stringNumbers + esc("/") + stringNumbers + esc("]")
+var stringBracketedCommaInteger = esc("[") + stringNumbers + esc("]")
+
+
 var stringBracketedOctaveError = esc(bl2 + err2 + br2)
 var stringBracketedOctaveUpOverflow = esc(bl2 + octaveText + octaveUpText + err0 + br2)
 var stringBracketedOctaveDownOverflow = esc(bl2 + octaveText + octaveDownText + err0 + br2)
@@ -55,12 +60,6 @@ var stringBracketedSyntonicDownOverflow = esc(bl5 + syntonicDownText + err0 + br
 var flags = "g"
 
 var result = {
-  REGEX_BRACKETED_OCTAVES_UP: new RegExp(stringBracketedOctavesUp, flags),
-  REGEX_BRACKETED_OCTAVES_DOWN: new RegExp(stringBracketedOctavesDown, flags),
-  REGEX_BRACKETED_SHARPS: new RegExp(stringBracketedSharps, flags),
-  REGEX_BRACKETED_FLATS: new RegExp(stringBracketedFlats, flags),
-  REGEX_BRACKETED_SYNTONIC_COMMA_ADD: new RegExp(stringBracketedSyntonicUp, flags),
-  REGEX_BRACKETED_SYNTONIC_COMMA_REMOVE: new RegExp(stringBracketedSyntonicDown, flags),
 
   REGEX_BRACKETED_OCTAVE_ERROR: new RegExp(stringBracketedOctaveError, flags),
   REGEX_BRACKETED_OCTAVE_UP_OVERFLOW: new RegExp(stringBracketedOctaveUpOverflow, flags),
@@ -71,12 +70,23 @@ var result = {
   REGEX_BRACKETED_SYNTONIC_COMMA_ADD_OVERFLOW: new RegExp(stringBracketedSyntonicUpOverflow, flags),
   REGEX_BRACKETED_SYNTONIC_COMMA_REMOVE_OVERFLOW: new RegExp(stringBracketedSyntonicDownOverflow, flags),
 
-  REGEX_CHAR_OCTAVE: new RegExp("[0-9]", flags),
-  REGEX_CHAR_DIATONIC: new RegExp("[A-G]", flags),
-  REGEX_CHAR_SHARP: new RegExp(esc(constants.NAME_3_SHARP), flags),
-  REGEX_CHAR_FLAT: new RegExp(esc(constants.NAME_3_FLAT), flags),
+  REGEX_BRACKETED_OCTAVES_UP: new RegExp(stringBracketedOctavesUp, flags),
+  REGEX_BRACKETED_OCTAVES_DOWN: new RegExp(stringBracketedOctavesDown, flags),
+  REGEX_BRACKETED_SHARPS: new RegExp(stringBracketedSharps, flags),
+  REGEX_BRACKETED_FLATS: new RegExp(stringBracketedFlats, flags),
+  REGEX_BRACKETED_SYNTONIC_COMMA_ADD: new RegExp(stringBracketedSyntonicUp, flags),
+  REGEX_BRACKETED_SYNTONIC_COMMA_REMOVE: new RegExp(stringBracketedSyntonicDown, flags),
+
+  REGEX_BRACKETED_COMMA_INTEGER: new RegExp(stringBracketedCommaInteger, flags),
+  REGEX_BRACKETED_COMMA_FRACTION: new RegExp(stringBracketedCommaFraction, flags),
+
   REGEX_CHAR_SYNTONIC_COMMA_ADD: new RegExp(esc(constants.NAME_5_SYNTONIC_COMMA_ADD), flags),
   REGEX_CHAR_SYNTONIC_COMMA_REMOVE: new RegExp(esc(constants.NAME_5_SYNTONIC_COMMA_REMOVE), flags),
+  REGEX_CHAR_SHARP: new RegExp(esc(constants.NAME_3_SHARP), flags),
+  REGEX_CHAR_FLAT: new RegExp(esc(constants.NAME_3_FLAT), flags),
+  REGEX_CHAR_ERROR: new RegExp("Na|Lo|Hi|N", flags),
+  REGEX_CHAR_DIATONIC: new RegExp("[A-G]", flags),
+  REGEX_CHAR_OCTAVE: new RegExp("[0-9]", flags),
 
   DUMMY: "DUMMY"
 }
