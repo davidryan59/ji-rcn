@@ -27,6 +27,26 @@ describe('Notation parsing API', function() {
     ["b", {3:-7,2:11}, ""],
     ["'", "80/81", ""],
     [".", "81/80", ""],
+    ["(o-5)", {2:-9}, ""],
+    ["(o+4)", "1", ""],
+    ["(o+10)", {2:6}, ""],
+    ["(#15)", {3:(7*15),2:(-11*15)}, ""],
+    ["(b240)", {3:(7*-240),2:(-11*-240)}, ""],
+    ["('100000)", {2:(4*100000),3:(-4*100000),5:(1*100000)}, ""],
+    ["(.42)", {2:(4*-42),3:(-4*-42),5:(1*-42)}, ""],
+
+    ["GG", "9/4", ""],
+    ["FA", "9/4", ""],
+    ["44", "1/1", ""],
+    ["55", "4/1", ""],
+    ["33", "1/4", ""],
+    ["######", {3:(7*6),2:(-11*6)}, ""],
+    ["bbbb", {3:(7*-4),2:(-11*-4)}, ""],
+    ["''''''''''", {2:(4*10),3:(-4*10),5:(1*10)}, ""],
+    ["......", {2:(4*-6),3:(-4*-6),5:(1*-6)}, ""],
+
+    ["Eb.4", "6/5", ""],
+    ["F#'4", "45/32", ""],
 
     ["", "1", ""]
   ]
@@ -34,10 +54,10 @@ describe('Notation parsing API', function() {
   var runTest = function(notationToParse, peoConstructorData, comment) {
     var peoFromParsing = Jinote.parseNotation(notationToParse)
     var peoFromSpec = new Peo(peoConstructorData)
-    var parseText = peoFromParsing.getText()
-    var specText = peoFromSpec.getText()
+    var parseText = JSON.stringify(peoFromParsing.getPrimeExps())
+    var specText = JSON.stringify(peoFromSpec.getPrimeExps())
     var commentText = (comment) ? ", " + comment : ""
-    var label = "Jinote.parseNotation( " + notationToParse + " ).getText() = " + specText + commentText
+    var label = "Jinote.parseNotation(\"" + notationToParse + "\") has prime exponents " + specText + commentText
     it(label, function() {assert.strictEqual(parseText, specText)})
   }
 
