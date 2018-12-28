@@ -34,17 +34,20 @@ There is a full test suite using Mocha (`mocha`) for testing and Istanbul (`nyc`
 ``` js
 var ji = require('ji-rcn')
 
-var Jinote = ji.jinote
+var Jinote = ji.Jinote       // ji.jinote also works
 var getComma = ji.getComma
+var parseNotation = ji.parseNotation
 
 // getComma
 getComma(p)          // Calculate a comma (in Peo format) for prime p under default ("DR") algorithm
 getComma(p, alg)     // Calculate a comma for prime p under other algorithm, e.g. "SAG", "KG2"
+parseNotation(text)  // Calculate a Peo for notation text, e.g. maps E'5 (5/2) to Peo on {2:-1, 5:1}
 
 // Jinote class
 
 // Class methods
 Jinote.getComma(p, alg)       // getComma is also provided as class method for Jinote
+Jinote.parseNotation(text)    // parseNotation is also provided as class method for Jinote
 
 // Constructors
 var jn = new Jinote()         // Can initialise with no args. Jinote for 1/1
@@ -72,12 +75,13 @@ var jn = new Jinote(object, alg)
 jn.copy()              // Return a deep copy of a Jinote
 jn.getAlg()            // Return algorithm for the Jinote
 jn.getBaseFreqHz()     // Returns the base frequency for Jinote on 1/1, defaults to 256 Hz
+jn.getFraction()       // Returns a text representation of fraction for this Jinote
 jn.getFreqHz()         // Returns the frequency of a specific Jinote, e.g. 320 for Jinote on 5/4
 jn.getFreqText()       // Returns the frequency text of a specific Jinote, e.g. "320 Hz" for Jinote on 5/4
 jn.getNotation()       // Equivalent to getPitch
+jn.getPeo()            // Returns the underlying Peo for this Jinote
 jn.getPitch()          // Return a pitch notation for the Jinote, e.g. "E'4" for new Jinote(5/4)
 jn.getPitchClass()     // Return a pitch class for the Jinote, e.g. "E'" for new Jinote(5/4). Octave information is discarded.
-jn.getPeo()            // Returns the underlying Peo for this Jinote
 jn.setBaseFreqHz(num)  // Sets the base frequency for a Jinote
 jn.toString()          // Equivalent to getPitch
 

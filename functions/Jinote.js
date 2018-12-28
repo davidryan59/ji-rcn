@@ -11,19 +11,21 @@ function Jinote() {
 
 // Static or Class methods
 Jinote.getComma = require('./api/class/getComma')
+Jinote.parseNotation = require('./api/class/parseNotation')
 
 // --------- Instance methods ---------
 
 // General
 Jinote.prototype.copy = require('./api/general/copy')
-Jinote.prototype.getPeo = require('./api/general/getPeo')
 Jinote.prototype.getAlg = require('./api/general/getAlg')
-Jinote.prototype.getNotation = require('./api/general/getNotation')
-Jinote.prototype.getPitch = require('./api/general/getPitch')
-Jinote.prototype.getPitchClass = require('./api/general/getPitchClass')
 Jinote.prototype.getBaseFreqHz = require('./api/general/getBaseFreqHz')
+Jinote.prototype.getFraction = require('./api/general/getFraction')
 Jinote.prototype.getFreqHz = require('./api/general/getFreqHz')
 Jinote.prototype.getFreqText = require('./api/general/getFreqText')
+Jinote.prototype.getNotation = require('./api/general/getNotation')
+Jinote.prototype.getPeo = require('./api/general/getPeo')
+Jinote.prototype.getPitch = require('./api/general/getPitch')
+Jinote.prototype.getPitchClass = require('./api/general/getPitchClass')
 Jinote.prototype.setBaseFreqHz = require('./api/general/setBaseFreqHz')
 Jinote.prototype.toString = require('./api/general/toString')
 

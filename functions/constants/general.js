@@ -1,0 +1,77 @@
+var Peo = require('peo')
+
+var peoOctave = new Peo(2)
+var peoF = new Peo(4, 3)
+var peoC = new Peo()
+var peoG = new Peo(3, 2)
+var peoD = new Peo(9, 8)
+var peoA = new Peo(27, 16)
+var peoE = new Peo(81, 64)
+var peoB = new Peo(243, 128)
+var peoSharp = new Peo({3:7, 2:-11})
+
+var result = {
+  OVERFLOW_TEXT: "LOTS",
+
+  A: peoA,
+  B: peoB,
+  C: peoC,
+  D: peoD,
+  E: peoE,
+  F: peoF,
+  G: peoG,
+
+  PEO_2_OCTAVE: peoOctave,
+  PEO_3_DIATONIC_F: peoF,
+  PEO_3_DIATONIC_C: peoC,
+  PEO_3_DIATONIC_G: peoG,
+  PEO_3_DIATONIC_D: peoD,
+  PEO_3_DIATONIC_A: peoA,
+  PEO_3_DIATONIC_E: peoE,
+  PEO_3_DIATONIC_B: peoB,
+  PEO_3_SHARP: peoSharp,
+
+  NAME_2_OCTAVE: "o",
+  NAME_3_SHARP: "#",
+  NAME_3_FLAT: "b",
+  NAME_5_SYNTONIC_COMMA_ADD: "'",
+  NAME_5_SYNTONIC_COMMA_REMOVE: ".",
+
+  BRACKET_2_OCTAVE_LEFT: "(",
+  SYMBOL_2_OCTAVE_UP: "+",
+  SYMBOL_2_OCTAVE_DOWN: "-",
+  BRACKET_2_OCTAVE_RIGHT: ")",
+  BRACKET_3_SHARP_FLAT_LEFT: "(",
+  BRACKET_3_SHARP_FLAT_RIGHT: ")",
+  BRACKET_5_SYNTONIC_LEFT: "(",
+  BRACKET_5_SYNTONIC_RIGHT: ")",
+  BRACKET_HIGHER_COMMA_LEFT: "[",
+  SYMBOL_HIGHER_COMMA_MID: "/",
+  SYMBOL_HIGHER_COMMA_POW: "^",
+  BRACKET_HIGHER_COMMA_RIGHT: "]",
+
+  MAX_ERROR_DIGITS_2_OCTAVE: 15,
+  MAX_OVERFLOW_DIGITS_2_OCTAVE: 6,
+  ERROR_TEXT_2_OCTAVE: "o.Err",
+
+  MAX_ERROR_DIGITS_3_DIATONIC: 15,
+  ERROR_TEXT_3_DIATONIC_NA: "Na",
+  ERROR_TEXT_3_DIATONIC_LO: "Lo",
+  ERROR_TEXT_3_DIATONIC_HI: "Hi",
+
+  MAX_ERROR_DIGITS_3_SHARPS_FLATS: 15,
+  MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS: 6,
+  MAX_REPEATS_3_SHARPS_FLATS: 4,
+  ERROR_TEXT_3_SHARPS_FLATS: "N",
+
+  MAX_ERROR_DIGITS_5_SYNTONIC_COMMA: 15,
+  MAX_OVERFLOW_DIGITS_5_SYNTONIC_COMMA: 6,
+  MAX_REPEATS_5_SYNTONIC_COMMA: 4,
+  ERROR_TEXT_5_SYNTONIC_COMMA: "5ERR",
+
+  MAX_DIGITS_UNSPLIT_HIGHER_PRIMES: 3,
+
+  DUMMY: "DUMMY"
+}
+
+module.exports = result

@@ -15,9 +15,10 @@
     "examples": "cd ./examples && node run.js"
   },
   "dependencies": {
+    "escape-string-regexp": "^1.0.5",
     "fraction.js": "^4.0.8",
     "is-bounded-number": "^1.0.1",
-    "peo": "^1.4.4",
+    "peo": "^1.5.1",
     "primes-and-factors": "^0.2.1"
   },
   "devDependencies": {

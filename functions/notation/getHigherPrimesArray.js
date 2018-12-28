@@ -1,17 +1,27 @@
+var constants = require('../constants/general')
+
+var bl = constants.BRACKET_HIGHER_COMMA_LEFT
+var bmid = constants.SYMBOL_HIGHER_COMMA_MID
+var bpow = constants.SYMBOL_HIGHER_COMMA_POW
+var br = constants.BRACKET_HIGHER_COMMA_RIGHT
+
+var unsplitDigits = constants.MAX_DIGITS_UNSPLIT_HIGHER_PRIMES
+
+
 var getHigherPrimesArray = function(peo) {
 
   // These two will be modified and outputted
   var result = ""
   var spacer = ""
 
-  // If both numerator and denominator are less than 1000,
+  // If both numerator and denominator are of length max unsplitDigits
   // use the text representation of the fraction instead of
   // splitting into prime factors
-  if (peo.getLogNum(10)<3 && peo.getLogDenom(10)<3) {
+  if (peo.getLogNum(10) < unsplitDigits && peo.getLogDenom(10) < unsplitDigits) {
     if (peo.getLog(10)===0) {
       return ["", spacer]
     } else {
-      return ["[" + peo.getText() + "]", spacer]
+      return ["" + bl + peo.getText() + br, spacer]
     }
   }
 
@@ -26,7 +36,7 @@ var getHigherPrimesArray = function(peo) {
     var exp = Number.parseInt(val)
     var absExp = Math.abs(exp)
     var thisLabel = "" + Math.pow(prime, absExp)
-    var thatLabel = "" + prime + ((absExp>1) ? "^" + absExp : "")
+    var thatLabel = "" + prime + ((absExp>1) ? bpow + absExp : "")
     thisLabel = (thisLabel.length<4) ? thisLabel : thatLabel
     if (exp>0) {
       if (numText) {
@@ -51,14 +61,14 @@ var getHigherPrimesArray = function(peo) {
   // since cases of less than 4 digits already taken care of
   if (denomText) {
     if (numText) {
-      result = numText + spacer + "/" + spacer + denomText
+      result = numText + spacer + bmid + spacer + denomText
     } else {
-      result = "1" + spacer + "/" + spacer + denomText
+      result = "1" + spacer + bmid + spacer + denomText
     }
   } else {
     result = numText
   }
-  result = "[" + result + "]"
+  result = "" + bl + result + br
 
   return [result, spacer]
 

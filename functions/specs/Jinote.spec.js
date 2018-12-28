@@ -23,6 +23,7 @@ describe(fnName, function() {
     assert.deepStrictEqual(jnPeoPriv, jnPeoPub)
     assert.deepStrictEqual(jnPeoPriv, origPeo)
     assert.deepStrictEqual(jnPrimeExps, origPrimeExps)
+    assert.strictEqual(jn.getFraction(), "14/15")
     assert.strictEqual(jn.getAlg(), "KG2")
   })
 
@@ -83,12 +84,6 @@ describe(fnName, function() {
     var jn = new Jinote(0.75, "KG2")
     assert.strictEqual(jn.getAlg(), "KG2")
     assert.deepStrictEqual(jn.peo.getPrimeExps(), {2:-2, 3:1})
-  })
-
-  it('can initialise from new Jinote("Eb.4") (DO THIS ONE LATER)', function() {
-    var jn = new Jinote("Eb.4")
-    assert.deepStrictEqual(jn.peo.getPrimeExps(), {})
-    assert.strictEqual(jn.getAlg(), "")
   })
 
   it('can provide a deep copy', function() {
@@ -172,6 +167,12 @@ describe(fnName, function() {
     jn.setBaseFreqHz()
     assert.strictEqual(jn.getFreqHz(), 10752)
     assert.strictEqual(jn.getFreqText(), "10752 Hz")
+  })
+
+  it('new Jinote("Eb.5") gives 12/5', function() {
+    var jn = new Jinote("Eb.5")
+    var peo = new Peo(12, 5)
+    assert.strictEqual(jn.getPeo().getText(), peo.getText())
   })
 
 })
