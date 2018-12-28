@@ -6,7 +6,8 @@ describe('Notation parsing API', function() {
 
   var testArray = [
     ["", "", "empty string"],
-    ["F", "4/3", ""],
+
+    ["F", "4/3", "Test parsing single characters"],
     ["C", "1", ""],
     ["G", "3/2", ""],
     ["D", "9/8", ""],
@@ -35,7 +36,7 @@ describe('Notation parsing API', function() {
     ["('100000)", {2:(4*100000),3:(-4*100000),5:(1*100000)}, ""],
     ["(.42)", {2:(4*-42),3:(-4*-42),5:(1*-42)}, ""],
 
-    ["GG", "9/4", ""],
+    ["GG", "9/4", "Test parsing repeated notations"],
     ["FA", "9/4", ""],
     ["44", "1/1", ""],
     ["55", "4/1", ""],
@@ -45,8 +46,11 @@ describe('Notation parsing API', function() {
     ["''''''''''", {2:(4*10),3:(-4*10),5:(1*10)}, ""],
     ["......", {2:(4*-6),3:(-4*-6),5:(1*-6)}, ""],
 
-    ["Eb.4", "6/5", ""],
+    ["Eb.4", "6/5", "Test parsing compound notations"],
     ["F#'4", "45/32", ""],
+    ["A(b3)(.2)(o+8)", {2:25,3:-10,5:-2}, ""],
+
+    ["(.LOTS)('LOTS)(#LOTS)(bLOTS)(o-LOTS)(o+LOTS)(o.Err)(5ERR)", "1/1", "Test some error inputs"],
 
     ["", "1", ""]
   ]
