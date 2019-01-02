@@ -17,8 +17,8 @@
   "dependencies": {
     "escape-string-regexp": "^1.0.5",
     "fraction.js": "^4.0.8",
-    "is-bounded-number": "^1.0.1",
-    "peo": "^1.5.2"
+    "is-bounded-number": "^1.1.1",
+    "peo": "^1.7.1"
   },
   "devDependencies": {
     "mocha": "^5.2.0",
