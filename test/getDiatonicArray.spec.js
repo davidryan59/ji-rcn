@@ -1,8 +1,9 @@
-var assert = require('assert')
+var assert = require('assert');
 
-var getDiatonicArray = require('../src/notation/getDiatonicArray')
+var index = require('./index');
+var getDiatonicArray = index.getDiatonicArray;
 
-var fnName = 'getDiatonicArray'
+var fnName = 'getDiatonicArray';
 describe(fnName, function() {
 
   var runTest = function(input, expected) {

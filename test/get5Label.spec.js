@@ -1,8 +1,9 @@
-var assert = require('assert')
+var assert = require('assert');
 
-var get5Label = require('../src/notation/get5Label')
+var index = require('./index');
+var get5Label = index.get5Label;
 
-var fnName = 'get5Label'
+var fnName = 'get5Label';
 describe(fnName, function() {
 
   var runTest = function(input, expected) {

@@ -8,8 +8,8 @@ var scu = constants.NAME_5_SYNTONIC_COMMA_ADD
 var scd = constants.NAME_5_SYNTONIC_COMMA_REMOVE
 var ot = constants.OVERFLOW_TEXT
 
-var numError = 10 ** constants.MAX_ERROR_DIGITS_5_SYNTONIC_COMMA
-var numOverflow = 10 ** constants.MAX_OVERFLOW_DIGITS_5_SYNTONIC_COMMA
+var numError = Math.pow(10, constants.MAX_ERROR_DIGITS_5_SYNTONIC_COMMA)
+var numOverflow = Math.pow(10, constants.MAX_OVERFLOW_DIGITS_5_SYNTONIC_COMMA)
 var numRepeats = constants.MAX_REPEATS_5_SYNTONIC_COMMA
 
 

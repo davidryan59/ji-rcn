@@ -1,8 +1,9 @@
-var assert = require('assert')
+var assert = require('assert');
 
-var getSharpFlatArray = require('../src/notation/getSharpFlatArray')
+var index = require('./index');
+var getSharpFlatArray = index.getSharpFlatArray;
 
-var fnName = 'getSharpFlatArray'
+var fnName = 'getSharpFlatArray';
 describe(fnName, function() {
 
   var runTest = function(input, expected) {

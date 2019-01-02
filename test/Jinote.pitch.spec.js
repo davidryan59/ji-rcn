@@ -1,6 +1,7 @@
-var assert = require('assert')
+var assert = require('assert');
 
-var Jinote = require('../src/Jinote')
+var index = require('./index');
+var Jinote = index.Jinote;
 
 describe('pitch and pitch class API', function() {
 

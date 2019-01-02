@@ -1,9 +1,10 @@
-var assert = require('assert')
-var Fraction = require('fraction.js')
-var Peo = require('peo')
+var assert = require('assert');
+var Fraction = require('fraction.js');
+var Peo = require('peo');
 
-var Jinote = require('../src/Jinote')
-var privateGetPeo = require('../src/private/privateGetPeo')
+var index = require('./index');
+var Jinote = index.Jinote;
+var privateGetPeo = index.privateGetPeo;
 
 var fnName = 'Jinote'
 describe(fnName, function() {

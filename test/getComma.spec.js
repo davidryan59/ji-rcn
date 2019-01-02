@@ -1,8 +1,9 @@
-var assert = require('assert')
+var assert = require('assert');
 
-var getComma = require('../src/api/class/getComma')
+var index = require('./index');
+var getComma = index.getComma;
 
-var fnName = 'getComma'
+var fnName = 'getComma';
 describe(fnName, function() {
 
   it("can calculate getComma(5)", function() {

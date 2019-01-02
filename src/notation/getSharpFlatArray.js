@@ -9,8 +9,8 @@ var ot = constants.OVERFLOW_TEXT
 var st = constants.NAME_3_SHARP
 var ft = constants.NAME_3_FLAT
 
-var numError = 10 ** constants.MAX_ERROR_DIGITS_3_SHARPS_FLATS
-var numOverflow = 10 ** constants.MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS
+var numError = Math.pow(10, constants.MAX_ERROR_DIGITS_3_SHARPS_FLATS)
+var numOverflow = Math.pow(10, constants.MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS)
 var numRepeats = constants.MAX_REPEATS_3_SHARPS_FLATS
 
 

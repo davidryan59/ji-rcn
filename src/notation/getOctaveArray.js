@@ -10,8 +10,8 @@ var sd = constants.SYMBOL_2_OCTAVE_DOWN
 var br = constants.BRACKET_2_OCTAVE_RIGHT
 var ot = constants.OVERFLOW_TEXT
 
-var numError = 10 ** constants.MAX_ERROR_DIGITS_2_OCTAVE
-var numOverflow = 10 ** constants.MAX_OVERFLOW_DIGITS_2_OCTAVE
+var numError = Math.pow(10, constants.MAX_ERROR_DIGITS_2_OCTAVE)
+var numOverflow = Math.pow(10, constants.MAX_OVERFLOW_DIGITS_2_OCTAVE)
 
 var getOctaveArray = function(exp2) {
 

@@ -1,7 +1,8 @@
-var assert = require('assert')
-var Peo = require('peo')
+var assert = require('assert');
+var Peo = require('peo');
 
-var Jinote = require('../src/Jinote')
+var index = require('./index');
+var Jinote = index.Jinote;
 
 describe('Notation parsing API', function() {
 
