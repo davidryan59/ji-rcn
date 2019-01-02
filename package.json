@@ -1,7 +1,7 @@
 {
   "name": "ji-rcn",
   "version": "5.2.0",
-  "description": "Functions for converting between numbers and notations",
+  "description": "Functions for converting between numbers and JI musical notations",
   "author": {
     "name": "David Ryan",
     "email": "davidryan1998@hotmail.com",
@@ -18,8 +18,7 @@
     "escape-string-regexp": "^1.0.5",
     "fraction.js": "^4.0.8",
     "is-bounded-number": "^1.0.1",
-    "peo": "^1.5.1",
-    "primes-and-factors": "^0.2.1"
+    "peo": "^1.5.2"
   },
   "devDependencies": {
     "mocha": "^5.2.0",
