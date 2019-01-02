@@ -75,6 +75,8 @@ var reduceToSumOfIntsMinus4 = function(acc, elt) {return acc + getIntFromChars(e
 
 var sharpsPeo = function(theInt) {return new Peo({3:(7*theInt),2:(-11*theInt)})}
 var flatsPeo = function(theInt) {return new Peo({3:(-7*theInt),2:(11*theInt)})}
+var pythagAddPeo = function(theInt) {return new Peo({3:(12*theInt),2:(-19*theInt)})}
+var pythagRemovePeo = function(theInt) {return new Peo({3:(-12*theInt),2:(19*theInt)})}
 var syntonicsAddPeo = function(theInt) {return new Peo({2:(4*theInt),3:(-4*theInt),5:(theInt)})}
 var syntonicsRemovePeo = function(theInt) {return new Peo({2:(-4*theInt),3:(4*theInt),5:(-theInt)})}
 var octavesPeo = function(theInt) {return new Peo({2:theInt})}
@@ -148,6 +150,18 @@ var parseNotation = function(notation) {
   })
 
   analyseNotation({
+    rgx: rxs.REGEX_BRACKETED_PYTHAG_COMMA_ADD,
+    reduceMatch: reduceToSumOfInts,
+    mapReducerResultToPeo: pythagAddPeo
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_BRACKETED_PYTHAG_COMMA_REMOVE,
+    reduceMatch: reduceToSumOfInts,
+    mapReducerResultToPeo: pythagRemovePeo
+  })
+
+  analyseNotation({
     rgx: rxs.REGEX_BRACKETED_SYNTONIC_COMMA_ADD,
     reduceMatch: reduceToSumOfInts,
     mapReducerResultToPeo: syntonicsAddPeo
@@ -197,6 +211,18 @@ var parseNotation = function(notation) {
     rgx: rxs.REGEX_CHAR_FLAT,
     reduceMatch: reduceToCount,
     mapReducerResultToPeo: flatsPeo
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_CHAR_PYTHAG_COMMA_ADD,
+    reduceMatch: reduceToCount,
+    mapReducerResultToPeo: pythagAddPeo
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_CHAR_PYTHAG_COMMA_REMOVE,
+    reduceMatch: reduceToCount,
+    mapReducerResultToPeo: pythagRemovePeo
   })
 
   // Remove any error conditions designated by individual characters
