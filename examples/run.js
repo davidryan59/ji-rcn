@@ -1,5 +1,5 @@
 // var ji = require('ji-rcn')           // via npm
-var ji = require('../index.js')       // locally
+var ji = require('../src/index.js')       // locally
 var Jinote = ji.jinote
 var jn = null
 var peo = null

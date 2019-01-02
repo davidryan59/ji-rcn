@@ -1,6 +1,6 @@
 var assert = require('assert')
 
-var getDiatonicArray = require('../notation/getDiatonicArray')
+var getDiatonicArray = require('../src/notation/getDiatonicArray')
 
 var fnName = 'getDiatonicArray'
 describe(fnName, function() {

@@ -1,6 +1,6 @@
 var assert = require('assert')
 
-var getComma = require('../api/class/getComma')
+var getComma = require('../src/api/class/getComma')
 
 var fnName = 'getComma'
 describe(fnName, function() {

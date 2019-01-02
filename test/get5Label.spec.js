@@ -1,12 +1,12 @@
 var assert = require('assert')
 
-var getSharpFlatArray = require('../notation/getSharpFlatArray')
+var get5Label = require('../src/notation/get5Label')
 
-var fnName = 'getSharpFlatArray'
+var fnName = 'get5Label'
 describe(fnName, function() {
 
   var runTest = function(input, expected) {
-    var actual = getSharpFlatArray(input)[0]
+    var actual = get5Label(input)
     var label = fnName + "(" + input + ") = " + expected
     it(label, function() {
       assert.strictEqual(actual, expected)
@@ -14,15 +14,15 @@ describe(fnName, function() {
   }
 
   var testArray = [
-    ["aString", "N"]   // Not (a number)
-  , [null, "N"]
-  , [undefined, "N"]
-  , [["array"], "N"]
-  , [{an:"object"}, "N"]
-  , [-1e15-1, "N"]
-  , [-1e15, "(bLOTS)"]
-  , [1e15, "(#LOTS)"]
-  , [1e15+1, "N"]
+    ["aString", "(5ERR)"]
+  , [null, "(5ERR)"]
+  , [undefined, "(5ERR)"]
+  , [["array"], "(5ERR)"]
+  , [{an:"object"}, "(5ERR)"]
+  , [-1e15-1, "(5ERR)"]
+  , [-1e15, "(.LOTS)"]
+  , [1e15, "('LOTS)"]
+  , [1e15+1, "(5ERR)"]
   ]
 
   for (var i=0; i<testArray.length; i++) {

@@ -1,6 +1,6 @@
 var assert = require('assert')
 
-var getOctaveArray = require('../notation/getOctaveArray')
+var getOctaveArray = require('../src/notation/getOctaveArray')
 
 var fnName = 'getOctaveArray'
 describe(fnName, function() {

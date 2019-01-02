@@ -1,6 +1,6 @@
 var assert = require('assert')
 
-var ji = require('../../index')
+var ji = require('../src/index')
 
 describe('API (index object) for ji-rcn (via variable `ji`)', function() {
 
