@@ -157,6 +157,42 @@ var parseNotation = function(notation) {
   })
 
   analyseNotation({
+    rgx: rxs.REGEX_BRACKETED_MERCATOR_COMMA_ADD,
+    reduceMatch: reduceToSumOfInts,
+    mapReducerResultToPeo: peoPower(constants.PEO_MERCATOR)
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_BRACKETED_MERCATOR_COMMA_REMOVE,
+    reduceMatch: reduceToSumOfInts,
+    mapReducerResultToPeo: peoPower(constants.PEO_MERCATOR, -1)
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_BRACKETED_SMALL_COMMA_ADD,
+    reduceMatch: reduceToSumOfInts,
+    mapReducerResultToPeo: peoPower(constants.PEO_SMALL)
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_BRACKETED_SMALL_COMMA_REMOVE,
+    reduceMatch: reduceToSumOfInts,
+    mapReducerResultToPeo: peoPower(constants.PEO_SMALL, -1)
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_BRACKETED_TINY_COMMA_ADD,
+    reduceMatch: reduceToSumOfInts,
+    mapReducerResultToPeo: peoPower(constants.PEO_TINY)
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_BRACKETED_TINY_COMMA_REMOVE,
+    reduceMatch: reduceToSumOfInts,
+    mapReducerResultToPeo: peoPower(constants.PEO_TINY, -1)
+  })
+
+  analyseNotation({
     rgx: rxs.REGEX_BRACKETED_SYNTONIC_COMMA_ADD,
     reduceMatch: reduceToSumOfInts,
     mapReducerResultToPeo: peoPower(constants.PEO_SYNTONIC)

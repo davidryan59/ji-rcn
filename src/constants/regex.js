@@ -12,8 +12,6 @@ var br2 = constants.BRACKET_2_OCTAVE_RIGHT
 var bl3 = constants.BRACKET_3_SHARP_FLAT_LEFT
 var sharpText = constants.NAME_3_SHARP
 var flatText = constants.NAME_3_FLAT
-var pythagAddText = constants.NAME_3_PYTHAG_COMMA_ADD
-var pythagRemoveText = constants.NAME_3_PYTHAG_COMMA_REMOVE
 var dig3 = constants.MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS
 var br3 = constants.BRACKET_3_SHARP_FLAT_RIGHT
 
@@ -50,8 +48,14 @@ var stringBracketedOctavesUp = makeRegexStringForVariableDigits(octaveText, octa
 var stringBracketedOctavesDown = makeRegexStringForVariableDigits(octaveText, octaveDownText, dig2)
 var stringBracketedSharps = makeRegexStringForVariableDigits(sharpText, "", dig3)
 var stringBracketedFlats = makeRegexStringForVariableDigits(flatText, "", dig3)
-var stringBracketedPythagAdd = makeRegexStringForVariableDigits(pythagAddText, "", dig3)
-var stringBracketedPythagRemove = makeRegexStringForVariableDigits(pythagRemoveText, "", dig3)
+var stringBracketedPythagAdd = makeRegexStringForVariableDigits(constants.NAME_3_PYTHAG_COMMA_ADD, "", dig3)
+var stringBracketedPythagRemove = makeRegexStringForVariableDigits(constants.NAME_3_PYTHAG_COMMA_REMOVE, "", dig3)
+var stringBracketedMercatorAdd = makeRegexStringForVariableDigits(constants.NAME_3_MERCATOR_COMMA_ADD, "", dig3)
+var stringBracketedMercatorRemove = makeRegexStringForVariableDigits(constants.NAME_3_MERCATOR_COMMA_REMOVE, "", dig3)
+var stringBracketedSmallAdd = makeRegexStringForVariableDigits(constants.NAME_3_SMALL_COMMA_ADD, "", dig3)
+var stringBracketedSmallRemove = makeRegexStringForVariableDigits(constants.NAME_3_SMALL_COMMA_REMOVE, "", dig3)
+var stringBracketedTinyAdd = makeRegexStringForVariableDigits(constants.NAME_3_TINY_COMMA_ADD, "", dig3)
+var stringBracketedTinyRemove = makeRegexStringForVariableDigits(constants.NAME_3_TINY_COMMA_REMOVE, "", dig3)
 var stringBracketedSyntonicAdd = makeRegexStringForVariableDigits(syntonicAddText, "", dig5)
 var stringBracketedSyntonicRemove = makeRegexStringForVariableDigits(syntonicRemoveText, "", dig5)
 
@@ -91,6 +95,12 @@ var result = {
   REGEX_BRACKETED_FLATS: new RegExp(stringBracketedFlats, flags),
   REGEX_BRACKETED_PYTHAG_COMMA_ADD: new RegExp(stringBracketedPythagAdd, flags),
   REGEX_BRACKETED_PYTHAG_COMMA_REMOVE: new RegExp(stringBracketedPythagRemove, flags),
+  REGEX_BRACKETED_MERCATOR_COMMA_ADD: new RegExp(stringBracketedMercatorAdd, flags),
+  REGEX_BRACKETED_MERCATOR_COMMA_REMOVE: new RegExp(stringBracketedMercatorRemove, flags),
+  REGEX_BRACKETED_SMALL_COMMA_ADD: new RegExp(stringBracketedSmallAdd, flags),
+  REGEX_BRACKETED_SMALL_COMMA_REMOVE: new RegExp(stringBracketedSmallRemove, flags),
+  REGEX_BRACKETED_TINY_COMMA_ADD: new RegExp(stringBracketedTinyAdd, flags),
+  REGEX_BRACKETED_TINY_COMMA_REMOVE: new RegExp(stringBracketedTinyRemove, flags),
   REGEX_BRACKETED_SYNTONIC_COMMA_ADD: new RegExp(stringBracketedSyntonicAdd, flags),
   REGEX_BRACKETED_SYNTONIC_COMMA_REMOVE: new RegExp(stringBracketedSyntonicRemove, flags),
 
