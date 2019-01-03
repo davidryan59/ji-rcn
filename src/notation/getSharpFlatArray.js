@@ -1,17 +1,21 @@
 var ibn = require('is-bounded-number')
 var Peo = require('peo')
 
-var constants = require('../constants/general')
+var texts = require('../constants/text')
+var peos = require('../constants/peo')
+var getErrorNotation = require('./getErrorNotation')
 
-var bl = constants.BRACKET_LEFT_STANDARD
-var br = constants.BRACKET_RIGHT_STANDARD
-var ot = constants.OVERFLOW_TEXT
-var st = constants.CHAR_SHARP
-var ft = constants.CHAR_FLAT
+var bl = texts.BRACKET_LEFT_STANDARD
+var br = texts.BRACKET_RIGHT_STANDARD
+var st = texts.CHAR_SHARP
+var ft = texts.CHAR_FLAT
+var errorNotationSF = getErrorNotation(st+ft)
+var errorNotationSharp = getErrorNotation(st)
+var errorNotationFlat = getErrorNotation(ft)
 
-var numError = Math.pow(10, constants.MAX_ERROR_DIGITS_3_SHARPS_FLATS)
-var numOverflow = Math.pow(10, constants.MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS)
-var numRepeats = constants.MAX_REPEATS_3_SHARPS_FLATS
+var numError = Math.pow(10, texts.MAX_ERROR_DIGITS_3_SHARPS_FLATS)
+var numOverflow = Math.pow(10, texts.MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS)
+var numRepeats = texts.MAX_REPEATS_3_SHARPS_FLATS
 
 
 var getSharpFlatArray = function(exp3) {
@@ -23,25 +27,25 @@ var getSharpFlatArray = function(exp3) {
   // Deal with error cases
   if (!ibn(exp3, numError)) {
     // Error output
-    return [constants.ERROR_TEXT_3_SHARPS_FLATS, new Peo(), 0]
+    return [errorNotationSF, new Peo(), 0]
   }
   // Its a valid number
   var offset = Math.round(exp3) - 2
   var sharps = Math.round(offset/7)
-  var peo = new Peo(constants.PEO_SHARP, sharps)
+  var peo = new Peo(peos.PEO_SHARP, sharps)
 
   var getResult = function(txt) {
     return [txt, peo, sharps]
   }
 
   if (sharps >= numOverflow) {
-    return getResult("" + bl + st + ot + br)
+    return getResult(errorNotationSharp)
   } else if (sharps > numRepeats) {
     return getResult("" + bl + st + sharps + br)
   } else if (sharps > 0) {
     return getResult(st.repeat(sharps))
   } else if (sharps <= -numOverflow) {
-    return getResult("" + bl + ft + ot + br)
+    return getResult(errorNotationFlat)
   } else if (sharps < -numRepeats) {
     return getResult("" + bl + ft + -sharps + br)
   } else if (sharps < 0) {

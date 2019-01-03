@@ -15,15 +15,15 @@ describe(fnName, function() {
   }
 
   var testArray = [
-    ["aString", "(o.Err)"]
-  , [null, "(o.Err)"]
-  , [undefined, "(o.Err)"]
-  , [["array"], "(o.Err)"]
-  , [{an:"object"}, "(o.Err)"]
-  , [-1e15-1, "(o.Err)"]
-  , [-1e15, "(o-LOTS)"]
-  , [1e15, "(o+LOTS)"]
-  , [1e15+1, "(o.Err)"]
+    ["aString", "(oERR)"]
+  , [null, "(oERR)"]
+  , [undefined, "(oERR)"]
+  , [["array"], "(oERR)"]
+  , [{an:"object"}, "(oERR)"]
+  , [-1e15-1, "(oERR)"]
+  , [-1e15, "(o-ERR)"]
+  , [1e15, "(o+ERR)"]
+  , [1e15+1, "(oERR)"]
   ]
 
   for (var i=0; i<testArray.length; i++) {

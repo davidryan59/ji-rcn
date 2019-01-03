@@ -15,16 +15,16 @@ describe(fnName, function() {
   }
 
   var testArray = [
-    ["aString", "Na"]   // Not A (Number)
-  , [null, "Na"]
-  , [undefined, "Na"]
-  , [["array"], "Na"]
-  , [{an:"object"}, "Na"]
-  , [-1e15-1, "Na"]
-  , [-1e15, "Lo"]
-  , [-100.232, "Lo"]
-  , [-2, "Lo"]
-  , [-1.500001, "Lo"]
+    ["aString", "(3ERR)"]   // Not A (Number)
+  , [null, "(3ERR)"]
+  , [undefined, "(3ERR)"]
+  , [["array"], "(3ERR)"]
+  , [{an:"object"}, "(3ERR)"]
+  , [-1e15-1, "(3ERR)"]
+  , [-1e15, "(3ERR)"]
+  , [-100.232, "(3ERR)"]
+  , [-2, "(3ERR)"]
+  , [-1.500001, "(3ERR)"]
   , [-1.5, "F"]
   , [-1, "F"]
   , [0, "C"]
@@ -36,11 +36,11 @@ describe(fnName, function() {
   , [4, "E"]
   , [5, "B"]
   , [5.49, "B"]
-  , [5.5, "Hi"]
-  , [6, "Hi"]
-  , [100, "Hi"]
-  , [1e15, "Hi"]
-  , [1e15+1, "Na"]
+  , [5.5, "(3ERR)"]
+  , [6, "(3ERR)"]
+  , [100, "(3ERR)"]
+  , [1e15, "(3ERR)"]
+  , [1e15+1, "(3ERR)"]
   ]
 
   for (var i=0; i<testArray.length; i++) {

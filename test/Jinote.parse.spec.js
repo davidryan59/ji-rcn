@@ -70,7 +70,7 @@ describe('Notation parsing API', function() {
     ["F#'4", "45/32", ""],
     ["A(b3)(.2)(o+8)", {2:25,3:-10,5:-2}, ""],
 
-    ["(.LOTS)('LOTS)(#LOTS)(bLOTS)(o-LOTS)(o+LOTS)(o.Err)(5ERR)", "1/1", "Test some error inputs"],
+    ["(oERR)(o-ERR)(o+ERR)(3ERR)(5ERR)(#ERR)(bERR)(#bERR)", "1/1", "Test some error inputs"],
 
     ["[2]", "1/1", "Test integer commas on default algorithm"],
     ["[3]", "1/1", ""],

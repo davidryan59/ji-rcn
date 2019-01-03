@@ -15,15 +15,15 @@ describe(fnName, function() {
   }
 
   var testArray = [
-    ["aString", "N"]   // Not (a number)
-  , [null, "N"]
-  , [undefined, "N"]
-  , [["array"], "N"]
-  , [{an:"object"}, "N"]
-  , [-1e15-1, "N"]
-  , [-1e15, "(bLOTS)"]
-  , [1e15, "(#LOTS)"]
-  , [1e15+1, "N"]
+    ["aString", "(#bERR)"]
+  , [null, "(#bERR)"]
+  , [undefined, "(#bERR)"]
+  , [["array"], "(#bERR)"]
+  , [{an:"object"}, "(#bERR)"]
+  , [-1e15-1, "(#bERR)"]
+  , [-1e15, "(bERR)"]
+  , [1e15, "(#ERR)"]
+  , [1e15+1, "(#bERR)"]
   ]
 
   for (var i=0; i<testArray.length; i++) {

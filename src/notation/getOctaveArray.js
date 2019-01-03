@@ -1,17 +1,21 @@
 var ibn = require('is-bounded-number')
 var Peo = require('peo')
 
-var constants = require('../constants/general')
+var texts = require('../constants/text')
+var getErrorNotation = require('./getErrorNotation')
 
-var bl = constants.BRACKET_LEFT_STANDARD
-var on = constants.CHAR_OCTAVE_MARK
-var su = constants.CHAR_OCTAVE_UP
-var sd = constants.CHAR_OCTAVE_DOWN
-var br = constants.BRACKET_RIGHT_STANDARD
-var ot = constants.OVERFLOW_TEXT
+var bl = texts.BRACKET_LEFT_STANDARD
+var on = texts.CHAR_OCTAVE_MARK
+var su = texts.CHAR_OCTAVE_UP
+var sd = texts.CHAR_OCTAVE_DOWN
+var br = texts.BRACKET_RIGHT_STANDARD
+var ot = texts.OVERFLOW_TEXT
+var errorNotationSize = getErrorNotation(on)
+var errorNotationUp = getErrorNotation(on + su)
+var errorNotationDown = getErrorNotation(on + sd)
 
-var numError = Math.pow(10, constants.MAX_ERROR_DIGITS_2_OCTAVE)
-var numOverflow = Math.pow(10, constants.MAX_OVERFLOW_DIGITS_2_OCTAVE)
+var numError = Math.pow(10, texts.MAX_ERROR_DIGITS_2_OCTAVE)
+var numOverflow = Math.pow(10, texts.MAX_OVERFLOW_DIGITS_2_OCTAVE)
 
 var getOctaveArray = function(exp2) {
 
@@ -23,16 +27,16 @@ var getOctaveArray = function(exp2) {
   // Deal with error cases
   if (!ibn(exp2, numError)) {
     // Error output
-    return ["" + bl + constants.ERROR_TEXT_2_OCTAVE + br, new Peo()]
+    return [errorNotationSize, new Peo()]
   }
 
   // Its a valid number
   exp2 = Math.round(exp2)
-  var peo = new Peo(constants.PEO_OCTAVE, exp2)
+  var peo = new Peo(texts.PEO_OCTAVE, exp2)
   standardOctaveNumber = exp2 + 4     // For 1/1, exp2=0, and octave is 4 (e.g. C4)
   if (standardOctaveNumber >= numOverflow) {
     // Case 1000000...
-    return ["" + bl + on + su + ot + br, peo]
+    return [errorNotationUp, peo]
   } else if (standardOctaveNumber > 9) {
     // Case 10...999999
     return ["" + bl + on + su + standardOctaveNumber + br, peo]
@@ -41,7 +45,7 @@ var getOctaveArray = function(exp2) {
     return ["" + standardOctaveNumber, peo]
   } else if (standardOctaveNumber <= -numOverflow) {
     // Case ...-1000000
-    return ["" + bl + on + sd + ot + br, peo]
+    return [errorNotationDown, peo]
   } else {
     // Case -999999...-1. Minus sign already there! Don't need sd in middle
     return ["" + bl + on + standardOctaveNumber + br, peo]

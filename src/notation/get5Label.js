@@ -1,16 +1,17 @@
 var ibn = require('is-bounded-number')
 
-var constants = require('../constants/general')
+var texts = require('../constants/text')
+var getErrorNotation = require('./getErrorNotation')
+var errorNotation = getErrorNotation("5")
 
-var bl = constants.BRACKET_LEFT_STANDARD
-var br = constants.BRACKET_RIGHT_STANDARD
-var scu = constants.CHAR_SYNTONIC_ON
-var scd = constants.CHAR_SYNTONIC_OFF
-var ot = constants.OVERFLOW_TEXT
+var bl = texts.BRACKET_LEFT_STANDARD
+var br = texts.BRACKET_RIGHT_STANDARD
+var scu = texts.CHAR_SYNTONIC_ON
+var scd = texts.CHAR_SYNTONIC_OFF
 
-var numError = Math.pow(10, constants.MAX_ERROR_DIGITS_5_SYNTONIC_COMMA)
-var numOverflow = Math.pow(10, constants.MAX_OVERFLOW_DIGITS_5_SYNTONIC_COMMA)
-var numRepeats = constants.MAX_REPEATS_5_SYNTONIC_COMMA
+var numError = Math.pow(10, texts.MAX_ERROR_DIGITS_5_SYNTONIC_COMMA)
+var numOverflow = Math.pow(10, texts.MAX_OVERFLOW_DIGITS_5_SYNTONIC_COMMA)
+var numRepeats = texts.MAX_REPEATS_5_SYNTONIC_COMMA
 
 
 var get5Label = function(exp5) {
@@ -21,18 +22,18 @@ var get5Label = function(exp5) {
   // Deal with error cases
   if (!ibn(exp5, numError)) {
     // Error output
-    return "" + bl + constants.ERROR_TEXT_5_SYNTONIC_COMMA + br
+    return errorNotation
   }
   // Its a valid number
   exp5 = Math.round(exp5)
   if (exp5 >= numOverflow) {
-    return "" + bl + scu + ot + br
+    return errorNotation
   } else if (exp5 > numRepeats) {
     return "" + bl + scu + exp5 + br
   } else if (exp5 > 0) {
     return scu.repeat(exp5)
   } else if (exp5 <= -numOverflow) {
-    return "" + bl + scd + ot + br
+    return errorNotation
   } else if (exp5 < -numRepeats) {
     return "" + bl + scd + -exp5 + br
   } else if (exp5 < 0) {

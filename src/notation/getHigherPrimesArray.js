@@ -1,11 +1,11 @@
-var constants = require('../constants/general')
+var texts = require('../constants/text')
 
-var bl = constants.BRACKET_LEFT_COMMA
-var bmid = constants.CHAR_COMMA_DIVIDE
-var bpow = constants.CHAR_COMMA_POWER
-var br = constants.BRACKET_RIGHT_COMMA
+var bl = texts.BRACKET_LEFT_COMMA
+var bmid = texts.CHAR_COMMA_DIVIDE
+var bpow = texts.CHAR_COMMA_POWER
+var br = texts.BRACKET_RIGHT_COMMA
 
-var unsplitDigits = constants.MAX_DIGITS_UNSPLIT_HIGHER_PRIMES
+var unsplitDigits = texts.MAX_DIGITS_UNSPLIT_HIGHER_PRIMES
 
 
 var getHigherPrimesArray = function(peo) {
