@@ -93,7 +93,10 @@ describe('Notation parsing API', function() {
     ["A[13]5", "13/4", ""],
     ["Fp8", "177147/8192", ""],
 
-    ["G5 E'6", "15/1", "Concatenation of full notations multiplies them"],
+    ["G5E'6", "15/1", "Concatenation of full notations multiplies them"],
+    ["C(o+14)(o+15)", {2:21}, "Concatenation of separated brackets parses"],
+    ["C(o+14)(#2)", {2:-12,3:14}, ""],
+    ["C((o+14)#2)", {2:(8-11),3:7}, "Nesting of brackets only parses the inner bracket"],  // Parses as C(o+14)#2 = C#(o+12)
 
     ["", "1", ""]
   ]
