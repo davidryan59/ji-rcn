@@ -68,7 +68,6 @@ var processCommaText = function(commaText) {
 
 var reduceCommasToPeo = function(acc, elt) {return acc.mult(processCommaText(elt))}
 
-var reduceToSumOrConcatenation = function(acc, elt) {return acc + elt}
 var reduceToCount = function(acc, elt) {return acc + 1}
 var reduceToSumOfInts = function(acc, elt) {return acc + getIntFromChars(elt)}
 var reduceToSumOfIntsMinus4 = function(acc, elt) {return acc + getIntFromChars(elt) - 4}
@@ -109,7 +108,11 @@ var parseNotation = function(notation) {
       resultsPeo = resultsPeo.mult(tempPeo)
     }
     tempSplit = tempNotation.split(tempRx)
-    tempNotation = tempSplit.reduce(reduceToSumOrConcatenation, "")
+    // Going to concatenate split array, but separate elements with ! symbol
+    // which prevents nested brackets from parsing
+    tempNotation = tempSplit.reduce(function(acc, elt, index) {
+      return acc + ((index>0) ? "!" : "") + elt
+    }, "")
   }
 
   // Remove error conditions from the text to parse
