@@ -26,6 +26,7 @@ Jinote.prototype.getNotation = require('./api/general/getNotation')
 Jinote.prototype.getPeo = require('./api/general/getPeo')
 Jinote.prototype.getPitch = require('./api/general/getPitch')
 Jinote.prototype.getPitchClass = require('./api/general/getPitchClass')
+Jinote.prototype.getVal = require('./api/general/getVal')
 Jinote.prototype.setBaseFreqHz = require('./api/general/setBaseFreqHz')
 Jinote.prototype.toString = require('./api/general/toString')
 

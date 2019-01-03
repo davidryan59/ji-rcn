@@ -82,6 +82,7 @@ jn.getNotation()       // Equivalent to getPitch
 jn.getPeo()            // Returns the underlying Peo for this Jinote
 jn.getPitch()          // Return a pitch notation for the Jinote, e.g. "E'4" for new Jinote(5/4)
 jn.getPitchClass()     // Return a pitch class for the Jinote, e.g. "E'" for new Jinote(5/4). Octave information is discarded.
+jn.getVal()            // Return a positive number representing relative frequency of Jinote
 jn.setBaseFreqHz(num)  // Sets the base frequency for a Jinote
 jn.toString()          // Equivalent to getPitch
 
