@@ -91,7 +91,7 @@ describe('pitch and pitch class API', function() {
     var actualPitchText = jn.getPitch()
     var actualPitchClassText = jn.getPitchClass()
     var algText = (alg) ? ", " + alg : ""
-    var commentText = (comment) ? ", " + comment : ""
+    var commentText = (comment) ? " (" + comment + ")" : ""
     var labelPitch = "(new Jinote(" + JSON.stringify(jnInput) + algText + ")).getPitch() = " + expectPitchText + commentText
     it(labelPitch, function() {
       assert.strictEqual(actualPitchText, expectPitchText)

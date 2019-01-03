@@ -27,27 +27,38 @@ var err0 = constants.OVERFLOW_TEXT
 var err2 = constants.ERROR_TEXT_2_OCTAVE
 var err5 = constants.ERROR_TEXT_5_SYNTONIC_COMMA
 
-
-var makeRegexStringForVariableDigits = function(bl, char1, char2, digits, br) {
-  // String to generate Regex for something like (o+11), (#999999)
-  return esc(bl+char1+char2) + "[0-9]{1," + digits + "}" + esc(br)
+var makeRegexStringForBrackets = function(char1, char2, regexString) {
+  var str = esc(char1+char2) + regexString
+  var str2 = esc("(") + str + esc(")") + "|"
+             + esc("[") + str + esc("]") + "|"
+             + esc("{") + str + esc("}") + "|"
+             + esc("<") + str + esc(">")
+  return str2
 }
-var stringBracketedOctavesUp = makeRegexStringForVariableDigits(bl2, octaveText, octaveUpText, dig2, br2)
-var stringBracketedOctavesDown = makeRegexStringForVariableDigits(bl2, octaveText, octaveDownText, dig2, br2)
 
-var stringBracketedSharps = makeRegexStringForVariableDigits(bl3, sharpText, "", dig3, br3)
-var stringBracketedFlats = makeRegexStringForVariableDigits(bl3, flatText, "", dig3, br3)
-var stringBracketedPythagAdd = makeRegexStringForVariableDigits(bl3, pythagAddText, "", dig5, br3)
-var stringBracketedPythagRemove = makeRegexStringForVariableDigits(bl3, pythagRemoveText, "", dig5, br3)
+var makeRegexStringForVariableDigits = function(char1, char2, digits) {
+  // String to generate Regex for something like (o+11), (#999999)
+  var regexString = "[0-9]{1," + digits + "}"
+  return makeRegexStringForBrackets(char1, char2, regexString)
+}
 
-var stringBracketedSyntonicAdd = makeRegexStringForVariableDigits(bl5, syntonicAddText, "", dig5, br5)
-var stringBracketedSyntonicRemove = makeRegexStringForVariableDigits(bl5, syntonicRemoveText, "", dig5, br5)
+var makeRegexStringForComma = function(regexString) {
+  return makeRegexStringForBrackets("", "", regexString)
+}
 
+var stringBracketedOctavesUp = makeRegexStringForVariableDigits(octaveText, octaveUpText, dig2)
+var stringBracketedOctavesDown = makeRegexStringForVariableDigits(octaveText, octaveDownText, dig2)
+var stringBracketedSharps = makeRegexStringForVariableDigits(sharpText, "", dig3)
+var stringBracketedFlats = makeRegexStringForVariableDigits(flatText, "", dig3)
+var stringBracketedPythagAdd = makeRegexStringForVariableDigits(pythagAddText, "", dig3)
+var stringBracketedPythagRemove = makeRegexStringForVariableDigits(pythagRemoveText, "", dig3)
+var stringBracketedSyntonicAdd = makeRegexStringForVariableDigits(syntonicAddText, "", dig5)
+var stringBracketedSyntonicRemove = makeRegexStringForVariableDigits(syntonicRemoveText, "", dig5)
 
-var stringNumbers = "[ " + esc("^") + "0-9]*"
-var stringBracketedCommaFraction = esc("[") + stringNumbers + esc("/") + stringNumbers + esc("]")
-var stringBracketedCommaInteger = esc("[") + stringNumbers + esc("]")
-
+var regexStringInteger = "[ " + esc("^") + "0-9]*"
+var regexStringFraction = regexStringInteger + esc("/") + regexStringInteger
+var stringBracketedCommaFraction = makeRegexStringForComma(regexStringFraction)
+var stringBracketedCommaInteger = makeRegexStringForComma(regexStringInteger)
 
 var stringBracketedOctaveError = esc(bl2 + err2 + br2)
 var stringBracketedOctaveUpOverflow = esc(bl2 + octaveText + octaveUpText + err0 + br2)

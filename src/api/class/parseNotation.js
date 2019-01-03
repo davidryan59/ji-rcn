@@ -1,4 +1,5 @@
 var Peo = require('peo')
+var esc = require('escape-string-regexp')
 
 var getComma = require('./getComma')
 var constants = require('../../constants/general')
@@ -11,27 +12,21 @@ var getIntFromChars = function(theText) {
   return theInt
 }
 
-var removeSpacesAroundPowerSymbol = function(theText) {
-  var regex = / *\^ */g
-  var substr = "^"
-  return theText.replace(regex, substr)
-}
-
-var addSpacesAroundDivideSymbol = function(theText) {
-  var regex = /\//g
-  var substr = " / "
-  return theText.replace(regex, substr)
-}
+var removeSpacesAroundPowerSymbol = function(theText) {return theText.replace(/ *\^ */g, "^")}
+var addSpacesAroundDivideSymbol = function(theText) {return theText.replace(/\//g, " / ")}
+var commaBracketCharacters = "[](){}<>"
+var commaRegexString = "[" + esc(" " + commaBracketCharacters) + "]"
+var commaSplitRegex = new RegExp(commaRegexString, "g")
 
 var processCommaText = function(commaText) {
   var tempText = commaText
   tempText = removeSpacesAroundPowerSymbol(tempText)
   tempText = addSpacesAroundDivideSymbol(tempText)
-  var textSplitBySpacesArray = tempText.split(/[ \[\]]/g)
+  var splitArray = tempText.split(commaSplitRegex)
   var sign = 1      // -1 after divide symbol
   var firstPeo = new Peo()
-  for (var i=0; i<textSplitBySpacesArray.length; i++) {
-    var elt = textSplitBySpacesArray[i]
+  for (var i=0; i<splitArray.length; i++) {
+    var elt = splitArray[i]
     if (elt==="") {
       // do nothing
     } else if (elt==="/") {
@@ -55,7 +50,7 @@ var processCommaText = function(commaText) {
   // firstPeo specifies which commas to multiply together
   // secondPeo actually does the multiplication
   var primeExps = firstPeo.getPrimeExps()    // Object like {'2':3, '3':-2}
-  var keyArray = Object.keys(primeExps)      // Text - need a parseInt on elts
+  var keyArray = Object.keys(primeExps)      // Keys are numbers in string format - need to parseInt
   var secondPeo = new Peo()
   for (var i=0; i<keyArray.length; i++) {
     var prime = parseInt(keyArray[i])
@@ -94,7 +89,6 @@ var parseNotation = function(notation) {
   var resultsPeo = new Peo()
 
   // Function to iterate on the variables
-
   var analyseNotation = function(options) {
     tempRx = options.rgx
     tempReduceMatch = options.reduceMatch

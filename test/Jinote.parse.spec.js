@@ -119,7 +119,7 @@ describe('Notation parsing API', function() {
     var peoFromSpec = new Peo(peoConstructorData)
     var parseText = JSON.stringify(peoFromParsing.getPrimeExps())
     var specText = JSON.stringify(peoFromSpec.getPrimeExps())
-    var commentText = (comment) ? ", " + comment : ""
+    var commentText = (comment) ? " (" + comment + ")" : ""
     var label = "Jinote.parseNotation(\"" + notationToParse + "\") has prime exponents " + specText + commentText
     it(label, function() {assert.strictEqual(parseText, specText)})
   }
