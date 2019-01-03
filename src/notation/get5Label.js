@@ -9,9 +9,8 @@ var br = consts.BRACKET_RIGHT_STANDARD
 var scu = consts.CHAR_SYNTONIC_ON
 var scd = consts.CHAR_SYNTONIC_OFF
 
-var numError = Math.pow(10, consts.MAX_ERROR_DIGITS_5_SYNTONIC_COMMA)
-var numOverflow = Math.pow(10, consts.MAX_OVERFLOW_DIGITS_5_SYNTONIC_COMMA)
-var numRepeats = consts.MAX_REPEATS_5_SYNTONIC_COMMA
+var numError = Math.pow(10, consts.BRACKET_MAX_DIGITS)
+var numRepeats = consts.REPEAT_MAX_CHARS
 
 
 var get5Label = function(exp5) {
@@ -26,14 +25,10 @@ var get5Label = function(exp5) {
   }
   // Its a valid number
   exp5 = Math.round(exp5)
-  if (exp5 >= numOverflow) {
-    return errorNotation
-  } else if (exp5 > numRepeats) {
+  if (exp5 > numRepeats) {
     return "" + bl + scu + exp5 + br
   } else if (exp5 > 0) {
     return scu.repeat(exp5)
-  } else if (exp5 <= -numOverflow) {
-    return errorNotation
   } else if (exp5 < -numRepeats) {
     return "" + bl + scd + -exp5 + br
   } else if (exp5 < 0) {

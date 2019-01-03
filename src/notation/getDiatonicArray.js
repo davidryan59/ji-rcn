@@ -5,7 +5,7 @@ var peos = require('../constants/peos')
 var getErrorNotation = require('./getErrorNotation')
 var errorNotation = getErrorNotation("3")
 
-var numError = Math.pow(10, consts.MAX_ERROR_DIGITS_3_DIATONIC)
+var numError = Math.pow(10, consts.BRACKET_MAX_DIGITS)
 
 
 var getDiatonicArray = function(exp3) {

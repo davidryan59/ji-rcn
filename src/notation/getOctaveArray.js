@@ -9,13 +9,9 @@ var on = consts.CHAR_OCTAVE_MARK
 var su = consts.CHAR_OCTAVE_UP
 var sd = consts.CHAR_OCTAVE_DOWN
 var br = consts.BRACKET_RIGHT_STANDARD
-var ot = consts.OVERFLOW_TEXT
-var errorNotationSize = getErrorNotation(on)
-var errorNotationUp = getErrorNotation(on + su)
-var errorNotationDown = getErrorNotation(on + sd)
+var errorNotation = getErrorNotation(on)
 
-var numError = Math.pow(10, consts.MAX_ERROR_DIGITS_2_OCTAVE)
-var numOverflow = Math.pow(10, consts.MAX_OVERFLOW_DIGITS_2_OCTAVE)
+var numError = Math.pow(10, consts.BRACKET_MAX_DIGITS)
 
 var getOctaveArray = function(exp2) {
 
@@ -27,25 +23,19 @@ var getOctaveArray = function(exp2) {
   // Deal with error cases
   if (!ibn(exp2, numError)) {
     // Error output
-    return [errorNotationSize, new Peo()]
+    return [errorNotation, new Peo()]
   }
 
   // Its a valid number
   exp2 = Math.round(exp2)
   var peo = new Peo(consts.PEO_OCTAVE, exp2)
   standardOctaveNumber = exp2 + 4     // For 1/1, exp2=0, and octave is 4 (e.g. C4)
-  if (standardOctaveNumber >= numOverflow) {
-    // Case 1000000...
-    return [errorNotationUp, peo]
-  } else if (standardOctaveNumber > 9) {
+  if (standardOctaveNumber > 9) {
     // Case 10...999999
     return ["" + bl + on + su + standardOctaveNumber + br, peo]
   } else if (standardOctaveNumber >= 0) {
     // Case 0..9
     return ["" + standardOctaveNumber, peo]
-  } else if (standardOctaveNumber <= -numOverflow) {
-    // Case ...-1000000
-    return [errorNotationDown, peo]
   } else {
     // Case -999999...-1. Minus sign already there! Don't need sd in middle
     return ["" + bl + on + standardOctaveNumber + br, peo]

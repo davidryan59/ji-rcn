@@ -5,7 +5,7 @@ var bmid = consts.CHAR_COMMA_DIVIDE
 var bpow = consts.CHAR_COMMA_POWER
 var br = consts.BRACKET_RIGHT_COMMA
 
-var unsplitDigits = consts.MAX_DIGITS_UNSPLIT_HIGHER_PRIMES
+var unsplitDigits = consts.COMMA_MAX_DIGITS
 
 
 var getHigherPrimesArray = function(peo) {

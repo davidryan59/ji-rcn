@@ -1,3 +1,4 @@
+var Peo = require('peo')
 // var ji = require('ji-rcn')           // via npm
 var ji = require('../src/index.js')       // locally
 var Jinote = ji.jinote
@@ -99,9 +100,24 @@ console.log("")
 console.log(jn1.getFraction())
 console.log(jn2.getFraction())
 console.log("")
-console.log("")
 
+console.log("")
 for (var i=256; i<=275; i++) {
   var jn = new Jinote(i, 256)
   console.log(`${i}/256 maps to ${jn.getPitch()}`)
 }
+
+console.log("")
+for (var i=1e14-4; i<=1e14+4; i++) {
+  var jn = new Jinote(i)
+  console.log(`${i} maps to ${jn.getPitch()}`)
+}
+
+console.log("")
+console.log("Constructing a Jinote for factorial of 60 (big number)")
+jn = new Jinote(Peo.fact(60))
+jn.getNotation()
+console.log(jn)
+console.log("")
+console.log("Jinote can go much higher than this - factorial of 1000000 should be fine to calculate, but take a while to print!")
+console.log("")

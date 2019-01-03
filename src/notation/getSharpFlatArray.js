@@ -9,13 +9,10 @@ var bl = consts.BRACKET_LEFT_STANDARD
 var br = consts.BRACKET_RIGHT_STANDARD
 var st = consts.CHAR_SHARP
 var ft = consts.CHAR_FLAT
-var errorNotationSF = getErrorNotation(st+ft)
-var errorNotationSharp = getErrorNotation(st)
-var errorNotationFlat = getErrorNotation(ft)
+var errorNotation = getErrorNotation(st)
 
-var numError = Math.pow(10, consts.MAX_ERROR_DIGITS_3_SHARPS_FLATS)
-var numOverflow = Math.pow(10, consts.MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS)
-var numRepeats = consts.MAX_REPEATS_3_SHARPS_FLATS
+var numError = Math.pow(10, consts.BRACKET_MAX_DIGITS)
+var numRepeats = consts.REPEAT_MAX_CHARS
 
 
 var getSharpFlatArray = function(exp3) {
@@ -27,7 +24,7 @@ var getSharpFlatArray = function(exp3) {
   // Deal with error cases
   if (!ibn(exp3, numError)) {
     // Error output
-    return [errorNotationSF, new Peo(), 0]
+    return [errorNotation, new Peo(), 0]
   }
   // Its a valid number
   var offset = Math.round(exp3) - 2
@@ -38,14 +35,10 @@ var getSharpFlatArray = function(exp3) {
     return [txt, peo, sharps]
   }
 
-  if (sharps >= numOverflow) {
-    return getResult(errorNotationSharp)
-  } else if (sharps > numRepeats) {
+  if (sharps > numRepeats) {
     return getResult("" + bl + st + sharps + br)
   } else if (sharps > 0) {
     return getResult(st.repeat(sharps))
-  } else if (sharps <= -numOverflow) {
-    return getResult(errorNotationFlat)
   } else if (sharps < -numRepeats) {
     return getResult("" + bl + ft + -sharps + br)
   } else if (sharps < 0) {
