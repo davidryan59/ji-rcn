@@ -1,11 +1,11 @@
 var ibn = require('is-bounded-number')
 
-var texts = require('../constants/text')
-var peos = require('../constants/peo')
+var consts = require('../constants/consts')
+var peos = require('../constants/peos')
 var getErrorNotation = require('./getErrorNotation')
 var errorNotation = getErrorNotation("3")
 
-var numError = Math.pow(10, texts.MAX_ERROR_DIGITS_3_DIATONIC)
+var numError = Math.pow(10, consts.MAX_ERROR_DIGITS_3_DIATONIC)
 
 
 var getDiatonicArray = function(exp3) {

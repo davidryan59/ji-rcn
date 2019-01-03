@@ -21,7 +21,7 @@ var peoTiny = new Peo({2:-301994, 3:190537})
 var peoSyntonic = getComma(5)
 
 
-var result = {
+module.exports = {
   A: peoA,
   B: peoB,
   C: peoC,
@@ -50,5 +50,3 @@ var result = {
 
   DUMMY: "DUMMY"
 }
-
-module.exports = result

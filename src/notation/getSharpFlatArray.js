@@ -1,21 +1,21 @@
 var ibn = require('is-bounded-number')
 var Peo = require('peo')
 
-var texts = require('../constants/text')
-var peos = require('../constants/peo')
+var consts = require('../constants/consts')
+var peos = require('../constants/peos')
 var getErrorNotation = require('./getErrorNotation')
 
-var bl = texts.BRACKET_LEFT_STANDARD
-var br = texts.BRACKET_RIGHT_STANDARD
-var st = texts.CHAR_SHARP
-var ft = texts.CHAR_FLAT
+var bl = consts.BRACKET_LEFT_STANDARD
+var br = consts.BRACKET_RIGHT_STANDARD
+var st = consts.CHAR_SHARP
+var ft = consts.CHAR_FLAT
 var errorNotationSF = getErrorNotation(st+ft)
 var errorNotationSharp = getErrorNotation(st)
 var errorNotationFlat = getErrorNotation(ft)
 
-var numError = Math.pow(10, texts.MAX_ERROR_DIGITS_3_SHARPS_FLATS)
-var numOverflow = Math.pow(10, texts.MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS)
-var numRepeats = texts.MAX_REPEATS_3_SHARPS_FLATS
+var numError = Math.pow(10, consts.MAX_ERROR_DIGITS_3_SHARPS_FLATS)
+var numOverflow = Math.pow(10, consts.MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS)
+var numRepeats = consts.MAX_REPEATS_3_SHARPS_FLATS
 
 
 var getSharpFlatArray = function(exp3) {

@@ -1,21 +1,21 @@
 var ibn = require('is-bounded-number')
 var Peo = require('peo')
 
-var texts = require('../constants/text')
+var consts = require('../constants/consts')
 var getErrorNotation = require('./getErrorNotation')
 
-var bl = texts.BRACKET_LEFT_STANDARD
-var on = texts.CHAR_OCTAVE_MARK
-var su = texts.CHAR_OCTAVE_UP
-var sd = texts.CHAR_OCTAVE_DOWN
-var br = texts.BRACKET_RIGHT_STANDARD
-var ot = texts.OVERFLOW_TEXT
+var bl = consts.BRACKET_LEFT_STANDARD
+var on = consts.CHAR_OCTAVE_MARK
+var su = consts.CHAR_OCTAVE_UP
+var sd = consts.CHAR_OCTAVE_DOWN
+var br = consts.BRACKET_RIGHT_STANDARD
+var ot = consts.OVERFLOW_TEXT
 var errorNotationSize = getErrorNotation(on)
 var errorNotationUp = getErrorNotation(on + su)
 var errorNotationDown = getErrorNotation(on + sd)
 
-var numError = Math.pow(10, texts.MAX_ERROR_DIGITS_2_OCTAVE)
-var numOverflow = Math.pow(10, texts.MAX_OVERFLOW_DIGITS_2_OCTAVE)
+var numError = Math.pow(10, consts.MAX_ERROR_DIGITS_2_OCTAVE)
+var numOverflow = Math.pow(10, consts.MAX_OVERFLOW_DIGITS_2_OCTAVE)
 
 var getOctaveArray = function(exp2) {
 
@@ -32,7 +32,7 @@ var getOctaveArray = function(exp2) {
 
   // Its a valid number
   exp2 = Math.round(exp2)
-  var peo = new Peo(texts.PEO_OCTAVE, exp2)
+  var peo = new Peo(consts.PEO_OCTAVE, exp2)
   standardOctaveNumber = exp2 + 4     // For 1/1, exp2=0, and octave is 4 (e.g. C4)
   if (standardOctaveNumber >= numOverflow) {
     // Case 1000000...
