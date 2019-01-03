@@ -1,9 +1,9 @@
 var constants = require('../constants/general')
 
-var bl = constants.BRACKET_HIGHER_COMMA_LEFT
-var bmid = constants.SYMBOL_HIGHER_COMMA_MID
-var bpow = constants.SYMBOL_HIGHER_COMMA_POW
-var br = constants.BRACKET_HIGHER_COMMA_RIGHT
+var bl = constants.BRACKET_LEFT_COMMA
+var bmid = constants.CHAR_COMMA_DIVIDE
+var bpow = constants.CHAR_COMMA_POWER
+var br = constants.BRACKET_RIGHT_COMMA
 
 var unsplitDigits = constants.MAX_DIGITS_UNSPLIT_HIGHER_PRIMES
 

@@ -3,11 +3,11 @@ var Peo = require('peo')
 
 var constants = require('../constants/general')
 
-var bl = constants.BRACKET_2_OCTAVE_LEFT
-var on = constants.NAME_2_OCTAVE
-var su = constants.SYMBOL_2_OCTAVE_UP
-var sd = constants.SYMBOL_2_OCTAVE_DOWN
-var br = constants.BRACKET_2_OCTAVE_RIGHT
+var bl = constants.BRACKET_LEFT_STANDARD
+var on = constants.CHAR_OCTAVE_MARK
+var su = constants.CHAR_OCTAVE_UP
+var sd = constants.CHAR_OCTAVE_DOWN
+var br = constants.BRACKET_RIGHT_STANDARD
 var ot = constants.OVERFLOW_TEXT
 
 var numError = Math.pow(10, constants.MAX_ERROR_DIGITS_2_OCTAVE)

@@ -3,11 +3,11 @@ var Peo = require('peo')
 
 var constants = require('../constants/general')
 
-var bl = constants.BRACKET_3_SHARP_FLAT_LEFT
-var br = constants.BRACKET_3_SHARP_FLAT_RIGHT
+var bl = constants.BRACKET_LEFT_STANDARD
+var br = constants.BRACKET_RIGHT_STANDARD
 var ot = constants.OVERFLOW_TEXT
-var st = constants.NAME_3_SHARP
-var ft = constants.NAME_3_FLAT
+var st = constants.CHAR_SHARP
+var ft = constants.CHAR_FLAT
 
 var numError = Math.pow(10, constants.MAX_ERROR_DIGITS_3_SHARPS_FLATS)
 var numOverflow = Math.pow(10, constants.MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS)

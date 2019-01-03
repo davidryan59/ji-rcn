@@ -2,35 +2,32 @@ var esc = require('escape-string-regexp')
 
 var constants = require('../constants/general')
 
-var bl2 = constants.BRACKET_2_OCTAVE_LEFT
-var octaveText = constants.NAME_2_OCTAVE
-var octaveUpText = constants.SYMBOL_2_OCTAVE_UP
-var octaveDownText = constants.SYMBOL_2_OCTAVE_DOWN
+var bls = constants.BRACKET_LEFT_STANDARD
+var brs = constants.BRACKET_RIGHT_STANDARD
+
+var octaveText = constants.CHAR_OCTAVE_MARK
+var octaveUpText = constants.CHAR_OCTAVE_UP
+var octaveDownText = constants.CHAR_OCTAVE_DOWN
+var sharpText = constants.CHAR_SHARP
+var flatText = constants.CHAR_FLAT
+var syntonicAddText = constants.CHAR_SYNTONIC_ON
+var syntonicRemoveText = constants.CHAR_SYNTONIC_OFF
+
 var dig2 = constants.MAX_OVERFLOW_DIGITS_2_OCTAVE
-var br2 = constants.BRACKET_2_OCTAVE_RIGHT
-
-var bl3 = constants.BRACKET_3_SHARP_FLAT_LEFT
-var sharpText = constants.NAME_3_SHARP
-var flatText = constants.NAME_3_FLAT
 var dig3 = constants.MAX_OVERFLOW_DIGITS_3_SHARPS_FLATS
-var br3 = constants.BRACKET_3_SHARP_FLAT_RIGHT
-
-var bl5 = constants.BRACKET_5_SYNTONIC_LEFT
-var syntonicAddText = constants.NAME_5_SYNTONIC_COMMA_ADD
-var syntonicRemoveText = constants.NAME_5_SYNTONIC_COMMA_REMOVE
 var dig5 = constants.MAX_OVERFLOW_DIGITS_5_SYNTONIC_COMMA
-var br5 = constants.BRACKET_5_SYNTONIC_RIGHT
 
 var err0 = constants.OVERFLOW_TEXT
 var err2 = constants.ERROR_TEXT_2_OCTAVE
 var err5 = constants.ERROR_TEXT_5_SYNTONIC_COMMA
 
 var makeRegexStringForBrackets = function(char1, char2, regexString) {
-  var str = esc(char1+char2) + regexString
-  var str2 = esc("(") + str + esc(")") + "|"
-             + esc("[") + str + esc("]") + "|"
-             + esc("{") + str + esc("}") + "|"
-             + esc("<") + str + esc(">")
+  // Going to allow four different types of bracket to parse
+  var str1 = esc(char1+char2) + regexString
+  var str2 = esc("(") + str1 + esc(")") + "|"
+             + esc("[") + str1 + esc("]") + "|"
+             + esc("{") + str1 + esc("}") + "|"
+             + esc("<") + str1 + esc(">")
   return str2
 }
 
@@ -48,32 +45,32 @@ var stringBracketedOctavesUp = makeRegexStringForVariableDigits(octaveText, octa
 var stringBracketedOctavesDown = makeRegexStringForVariableDigits(octaveText, octaveDownText, dig2)
 var stringBracketedSharps = makeRegexStringForVariableDigits(sharpText, "", dig3)
 var stringBracketedFlats = makeRegexStringForVariableDigits(flatText, "", dig3)
-var stringBracketedPythagAdd = makeRegexStringForVariableDigits(constants.NAME_3_PYTHAG_COMMA_ADD, "", dig3)
-var stringBracketedPythagRemove = makeRegexStringForVariableDigits(constants.NAME_3_PYTHAG_COMMA_REMOVE, "", dig3)
-var stringBracketedMercatorAdd = makeRegexStringForVariableDigits(constants.NAME_3_MERCATOR_COMMA_ADD, "", dig3)
-var stringBracketedMercatorRemove = makeRegexStringForVariableDigits(constants.NAME_3_MERCATOR_COMMA_REMOVE, "", dig3)
-var stringBracketedSmallAdd = makeRegexStringForVariableDigits(constants.NAME_3_SMALL_COMMA_ADD, "", dig3)
-var stringBracketedSmallRemove = makeRegexStringForVariableDigits(constants.NAME_3_SMALL_COMMA_REMOVE, "", dig3)
-var stringBracketedTinyAdd = makeRegexStringForVariableDigits(constants.NAME_3_TINY_COMMA_ADD, "", dig3)
-var stringBracketedTinyRemove = makeRegexStringForVariableDigits(constants.NAME_3_TINY_COMMA_REMOVE, "", dig3)
+var stringBracketedPythagAdd = makeRegexStringForVariableDigits(constants.CHAR_PYTHAG_ON, "", dig3)
+var stringBracketedPythagRemove = makeRegexStringForVariableDigits(constants.CHAR_PYTHAG_OFF, "", dig3)
+var stringBracketedMercatorAdd = makeRegexStringForVariableDigits(constants.CHAR_MERCATOR_ON, "", dig3)
+var stringBracketedMercatorRemove = makeRegexStringForVariableDigits(constants.CHAR_MERCATOR_OFF, "", dig3)
+var stringBracketedSmallAdd = makeRegexStringForVariableDigits(constants.CHAR_SMALL_ON, "", dig3)
+var stringBracketedSmallRemove = makeRegexStringForVariableDigits(constants.CHAR_SMALL_OFF, "", dig3)
+var stringBracketedTinyAdd = makeRegexStringForVariableDigits(constants.CHAR_TINY_ON, "", dig3)
+var stringBracketedTinyRemove = makeRegexStringForVariableDigits(constants.CHAR_TINY_OFF, "", dig3)
 var stringBracketedSyntonicAdd = makeRegexStringForVariableDigits(syntonicAddText, "", dig5)
 var stringBracketedSyntonicRemove = makeRegexStringForVariableDigits(syntonicRemoveText, "", dig5)
 
-var regexStringInteger = "[ " + esc("^") + "0-9]*"
-var regexStringFraction = regexStringInteger + esc("/") + regexStringInteger
+var regexStringInteger = "[" + esc(" " + constants.CHAR_COMMA_POWER) + "0-9]*"
+var regexStringFraction = regexStringInteger + esc(constants.CHAR_COMMA_DIVIDE) + regexStringInteger
 var stringBracketedCommaFraction = makeRegexStringForComma(regexStringFraction)
 var stringBracketedCommaInteger = makeRegexStringForComma(regexStringInteger)
 
-var stringBracketedOctaveError = esc(bl2 + err2 + br2)
-var stringBracketedOctaveUpOverflow = esc(bl2 + octaveText + octaveUpText + err0 + br2)
-var stringBracketedOctaveDownOverflow = esc(bl2 + octaveText + octaveDownText + err0 + br2)
+var stringBracketedOctaveError = esc(bls + err2 + brs)
+var stringBracketedOctaveUpOverflow = esc(bls + octaveText + octaveUpText + err0 + brs)
+var stringBracketedOctaveDownOverflow = esc(bls + octaveText + octaveDownText + err0 + brs)
 
-var stringBracketedSharpOverflow = esc(bl3 + sharpText + err0 + br3)
-var stringBracketedFlatOverflow = esc(bl3 + flatText + err0 + br3)
+var stringBracketedSharpOverflow = esc(bls + sharpText + err0 + brs)
+var stringBracketedFlatOverflow = esc(bls + flatText + err0 + brs)
 
-var stringBracketedSyntonicError = esc(bl5 + err5 + br5)
-var stringBracketedSyntonicUpOverflow = esc(bl5 + syntonicAddText + err0 + br5)
-var stringBracketedSyntonicDownOverflow = esc(bl5 + syntonicRemoveText + err0 + br5)
+var stringBracketedSyntonicError = esc(bls + err5 + brs)
+var stringBracketedSyntonicUpOverflow = esc(bls + syntonicAddText + err0 + brs)
+var stringBracketedSyntonicDownOverflow = esc(bls + syntonicRemoveText + err0 + brs)
 
 
 var flags = "g"
@@ -107,18 +104,18 @@ var result = {
   REGEX_BRACKETED_COMMA_INTEGER: new RegExp(stringBracketedCommaInteger, flags),
   REGEX_BRACKETED_COMMA_FRACTION: new RegExp(stringBracketedCommaFraction, flags),
 
-  REGEX_CHAR_SYNTONIC_COMMA_ADD: new RegExp(esc(constants.NAME_5_SYNTONIC_COMMA_ADD), flags),
-  REGEX_CHAR_SYNTONIC_COMMA_REMOVE: new RegExp(esc(constants.NAME_5_SYNTONIC_COMMA_REMOVE), flags),
-  REGEX_CHAR_SHARP: new RegExp(esc(constants.NAME_3_SHARP), flags),
-  REGEX_CHAR_FLAT: new RegExp(esc(constants.NAME_3_FLAT), flags),
-  REGEX_CHAR_PYTHAG_COMMA_ADD: new RegExp(esc(constants.NAME_3_PYTHAG_COMMA_ADD), flags),
-  REGEX_CHAR_PYTHAG_COMMA_REMOVE: new RegExp(esc(constants.NAME_3_PYTHAG_COMMA_REMOVE), flags),
-  REGEX_CHAR_MERCATOR_COMMA_ADD: new RegExp(esc(constants.NAME_3_MERCATOR_COMMA_ADD), flags),
-  REGEX_CHAR_MERCATOR_COMMA_REMOVE: new RegExp(esc(constants.NAME_3_MERCATOR_COMMA_REMOVE), flags),
-  REGEX_CHAR_SMALL_COMMA_ADD: new RegExp(esc(constants.NAME_3_SMALL_COMMA_ADD), flags),
-  REGEX_CHAR_SMALL_COMMA_REMOVE: new RegExp(esc(constants.NAME_3_SMALL_COMMA_REMOVE), flags),
-  REGEX_CHAR_TINY_COMMA_ADD: new RegExp(esc(constants.NAME_3_TINY_COMMA_ADD), flags),
-  REGEX_CHAR_TINY_COMMA_REMOVE: new RegExp(esc(constants.NAME_3_TINY_COMMA_REMOVE), flags),
+  REGEX_CHAR_SYNTONIC_COMMA_ADD: new RegExp(esc(constants.CHAR_SYNTONIC_ON), flags),
+  REGEX_CHAR_SYNTONIC_COMMA_REMOVE: new RegExp(esc(constants.CHAR_SYNTONIC_OFF), flags),
+  REGEX_CHAR_SHARP: new RegExp(esc(constants.CHAR_SHARP), flags),
+  REGEX_CHAR_FLAT: new RegExp(esc(constants.CHAR_FLAT), flags),
+  REGEX_CHAR_PYTHAG_COMMA_ADD: new RegExp(esc(constants.CHAR_PYTHAG_ON), flags),
+  REGEX_CHAR_PYTHAG_COMMA_REMOVE: new RegExp(esc(constants.CHAR_PYTHAG_OFF), flags),
+  REGEX_CHAR_MERCATOR_COMMA_ADD: new RegExp(esc(constants.CHAR_MERCATOR_ON), flags),
+  REGEX_CHAR_MERCATOR_COMMA_REMOVE: new RegExp(esc(constants.CHAR_MERCATOR_OFF), flags),
+  REGEX_CHAR_SMALL_COMMA_ADD: new RegExp(esc(constants.CHAR_SMALL_ON), flags),
+  REGEX_CHAR_SMALL_COMMA_REMOVE: new RegExp(esc(constants.CHAR_SMALL_OFF), flags),
+  REGEX_CHAR_TINY_COMMA_ADD: new RegExp(esc(constants.CHAR_TINY_ON), flags),
+  REGEX_CHAR_TINY_COMMA_REMOVE: new RegExp(esc(constants.CHAR_TINY_OFF), flags),
   REGEX_CHAR_ERROR: new RegExp("Na|Lo|Hi|N", flags),
   REGEX_CHAR_DIATONIC: new RegExp("[A-G]", flags),
   REGEX_CHAR_OCTAVE: new RegExp("[0-9]", flags),
