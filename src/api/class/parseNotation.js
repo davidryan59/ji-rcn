@@ -220,6 +220,42 @@ var parseNotation = function(notation) {
     mapReducerResultToPeo: peoPower(constants.PEO_PYTHAG, -1)
   })
 
+  analyseNotation({
+    rgx: rxs.REGEX_CHAR_MERCATOR_COMMA_ADD,
+    reduceMatch: reduceToCount,
+    mapReducerResultToPeo: peoPower(constants.PEO_MERCATOR)
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_CHAR_MERCATOR_COMMA_REMOVE,
+    reduceMatch: reduceToCount,
+    mapReducerResultToPeo: peoPower(constants.PEO_MERCATOR, -1)
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_CHAR_SMALL_COMMA_ADD,
+    reduceMatch: reduceToCount,
+    mapReducerResultToPeo: peoPower(constants.PEO_SMALL)
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_CHAR_SMALL_COMMA_REMOVE,
+    reduceMatch: reduceToCount,
+    mapReducerResultToPeo: peoPower(constants.PEO_SMALL, -1)
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_CHAR_TINY_COMMA_ADD,
+    reduceMatch: reduceToCount,
+    mapReducerResultToPeo: peoPower(constants.PEO_TINY)
+  })
+
+  analyseNotation({
+    rgx: rxs.REGEX_CHAR_TINY_COMMA_REMOVE,
+    reduceMatch: reduceToCount,
+    mapReducerResultToPeo: peoPower(constants.PEO_TINY, -1)
+  })
+
   // Remove any error conditions designated by individual characters
   analyseNotation({rgx: rxs.REGEX_CHAR_ERROR})
 
