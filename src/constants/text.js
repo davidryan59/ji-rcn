@@ -1,5 +1,8 @@
 // Notation characters A, B, C, D, E, F, G are not configurable.
 
+// Notation digits 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 as used in brackets
+// and for octave numbers are also not configurable.
+
 module.exports = {
   CHAR_OCTAVE_MARK: "o",
   CHAR_OCTAVE_UP: "+",
@@ -27,10 +30,11 @@ module.exports = {
   BRACKET_LEFT_COMMA: "[",
   BRACKET_RIGHT_COMMA: "]",
 
-  BRACKET_COMMA_ALLOWED_CHARS: "[](){}<>",
+  BRACKET_ALLOWED_CHARS: "[](){}<>",
 
   ERROR_TEXT: "ERR",
   ERROR_MAX_CHARS: 2,
+  MAX_DIGITS_UNSPLIT_HIGHER_PRIMES: 3,
   MAX_ERROR_DIGITS_2_OCTAVE: 15,
   MAX_OVERFLOW_DIGITS_2_OCTAVE: 6,
   MAX_ERROR_DIGITS_3_DIATONIC: 15,
@@ -40,7 +44,6 @@ module.exports = {
   MAX_ERROR_DIGITS_5_SYNTONIC_COMMA: 15,
   MAX_OVERFLOW_DIGITS_5_SYNTONIC_COMMA: 6,
   MAX_REPEATS_5_SYNTONIC_COMMA: 4,
-  MAX_DIGITS_UNSPLIT_HIGHER_PRIMES: 3,
 
   DUMMY: "DUMMY"
 }

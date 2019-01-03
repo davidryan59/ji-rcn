@@ -15,7 +15,7 @@ var getIntFromChars = function(theText) {
 
 var removeSpacesAroundPowerSymbol = function(theText) {return theText.replace(/ *\^ */g, "^")}
 var addSpacesAroundDivideSymbol = function(theText) {return theText.replace(/\//g, " / ")}
-var commaSplitRegex = new RegExp("[" + esc(" " + texts.BRACKET_COMMA_ALLOWED_CHARS) + "]", "g")
+var commaSplitRegex = new RegExp("[" + esc(" " + texts.BRACKET_ALLOWED_CHARS) + "]", "g")
 
 var processCommaText = function(commaText) {
   var tempText = commaText
