@@ -73,13 +73,11 @@ var reduceToCount = function(acc, elt) {return acc + 1}
 var reduceToSumOfInts = function(acc, elt) {return acc + getIntFromChars(elt)}
 var reduceToSumOfIntsMinus4 = function(acc, elt) {return acc + getIntFromChars(elt) - 4}
 
-var sharpsPeo = function(theInt) {return new Peo({3:(7*theInt),2:(-11*theInt)})}
-var flatsPeo = function(theInt) {return new Peo({3:(-7*theInt),2:(11*theInt)})}
-var pythagAddPeo = function(theInt) {return new Peo({3:(12*theInt),2:(-19*theInt)})}
-var pythagRemovePeo = function(theInt) {return new Peo({3:(-12*theInt),2:(19*theInt)})}
-var syntonicsAddPeo = function(theInt) {return new Peo({2:(4*theInt),3:(-4*theInt),5:(theInt)})}
-var syntonicsRemovePeo = function(theInt) {return new Peo({2:(-4*theInt),3:(4*theInt),5:(-theInt)})}
-var octavesPeo = function(theInt) {return new Peo({2:theInt})}
+var peoPower = function(peo, outerPower) {
+  return function(innerPower) {
+    return peo.pow(innerPower * (outerPower || 1))
+  }
+}
 
 var reduceDiatonicLettersToPeo = function(acc, elt) {return acc.mult(constants[elt])}
 var identityFunction = function(anything) {return anything}
@@ -128,49 +126,49 @@ var parseNotation = function(notation) {
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_OCTAVES_UP,
     reduceMatch: reduceToSumOfIntsMinus4,
-    mapReducerResultToPeo: octavesPeo
+    mapReducerResultToPeo: peoPower(constants.PEO_OCTAVE)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_OCTAVES_DOWN,
     reduceMatch: reduceToSumOfIntsMinus4,
-    mapReducerResultToPeo: octavesPeo
+    mapReducerResultToPeo: peoPower(constants.PEO_OCTAVE)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_SHARPS,
     reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: sharpsPeo
+    mapReducerResultToPeo: peoPower(constants.PEO_SHARP)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_FLATS,
     reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: flatsPeo
+    mapReducerResultToPeo: peoPower(constants.PEO_SHARP, -1)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_PYTHAG_COMMA_ADD,
     reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: pythagAddPeo
+    mapReducerResultToPeo: peoPower(constants.PEO_PYTHAG)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_PYTHAG_COMMA_REMOVE,
     reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: pythagRemovePeo
+    mapReducerResultToPeo: peoPower(constants.PEO_PYTHAG, -1)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_SYNTONIC_COMMA_ADD,
     reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: syntonicsAddPeo
+    mapReducerResultToPeo: peoPower(constants.PEO_SYNTONIC)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_SYNTONIC_COMMA_REMOVE,
     reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: syntonicsRemovePeo
+    mapReducerResultToPeo: peoPower(constants.PEO_SYNTONIC, -1)
   })
 
   // Do the commas next
@@ -192,37 +190,37 @@ var parseNotation = function(notation) {
   analyseNotation({
     rgx: rxs.REGEX_CHAR_SYNTONIC_COMMA_ADD,
     reduceMatch: reduceToCount,
-    mapReducerResultToPeo: syntonicsAddPeo
+    mapReducerResultToPeo: peoPower(constants.PEO_SYNTONIC)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_CHAR_SYNTONIC_COMMA_REMOVE,
     reduceMatch: reduceToCount,
-    mapReducerResultToPeo: syntonicsRemovePeo
+    mapReducerResultToPeo: peoPower(constants.PEO_SYNTONIC, -1)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_CHAR_SHARP,
     reduceMatch: reduceToCount,
-    mapReducerResultToPeo: sharpsPeo
+    mapReducerResultToPeo: peoPower(constants.PEO_SHARP)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_CHAR_FLAT,
     reduceMatch: reduceToCount,
-    mapReducerResultToPeo: flatsPeo
+    mapReducerResultToPeo: peoPower(constants.PEO_SHARP, -1)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_CHAR_PYTHAG_COMMA_ADD,
     reduceMatch: reduceToCount,
-    mapReducerResultToPeo: pythagAddPeo
+    mapReducerResultToPeo: peoPower(constants.PEO_PYTHAG)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_CHAR_PYTHAG_COMMA_REMOVE,
     reduceMatch: reduceToCount,
-    mapReducerResultToPeo: pythagRemovePeo
+    mapReducerResultToPeo: peoPower(constants.PEO_PYTHAG, -1)
   })
 
   // Remove any error conditions designated by individual characters
@@ -239,7 +237,7 @@ var parseNotation = function(notation) {
   analyseNotation({
     rgx: rxs.REGEX_CHAR_OCTAVE,
     reduceMatch: reduceToSumOfIntsMinus4,
-    mapReducerResultToPeo: octavesPeo
+    mapReducerResultToPeo: peoPower(constants.PEO_OCTAVE)
   })
 
   return resultsPeo

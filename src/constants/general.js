@@ -1,6 +1,5 @@
 var Peo = require('peo')
 
-var peoOctave = new Peo(2)
 var peoF = new Peo(4, 3)
 var peoC = new Peo()
 var peoG = new Peo(3, 2)
@@ -8,7 +7,10 @@ var peoD = new Peo(9, 8)
 var peoA = new Peo(27, 16)
 var peoE = new Peo(81, 64)
 var peoB = new Peo(243, 128)
-var peoSharp = new Peo({3:7, 2:-11})
+var peoOctave = new Peo(2)
+var peoSharp = new Peo({2:-11, 3:7})
+var peoPythag = new Peo({2:-19, 3:12})
+var peoSyntonic = new Peo({2:4, 3:-4, 5:1})
 
 var result = {
   OVERFLOW_TEXT: "LOTS",
@@ -21,15 +23,18 @@ var result = {
   F: peoF,
   G: peoG,
 
-  PEO_2_OCTAVE: peoOctave,
-  PEO_3_DIATONIC_F: peoF,
-  PEO_3_DIATONIC_C: peoC,
-  PEO_3_DIATONIC_G: peoG,
-  PEO_3_DIATONIC_D: peoD,
-  PEO_3_DIATONIC_A: peoA,
-  PEO_3_DIATONIC_E: peoE,
-  PEO_3_DIATONIC_B: peoB,
-  PEO_3_SHARP: peoSharp,
+  PEO_DIATONIC_F: peoF,
+  PEO_DIATONIC_C: peoC,
+  PEO_DIATONIC_G: peoG,
+  PEO_DIATONIC_D: peoD,
+  PEO_DIATONIC_A: peoA,
+  PEO_DIATONIC_E: peoE,
+  PEO_DIATONIC_B: peoB,
+
+  PEO_OCTAVE: peoOctave,
+  PEO_SHARP: peoSharp,
+  PEO_PYTHAG: peoPythag,
+  PEO_SYNTONIC: peoSyntonic,
 
   NAME_2_OCTAVE: "o",
   NAME_3_SHARP: "#",

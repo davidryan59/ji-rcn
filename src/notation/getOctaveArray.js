@@ -28,7 +28,7 @@ var getOctaveArray = function(exp2) {
 
   // Its a valid number
   exp2 = Math.round(exp2)
-  var peo = new Peo(constants.PEO_2_OCTAVE, exp2)
+  var peo = new Peo(constants.PEO_OCTAVE, exp2)
   standardOctaveNumber = exp2 + 4     // For 1/1, exp2=0, and octave is 4 (e.g. C4)
   if (standardOctaveNumber >= numOverflow) {
     // Case 1000000...

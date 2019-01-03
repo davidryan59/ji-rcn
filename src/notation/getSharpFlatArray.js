@@ -28,7 +28,7 @@ var getSharpFlatArray = function(exp3) {
   // Its a valid number
   var offset = Math.round(exp3) - 2
   var sharps = Math.round(offset/7)
-  var peo = new Peo(constants.PEO_3_SHARP, sharps)
+  var peo = new Peo(constants.PEO_SHARP, sharps)
 
   var getResult = function(txt) {
     return [txt, peo, sharps]
