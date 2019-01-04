@@ -1,7 +1,7 @@
 # Just Intonation - Rational Comma Notation
 ## (JI-RCN, `ji-rcn`)
 
-[![npm version](https://badge.fury.io/js/ji-rcn.png)](https://badge.fury.io/js/ji-rcn)
+[![npm version](https://badge.fury.io/js/ji-rcn.png)](https://badge.fury.io/js/ji-rcn) [npm module](https://www.npmjs.com/package/ji-rcn) [GitHub repo](https://github.com/davidryan59/ji-rcn)
 
 **Just Intonation** (JI) is a system of musical tuning where intervals can be expressed as ratios between whole numbers.
 
@@ -74,17 +74,19 @@ var jn = new Jinote(object, alg)
 // General methods
 jn.copy()              // Return a deep copy of a Jinote
 jn.getAlg()            // Return algorithm for the Jinote
-jn.getBaseFreqHz()     // Returns the base frequency for Jinote on 1/1, defaults to 256 Hz
 jn.getFraction()       // Returns a text representation of fraction for this Jinote
-jn.getFreqHz()         // Returns the frequency of a specific Jinote, e.g. 320 for Jinote on 5/4
-jn.getFreqText()       // Returns the frequency text of a specific Jinote, e.g. "320 Hz" for Jinote on 5/4
 jn.getNotation()       // Equivalent to getPitch
 jn.getPeo()            // Returns the underlying Peo for this Jinote
 jn.getPitch()          // Return a pitch notation for the Jinote, e.g. "E'4" for new Jinote(5/4)
 jn.getPitchClass()     // Return a pitch class for the Jinote, e.g. "E'" for new Jinote(5/4). Octave information is discarded.
 jn.getVal()            // Return a positive number representing relative frequency of Jinote
-jn.setBaseFreqHz(num)  // Sets the base frequency for a Jinote
 jn.toString()          // Equivalent to getPitch
+
+// Frequency methods
+jn.getBaseFreqHz()     // Returns the base frequency for Jinote on 1/1, defaults to 256 Hz
+jn.getFreqHz()         // Returns the frequency of a specific Jinote, e.g. 320 for Jinote on 5/4
+jn.getFreqText()       // Returns the frequency text of a specific Jinote, e.g. "320 Hz" for Jinote on 5/4
+jn.setBaseFreqHz(num)  // Changes the specific base frequency for a particular Jinote instance
 
 // Maths methods
 jn.get1()              // Return a new identity Jinote (from any Jinote)

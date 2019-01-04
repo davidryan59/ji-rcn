@@ -4,6 +4,9 @@
 // and for octave numbers are also not configurable.
 
 module.exports = {
+  DEFAULT_NOTATION: "C4",
+  DEFAULT_BASE_FREQ_HZ: 256,
+
   CHAR_OCTAVE_MARK: "o",
   CHAR_OCTAVE_UP: "+",
   CHAR_OCTAVE_DOWN: "-",
