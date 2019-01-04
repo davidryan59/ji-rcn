@@ -101,46 +101,53 @@ console.log(jn1.getFraction())
 console.log(jn2.getFraction())
 console.log("")
 
+console.log("In the examples below, the base notation C4 represents the interval 1/1:")
+
 console.log("")
 for (var i=1; i<=32; i++) {
-  var jn = new Jinote(i, i+1)
+  var jn = new Jinote(i)
+  console.log(`${i} is notated ${jn.getPitch()}`)
+}
+
+console.log("")
+for (var i=1; i<=32; i++) {
+  var jn = new Jinote(1, i)
+  console.log(`1/${i} is notated ${jn.getPitch()}`)
+}
+
+console.log("")
+for (var i=1; i<=32; i++) {
+  var jn = new Jinote(i+1, i)
+  console.log(`${i+1}/${i} is notated ${jn.getPitch()}`)
+}
+
+console.log("")
+for (var i=1; i<=49; i++) {
+  var num = Math.pow(2, i)
+  var jn = new Jinote(num+1, num)
+  console.log(`${num+1}/${num} is notated ${jn.getPitch()}`)
+}
+
+console.log("")
+for (var i=60; i<=90; i++) {
+  var jn = new Jinote(i, 60)
   var fract = "" + jn.getFraction()
   var fractText = fract + " ".repeat(6-fract.length)
-  console.log(`${i}/${i+1} maps to ${fractText} ${jn.getPitch()}`)
+  console.log(`${i}/60 = ${fractText} is notated ${jn.getPitch()}`)
 }
 
 console.log("")
-for (var i=16; i<=32; i++) {
-  var jn = new Jinote(1, i)
-  console.log(`1/${i} maps to ${jn.getPitch()}`)
-}
-
-console.log("")
-for (var i=32; i<=64; i++) {
-  var jn = new Jinote(i)
-  console.log(`${i} maps to ${jn.getPitch()}`)
-}
-
-console.log("")
-for (var i=360; i<=400; i++) {
-  var jn = new Jinote(i, 360)
-  var fract = "" + jn.getFraction()
-  var fractText = fract + " ".repeat(8-fract.length)
-  console.log(`${i}/360 maps to ${fractText} ${jn.getPitch()}`)
-}
-
-console.log("")
-for (var i=1e6; i<=1e6+10; i++) {
+for (var i=65536; i<=65536+15; i++) {
   var jn = new Jinote(i, 65536)
   var fract = "" + jn.getFraction()
-  var fractText = fract + " ".repeat(13-fract.length)
-  console.log(`${i}/65536 maps to ${fractText} ${jn.getPitch()}`)
+  var fractText = fract + " ".repeat(12-fract.length)
+  console.log(`${i}/65536 = ${fractText} is notated ${jn.getPitch()}`)
 }
 
 console.log("")
 for (var i=1e14-4; i<=1e14+4; i++) {
   var jn = new Jinote(i)
-  console.log(`${i} maps to ${jn.getPitch()}`)
+  console.log(`${i} is notated ${jn.getPitch()}`)
 }
 
 console.log("")
