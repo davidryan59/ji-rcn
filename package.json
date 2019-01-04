@@ -1,6 +1,6 @@
 {
   "name": "ji-rcn",
-  "version": "7.0.1",
+  "version": "7.0.2",
   "description": "Functions for converting between numbers and JI musical notations",
   "author": {
     "name": "David Ryan",
