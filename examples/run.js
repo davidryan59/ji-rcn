@@ -102,6 +102,20 @@ console.log(jn2.getFraction())
 console.log("")
 
 console.log("")
+for (var i=1; i<=32; i++) {
+  var jn = new Jinote(i, i+1)
+  var fract = "" + jn.getFraction()
+  var fractText = fract + " ".repeat(6-fract.length)
+  console.log(`${i}/${i+1} maps to ${fractText} ${jn.getPitch()}`)
+}
+
+console.log("")
+for (var i=16; i<=32; i++) {
+  var jn = new Jinote(1, i)
+  console.log(`1/${i} maps to ${jn.getPitch()}`)
+}
+
+console.log("")
 for (var i=32; i<=64; i++) {
   var jn = new Jinote(i)
   console.log(`${i} maps to ${jn.getPitch()}`)
@@ -118,7 +132,9 @@ for (var i=360; i<=400; i++) {
 console.log("")
 for (var i=1e6; i<=1e6+10; i++) {
   var jn = new Jinote(i, 65536)
-  console.log(`${i}/65536 maps to ${jn.getPitch()}`)
+  var fract = "" + jn.getFraction()
+  var fractText = fract + " ".repeat(13-fract.length)
+  console.log(`${i}/65536 maps to ${fractText} ${jn.getPitch()}`)
 }
 
 console.log("")
