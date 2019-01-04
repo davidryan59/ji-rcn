@@ -101,53 +101,76 @@ console.log(jn1.getFraction())
 console.log(jn2.getFraction())
 console.log("")
 
-console.log("In the examples below, the base notation C4 represents the interval 1/1:")
+console.log("In the examples below, it is assumed 1/1 is notated C4, e.g. C4 is the base notation:")
 
 console.log("")
 for (var i=1; i<=32; i++) {
   var jn = new Jinote(i)
-  console.log(`${i} is notated ${jn.getPitch()}`)
+  console.log(`${i}  is notated  ${jn.getPitch()}`)
 }
 
 console.log("")
 for (var i=1; i<=32; i++) {
   var jn = new Jinote(1, i)
-  console.log(`1/${i} is notated ${jn.getPitch()}`)
+  console.log(`1/${i}  is notated  ${jn.getPitch()}`)
 }
 
 console.log("")
 for (var i=1; i<=32; i++) {
   var jn = new Jinote(i+1, i)
-  console.log(`${i+1}/${i} is notated ${jn.getPitch()}`)
+  console.log(`${i+1}/${i}  is notated  ${jn.getPitch()}`)
 }
 
 console.log("")
 for (var i=1; i<=49; i++) {
   var num = Math.pow(2, i)
   var jn = new Jinote(num+1, num)
-  console.log(`${num+1}/${num} is notated ${jn.getPitch()}`)
+  console.log(`${num+1}/${num}  is notated  ${jn.getPitch()}`)
 }
 
 console.log("")
 for (var i=60; i<=90; i++) {
   var jn = new Jinote(i, 60)
   var fract = "" + jn.getFraction()
-  var fractText = fract + " ".repeat(6-fract.length)
-  console.log(`${i}/60 = ${fractText} is notated ${jn.getPitch()}`)
+  var fractText = fract + " ".repeat(5-fract.length)
+  console.log(`${i}/60 = ${fractText}  is notated  ${jn.getPitch()}`)
 }
 
 console.log("")
 for (var i=65536; i<=65536+15; i++) {
   var jn = new Jinote(i, 65536)
   var fract = "" + jn.getFraction()
-  var fractText = fract + " ".repeat(12-fract.length)
-  console.log(`${i}/65536 = ${fractText} is notated ${jn.getPitch()}`)
+  var fractText = fract + " ".repeat(11-fract.length)
+  console.log(`${i}/65536 = ${fractText}  is notated  ${jn.getPitch()}`)
 }
 
 console.log("")
 for (var i=1e14-4; i<=1e14+4; i++) {
   var jn = new Jinote(i)
-  console.log(`${i} is notated ${jn.getPitch()}`)
+  console.log(`${i}  is notated  ${jn.getPitch()}`)
+}
+
+console.log("")
+var num = 1
+var denom = 0
+var temp = null
+for (var i=1; i<=20; i++) {
+  temp = num + denom
+  denom = num
+  num = temp
+  var jn = new Jinote(num, denom)
+  console.log(`${num}/${denom}  is notated  ${jn.getPitch()}`)
+}
+
+console.log("")
+var mid = 34650
+var count = 15
+var denom = 27720
+for (var i=mid-count; i<=mid+count; i++) {
+  var jn = new Jinote(i, denom)
+  var fract = "" + jn.getFraction()
+  var fractText = fract + " ".repeat(11-fract.length)
+  console.log(`${i}/${denom} = ${fractText}  is notated  ${jn.getPitch()}`)
 }
 
 console.log("")
