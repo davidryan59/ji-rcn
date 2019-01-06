@@ -5,12 +5,12 @@ var ji = index.ji;
 
 describe('API (index object) for ji-rcn (via variable `ji`)', function() {
 
-  it('ji.jinote makes Jinote class available', function() {
-    assert.strictEqual(ji.jinote.getComma(5).getText(), "80/81")
+  it('ji.jinterval makes JInterval class available', function() {
+    assert.strictEqual(ji.jinterval.getComma(5).getText(), "80/81")
   })
 
-  it('ji.Jinote makes Jinote class available', function() {
-    assert.strictEqual(ji.Jinote.getComma(5).getText(), "80/81")
+  it('ji.JInterval makes JInterval class available', function() {
+    assert.strictEqual(ji.JInterval.getComma(5).getText(), "80/81")
   })
 
   it('ji.getComma function available', function() {

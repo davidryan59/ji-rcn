@@ -1,7 +1,7 @@
-// Return an identity Jinote, representing a Jinote on 1/1
+// Return an identity JInterval, representing a JInterval on 1/1
 var get1 = function() {
-  var JinoteConstructor = this.constructor
-  return new JinoteConstructor()
+  var JIntervalConstructor = this.constructor
+  return new JIntervalConstructor()
 }
 
 module.exports = get1

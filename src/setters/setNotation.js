@@ -7,14 +7,14 @@ var getSharpFlatArray = require('../notation/getSharpFlatArray')
 var getDiatonicArray = require('../notation/getDiatonicArray')
 var getOctaveArray = require('../notation/getOctaveArray')
 
-var setNotation = function(jn) {
+var setNotation = function(jint) {
 
-  if (jn.txt && jn.comp) return
+  if (jint.txt && jint.comp) return
 
-  var alg = jn.alg
+  var alg = jint.alg
 
-  // Split up Peo of this Jinote into components:  2,3  ;  5  ;  primes 7+
-  var myPeo = privateGetPeo(jn)
+  // Split up Peo of this JInterval into components:  2,3  ;  5  ;  primes 7+
+  var myPeo = privateGetPeo(jint)
   var splitArray = myPeo.split([2, 3], 5)  // [Peo({2:a,3:b}), Peo({5:c}), Peo(the rest)]
   var pythagPeo = splitArray[0]            // Pythagorean = primes 2 and 3 only
   var prime5Peo = splitArray[1]
@@ -66,13 +66,13 @@ var setNotation = function(jn) {
 
   // Should be down to 1 on the pythagPeo
   // Set the text labels that comprise the notation
-  jn.txt = {}
-  jn.txt.oct = octaveText
-  jn.txt.dia = diatonicText
-  jn.txt.saf = safText
-  jn.txt.pr5 = prime5Text
-  jn.txt.prHi = primes7PlusText
-  jn.txt.spc = commaSpacer
+  jint.txt = {}
+  jint.txt.oct = octaveText
+  jint.txt.dia = diatonicText
+  jint.txt.saf = safText
+  jint.txt.pr5 = prime5Text
+  jint.txt.prHi = primes7PlusText
+  jint.txt.spc = commaSpacer
 
   // Put all these text components together for a final notation
   var pitchText = ""
@@ -84,16 +84,16 @@ var setNotation = function(jn) {
     pitchText = diatonicText + safText + prime5Text + primes7PlusText + octaveText
     pitchClassText = diatonicText + safText + prime5Text + primes7PlusText
   }
-  jn.txt.pitch = pitchText
-  jn.txt.pclass = pitchClassText
+  jint.txt.pitch = pitchText
+  jint.txt.pclass = pitchClassText
 
   // Set the Peos that multiply to original myPeo
-  jn.comp = {}
-  jn.comp.oct = octavePeo
-  jn.comp.dia = diatonicPeo
-  jn.comp.saf = safPeo
-  jn.comp.pr5 = prime5Peo
-  jn.comp.prHi = primes7PlusPeo
+  jint.comp = {}
+  jint.comp.oct = octavePeo
+  jint.comp.dia = diatonicPeo
+  jint.comp.saf = safPeo
+  jint.comp.pr5 = prime5Peo
+  jint.comp.prHi = primes7PlusPeo
 
 }
 

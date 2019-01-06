@@ -2,7 +2,7 @@ var assert = require('assert');
 var Peo = require('peo');
 
 var index = require('./index');
-var Jinote = index.Jinote;
+var JInterval = index.JInterval;
 
 describe('Notation parsing API', function() {
 
@@ -127,12 +127,12 @@ describe('Notation parsing API', function() {
   ]
 
   var runTest = function(notationToParse, peoConstructorData, comment) {
-    var peoFromParsing = Jinote.parseNotation(notationToParse)
+    var peoFromParsing = JInterval.parseNotation(notationToParse)
     var peoFromSpec = new Peo(peoConstructorData)
     var parseText = JSON.stringify(peoFromParsing.getPrimeExps())
     var specText = JSON.stringify(peoFromSpec.getPrimeExps())
     var commentText = (comment) ? " (" + comment + ")" : ""
-    var label = "Jinote.parseNotation(\"" + notationToParse + "\") has prime exponents " + specText + commentText
+    var label = "JInterval.parseNotation(\"" + notationToParse + "\") has prime exponents " + specText + commentText
     it(label, function() {assert.strictEqual(parseText, specText)})
   }
 

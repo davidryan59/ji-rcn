@@ -1,7 +1,7 @@
 var assert = require('assert');
 
 var index = require('./index');
-var Jinote = index.Jinote;
+var JInterval = index.JInterval;
 
 describe('pitch and pitch class API', function() {
 
@@ -84,18 +84,18 @@ describe('pitch and pitch class API', function() {
   ]
 
   var runTest = function(jnInput, expectPitchText, expectPitchClassText, alg, comment) {
-    var jn = new Jinote(jnInput, alg)
-    var actualNotationText = jn.getNotation()
-    var actualPitchText = jn.getPitch()
-    var actualPitchClassText = jn.getPitchClass()
+    var jint = new JInterval(jnInput, alg)
+    var actualNotationText = jint.getNotation()
+    var actualPitchText = jint.getPitch()
+    var actualPitchClassText = jint.getPitchClass()
     var algText = (alg) ? ", " + alg : ""
     var commentText = (comment) ? " (" + comment + ")" : ""
-    var labelPitch = "(new Jinote(" + JSON.stringify(jnInput) + algText + ")).getPitch() = " + expectPitchText + commentText
+    var labelPitch = "(new JInterval(" + JSON.stringify(jnInput) + algText + ")).getPitch() = " + expectPitchText + commentText
     it(labelPitch, function() {
       assert.strictEqual(actualPitchText, expectPitchText)
       assert.strictEqual(actualNotationText, expectPitchText)
     })
-    var labelPitchClass = "(new Jinote(" + JSON.stringify(jnInput) + algText + ")).getPitchClass() = " + expectPitchClassText + commentText
+    var labelPitchClass = "(new JInterval(" + JSON.stringify(jnInput) + algText + ")).getPitchClass() = " + expectPitchClassText + commentText
     it(labelPitchClass, function() {
       assert.strictEqual(actualPitchClassText, expectPitchClassText)
     })

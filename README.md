@@ -17,7 +17,7 @@ For RCN it is necessary to specify an algorithm which maps any prime `p` to its 
 
 The purpose of the `ji-rcn` npm package is to help convert between rational numbers and their RCN representations under each algorithm.
 
-Currently the API contains two items: a class `Jinote` which automates all the RCN calculations, and a function `getComma` which provides direct access to the calculation of prime commas for each prime and algorithm.
+Currently the API contains two items: a class `JInterval` which automates all the RCN calculations, and a function `getComma` which provides direct access to the calculation of prime commas for each prime and algorithm.
 
 There is a full test suite using Mocha (`mocha`) for testing and Istanbul (`nyc`) for coverage. Currently all tests pass and coverage is 100%.
 
@@ -34,7 +34,7 @@ There is a full test suite using Mocha (`mocha`) for testing and Istanbul (`nyc`
 ``` js
 var ji = require('ji-rcn')
 
-var Jinote = ji.Jinote       // ji.jinote also works
+var JInterval = ji.JInterval       // ji.jinterval also works
 var getComma = ji.getComma
 var parseNotation = ji.parseNotation
 
@@ -43,56 +43,56 @@ getComma(p)          // Calculate a comma (in Peo format) for prime p under defa
 getComma(p, alg)     // Calculate a comma for prime p under other algorithm, e.g. "SAG", "KG2"
 parseNotation(text)  // Calculate a Peo for notation text, e.g. maps E'5 (5/2) to Peo on {2:-1, 5:1}
 
-// Jinote class
+// JInterval class
 
 // Class methods
-Jinote.getComma(p, alg)       // getComma is also provided as class method for Jinote
-Jinote.parseNotation(text)    // parseNotation is also provided as class method for Jinote
+JInterval.getComma(p, alg)       // getComma is also provided as class method for JInterval
+JInterval.parseNotation(text)    // parseNotation is also provided as class method for JInterval
 
 // Constructors
-var jn = new Jinote()         // Can initialise with no args. Jinote for 1/1
-var jn = new Jinote(7)        // Can initialise from an integer. Jinote for 7/1
-var jn = new Jinote(14, 15)   // Can initialise from fraction specified as integers. Jinote for 14/15
-var jn = new Jinote(0.75)     // Can initialise from a decimal number (this example is Jinote for 3/4)
-var jn = new Jinote("14/15")  // Can initialise from fraction specified as text
-var jn2 = new Jinote(jn)      // Can initialise from another Jinote (equivalent to copying the Jinote)
-var jn = new Jinote(peo)      // Can initialise from a Prime Exponent Object (Peo instance)
-var jn = new Jinote(fraction) // Can initialise from a Fraction (fraction.js package)
-var jn = new Jinote(object)   // Can initialise from an object similar to {2:3, 7:-1} for 8/7
+var jint = new JInterval()         // Can initialise with no args. JInterval for 1/1
+var jint = new JInterval(7)        // Can initialise from an integer. JInterval for 7/1
+var jint = new JInterval(14, 15)   // Can initialise from fraction specified as integers. JInterval for 14/15
+var jint = new JInterval(0.75)     // Can initialise from a decimal number (this example is JInterval for 3/4)
+var jint = new JInterval("14/15")  // Can initialise from fraction specified as text
+var jn2 = new JInterval(jint)      // Can initialise from another JInterval (equivalent to copying the JInterval)
+var jint = new JInterval(peo)      // Can initialise from a Prime Exponent Object (Peo instance)
+var jint = new JInterval(fraction) // Can initialise from a Fraction (fraction.js package)
+var jint = new JInterval(object)   // Can initialise from an object similar to {2:3, 7:-1} for 8/7
 
 // Constructors with algorithm
 // Currently algorithm should be one of "DR" (default), "SAG" or "KG2"
-var jn = new Jinote(139, alg)    // Can initialise from an integer using specified algorithm alg
-var jn = new Jinote(14, 15, alg)
-var jn = new Jinote(0.75, alg)
-var jn = new Jinote("14/15", alg)
-var jn2 = new Jinote(jn, alg)    // This is equivalent to copying the Jinote, but switching the algorithm
-var jn = new Jinote(peo, alg)
-var jn = new Jinote(fraction, alg)
-var jn = new Jinote(object, alg)
+var jint = new JInterval(139, alg)    // Can initialise from an integer using specified algorithm alg
+var jint = new JInterval(14, 15, alg)
+var jint = new JInterval(0.75, alg)
+var jint = new JInterval("14/15", alg)
+var jn2 = new JInterval(jint, alg)    // This is equivalent to copying the JInterval, but switching the algorithm
+var jint = new JInterval(peo, alg)
+var jint = new JInterval(fraction, alg)
+var jint = new JInterval(object, alg)
 
 // General methods
-jn.copy()              // Return a deep copy of a Jinote
-jn.getAlg()            // Return algorithm for the Jinote
-jn.getFraction()       // Returns a text representation of fraction for this Jinote
-jn.getNotation()       // Equivalent to getPitch
-jn.getPeo()            // Returns the underlying Peo for this Jinote
-jn.getPitch()          // Return a pitch notation for the Jinote, e.g. "E'4" for new Jinote(5/4)
-jn.getPitchClass()     // Return a pitch class for the Jinote, e.g. "E'" for new Jinote(5/4). Octave information is discarded.
-jn.getVal()            // Return a positive number representing relative frequency of Jinote
-jn.toString()          // Equivalent to getPitch
+jint.copy()              // Return a deep copy of a JInterval
+jint.getAlg()            // Return algorithm for the JInterval
+jint.getFraction()       // Returns a text representation of fraction for this JInterval
+jint.getNotation()       // Equivalent to getPitch
+jint.getPeo()            // Returns the underlying Peo for this JInterval
+jint.getPitch()          // Return a pitch notation for the JInterval, e.g. "E'4" for new JInterval(5/4)
+jint.getPitchClass()     // Return a pitch class for the JInterval, e.g. "E'" for new JInterval(5/4). Octave information is discarded.
+jint.getVal()            // Return a positive number representing relative frequency of JInterval
+jint.toString()          // Equivalent to getPitch
 
 // Frequency methods
-jn.getBaseFreqHz()     // Returns the base frequency for Jinote on 1/1, defaults to 256 Hz
-jn.getFreqHz()         // Returns the frequency of a specific Jinote, e.g. 320 for Jinote on 5/4
-jn.getFreqText()       // Returns the frequency text of a specific Jinote, e.g. "320 Hz" for Jinote on 5/4
-jn.setBaseFreqHz(num)  // Changes the specific base frequency for a particular Jinote instance
+jint.getBaseFreqHz()     // Returns the base frequency for JInterval on 1/1, defaults to 256 Hz
+jint.getFreqHz()         // Returns the frequency of a specific JInterval, e.g. 320 for JInterval on 5/4
+jint.getFreqText()       // Returns the frequency text of a specific JInterval, e.g. "320 Hz" for JInterval on 5/4
+jint.setBaseFreqHz(num)  // Changes the specific base frequency for a particular JInterval instance
 
 // Maths methods
-jn.get1()              // Return a new identity Jinote (from any Jinote)
-jn.mult(jn2)           // Returns new Jinote based on peo of jn multiplied by peo of jn2
-jn.mult(jn2, pow)      // Same as previous, but jn2 is first raised to power 'pow'
-jn.pow(pow)            // Return new Jinote based on its peo being raised to power 'pow'
+jint.get1()              // Return a new identity JInterval (from any JInterval)
+jint.mult(jn2)           // Returns new JInterval based on peo of jint multiplied by peo of jn2
+jint.mult(jn2, pow)      // Same as previous, but jn2 is first raised to power 'pow'
+jint.pow(pow)            // Return new JInterval based on its peo being raised to power 'pow'
 ```
 
 ## Examples
@@ -124,29 +124,29 @@ getComma(2499949, "SAG")  // returns 67498623/67108864
 getComma(2499949, "KG2")  // returns 67498623/67108864
 ```
 
-### Jinote
+### JInterval
 ``` js
 // Simpler examples
-(new Jinote(1)).getNotation()           // returns "C4"
-(new Jinote(8)).getNotation()           // returns "C7"
-(new Jinote(3, 2)).getNotation()        // returns "G4"
-(new Jinote(6)).getNotation()           // returns "G6"
-(new Jinote(7)).getNotation()           // returns "Bb[7]6"
-(new Jinote(35/36)).getNotation()       // returns "C'[7]4"
-(new Jinote(91, 90)).getNotation()      // returns "Db.[91]4", now 91 = 7*13 and commas with num & denom under 4 digits stay in this simple form
-(new Jinote(1925, 247)).getNotation()   // returns "B''[77/247]6"
-(new Jinote(1001, 1000)).getNotation()  // returns "Dbb...4 [7 11 13]" - more complex commas get moved to the end of the notation
+(new JInterval(1)).getNotation()           // returns "C4"
+(new JInterval(8)).getNotation()           // returns "C7"
+(new JInterval(3, 2)).getNotation()        // returns "G4"
+(new JInterval(6)).getNotation()           // returns "G6"
+(new JInterval(7)).getNotation()           // returns "Bb[7]6"
+(new JInterval(35/36)).getNotation()       // returns "C'[7]4"
+(new JInterval(91, 90)).getNotation()      // returns "Db.[91]4", now 91 = 7*13 and commas with num & denom under 4 digits stay in this simple form
+(new JInterval(1925, 247)).getNotation()   // returns "B''[77/247]6"
+(new JInterval(1001, 1000)).getNotation()  // returns "Dbb...4 [7 11 13]" - more complex commas get moved to the end of the notation
 
 // More complex examples
-(new Jinote(65536)).getNotation()            // returns "C(o+20)" which is 16 octaves above "C4"
-(new Jinote(1, 65536)).getNotation()         // returns "C(o-12)" which is 16 octaves below "C4"
-(new Jinote(531441)).getNotation()           // returns "B#(o+22)" which is 12 perfect fifths and 12 octaves above "C4" (531441 = 3^12)
-(new Jinote(1000001, 1000000)).getNotation() // returns "Cb(.6)4 [101 9901]" where 5-commas are gathered; (.6) is equivalent to ......
+(new JInterval(65536)).getNotation()            // returns "C(o+20)" which is 16 octaves above "C4"
+(new JInterval(1, 65536)).getNotation()         // returns "C(o-12)" which is 16 octaves below "C4"
+(new JInterval(531441)).getNotation()           // returns "B#(o+22)" which is 12 perfect fifths and 12 octaves above "C4" (531441 = 3^12)
+(new JInterval(1000001, 1000000)).getNotation() // returns "Cb(.6)4 [101 9901]" where 5-commas are gathered; (.6) is equivalent to ......
 
 // More complex examples using object notation to specify (large) input integers
-(new Jinote({2:19, 3:-12})).getNotation()       // returns "Dbb4" which is notation for a small comma
-(new Jinote({3:665, 2:-1054})).getNotation()    // returns "C(#95)(o-5)" which is fact a tiny comma of around 0.076 cents. This has 95 sharps!
-(new Jinote({2:66, 5:40, 7:-40, 11:20, 13:-30})).getNotation() // returns "E(#18)('40)4 [11^20 / 7^40 13^30]" which is in octave 4
+(new JInterval({2:19, 3:-12})).getNotation()       // returns "Dbb4" which is notation for a small comma
+(new JInterval({3:665, 2:-1054})).getNotation()    // returns "C(#95)(o-5)" which is fact a tiny comma of around 0.076 cents. This has 95 sharps!
+(new JInterval({2:66, 5:40, 7:-40, 11:20, 13:-30})).getNotation() // returns "E(#18)('40)4 [11^20 / 7^40 13^30]" which is in octave 4
 ```
 
 These higher prime commas and notations are being made available to enable writing beautiful JI music that goes way outside the 12 notes of the standard scale. A piece of music written at the prime limit of 2499949 is available [here](https://soundcloud.com/davidryan59/ryan-example-primenumberedblues) (which used the `"DR"` comma given above), and the rest of the author's music is available [here](https://soundcloud.com/davidryan59/tracks).

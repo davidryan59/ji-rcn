@@ -5,33 +5,33 @@ var privateGetPeo = require('../private/privateGetPeo')
 var initialiseFromPeo = require('./initialiseFromPeo')
 var initialiseFromNotation = require('./initialiseFromNotation')
 
-var initialise = function(jn, args) {
-  // Args should first contain a number, fraction, Peo or Jinote (the frequency)
+var initialise = function(jint, args) {
+  // Args should first contain a number, fraction, Peo or JInterval (the frequency)
   // Args can then contain an optional algorithm string: "DR" (default), "SAG", "KG2"
 
-  // Get the first few arguments given to Jinote constructor
+  // Get the first few arguments given to JInterval constructor
   var arg0 = args[0]
   var arg1 = args[1]
   var arg2 = args[2]
 
-  // Check for Jinote case
-  // Have to use jn.constructor, rather than Jinote
-  if (arg0 instanceof jn.constructor) {
-    // arg0 is a Jinote.
+  // Check for JInterval case
+  // Have to use jint.constructor, rather than JInterval
+  if (arg0 instanceof jint.constructor) {
+    // arg0 is a JInterval.
     // Initialise from its actual Peo, not a copy
-    initialiseFromPeo(jn, privateGetPeo(arg0), arg1 || arg0.getAlg())
+    initialiseFromPeo(jint, privateGetPeo(arg0), arg1 || arg0.getAlg())
     return
   }
 
   // Check for Peo case
   if (arg0 instanceof Peo) {
-    initialiseFromPeo(jn, arg0, arg1)
+    initialiseFromPeo(jint, arg0, arg1)
     return
   }
 
   // Check for Fraction case
   if (arg0 instanceof Fraction) {
-    initialiseFromPeo(jn, new Peo(arg0), arg1)
+    initialiseFromPeo(jint, new Peo(arg0), arg1)
     return
   }
 
@@ -46,13 +46,13 @@ var initialise = function(jn, args) {
       peo = new Peo(arg0)
       alg = arg1
     }
-    initialiseFromPeo(jn, peo, alg)
+    initialiseFromPeo(jint, peo, alg)
     return
   }
 
   // Check for numeric case - Decimal - use Fraction to convert
   if (Number.isFinite(arg0)) {
-    initialiseFromPeo(jn, new Peo(new Fraction(arg0)), arg1)
+    initialiseFromPeo(jint, new Peo(new Fraction(arg0)), arg1)
     return
   }
 
@@ -62,13 +62,13 @@ var initialise = function(jn, args) {
     var numChar = Number.parseFloat(arg0[0])
     if (Number.isNaN(numChar)) {
       // Its a string string
-      // This one's different, its notation -> jn
+      // This one's different, its notation -> jint
       // Going to try and parse a notation here...
-      initialiseFromNotation(jn, arg0)
+      initialiseFromNotation(jint, arg0)
       return
     } else {
       // Its a number presented as a string
-      initialiseFromPeo(jn, new Peo(new Fraction(arg0)), arg1)
+      initialiseFromPeo(jint, new Peo(new Fraction(arg0)), arg1)
       return
     }
   }
@@ -77,12 +77,12 @@ var initialise = function(jn, args) {
   if (typeof(arg0)==='object') {
     // Assuming {p1:e1, ...pi:ei} format for object
     var peo = new Peo(arg0)
-    initialiseFromPeo(jn, peo, arg1)
+    initialiseFromPeo(jint, peo, arg1)
     return
   }
 
-  // If all else fails, return 1/1 as default Jinote
-  initialiseFromPeo(jn, new Peo(1))
+  // If all else fails, return 1/1 as default JInterval
+  initialiseFromPeo(jint, new Peo(1))
 
 }
 

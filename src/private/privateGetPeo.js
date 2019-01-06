@@ -1,5 +1,5 @@
-var privateGetPeo = function(jn) {
-  return jn.peo
+var privateGetPeo = function(jint) {
+  return jint.peo
 }
 
 module.exports = privateGetPeo

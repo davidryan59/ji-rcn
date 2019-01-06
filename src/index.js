@@ -1,10 +1,10 @@
-var Jinote = require('./Jinote')
+var JInterval = require('./JInterval')
 var getComma = require('./api/class/getComma')
 var parseNotation = require('./api/class/parseNotation')
 
 module.exports = {
-  jinote: Jinote,
-  Jinote: Jinote,
+  jinterval: JInterval,
+  JInterval: JInterval,
   getComma: getComma,
   parseNotation: parseNotation
 }

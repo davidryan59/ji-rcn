@@ -1,12 +1,12 @@
-var mult = function(otherJinote, power) {
+var mult = function(otherJInterval, power) {
 
   // Use Peo to do a multiplication
   var peo1 = this.peo
-  var peo2 = otherJinote.peo
+  var peo2 = otherJInterval.peo
   var peoMult = peo1.mult(peo2, power)
-  var JinoteConstructor = this.constructor
-  var newJinote = new JinoteConstructor(peoMult)
-  return newJinote
+  var JIntervalConstructor = this.constructor
+  var newJInterval = new JIntervalConstructor(peoMult)
+  return newJInterval
 
 }
 

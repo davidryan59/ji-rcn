@@ -1,6 +1,6 @@
-var initialiseFromPeo = function(jn, peo, alg) {
-  jn.peo = peo.copy()           // Store a copy, not the original
-  jn.alg = alg || null
+var initialiseFromPeo = function(jint, peo, alg) {
+  jint.peo = peo.copy()           // Store a copy, not the original
+  jint.alg = alg || null
 }
 
 module.exports = initialiseFromPeo
