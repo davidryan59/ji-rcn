@@ -12,31 +12,31 @@ describe(fnName, function() {
   it("can initialise from new JInterval(new Peo(14, 15)), and objects get copied correctly", function() {
     var origPeo = new Peo(14, 15)
     var jint = new JInterval(origPeo, "KG2")
-    var jnPeoPriv = privateGetPeo(jint)
-    var jnPeoPub = jint.getPeo()
+    var jintPeoPriv = privateGetPeo(jint)
+    var jintPeoPub = jint.getPeo()
     var origPrimeExps = origPeo.getPrimeExps()
-    var jnPrimeExps = jnPeoPriv.getPrimeExps()
+    var jintPrimeExps = jintPeoPriv.getPrimeExps()
     // Different object identities
-    assert(jnPrimeExps!==origPrimeExps, 'Different Peo inner objects')
-    assert(jnPeoPriv!==origPeo, 'Different Peo outer objects')
-    assert(jnPeoPriv!==jnPeoPub, 'Different private and public objects')
+    assert(jintPrimeExps!==origPrimeExps, 'Different Peo inner objects')
+    assert(jintPeoPriv!==origPeo, 'Different Peo outer objects')
+    assert(jintPeoPriv!==jintPeoPub, 'Different private and public objects')
     // Same contents
-    assert.deepStrictEqual(jnPeoPriv, jnPeoPub)
-    assert.deepStrictEqual(jnPeoPriv, origPeo)
-    assert.deepStrictEqual(jnPrimeExps, origPrimeExps)
+    assert.deepStrictEqual(jintPeoPriv, jintPeoPub)
+    assert.deepStrictEqual(jintPeoPriv, origPeo)
+    assert.deepStrictEqual(jintPrimeExps, origPrimeExps)
     assert.strictEqual(jint.getFraction(), "14/15")
     assert.strictEqual(jint.getAlg(), "KG2")
   })
 
   it("can initialise from new JInterval(<another JInterval>)", function() {
     var peo = new Peo(14, 15)
-    var jn1 = new JInterval(peo, "SAG")
-    var jn2 = new JInterval(jn1)
-    var ob1 = jn1.getPeo().getPrimeExps()
-    var ob2 = jn2.getPeo().getPrimeExps()
-    assert(jn1!==jn2, 'Different JInterval objects')
+    var jint1 = new JInterval(peo, "SAG")
+    var jint2 = new JInterval(jint1)
+    var ob1 = jint1.getPeo().getPrimeExps()
+    var ob2 = jint2.getPeo().getPrimeExps()
+    assert(jint1!==jint2, 'Different JInterval objects')
     assert.deepStrictEqual(ob1, ob2, 'Represent same note')
-    assert.strictEqual(jn2.getAlg(), "SAG")
+    assert.strictEqual(jint2.getAlg(), "SAG")
   })
 
   it("can initialise from new JInterval(new Fraction('14/15'))", function() {
@@ -89,23 +89,23 @@ describe(fnName, function() {
 
   it('can provide a deep copy', function() {
     var jint = new JInterval("7/2")
-    var jnc = jint.copy()
-    var jnp = jint.getPitch()
-    var jncp = jnc.getPitch()
-    assert(jint !== jnc)                  // Objects different
-    assert(jint.peo !== jnc.peo)
-    assert.strictEqual(jnp, "Bb[7]5")   // Represents same JInterval
-    assert.strictEqual(jncp, "Bb[7]5")
+    var jintc = jint.copy()
+    var jintp = jint.getPitch()
+    var jintcp = jintc.getPitch()
+    assert(jint !== jintc)                  // Objects different
+    assert(jint.peo !== jintc.peo)
+    assert.strictEqual(jintp, "Bb[7]5")   // Represents same JInterval
+    assert.strictEqual(jintcp, "Bb[7]5")
   })
 
   it('can return an identity JInterval', function() {
     var jint = new JInterval("7/2")
-    var jn1 = jint.get1()
-    var jnp = jint.getPitch()
-    var jn1p = jn1.getPitch()
-    assert(jint !== jn1)
-    assert.strictEqual(jnp, "Bb[7]5")
-    assert.strictEqual(jn1p, "C4")
+    var jint1 = jint.get1()
+    var jintp = jint.getPitch()
+    var jint1p = jint1.getPitch()
+    assert(jint !== jint1)
+    assert.strictEqual(jintp, "Bb[7]5")
+    assert.strictEqual(jint1p, "C4")
   })
 
   it('can provide a pitch and a string', function() {
@@ -120,15 +120,15 @@ describe(fnName, function() {
   })
 
   it('can multiply', function() {
-    var jn1 = new JInterval(5, 3)              // A'5
-    var jn2 = new JInterval(9, 4)              // D5
-    assert.strictEqual(jn1.mult(jn2).getPitch(), "B'5")   // 15/4
+    var jint1 = new JInterval(5, 3)              // A'5
+    var jint2 = new JInterval(9, 4)              // D5
+    assert.strictEqual(jint1.mult(jint2).getPitch(), "B'5")   // 15/4
   })
 
   it('can multiply by a power', function() {
-    var jn1 = new JInterval(5, 4)              // E'4
-    var jn2 = new JInterval(3, 2)              // G4
-    assert.strictEqual(jn1.mult(jn2, 2).getPitch(), "F#'5")   // 45/16
+    var jint1 = new JInterval(5, 4)              // E'4
+    var jint2 = new JInterval(3, 2)              // G4
+    assert.strictEqual(jint1.mult(jint2, 2).getPitch(), "F#'5")   // 45/16
   })
 
   it('default JInterval has frequency Hz and text of 256 Hz', function() {
