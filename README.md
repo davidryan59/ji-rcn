@@ -75,7 +75,7 @@ var jint = new JInterval(object, alg)
 jint.copy()              // Return a deep copy of a JInterval
 jint.getAlg()            // Return algorithm for the JInterval
 jint.getFraction()       // Returns a text representation of fraction for this JInterval
-jint.getNotation()       // Equivalent to getPitch
+jint.getEndNotation()       // Equivalent to getPitch
 jint.getPeo()            // Returns the underlying Peo for this JInterval
 jint.getPitch()          // Return a pitch notation for the JInterval, e.g. "E'4" for new JInterval(5/4)
 jint.getPitchClass()     // Return a pitch class for the JInterval, e.g. "E'" for new JInterval(5/4). Octave information is discarded.
@@ -126,26 +126,26 @@ getComma(2499949, "KG2")  // returns 67498623/67108864
 ### JInterval
 ``` js
 // Simpler examples
-(new JInterval(1)).getNotation()           // returns "C4"
-(new JInterval(8)).getNotation()           // returns "C7"
-(new JInterval(3, 2)).getNotation()        // returns "G4"
-(new JInterval(6)).getNotation()           // returns "G6"
-(new JInterval(7)).getNotation()           // returns "Bb[7]6"
-(new JInterval(35/36)).getNotation()       // returns "C'[7]4"
-(new JInterval(91, 90)).getNotation()      // returns "Db.[91]4", now 91 = 7*13 and commas with num & denom under 4 digits stay in this simple form
-(new JInterval(1925, 247)).getNotation()   // returns "B''[77/247]6"
-(new JInterval(1001, 1000)).getNotation()  // returns "Dbb...4 [7 11 13]" - more complex commas get moved to the end of the notation
+(new JInterval(1)).getEndNotation()           // returns "C4"
+(new JInterval(8)).getEndNotation()           // returns "C7"
+(new JInterval(3, 2)).getEndNotation()        // returns "G4"
+(new JInterval(6)).getEndNotation()           // returns "G6"
+(new JInterval(7)).getEndNotation()           // returns "Bb[7]6"
+(new JInterval(35/36)).getEndNotation()       // returns "C'[7]4"
+(new JInterval(91, 90)).getEndNotation()      // returns "Db.[91]4", now 91 = 7*13 and commas with num & denom under 4 digits stay in this simple form
+(new JInterval(1925, 247)).getEndNotation()   // returns "B''[77/247]6"
+(new JInterval(1001, 1000)).getEndNotation()  // returns "Dbb...4 [7 11 13]" - more complex commas get moved to the end of the notation
 
 // More complex examples
-(new JInterval(65536)).getNotation()            // returns "C(o+20)" which is 16 octaves above "C4"
-(new JInterval(1, 65536)).getNotation()         // returns "C(o-12)" which is 16 octaves below "C4"
-(new JInterval(531441)).getNotation()           // returns "B#(o+22)" which is 12 perfect fifths and 12 octaves above "C4" (531441 = 3^12)
-(new JInterval(1000001, 1000000)).getNotation() // returns "Cb(.6)4 [101 9901]" where 5-commas are gathered; (.6) is equivalent to ......
+(new JInterval(65536)).getEndNotation()            // returns "C(o+20)" which is 16 octaves above "C4"
+(new JInterval(1, 65536)).getEndNotation()         // returns "C(o-12)" which is 16 octaves below "C4"
+(new JInterval(531441)).getEndNotation()           // returns "B#(o+22)" which is 12 perfect fifths and 12 octaves above "C4" (531441 = 3^12)
+(new JInterval(1000001, 1000000)).getEndNotation() // returns "Cb(.6)4 [101 9901]" where 5-commas are gathered; (.6) is equivalent to ......
 
 // More complex examples using object notation to specify (large) input integers
-(new JInterval({2:19, 3:-12})).getNotation()       // returns "Dbb4" which is notation for a small comma
-(new JInterval({3:665, 2:-1054})).getNotation()    // returns "C(#95)(o-5)" which is fact a tiny comma of around 0.076 cents. This has 95 sharps!
-(new JInterval({2:66, 5:40, 7:-40, 11:20, 13:-30})).getNotation() // returns "E(#18)('40)4 [11^20 / 7^40 13^30]" which is in octave 4
+(new JInterval({2:19, 3:-12})).getEndNotation()       // returns "Dbb4" which is notation for a small comma
+(new JInterval({3:665, 2:-1054})).getEndNotation()    // returns "C(#95)(o-5)" which is fact a tiny comma of around 0.076 cents. This has 95 sharps!
+(new JInterval({2:66, 5:40, 7:-40, 11:20, 13:-30})).getEndNotation() // returns "E(#18)('40)4 [11^20 / 7^40 13^30]" which is in octave 4
 ```
 
 These higher prime commas and notations are being made available to enable writing beautiful JI music that goes way outside the 12 notes of the standard scale. A piece of music written at the prime limit of 2499949 is available [here](https://soundcloud.com/davidryan59/ryan-example-primenumberedblues) (which used the `"DR"` comma given above), and the rest of the author's music is available [here](https://soundcloud.com/davidryan59/tracks).

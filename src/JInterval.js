@@ -17,12 +17,14 @@ JInterval.getComma = require('./api/class/getComma')
 JInterval.prototype.copy = require('./api/general/copy')
 JInterval.prototype.getAlg = require('./api/general/getAlg')
 JInterval.prototype.getFraction = require('./api/general/getFraction')
-JInterval.prototype.getNotation = require('./api/general/getNotation')
 JInterval.prototype.getPeo = require('./api/general/getPeo')
 JInterval.prototype.getPitch = require('./api/general/getPitch')
 JInterval.prototype.getPitchClass = require('./api/general/getPitchClass')
 JInterval.prototype.getVal = require('./api/general/getVal')
 JInterval.prototype.toString = require('./api/general/toString')
+
+// Notation
+JInterval.prototype.getEndNotation = require('./api/notation/getEndNotation')
 
 // Frequency
 JInterval.prototype.getEndFreqHz = require('./api/freq/getEndFreqHz')

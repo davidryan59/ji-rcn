@@ -1,7 +1,7 @@
 var getPitch = require('./getPitch')
 
-var getNotation = function() {
+var getEndNotation = function() {
   return this.getPitch()          // Its an alias for getPitch
 }
 
-module.exports = getNotation
+module.exports = getEndNotation

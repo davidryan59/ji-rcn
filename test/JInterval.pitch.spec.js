@@ -85,7 +85,7 @@ describe('pitch and pitch class API', function() {
 
   var runTest = function(jintInput, expectPitchText, expectPitchClassText, alg, comment) {
     var jint = new JInterval(jintInput, alg)
-    var actualNotationText = jint.getNotation()
+    var actualNotationText = jint.getEndNotation()
     var actualPitchText = jint.getPitch()
     var actualPitchClassText = jint.getPitchClass()
     var algText = (alg) ? ", " + alg : ""
