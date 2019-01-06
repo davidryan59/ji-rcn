@@ -17,7 +17,7 @@ var removeSpacesAroundPowerSymbol = function(theText) {return theText.replace(/ 
 var addSpacesAroundDivideSymbol = function(theText) {return theText.replace(/\//g, " / ")}
 var commaSplitRegex = new RegExp("[" + esc(" " + consts.BRACKET_ALLOWED_CHARS) + "]", "g")
 
-var processCommaText = function(commaText) {
+var processCommaText = function(commaText, algType) {
   var tempText = commaText
   tempText = removeSpacesAroundPowerSymbol(tempText)
   tempText = addSpacesAroundDivideSymbol(tempText)
@@ -54,13 +54,15 @@ var processCommaText = function(commaText) {
   for (var i=0; i<keyArray.length; i++) {
     var prime = parseInt(keyArray[i])
     var power = primeExps[prime]
-    var commaPeo = getComma(prime)
+    var commaPeo = getComma(prime, algType)
     secondPeo = secondPeo.mult(commaPeo, power)
   }
   return secondPeo
 }
 
-var reduceCommasToPeo = function(acc, elt) {return acc.mult(processCommaText(elt))}
+var reduceCommasToPeo = function(algType) {
+  return function(acc, elt) {return acc.mult(processCommaText(elt, algType))}
+}
 
 var reduceToCount = function(acc, elt) {return acc + 1}
 var reduceToSumOfInts = function(acc, elt) {return acc + getIntFromChars(elt)}
@@ -76,7 +78,8 @@ var reduceDiatonicLettersToPeo = function(acc, elt) {return acc.mult(peos[elt])}
 var identityFunction = function(anything) {return anything}
 
 
-var parseNotation = function(notation) {
+var parseNotation = function(notation, algType) {
+  // algType is optional
 
   // Variables to iterate on
   var tempResult = 0
@@ -200,14 +203,14 @@ var parseNotation = function(notation) {
   // Do the commas next
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_COMMA_FRACTION,
-    reduceMatch: reduceCommasToPeo,
+    reduceMatch: reduceCommasToPeo(algType),
     initialValue: new Peo(),
     mapReducerResultToPeo: identityFunction
   })
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_COMMA_INTEGER,
-    reduceMatch: reduceCommasToPeo,
+    reduceMatch: reduceCommasToPeo(algType),
     initialValue: new Peo(),
     mapReducerResultToPeo: identityFunction
   })
