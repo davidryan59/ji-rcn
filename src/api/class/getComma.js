@@ -3,6 +3,7 @@ var Peo = require('peo')
 var getCommaDR = require('../../commas/getCommaDR')
 var getCommaSAG = require('../../commas/getCommaSAG')
 var getCommaKG2 = require('../../commas/getCommaKG2')
+var getCommaBAD = require('../../commas/getCommaBAD')
 
 var getComma = function(p, algType) {
   // Calculate a prime comma, according to the specified algorithm
@@ -37,6 +38,8 @@ var getComma = function(p, algType) {
     return getCommaSAG(p)
   } else if (lowerAlgType.includes("kg")) {
     return getCommaKG2(p)
+  } else if (lowerAlgType.includes("bad")) {
+    return getCommaBAD(p)
   } else {
     // Use algorithm DR by default
     return getCommaDR(p)
