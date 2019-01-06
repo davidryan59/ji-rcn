@@ -106,26 +106,32 @@ console.log("In the examples below, it is assumed 1/1 is notated C4, e.g. C4 is 
 console.log("")
 for (var i=1; i<=32; i++) {
   var jn = new Jinote(i)
-  console.log(`${i}  is notated  ${jn.getPitch()}`)
+  console.log(`${i}  ->  ${jn.getPitch()}`)
 }
 
 console.log("")
 for (var i=1; i<=32; i++) {
   var jn = new Jinote(1, i)
-  console.log(`1/${i}  is notated  ${jn.getPitch()}`)
+  console.log(`1/${i}  ->  ${jn.getPitch()}`)
 }
 
 console.log("")
 for (var i=1; i<=32; i++) {
   var jn = new Jinote(i+1, i)
-  console.log(`${i+1}/${i}  is notated  ${jn.getPitch()}`)
+  console.log(`${i+1}/${i}  ->  ${jn.getPitch()}`)
+}
+
+console.log("")
+for (var i=512; i<=540; i++) {
+  var jn = new Jinote(i, 32)
+  console.log(`${i}/32  ->  ${jn.getPitch()}`)
 }
 
 console.log("")
 for (var i=1; i<=49; i++) {
   var num = Math.pow(2, i)
   var jn = new Jinote(num+1, num)
-  console.log(`${num+1}/${num}  is notated  ${jn.getPitch()}`)
+  console.log(`${num+1}/${num}  ->  ${jn.getPitch()}`)
 }
 
 console.log("")
@@ -133,7 +139,7 @@ for (var i=60; i<=90; i++) {
   var jn = new Jinote(i, 60)
   var fract = "" + jn.getFraction()
   var fractText = fract + " ".repeat(5-fract.length)
-  console.log(`${i}/60 = ${fractText}  is notated  ${jn.getPitch()}`)
+  console.log(`${i}/60 = ${fractText}  ->  ${jn.getPitch()}`)
 }
 
 console.log("")
@@ -141,13 +147,13 @@ for (var i=65536; i<=65536+15; i++) {
   var jn = new Jinote(i, 65536)
   var fract = "" + jn.getFraction()
   var fractText = fract + " ".repeat(11-fract.length)
-  console.log(`${i}/65536 = ${fractText}  is notated  ${jn.getPitch()}`)
+  console.log(`${i}/65536 = ${fractText}  ->  ${jn.getPitch()}`)
 }
 
 console.log("")
 for (var i=1e14-4; i<=1e14+4; i++) {
   var jn = new Jinote(i)
-  console.log(`${i}  is notated  ${jn.getPitch()}`)
+  console.log(`${i}  ->  ${jn.getPitch()}`)
 }
 
 console.log("")
@@ -159,18 +165,49 @@ for (var i=1; i<=20; i++) {
   denom = num
   num = temp
   var jn = new Jinote(num, denom)
-  console.log(`${num}/${denom}  is notated  ${jn.getPitch()}`)
+  console.log(`${num}/${denom}  ->  ${jn.getPitch()}`)
 }
 
 console.log("")
 var mid = 34650
 var count = 15
-var denom = 27720
+var denom = 6930
 for (var i=mid-count; i<=mid+count; i++) {
   var jn = new Jinote(i, denom)
   var fract = "" + jn.getFraction()
   var fractText = fract + " ".repeat(11-fract.length)
-  console.log(`${i}/${denom} = ${fractText}  is notated  ${jn.getPitch()}`)
+  console.log(`${i}/${denom} = ${fractText}  ->  ${jn.getPitch()}`)
+}
+console.log("")
+for (var j=0; j<=20; j+=2) {
+  for (var i=-5; i<=5; i++) {
+    var mult = Math.pow(2, j)
+    var num = i + 8*mult
+    var jn = new Jinote(num, mult)
+    console.log(`${num}/${mult}  ->  ${jn.getPitch()}`)
+  }
+  console.log("")
+}
+
+var len3 = 15
+var len5 = 3
+var array3 = []
+var array5 = []
+var array = []
+for (var i=0; i<len3; i++) {array3.push(Math.pow(3, i))}
+for (var i=0; i<len5; i++) {array5.push(Math.pow(5, i))}
+for (var i=0; i<len3; i++) {
+  for (var j=0; j<len5; j++) {
+    array.push(array3[i] * array5[j])
+  }
+}
+array.filter(function(elt){return ((10000<elt) && (elt<100000))})
+array.sort(function(elt1, elt2){return elt1-elt2})
+for (var i=0; i<array.length; i++) {
+  var num = array[i]
+  var denom = Math.pow(2, Math.floor(Math.log(num)/Math.log(2)))
+  var jn = new Jinote(num, denom)
+  console.log(`${num}/${denom}  ->  ${jn.getPitch()}`)
 }
 
 console.log("")
