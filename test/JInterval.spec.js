@@ -4,7 +4,6 @@ var Peo = require('peo');
 
 var test_index = require('./_test_index');
 var JInterval = test_index.JInterval;
-var privateGetPeo = test_index.privateGetPeo;
 
 var fnName = 'JInterval'
 describe(fnName, function() {
@@ -12,17 +11,17 @@ describe(fnName, function() {
   it("can initialise from new JInterval(new Peo(14, 15)), and objects get copied correctly", function() {
     var origPeo = new Peo(14, 15)
     var jint = new JInterval(origPeo, "KG2")
-    var jintPeoPriv = privateGetPeo(jint)
-    var jintPeoPub = jint.getPeo()
+    var jintPeoPrivate = jint.peo
+    var jintPeoPublicCopy = jint.getPeo()
     var origPrimeExps = origPeo.getPrimeExps()
-    var jintPrimeExps = jintPeoPriv.getPrimeExps()
+    var jintPrimeExps = jintPeoPrivate.getPrimeExps()
     // Different object identities
     assert(jintPrimeExps!==origPrimeExps, 'Different Peo inner objects')
-    assert(jintPeoPriv!==origPeo, 'Different Peo outer objects')
-    assert(jintPeoPriv!==jintPeoPub, 'Different private and public objects')
+    assert(jintPeoPrivate!==origPeo, 'Different Peo outer objects')
+    assert(jintPeoPrivate!==jintPeoPublicCopy, 'Different private and public objects')
     // Same contents
-    assert.deepStrictEqual(jintPeoPriv, jintPeoPub)
-    assert.deepStrictEqual(jintPeoPriv, origPeo)
+    assert.deepStrictEqual(jintPeoPrivate, jintPeoPublicCopy)
+    assert.deepStrictEqual(jintPeoPrivate, origPeo)
     assert.deepStrictEqual(jintPrimeExps, origPrimeExps)
     assert.strictEqual(jint.getFraction(), "14/15")
     assert.strictEqual(jint.getAlg(), "KG2")

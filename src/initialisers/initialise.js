@@ -1,7 +1,6 @@
 var Fraction = require('fraction.js')
 var Peo = require('peo')
 
-var privateGetPeo = require('../private/privateGetPeo')
 var initialiseFromPeo = require('./initialiseFromPeo')
 var initialiseFromNotation = require('./initialiseFromNotation')
 
@@ -20,7 +19,7 @@ var initialise = function(jint, argumentArray) {
   if (arg0 instanceof jint.constructor) {
     // arg0 is a JInterval.
     // Initialise from its actual Peo, not a copy
-    initialiseFromPeo(jint, privateGetPeo(arg0), arg1 || arg0.getAlg())
+    initialiseFromPeo(jint, arg0.peo, arg1 || arg0.getAlg())
     return
   }
 

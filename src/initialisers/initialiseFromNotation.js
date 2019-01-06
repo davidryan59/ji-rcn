@@ -1,4 +1,4 @@
-var privateParseNotation = require("../private/privateParseNotation")
+var parseNotation = require("../notation/parseNotation")
 
 var initialiseFromNotation = function(jint, notationText) {
 
@@ -6,7 +6,7 @@ var initialiseFromNotation = function(jint, notationText) {
   // Base notation other than C4
   // Comma algorithm other than default
 
-  jint.peo = privateParseNotation(notationText)
+  jint.peo = parseNotation(notationText)
 }
 
 module.exports = initialiseFromNotation

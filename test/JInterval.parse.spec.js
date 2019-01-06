@@ -2,7 +2,7 @@ var assert = require('assert');
 var Peo = require('peo');
 
 var test_index = require('./_test_index');
-var privateParseNotation = test_index.privateParseNotation;
+var parseNotation = test_index.parseNotation;
 
 describe('Notation parsing API', function() {
 
@@ -132,13 +132,13 @@ describe('Notation parsing API', function() {
   ]
 
   var runTest = function(notationToParse, peoConstructorData, algType, comment) {
-    var peoFromParsing = privateParseNotation(notationToParse, algType)
+    var peoFromParsing = parseNotation(notationToParse, algType)
     var peoFromSpec = new Peo(peoConstructorData)
     var parseText = JSON.stringify(peoFromParsing.getPrimeExps())
     var specText = JSON.stringify(peoFromSpec.getPrimeExps())
     var algTypeText = (algType) ? ", " + algType : ""
     var commentText = (comment) ? " (" + comment + ")" : ""
-    var label = "privateParseNotation(\"" + notationToParse + algTypeText + "\") has prime exponents " + specText + commentText
+    var label = "parseNotation(\"" + notationToParse + algTypeText + "\") has prime exponents " + specText + commentText
     it(label, function() {assert.strictEqual(parseText, specText)})
   }
 

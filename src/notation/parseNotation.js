@@ -78,7 +78,7 @@ var reduceDiatonicLettersToPeo = function(acc, elt) {return acc.mult(peos[elt])}
 var identityFunction = function(anything) {return anything}
 
 
-var privateParseNotation = function(notation, algType) {
+var parseNotation = function(notation, algType) {
   // algType is optional, and is passed straight through to getComma
 
   // Variables to iterate on
@@ -309,4 +309,4 @@ var privateParseNotation = function(notation, algType) {
   return resultsPeo
 }
 
-module.exports = privateParseNotation
+module.exports = parseNotation
