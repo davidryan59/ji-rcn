@@ -18,7 +18,7 @@ var peoMercator = new Peo({2:-84, 3:53})
 var peoSmall = new Peo({2:-1054, 3:665})
 var peoTiny = new Peo({2:-301994, 3:190537})
 
-var peoSyntonic = getComma(5)
+// peoSyntonic not cached here since it could potentially change based on algorithm
 
 
 module.exports = {
@@ -45,8 +45,6 @@ module.exports = {
   PEO_MERCATOR: peoMercator,
   PEO_SMALL: peoSmall,
   PEO_TINY: peoTiny,
-
-  PEO_SYNTONIC: peoSyntonic,
 
   DUMMY: "DUMMY"
 }

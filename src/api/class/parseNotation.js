@@ -79,7 +79,7 @@ var identityFunction = function(anything) {return anything}
 
 
 var parseNotation = function(notation, algType) {
-  // algType is optional
+  // algType is optional, and is passed straight through to getComma
 
   // Variables to iterate on
   var tempResult = 0
@@ -89,6 +89,7 @@ var parseNotation = function(notation, algType) {
   var tempNotation = notation
   var tempPeo = null
   var resultsPeo = new Peo()
+  var peoSyntonic = getComma(5, algType);
 
   // Function to iterate on the variables
   var analyseNotation = function(options) {
@@ -191,13 +192,13 @@ var parseNotation = function(notation, algType) {
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_SYNTONIC_COMMA_ADD,
     reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_SYNTONIC)
+    mapReducerResultToPeo: peoPower(peoSyntonic)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_SYNTONIC_COMMA_REMOVE,
     reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_SYNTONIC, -1)
+    mapReducerResultToPeo: peoPower(peoSyntonic, -1)
   })
 
   // Do the commas next
@@ -219,13 +220,13 @@ var parseNotation = function(notation, algType) {
   analyseNotation({
     rgx: rxs.REGEX_CHAR_SYNTONIC_COMMA_ADD,
     reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_SYNTONIC)
+    mapReducerResultToPeo: peoPower(peoSyntonic)
   })
 
   analyseNotation({
     rgx: rxs.REGEX_CHAR_SYNTONIC_COMMA_REMOVE,
     reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_SYNTONIC, -1)
+    mapReducerResultToPeo: peoPower(peoSyntonic, -1)
   })
 
   analyseNotation({
