@@ -2,9 +2,9 @@ var assert = require('assert');
 var Fraction = require('fraction.js');
 var Peo = require('peo');
 
-var index = require('./_test_index');
-var JInterval = index.JInterval;
-var privateGetPeo = index.privateGetPeo;
+var test_index = require('./_test_index');
+var JInterval = test_index.JInterval;
+var privateGetPeo = test_index.privateGetPeo;
 
 var fnName = 'JInterval'
 describe(fnName, function() {

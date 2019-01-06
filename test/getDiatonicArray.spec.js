@@ -1,7 +1,7 @@
 var assert = require('assert');
 
-var index = require('./_test_index');
-var getDiatonicArray = index.getDiatonicArray;
+var test_index = require('./_test_index');
+var getDiatonicArray = test_index.getDiatonicArray;
 
 var fnName = 'getDiatonicArray';
 describe(fnName, function() {

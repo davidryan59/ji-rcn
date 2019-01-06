@@ -1,7 +1,7 @@
 var assert = require('assert');
 
-var index = require('./_test_index');
-var get5Label = index.get5Label;
+var test_index = require('./_test_index');
+var get5Label = test_index.get5Label;
 
 var fnName = 'get5Label';
 describe(fnName, function() {

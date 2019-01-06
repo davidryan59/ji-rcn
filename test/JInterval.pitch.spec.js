@@ -1,7 +1,7 @@
 var assert = require('assert');
 
-var index = require('./_test_index');
-var JInterval = index.JInterval;
+var test_index = require('./_test_index');
+var JInterval = test_index.JInterval;
 
 describe('pitch and pitch class API', function() {
 

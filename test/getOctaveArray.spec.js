@@ -1,7 +1,7 @@
 var assert = require('assert');
 
-var index = require('./_test_index');
-var getOctaveArray = index.getOctaveArray;
+var test_index = require('./_test_index');
+var getOctaveArray = test_index.getOctaveArray;
 
 var fnName = 'getOctaveArray';
 describe(fnName, function() {

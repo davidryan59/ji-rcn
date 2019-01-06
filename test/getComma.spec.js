@@ -1,7 +1,7 @@
 var assert = require('assert');
 
-var index = require('./_test_index');
-var getComma = index.getComma;
+var test_index = require('./_test_index');
+var getComma = test_index.getComma;
 
 var fnName = 'getComma';
 describe(fnName, function() {

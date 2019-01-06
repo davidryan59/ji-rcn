@@ -1,8 +1,8 @@
 var assert = require('assert');
 var Peo = require('peo');
 
-var index = require('./_test_index');
-var privateParseNotation = index.privateParseNotation;
+var test_index = require('./_test_index');
+var privateParseNotation = test_index.privateParseNotation;
 
 describe('Notation parsing API', function() {
 
