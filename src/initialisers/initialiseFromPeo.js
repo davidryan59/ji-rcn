@@ -1,6 +1,8 @@
+var isString = require('is-string');
+
 var initialiseFromPeo = function(jint, peo, alg) {
   jint.peo = peo.copy()           // Store a copy, not the original
-  jint.alg = alg || null
+  if (isString(alg)) jint.alg = alg
 }
 
 module.exports = initialiseFromPeo

@@ -4,8 +4,6 @@ var initialise = require('./initialisers/initialise')
 // Object's purpose is to translate between a fraction (in Peo format)
 // and a notation (text)
 function JInterval() {
-  this.peo = null
-  this.alg = ""
   initialise(this, arguments)
 }
 

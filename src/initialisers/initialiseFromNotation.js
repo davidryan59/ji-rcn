@@ -7,7 +7,6 @@ var initialiseFromNotation = function(jint, notationText) {
   // Comma algorithm other than default
 
   jint.peo = parseNotation(notationText)
-  jint.alg = null
 }
 
 module.exports = initialiseFromNotation

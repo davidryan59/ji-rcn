@@ -11,8 +11,6 @@ var setNotation = function(jint) {
 
   if (jint.txt && jint.comp) return
 
-  var alg = jint.alg
-
   // Split up Peo of this JInterval into components:  2,3  ;  5  ;  primes 7+
   var myPeo = privateGetPeo(jint)
   var splitArray = myPeo.split([2, 3], 5)  // [Peo({2:a,3:b}), Peo({5:c}), Peo(the rest)]
@@ -20,7 +18,7 @@ var setNotation = function(jint) {
   var prime5Peo = splitArray[1]
   var primes7PlusPeo = splitArray[2]
 
-  // Calculate comma5PlusPeo from 1/1 based on primes5PlusPeo and alg
+  // Calculate comma5PlusPeo from 1/1 based on primes5PlusPeo and algorithm
   var primes5PlusPeo = primes7PlusPeo.mult(prime5Peo)
   var comma5PlusPeo = myPeo.get1()     // Use .get1 to get id=1 from any Peo
   var obj = primes5PlusPeo.getPrimeExps()
@@ -30,7 +28,7 @@ var setNotation = function(jint) {
     var val = obj[key]
     var prime = Number.parseInt(key)
     var exp = Number.parseInt(val)
-    var thisComma = getComma(prime, alg)
+    var thisComma = getComma(prime, jint.getAlg())
     comma5PlusPeo = comma5PlusPeo.mult(thisComma, exp)
   }
   // Divide comma5PlusPeo out of original Peo
