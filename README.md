@@ -3,13 +3,13 @@ JI-RCN, `ji-rcn` module. Find [module on npm](https://www.npmjs.com/package/ji-r
 
 [![npm version](https://badge.fury.io/js/ji-rcn.png)](https://badge.fury.io/js/ji-rcn)
 
-**Just Intonation** (JI) is a system of musical tuning where intervals can be expressed as ratios between whole numbers.
+**Just Intonation** (JI) is a system of musical tuning where intervals can be expressed as ratios between whole numbers. It is also called Rational Intonation (RI) since it is based on rational numbers of the form `a/b`.
 
 Examples include: an octave (1:2), a major fourth (3:4), a major triad (4:5:6).
 
 The reason to use Just Intonation is that it is the natural system of tuning for harmonic instruments such as stringed instruments, wind instruments, and the human voice itself.
 
-The contemporary scale of 12-tone equal temperament (12TET) has only 12 notes in the octave. However, Just Intonation has a infinite number of notes in the octave. This makes it trickier to design a notation system that can cope with any possible note in JI.
+The contemporary scale of 12-tone equal temperament (12TET) has only 12 notes in the octave. However, Just Intonation has a infinite number of notes in the octave. This makes it trickier to design a notation system that can cope with any possible interval and note in JI.
 
 **Rational Comma Notation** (RCN) was designed to solve this problem. It was developed by David Ryan between 2015 and 2017, and [is documented in this paper](https://arxiv.org/abs/1612.01860).
 
@@ -55,7 +55,7 @@ var jint = new JInterval(7)        // Can initialise from an integer. JInterval 
 var jint = new JInterval(14, 15)   // Can initialise from fraction specified as integers. JInterval for 14/15
 var jint = new JInterval(0.75)     // Can initialise from a decimal number (this example is JInterval for 3/4)
 var jint = new JInterval("14/15")  // Can initialise from fraction specified as text
-var jn2 = new JInterval(jint)      // Can initialise from another JInterval (equivalent to copying the JInterval)
+var jint2 = new JInterval(jint)    // Can initialise from another JInterval (equivalent to copying the JInterval)
 var jint = new JInterval(peo)      // Can initialise from a Prime Exponent Object (Peo instance)
 var jint = new JInterval(fraction) // Can initialise from a Fraction (fraction.js package)
 var jint = new JInterval(object)   // Can initialise from an object similar to {2:3, 7:-1} for 8/7
@@ -66,7 +66,7 @@ var jint = new JInterval(139, alg)    // Can initialise from an integer using sp
 var jint = new JInterval(14, 15, alg)
 var jint = new JInterval(0.75, alg)
 var jint = new JInterval("14/15", alg)
-var jn2 = new JInterval(jint, alg)    // This is equivalent to copying the JInterval, but switching the algorithm
+var jint2 = new JInterval(jint, alg)    // This is equivalent to copying the JInterval, but switching the algorithm
 var jint = new JInterval(peo, alg)
 var jint = new JInterval(fraction, alg)
 var jint = new JInterval(object, alg)
@@ -90,8 +90,8 @@ jint.setBaseFreqHz(num)  // Changes the specific base frequency for a particular
 
 // Maths methods
 jint.get1()              // Return a new identity JInterval (from any JInterval)
-jint.mult(jn2)           // Returns new JInterval based on peo of jint multiplied by peo of jn2
-jint.mult(jn2, pow)      // Same as previous, but jn2 is first raised to power 'pow'
+jint.mult(jint2)         // Returns new JInterval based on peo of jint multiplied by peo of jint2
+jint.mult(jint2, pow)    // Same as previous, but jint2 is first raised to power 'pow'
 jint.pow(pow)            // Return new JInterval based on its peo being raised to power 'pow'
 ```
 

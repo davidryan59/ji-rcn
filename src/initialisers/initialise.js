@@ -5,14 +5,15 @@ var privateGetPeo = require('../private/privateGetPeo')
 var initialiseFromPeo = require('./initialiseFromPeo')
 var initialiseFromNotation = require('./initialiseFromNotation')
 
-var initialise = function(jint, args) {
-  // Args should first contain a number, fraction, Peo or JInterval (the frequency)
+var initialise = function(jint, argumentArray) {
+  // argumentArray should contain first a number, fraction, Peo or JInterval
+  // representing the frequency shift of the interval.
   // Args can then contain an optional algorithm string: "DR" (default), "SAG", "KG2"
 
   // Get the first few arguments given to JInterval constructor
-  var arg0 = args[0]
-  var arg1 = args[1]
-  var arg2 = args[2]
+  var arg0 = argumentArray[0]
+  var arg1 = argumentArray[1]
+  var arg2 = argumentArray[2]
 
   // Check for JInterval case
   // Have to use jint.constructor, rather than JInterval
