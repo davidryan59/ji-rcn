@@ -3,11 +3,11 @@ JI-RCN, `ji-rcn` module. Find [module on npm](https://www.npmjs.com/package/ji-r
 
 [![npm version](https://badge.fury.io/js/ji-rcn.png)](https://badge.fury.io/js/ji-rcn)
 
-**Just Intonation** (JI) is a system of musical tuning where intervals can be expressed as ratios between whole numbers. It is also called Rational Intonation (RI) since it is based on rational numbers of the form `a/b`.
+**Just Intonation** (JI) is a system of musical tuning where intervals and chords can be expressed as ratios between whole numbers. It is also called Rational Intonation (RI) since it is based on rational numbers of the form `a/b`, or ratios of the form `a:b`, `a:b:c`, etc.
+- Examples of intervals include: an octave (1:2), a perfect fifth (2:3), a perfect fourth (3:4), a major third (4:5)
+- Examples of chords include: a major triad (4:5:6), a minor triad (10:12:15), an extended seventh chord (4:6:7:10)
 
-Examples include: an octave (1:2), a major fourth (3:4), a major triad (4:5:6).
-
-The reason to use Just Intonation is that it is the natural system of tuning for harmonic instruments such as stringed instruments, wind instruments, and the human voice itself.
+One good reason to use Just Intonation is that it is the natural system of tuning for harmonic instruments such as stringed instruments, wind instruments, and the human voice itself.
 
 The contemporary scale of 12-tone equal temperament (12TET) has only 12 notes in the octave. However, Just Intonation has a infinite number of notes in the octave. This makes it trickier to design a notation system that can cope with any possible interval and note in JI.
 
@@ -15,12 +15,15 @@ The contemporary scale of 12-tone equal temperament (12TET) has only 12 notes in
 
 For RCN it is necessary to specify an algorithm which maps any prime `p` to its prime comma `n/m`. For example, primes `5` and `7` are usually given commas `80/81` and `63/64` respectively. Algorithms tend to vary for higher primes. Three algorithms which are currently available are `"DR"`, `"SAG"`, and `"KG2"`; all three algorithms are described in the paper above.
 
-The purpose of the `ji-rcn` npm package is to help convert between rational numbers and their RCN representations under each algorithm.
+The purpose of the `ji-rcn` npm package is to help convert between:
+- An interval expressed as a single rational number
+- Start and end points of the interval expressed as:
+  - Notations from the RCN scheme
+  - Frequencies in Hz
 
 Currently the API contains two items: a class `JInterval` which automates all the RCN calculations, and a function `getComma` which provides direct access to the calculation of prime commas for each prime and algorithm.
 
 There is a full test suite using Mocha (`mocha`) for testing and Istanbul (`nyc`) for coverage. Currently all tests pass and coverage is 100%.
-
 
 
 ## Install
@@ -82,11 +85,10 @@ jint.getPitchClass()     // Return a pitch class for the JInterval, e.g. "E'" fo
 jint.getVal()            // Return a positive number representing relative frequency of JInterval
 jint.toString()          // Equivalent to getPitch
 
-// Frequency methods
-jint.getBaseFreqHz()     // Returns the base frequency for JInterval on 1/1, defaults to 256 Hz
-jint.getFreqHz()         // Returns the frequency of a specific JInterval, e.g. 320 for JInterval on 5/4
-jint.getFreqText()       // Returns the frequency text of a specific JInterval, e.g. "320 Hz" for JInterval on 5/4
-jint.setBaseFreqHz(num)  // Changes the specific base frequency for a particular JInterval instance
+// Frequency calculations
+jint.getEndFreqHz(startFreqHz) // Given positive number startFreqHz, calculate the end frequency of this interval
+jint.getEndFreqHz()            // If startFreqHz omitted, use either previously supplied value or global default (256 Hz)
+jint.getEndFreqText()          // Supplies the end frequency in format like "300 Hz" (integer) or "123.45 Hz" (decimal)
 
 // Maths methods
 jint.get1()              // Return a new identity JInterval (from any JInterval)

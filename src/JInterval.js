@@ -4,6 +4,7 @@ var initialise = require('./initialisers/initialise')
 // Object's purpose is to translate between a fraction (in Peo format)
 // and a notation (text)
 function JInterval() {
+  this.freqHz = {}
   initialise(this, arguments)
 }
 
@@ -25,10 +26,8 @@ JInterval.prototype.getVal = require('./api/general/getVal')
 JInterval.prototype.toString = require('./api/general/toString')
 
 // Frequency
-JInterval.prototype.getBaseFreqHz = require('./api/freq/getBaseFreqHz')
-JInterval.prototype.getFreqHz = require('./api/freq/getFreqHz')
-JInterval.prototype.getFreqText = require('./api/freq/getFreqText')
-JInterval.prototype.setBaseFreqHz = require('./api/freq/setBaseFreqHz')
+JInterval.prototype.getEndFreqHz = require('./api/freq/getEndFreqHz')
+JInterval.prototype.getEndFreqText = require('./api/freq/getEndFreqText')
 
 // Maths
 JInterval.prototype.get1 = require('./api/maths/get1')
