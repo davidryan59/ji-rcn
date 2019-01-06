@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var index = require('./index');
+var index = require('./_test_index');
 var get5Label = index.get5Label;
 
 var fnName = 'get5Label';

@@ -2,7 +2,7 @@ var assert = require('assert');
 var Fraction = require('fraction.js');
 var Peo = require('peo');
 
-var index = require('./index');
+var index = require('./_test_index');
 var JInterval = index.JInterval;
 var privateGetPeo = index.privateGetPeo;
 

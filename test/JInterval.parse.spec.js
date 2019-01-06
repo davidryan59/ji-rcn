@@ -1,7 +1,7 @@
 var assert = require('assert');
 var Peo = require('peo');
 
-var index = require('./index');
+var index = require('./_test_index');
 var JInterval = index.JInterval;
 
 describe('Notation parsing API', function() {

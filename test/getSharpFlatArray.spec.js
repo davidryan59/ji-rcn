@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var index = require('./index');
+var index = require('./_test_index');
 var getSharpFlatArray = index.getSharpFlatArray;
 
 var fnName = 'getSharpFlatArray';
