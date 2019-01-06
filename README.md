@@ -39,18 +39,15 @@ var ji = require('ji-rcn')
 
 var JInterval = ji.JInterval       // ji.jinterval also works
 var getComma = ji.getComma
-var parseNotation = ji.parseNotation
 
 // getComma
 getComma(p)          // Calculate a comma (in Peo format) for prime p under default ("DR") algorithm
 getComma(p, alg)     // Calculate a comma for prime p under other algorithm, e.g. "SAG", "KG2"
-parseNotation(text)  // Calculate a Peo for notation text, e.g. maps E'5 (5/2) to Peo on {2:-1, 5:1}
 
 // JInterval class
 
 // Class methods
 JInterval.getComma(p, alg)       // getComma is also provided as class method for JInterval
-JInterval.parseNotation(text)    // parseNotation is also provided as class method for JInterval
 
 // Constructors
 var jint = new JInterval()         // Can initialise with no args. JInterval for 1/1

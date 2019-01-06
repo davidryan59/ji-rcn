@@ -11,5 +11,6 @@ module.exports = {
   getDiatonicArray: require('../' + testDir + '/notation/getDiatonicArray'),
   getOctaveArray: require('../' + testDir + '/notation/getOctaveArray'),
   getSharpFlatArray: require('../' + testDir + '/notation/getSharpFlatArray'),
-  privateGetPeo: require('../' + testDir + '/private/privateGetPeo')
+  privateGetPeo: require('../' + testDir + '/private/privateGetPeo'),
+  privateParseNotation: require('../' + testDir + '/private/privateParseNotation')
 };

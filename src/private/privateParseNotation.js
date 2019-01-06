@@ -1,10 +1,10 @@
 var Peo = require('peo')
 var esc = require('escape-string-regexp')
 
-var getComma = require('./getComma')
-var consts = require('../../constants/consts')
-var peos = require('../../constants/peos')
-var rxs = require('../../constants/regexes')
+var getComma = require('../api/class/getComma')
+var consts = require('../constants/consts')
+var peos = require('../constants/peos')
+var rxs = require('../constants/regexes')
 
 var getIntFromChars = function(theText) {
   var regex = /[-+0-9]{1,}/g        // Characters -+0123456789 only
@@ -78,7 +78,7 @@ var reduceDiatonicLettersToPeo = function(acc, elt) {return acc.mult(peos[elt])}
 var identityFunction = function(anything) {return anything}
 
 
-var parseNotation = function(notation, algType) {
+var privateParseNotation = function(notation, algType) {
   // algType is optional, and is passed straight through to getComma
 
   // Variables to iterate on
@@ -309,4 +309,4 @@ var parseNotation = function(notation, algType) {
   return resultsPeo
 }
 
-module.exports = parseNotation
+module.exports = privateParseNotation

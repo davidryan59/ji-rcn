@@ -1,24 +1,20 @@
 var assert = require('assert');
 
-var index = require('./_test_index');
-var ji = index.ji;
+var test_index = require('./_test_index');
+var module_index = test_index.ji;
 
 describe('API (index object) for ji-rcn (via variable `ji`)', function() {
 
-  it('ji.jinterval makes JInterval class available', function() {
-    assert.strictEqual(ji.jinterval.getComma(5).getText(), "80/81")
+  it('module_index.jinterval makes JInterval class available', function() {
+    assert.strictEqual(module_index.jinterval.getComma(5).getText(), "80/81")
   })
 
-  it('ji.JInterval makes JInterval class available', function() {
-    assert.strictEqual(ji.JInterval.getComma(5).getText(), "80/81")
+  it('module_index.JInterval makes JInterval class available', function() {
+    assert.strictEqual(module_index.JInterval.getComma(5).getText(), "80/81")
   })
 
-  it('ji.getComma function available', function() {
-    assert.strictEqual(ji.getComma(7).getText(), "63/64")
-  })
-
-  it('ji.parseNotation function available', function() {
-    assert.strictEqual(ji.parseNotation("E'5").getText(), "5/2")
+  it('module_index.getComma function available', function() {
+    assert.strictEqual(module_index.getComma(7).getText(), "63/64")
   })
 
 })

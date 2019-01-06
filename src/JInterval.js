@@ -10,7 +10,6 @@ function JInterval() {
 
 // Static or Class methods
 JInterval.getComma = require('./api/class/getComma')
-JInterval.parseNotation = require('./api/class/parseNotation')
 
 // --------- Instance methods ---------
 
