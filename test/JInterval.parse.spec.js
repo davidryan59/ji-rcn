@@ -4,7 +4,7 @@ var Peo = require('peo');
 var test_index = require('./_test_index');
 var parseNotation = test_index.parseNotation;
 
-describe('Notation parsing API', function() {
+describe('API to parse notation text into intervals', function() {
 
   var testArray = [
     ["", "", "", "empty string"],

@@ -71,27 +71,33 @@ var jint = new JInterval(peo, alg)
 var jint = new JInterval(fraction, alg)
 var jint = new JInterval(object, alg)
 
-// General methods
-jint.copy()              // Return a deep copy of a JInterval
-jint.getAlg()            // Return algorithm for the JInterval
-jint.getFraction()       // Returns a text representation of fraction for this JInterval
-jint.getEndNotation()       // Equivalent to getPitch
-jint.getPeo()            // Returns the underlying Peo for this JInterval
-jint.getPitch()          // Return a pitch notation for the JInterval, e.g. "E'4" for new JInterval(5/4)
-jint.getPitchClass()     // Return a pitch class for the JInterval, e.g. "E'" for new JInterval(5/4). Octave information is discarded.
-jint.getAsDecimal()            // Return a positive number representing relative frequency of JInterval
-jint.toString()          // Equivalent to getPitch
-
 // Frequency calculations
 jint.getEndFreqHz(startFreqHz) // Given positive number startFreqHz, calculate the end frequency of this interval
-jint.getEndFreqHz()            // If startFreqHz omitted, use either previously supplied value or global default (256 Hz)
-jint.getEndFreqText()          // Supplies the end frequency in format like "300 Hz" (integer) or "123.45 Hz" (decimal)
+jint.getEndFreqHz()      // If startFreqHz omitted, use either previously supplied value or global default (256 Hz)
+jint.getEndFreqText()    // Return text description of end frequency in format like "300 Hz" (integer) or "123.45 Hz" (decimal)
+jint.getStartFreqHz()    // Return previous or default start frequency
+jint.getStartFreqText()  // Return text description of start frequency
+
+// General methods
+jint.copy()              // Return a deep copy of a JInterval
+jint.getPeo()            // Returns the underlying Peo for this JInterval
+jint.toDecimal()         // Return a positive number representing relative frequency of JInterval
+jint.toFractionText()    // Returns a text representation of fraction for this JInterval
+jint.toString()          // Returns text description of JInterval
 
 // Maths methods
 jint.get1()              // Return a new identity JInterval (from any JInterval)
 jint.mult(jint2)         // Returns new JInterval based on peo of jint multiplied by peo of jint2
 jint.mult(jint2, pow)    // Same as previous, but jint2 is first raised to power 'pow'
 jint.pow(pow)            // Return new JInterval based on its peo being raised to power 'pow'
+
+// Notation methods
+jint.getAlg()            // Return algorithm for the JInterval
+jint.getEndPitchNotation(startPitchNotation) // If this interval starts at inputted notation, calculate the end notation
+jint.getEndPitchNotation()        // Calculate end notation based on default or previous start notation
+jint.getEndPitchClassNotation()   // Return the end notation, minus its octave information
+jint.getStartPitchNotation()      // Return previous or default starting pitch notation
+jint.getStartPitchClassNotation() // Return the start notation, minus its octave information
 ```
 
 ## Examples
@@ -126,26 +132,26 @@ getComma(2499949, "KG2")  // returns 67498623/67108864
 ### JInterval
 ``` js
 // Simpler examples
-(new JInterval(1)).getEndNotation()           // returns "C4"
-(new JInterval(8)).getEndNotation()           // returns "C7"
-(new JInterval(3, 2)).getEndNotation()        // returns "G4"
-(new JInterval(6)).getEndNotation()           // returns "G6"
-(new JInterval(7)).getEndNotation()           // returns "Bb[7]6"
-(new JInterval(35/36)).getEndNotation()       // returns "C'[7]4"
-(new JInterval(91, 90)).getEndNotation()      // returns "Db.[91]4", now 91 = 7*13 and commas with num & denom under 4 digits stay in this simple form
-(new JInterval(1925, 247)).getEndNotation()   // returns "B''[77/247]6"
-(new JInterval(1001, 1000)).getEndNotation()  // returns "Dbb...4 [7 11 13]" - more complex commas get moved to the end of the notation
+(new JInterval(1)).getEndPitchNotation()           // returns "C4"
+(new JInterval(8)).getEndPitchNotation()           // returns "C7"
+(new JInterval(3, 2)).getEndPitchNotation()        // returns "G4"
+(new JInterval(6)).getEndPitchNotation()           // returns "G6"
+(new JInterval(7)).getEndPitchNotation()           // returns "Bb[7]6"
+(new JInterval(35/36)).getEndPitchNotation()       // returns "C'[7]4"
+(new JInterval(91, 90)).getEndPitchNotation()      // returns "Db.[91]4", now 91 = 7*13 and commas with num & denom under 4 digits stay in this simple form
+(new JInterval(1925, 247)).getEndPitchNotation()   // returns "B''[77/247]6"
+(new JInterval(1001, 1000)).getEndPitchNotation()  // returns "Dbb...4 [7 11 13]" - more complex commas get moved to the end of the notation
 
 // More complex examples
-(new JInterval(65536)).getEndNotation()            // returns "C(o+20)" which is 16 octaves above "C4"
-(new JInterval(1, 65536)).getEndNotation()         // returns "C(o-12)" which is 16 octaves below "C4"
-(new JInterval(531441)).getEndNotation()           // returns "B#(o+22)" which is 12 perfect fifths and 12 octaves above "C4" (531441 = 3^12)
-(new JInterval(1000001, 1000000)).getEndNotation() // returns "Cb(.6)4 [101 9901]" where 5-commas are gathered; (.6) is equivalent to ......
+(new JInterval(65536)).getEndPitchNotation()            // returns "C(o+20)" which is 16 octaves above "C4"
+(new JInterval(1, 65536)).getEndPitchNotation()         // returns "C(o-12)" which is 16 octaves below "C4"
+(new JInterval(531441)).getEndPitchNotation()           // returns "B#(o+22)" which is 12 perfect fifths and 12 octaves above "C4" (531441 = 3^12)
+(new JInterval(1000001, 1000000)).getEndPitchNotation() // returns "Cb(.6)4 [101 9901]" where 5-commas are gathered; (.6) is equivalent to ......
 
 // More complex examples using object notation to specify (large) input integers
-(new JInterval({2:19, 3:-12})).getEndNotation()       // returns "Dbb4" which is notation for a small comma
-(new JInterval({3:665, 2:-1054})).getEndNotation()    // returns "C(#95)(o-5)" which is fact a tiny comma of around 0.076 cents. This has 95 sharps!
-(new JInterval({2:66, 5:40, 7:-40, 11:20, 13:-30})).getEndNotation() // returns "E(#18)('40)4 [11^20 / 7^40 13^30]" which is in octave 4
+(new JInterval({2:19, 3:-12})).getEndPitchNotation()       // returns "Dbb4" which is notation for a small comma
+(new JInterval({3:665, 2:-1054})).getEndPitchNotation()    // returns "C(#95)(o-5)" which is fact a tiny comma of around 0.076 cents. This has 95 sharps!
+(new JInterval({2:66, 5:40, 7:-40, 11:20, 13:-30})).getEndPitchNotation() // returns "E(#18)('40)4 [11^20 / 7^40 13^30]" which is in octave 4
 ```
 
 These higher prime commas and notations are being made available to enable writing beautiful JI music that goes way outside the 12 notes of the standard scale. A piece of music written at the prime limit of 2499949 is available [here](https://soundcloud.com/davidryan59/ryan-example-primenumberedblues) (which used the `"DR"` comma given above), and the rest of the author's music is available [here](https://soundcloud.com/davidryan59/tracks).

@@ -85,17 +85,17 @@ describe('pitch and pitch class API', function() {
 
   var runTest = function(jintInput, expectPitchText, expectPitchClassText, alg, comment) {
     var jint = new JInterval(jintInput, alg)
-    var actualNotationText = jint.getEndNotation()
-    var actualPitchText = jint.getPitch()
-    var actualPitchClassText = jint.getPitchClass()
+    var actualNotationText = jint.getEndPitchNotation()
+    var actualPitchText = jint.getEndPitchNotation()
+    var actualPitchClassText = jint.getEndPitchClassNotation()
     var algText = (alg) ? ", " + alg : ""
     var commentText = (comment) ? " (" + comment + ")" : ""
-    var labelPitch = "(new JInterval(" + JSON.stringify(jintInput) + algText + ")).getPitch() = " + expectPitchText + commentText
+    var labelPitch = "(new JInterval(" + JSON.stringify(jintInput) + algText + ")).getEndPitchNotation() = " + expectPitchText + commentText
     it(labelPitch, function() {
       assert.strictEqual(actualPitchText, expectPitchText)
       assert.strictEqual(actualNotationText, expectPitchText)
     })
-    var labelPitchClass = "(new JInterval(" + JSON.stringify(jintInput) + algText + ")).getPitchClass() = " + expectPitchClassText + commentText
+    var labelPitchClass = "(new JInterval(" + JSON.stringify(jintInput) + algText + ")).getEndPitchClassNotation() = " + expectPitchClassText + commentText
     it(labelPitchClass, function() {
       assert.strictEqual(actualPitchClassText, expectPitchClassText)
     })

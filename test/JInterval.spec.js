@@ -23,7 +23,7 @@ describe(fnName, function() {
     assert.deepStrictEqual(jintPeoPrivate, jintPeoPublicCopy)
     assert.deepStrictEqual(jintPeoPrivate, origPeo)
     assert.deepStrictEqual(jintPrimeExps, origPrimeExps)
-    assert.strictEqual(jint.getFraction(), "14/15")
+    assert.strictEqual(jint.toFractionText(), "14/15")
     assert.strictEqual(jint.getAlg(), "KG2")
   })
 
@@ -89,8 +89,8 @@ describe(fnName, function() {
   it('can provide a deep copy', function() {
     var jint = new JInterval("7/2")
     var jintc = jint.copy()
-    var jintp = jint.getPitch()
-    var jintcp = jintc.getPitch()
+    var jintp = jint.getEndPitchNotation()
+    var jintcp = jintc.getEndPitchNotation()
     assert(jint !== jintc)                  // Objects different
     assert(jint.peo !== jintc.peo)
     assert.strictEqual(jintp, "Bb[7]5")   // Represents same JInterval
@@ -100,34 +100,64 @@ describe(fnName, function() {
   it('can return an identity JInterval', function() {
     var jint = new JInterval("7/2")
     var jint1 = jint.get1()
-    var jintp = jint.getPitch()
-    var jint1p = jint1.getPitch()
+    var jintp = jint.getEndPitchNotation()
+    var jint1p = jint1.getEndPitchNotation()
     assert(jint !== jint1)
     assert.strictEqual(jintp, "Bb[7]5")
     assert.strictEqual(jint1p, "C4")
   })
 
-  it('can provide a pitch and a string', function() {
+  it('can provide a pitch', function() {
     var jint = new JInterval(35, 12)
-    assert.strictEqual(jint.getPitch(), "G'[7]5")
-    assert.strictEqual(jint.toString(), "G'[7]5")
+    assert.strictEqual(jint.getEndPitchNotation(), "G'[7]5")
+  })
+
+  it('check default (starting) pitch class is C', function() {
+    var jint = new JInterval(2, 1)
+    assert.strictEqual(jint.getStartPitchClassNotation(), "C")
+  })
+
+  it('check default (starting) frequency is 256 Hz', function() {
+    var jint = new JInterval(13, 8)
+    assert.strictEqual(jint.getStartFreqText(), "256 Hz")
+  })
+
+  it('cover three branches on recalcStartAndEndNotations', function() {
+    var jint = new JInterval(2, 1);
+    var endNotation = jint.getEndPitchNotation("G4");
+    assert.strictEqual(endNotation, "G5");
+    var endNotation = jint.getEndPitchNotation("G4"); // Cover case of repeated input hitting cache
+    assert.strictEqual(endNotation, "G5");
+    var endNotation = jint.getEndPitchNotation();     // Cover case of empty input hitting cache
+    assert.strictEqual(endNotation, "G5");
+    var endNotation = jint.getEndPitchNotation("F4"); // Cover case of different input not hitting cache
+    assert.strictEqual(endNotation, "F5");
+  })
+
+  it('can provide a text description via toString', function() {
+    var jint = new JInterval(35, 12)
+    var endNotation = jint.getEndPitchNotation();
+    var startNotation = jint.getStartPitchNotation();
+    var toStringText = jint.toString();
+    assert(toStringText.includes(startNotation));
+    assert(toStringText.includes(endNotation));
   })
 
   it('can raise to a power', function() {
     var jint = new JInterval(3, 2)              // G4
-    assert.strictEqual(jint.pow(3).getPitch(), "A5")   // 27/8
+    assert.strictEqual(jint.pow(3).getEndPitchNotation(), "A5")   // 27/8
   })
 
   it('can multiply', function() {
     var jint1 = new JInterval(5, 3)              // A'5
     var jint2 = new JInterval(9, 4)              // D5
-    assert.strictEqual(jint1.mult(jint2).getPitch(), "B'5")   // 15/4
+    assert.strictEqual(jint1.mult(jint2).getEndPitchNotation(), "B'5")   // 15/4
   })
 
   it('can multiply by a power', function() {
     var jint1 = new JInterval(5, 4)              // E'4
     var jint2 = new JInterval(3, 2)              // G4
-    assert.strictEqual(jint1.mult(jint2, 2).getPitch(), "F#'5")   // 45/16
+    assert.strictEqual(jint1.mult(jint2, 2).getEndPitchNotation(), "F#'5")   // 45/16
   })
 
   it('default JInterval has frequency Hz and text of 256 Hz', function() {
@@ -179,7 +209,7 @@ describe(fnName, function() {
 
   it('new JInterval("E\'4") gives value of 1.25', function() {
     var jint = new JInterval("E'4")
-    assert.strictEqual(jint.getAsDecimal(), 1.25)
+    assert.strictEqual(jint.toDecimal(), 1.25)
   })
 
 })

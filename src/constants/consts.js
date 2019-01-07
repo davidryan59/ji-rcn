@@ -4,7 +4,8 @@
 // and for octave numbers are also not configurable.
 
 module.exports = {
-  DEFAULT_NOTATION: "C4",
+  DEFAULT_PITCH_NOTATION: "C4",
+  DEFAULT_PITCH_CLASS_NOTATION: "C",
   DEFAULT_BASE_FREQ_HZ: 256,
 
   CHAR_OCTAVE_MARK: "o",

@@ -6,20 +6,17 @@ var getSharpFlatArray = require('./getSharpFlatArray')
 var getDiatonicArray = require('./getDiatonicArray')
 var getOctaveArray = require('./getOctaveArray')
 
-var setNotation = function(jint) {
-
-  if (jint.txt && jint.comp) return
+var calcNotation = function(thePeo, alg) {
 
   // Split up Peo of this JInterval into components:  2,3  ;  5  ;  primes 7+
-  var myPeo = jint.peo
-  var splitArray = myPeo.split([2, 3], 5)  // [Peo({2:a,3:b}), Peo({5:c}), Peo(the rest)]
-  var pythagPeo = splitArray[0]            // Pythagorean = primes 2 and 3 only
+  var splitArray = thePeo.split([2, 3], 5)  // [Peo({2:a,3:b}), Peo({5:c}), Peo(the rest)]
+  var pythagPeo = splitArray[0]             // Pythagorean = primes 2 and 3 only
   var prime5Peo = splitArray[1]
   var primes7PlusPeo = splitArray[2]
 
   // Calculate comma5PlusPeo from 1/1 based on primes5PlusPeo and algorithm
   var primes5PlusPeo = primes7PlusPeo.mult(prime5Peo)
-  var comma5PlusPeo = myPeo.get1()     // Use .get1 to get id=1 from any Peo
+  var comma5PlusPeo = thePeo.get1()     // Use .get1 to get id=1 from any Peo
   var obj = primes5PlusPeo.getPrimeExps()
   var keys = Object.keys(obj)
   for (var i=0; i<keys.length; i++) {
@@ -27,12 +24,12 @@ var setNotation = function(jint) {
     var val = obj[key]
     var prime = Number.parseInt(key)
     var exp = Number.parseInt(val)
-    var thisComma = getComma(prime, jint.getAlg())
+    var thisComma = getComma(prime, alg)
     comma5PlusPeo = comma5PlusPeo.mult(thisComma, exp)
   }
   // Divide comma5PlusPeo out of original Peo
   // to get a Pythagorean component
-  pythagPeo = myPeo.mult(comma5PlusPeo, -1)
+  pythagPeo = thePeo.mult(comma5PlusPeo, -1)
 
   // Get labels for the prime components 5+
   var prime5Text = get5Label(prime5Peo.getPrimeExp(5))
@@ -61,15 +58,7 @@ var setNotation = function(jint) {
   var octavePeo = octaveArray[1]
   pythagPeo = pythagPeo.mult(octavePeo, -1)
 
-  // Should be down to 1 on the pythagPeo
-  // Set the text labels that comprise the notation
-  jint.txt = {}
-  jint.txt.oct = octaveText
-  jint.txt.dia = diatonicText
-  jint.txt.saf = safText
-  jint.txt.pr5 = prime5Text
-  jint.txt.prHi = primes7PlusText
-  jint.txt.spc = commaSpacer
+  // Should be down to 1 on the pythagPeo now.
 
   // Put all these text components together for a final notation
   var pitchText = ""
@@ -81,17 +70,12 @@ var setNotation = function(jint) {
     pitchText = diatonicText + safText + prime5Text + primes7PlusText + octaveText
     pitchClassText = diatonicText + safText + prime5Text + primes7PlusText
   }
-  jint.txt.pitch = pitchText
-  jint.txt.pclass = pitchClassText
 
-  // Set the Peos that multiply to original myPeo
-  jint.comp = {}
-  jint.comp.oct = octavePeo
-  jint.comp.dia = diatonicPeo
-  jint.comp.saf = safPeo
-  jint.comp.pr5 = prime5Peo
-  jint.comp.prHi = primes7PlusPeo
+  result = {}
+  result.pitch = pitchText
+  result.pclass = pitchClassText
 
+  return result
 }
 
-module.exports = setNotation
+module.exports = calcNotation
