@@ -79,7 +79,7 @@ jint.getEndNotation()       // Equivalent to getPitch
 jint.getPeo()            // Returns the underlying Peo for this JInterval
 jint.getPitch()          // Return a pitch notation for the JInterval, e.g. "E'4" for new JInterval(5/4)
 jint.getPitchClass()     // Return a pitch class for the JInterval, e.g. "E'" for new JInterval(5/4). Octave information is discarded.
-jint.getVal()            // Return a positive number representing relative frequency of JInterval
+jint.getAsDecimal()            // Return a positive number representing relative frequency of JInterval
 jint.toString()          // Equivalent to getPitch
 
 // Frequency calculations

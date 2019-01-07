@@ -1,10 +1,10 @@
 var getComma = require('../api/class/getComma')
 
-var getHigherPrimesArray = require('../notation/getHigherPrimesArray')
-var get5Label = require('../notation/get5Label')
-var getSharpFlatArray = require('../notation/getSharpFlatArray')
-var getDiatonicArray = require('../notation/getDiatonicArray')
-var getOctaveArray = require('../notation/getOctaveArray')
+var getHigherPrimesArray = require('./getHigherPrimesArray')
+var get5Label = require('./get5Label')
+var getSharpFlatArray = require('./getSharpFlatArray')
+var getDiatonicArray = require('./getDiatonicArray')
+var getOctaveArray = require('./getOctaveArray')
 
 var setNotation = function(jint) {
 

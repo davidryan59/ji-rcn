@@ -1,5 +1,5 @@
 var getAlg = function() {
-  // Its a string
+  // Must return a string.
   return this.alg || ""
 }
 

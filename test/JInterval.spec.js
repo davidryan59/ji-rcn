@@ -179,7 +179,7 @@ describe(fnName, function() {
 
   it('new JInterval("E\'4") gives value of 1.25', function() {
     var jint = new JInterval("E'4")
-    assert.strictEqual(jint.getVal(), 1.25)
+    assert.strictEqual(jint.getAsDecimal(), 1.25)
   })
 
 })
