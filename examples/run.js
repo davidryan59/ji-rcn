@@ -6,6 +6,14 @@ var jint = null
 var peo = null
 
 console.log("")
+console.log("Example of newly created empty JInterval:")
+console.log("`new JInterval()`")
+console.log("")
+console.log(new JInterval())
+console.log("")
+console.log("")
+
+console.log("")
 console.log("Example of newly created JInterval:")
 console.log("`new JInterval(7, 5)`")
 console.log("")
@@ -14,23 +22,12 @@ console.log("")
 console.log("")
 
 console.log("")
-console.log("Example of JInterval with cached calculations:")
-console.log("`new JInterval(7, 5)`")
+console.log("Same JInterval, with frequency and notation calculated:")
+console.log("`new JInterval(7, 5), starting at 240 Hz for notation B'3`")
 console.log("")
-jint = new JInterval(7, 5)
-console.log(jint.getEndPitchNotation())
-console.log("")
-console.log(jint)
-console.log("")
-console.log("")
-
-console.log("")
-console.log("Example of more complex JInterval:")
-console.log("`new JInterval(31031000, 65537)`")
-console.log("")
-jint = new JInterval(31031000, 65537)
-console.log(jint.getEndPitchNotation())
-console.log("")
+jint = new JInterval(7, 5);
+jint.getEndFreqHz(240);
+jint.getEndPitchNotation("B'3");
 console.log(jint)
 console.log("")
 console.log("")

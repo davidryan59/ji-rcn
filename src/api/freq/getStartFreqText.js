@@ -1,8 +1,7 @@
-var getFreqText = require('../../maths/getFreqText');
+var consts = require('../../constants/consts')
 
 var getStartFreqText = function() {
-  var theFreqHz = this.getStartFreqHz()
-  return getFreqText(theFreqHz);
+  return this.freq.start.txt || consts.DEFAULT_BASE_FREQ_TXT
 }
 
 module.exports = getStartFreqText
