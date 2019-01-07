@@ -6,9 +6,14 @@ var getComma = test_index.getComma;
 var fnName = 'getComma';
 describe(fnName, function() {
 
-  it("can calculate getComma(5)", function() {
+  it("gives 80/81 for getComma(5)", function() {
     var result = getComma(5)
-    assert.deepStrictEqual(result.getPrimeExps(), {5:1, 2:4, 3:-4})
+    assert.deepStrictEqual(result.getPrimeExps(), {2:4,3:-4,5:1})
+  })
+
+  it("gives default for getComma(5.01)", function() {
+    var result = getComma(5.01)
+    assert.deepStrictEqual(result.getPrimeExps(), {})
   })
 
   it('gives default for getComma("aString")', function() {

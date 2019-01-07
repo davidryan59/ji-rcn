@@ -10,13 +10,10 @@ var getComma = function(p, algType) {
 
   var defaultResult = function() {return new Peo(1)}
 
-  // p has got to be a number
-  if (!(typeof(p)==="number")) {
+  // All prime numbers are finite integers
+  if (!Number.isInteger(p)) {
     return defaultResult()
   }
-
-  // p forced to integer
-  p = Math.round(p)
 
   // p ought to be between 5 and upper limit of integer precision
   if (p<5) {
@@ -39,6 +36,7 @@ var getComma = function(p, algType) {
   } else if (lowerAlgType.includes("kg")) {
     return getCommaKG2(p)
   } else if (lowerAlgType.includes("bad")) {
+    // BAD algorithm added to test unlikely values for getComma(5) or other primes
     return getCommaBAD(p)
   } else {
     // Use algorithm DR by default
