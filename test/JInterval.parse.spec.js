@@ -37,6 +37,9 @@ describe('Notation parsing API', function() {
     ["t", {3:190537,2:-301994}, "", "Tiny Pythagorean commas"],
     ["y", {3:-190537,2:301994}],
     ["'", "80/81", "", "Syntonic commas"],
+    ["'", "80/81", "SAG"],
+    ["'", "80/81", "KG2"],
+    ["'", {2:-15,3:8,5:1}, "BAD", "Test bad algorithm with different getComma(5)"],
     [".", "81/80"],
     ["(o-5)", {2:-9}, "", "Bracketed items"],
     ["(o+4)", "1"],
@@ -78,6 +81,15 @@ describe('Notation parsing API', function() {
     ["[7]", "63/64"],
     ["[11]", "33/32"],
     ["[13]", "26/27"],
+
+    ["[5]", "80/81", "SAG", "Test parsing of some other algorithms"],
+    ["[5]", "80/81", "KG2"],
+    ["[5]", {2:-15,3:8,5:1}, "BAD"],
+    ["[139]", {2:4,3:-7,139:1}, ""],
+    ["[139]", {2:4,3:-7,139:1}, "DR"],
+    ["[139]", {2:-4,3:-2,139:1}, "SAG"],
+    ["[139]", {2:-15,3:5,139:1}, "KG2"],
+    ["[139]", {2:23,3:-19,139:1}, "BAD"],
 
     ["[1/5]", "81/80", "", "Reciprocal commas"],
     ["[1/7]", "64/63"],
@@ -122,11 +134,6 @@ describe('Notation parsing API', function() {
     ["{7/11}", "21/22"],
 
     ["(#3]", {3:(7*1),2:(-11*1-1)}, "", "Mis-formed brackets do not parse"],  // Should parse as #3
-
-    ["[139]", {2:4,3:-7,139:1}, "", "Test parsing of different comma algorithms"],
-    ["[139]", {2:4,3:-7,139:1}, "DR"],
-    ["[139]", {2:-4,3:-2,139:1}, "SAG"],
-    ["[139]", {2:-15,3:5,139:1}, "KG2"],
 
     ["", "1", ""]
   ]
