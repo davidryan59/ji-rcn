@@ -1,13 +1,11 @@
-var parseNotation = require("../api/class/parseNotation")
+var parseNotation = require('../notation/parseNotation');
 
-var initialiseFromNotation = function(jn, notationText) {
-
+var initialiseFromNotation = function initialiseFromNotation(jint, notationText) {
   // Simple implementation. Doesn't take into account:
   // Base notation other than C4
   // Comma algorithm other than default
 
-  jn.peo = parseNotation(notationText)
-  jn.alg = null
-}
+  jint.peo = parseNotation(notationText);
+};
 
-module.exports = initialiseFromNotation
+module.exports = initialiseFromNotation;

@@ -1,5 +1,8 @@
-var toString = function() {
-  return this.getPitch()
-}
+var toString = function toString() {
+  var endNotation = this.getEndPitchNotation();
+  var startNotation = this.getStartPitchNotation();
+  var fractionText = this.toFractionText();
+  return 'Interval of ' + fractionText + ' from ' + startNotation + ' to ' + endNotation;
+};
 
-module.exports = toString
+module.exports = toString;

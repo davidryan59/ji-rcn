@@ -1,6 +1,8 @@
-var initialiseFromPeo = function(jn, peo, alg) {
-  jn.peo = peo.copy()           // Store a copy, not the original
-  jn.alg = alg || null
-}
+var isString = require('is-string');
 
-module.exports = initialiseFromPeo
+var initialiseFromPeo = function initialiseFromPeo(jint, peo, alg) {
+  jint.peo = peo.copy();           // Store a copy, not the original
+  if (isString(alg)) jint.alg = alg;
+};
+
+module.exports = initialiseFromPeo;

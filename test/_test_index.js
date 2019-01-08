@@ -5,11 +5,11 @@ var testDir = 'src';
 
 module.exports = {
   ji: require('../' + testDir + '/index'),
-  Jinote: require('../' + testDir + '/Jinote'),
+  JInterval: require('../' + testDir + '/JInterval'),
   get5Label: require('../' + testDir + '/notation/get5Label'),
   getComma: require('../' + testDir + '/api/class/getComma'),
   getDiatonicArray: require('../' + testDir + '/notation/getDiatonicArray'),
   getOctaveArray: require('../' + testDir + '/notation/getOctaveArray'),
   getSharpFlatArray: require('../' + testDir + '/notation/getSharpFlatArray'),
-  privateGetPeo: require('../' + testDir + '/private/privateGetPeo')
+  parseNotation: require('../' + testDir + '/notation/parseNotation')
 };
