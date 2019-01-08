@@ -1,5 +1,5 @@
-var toDecimal = function() {
-  return this.peo.getVal()
-}
+var toDecimal = function toDecimal() {
+  return this.peo.getAsDecimal();
+};
 
-module.exports = toDecimal
+module.exports = toDecimal;

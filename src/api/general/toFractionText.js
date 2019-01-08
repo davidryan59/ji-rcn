@@ -1,5 +1,5 @@
-var toFractionText = function() {
-  return this.peo.getText()
-}
+var toFractionText = function toFractionText() {
+  return this.peo.getAsFractionText();
+};
 
-module.exports = toFractionText
+module.exports = toFractionText;

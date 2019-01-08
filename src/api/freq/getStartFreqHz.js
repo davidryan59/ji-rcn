@@ -1,7 +1,7 @@
-var consts = require('../../constants/consts')
+var consts = require('../../constants/consts');
 
-var getStartFreqHz = function() {
-  return this.freq.start.hz || consts.DEFAULT_BASE_FREQ_HZ
-}
+var getStartFreqHz = function getStartFreqHz() {
+  return this.freq.start.hz || consts.DEFAULT_BASE_FREQ_HZ;
+};
 
-module.exports = getStartFreqHz
+module.exports = getStartFreqHz;

@@ -1,8 +1,8 @@
-var recalcStartAndEndNotations = require('../../notation/recalcStartAndEndNotations')
+var recalcStartAndEndNotations = require('../../notation/recalcStartAndEndNotations');
 
-var getEndPitchClassNotation = function(inputtedStartNotation) {
+var getEndPitchClassNotation = function getEndPitchClassNotation(inputtedStartNotation) {
   var endNotationObject = recalcStartAndEndNotations(this, inputtedStartNotation);
   return endNotationObject.pclass;
-}
+};
 
-module.exports = getEndPitchClassNotation
+module.exports = getEndPitchClassNotation;

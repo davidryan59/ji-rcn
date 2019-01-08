@@ -1,7 +1,7 @@
-var parseNotation = require('./parseNotation')
-var calcNotation = require('./calcNotation')
+var parseNotation = require('./parseNotation');
+var calcNotation = require('./calcNotation');
 
-var recalcStartAndEndNotations = function(jint, inputtedStartNotation) {
+var recalcStartAndEndNotations = function recalcStartAndEndNotations(jint, inputtedStartNotation) {
   // Given a start notation for a JInterval:
   // - Return the end notation, if answer is already cached
   // - Otherwise calculate the end notation from the start notation and interval width
@@ -20,7 +20,7 @@ var recalcStartAndEndNotations = function(jint, inputtedStartNotation) {
 
   // Need to calculate and cache a new start and end notation.
   // Use as appropriate either inputted, cached or default start notation
-  var alg = jint.getAlg()
+  var alg = jint.getAlg();
   var startNotation = inputtedStartNotation || jint.getStartPitchNotation();
 
   // Calculate Peos
@@ -38,7 +38,7 @@ var recalcStartAndEndNotations = function(jint, inputtedStartNotation) {
   jint.notation.end.pitch = endNotationResults.pitch;
   jint.notation.end.pclass = endNotationResults.pclass;
 
-  return jint.notation.end
-}
+  return jint.notation.end;
+};
 
-module.exports = recalcStartAndEndNotations
+module.exports = recalcStartAndEndNotations;

@@ -54,10 +54,10 @@ var jint = new JInterval()         // Can initialise with no args. JInterval for
 var jint = new JInterval(7)        // Can initialise from an integer. JInterval for 7/1
 var jint = new JInterval(14, 15)   // Can initialise from fraction specified as integers. JInterval for 14/15
 var jint = new JInterval(0.75)     // Can initialise from a decimal number (this example is JInterval for 3/4)
-var jint = new JInterval("14/15")  // Can initialise from fraction specified as text
+var jint = new JInterval("14/15")  // Can initialise from fraction in text format
 var jint2 = new JInterval(jint)    // Can initialise from another JInterval (equivalent to copying the JInterval)
 var jint = new JInterval(peo)      // Can initialise from a Prime Exponent Object (Peo instance)
-var jint = new JInterval(fraction) // Can initialise from a Fraction (fraction.js package)
+var jint = new JInterval(jint2)    // Can initialise from another JInterval
 var jint = new JInterval(object)   // Can initialise from an object similar to {2:3, 7:-1} for 8/7
 
 // Constructors with algorithm
@@ -68,7 +68,6 @@ var jint = new JInterval(0.75, alg)
 var jint = new JInterval("14/15", alg)
 var jint2 = new JInterval(jint, alg)    // This is equivalent to copying the JInterval, but switching the algorithm
 var jint = new JInterval(peo, alg)
-var jint = new JInterval(fraction, alg)
 var jint = new JInterval(object, alg)
 
 // Frequency calculations

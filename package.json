@@ -11,19 +11,22 @@
   "repository": "git@github.com:davidryan59/ji-rcn.git",
   "license": "ISC",
   "scripts": {
-    "test": "nyc mocha ./test/*.spec.js",
+    "lint": "eslint src test examples",
     "examples": "cd ./examples && node run.js",
-    "build": "./minify-js.sh",
-    "prepublishOnly": "npm run test"
+    "test": "nyc mocha ./test/*.spec.js",
+    "prepublishOnly": "npm run lint && npm run test"
   },
   "dependencies": {
     "escape-string-regexp": "^1.0.5",
-    "fraction.js": "^4.0.12",
-    "is-bounded-number": "^1.2.0",
+    "is-bounded-number": "^1.2.1",
     "is-string": "^1.0.4",
-    "peo": "^2.0.0"
+    "peo": "^3.1.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb-es5": "^1.2.0",
+    "eslint-plugin-react": "^7.12.3",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2"
   },

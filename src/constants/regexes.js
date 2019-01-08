@@ -1,39 +1,39 @@
-var esc = require('escape-string-regexp')
+var esc = require('escape-string-regexp');
 
-var consts = require('../constants/consts')
+var consts = require('../constants/consts');
 
-var sharedRegexFlags = "g"
+var sharedRegexFlags = 'g';
 
-var makeRegexStringForBrackets = function(text, regexString) {
+var makeRegexStringForBrackets = function makeRegexStringForBrackets(text, regexString) {
   // Going to allow four different types of bracket to parse
-  var str1 = esc(text) + regexString
-  var str2 = esc("(") + str1 + esc(")") + "|"
-             + esc("[") + str1 + esc("]") + "|"
-             + esc("{") + str1 + esc("}") + "|"
-             + esc("<") + str1 + esc(">")
-  return str2
-}
+  var str1 = esc(text) + regexString;
+  var str2 = esc('(') + str1 + esc(')') + '|'
+             + esc('[') + str1 + esc(']') + '|'
+             + esc('{') + str1 + esc('}') + '|'
+             + esc('<') + str1 + esc('>');
+  return str2;
+};
 
-var makeRegexForVariableDigits = function(text) {
+var makeRegexForVariableDigits = function makeRegexForVariableDigits(text) {
   // String to generate Regex for something like (o+11), (#999999)
-  var regexString = "[0-9]{1," + consts.BRACKET_MAX_DIGITS + "}"
-  var regexBracketString = makeRegexStringForBrackets(text, regexString)
-  return new RegExp(regexBracketString, sharedRegexFlags)
-}
+  var regexString = '[0-9]{1,' + consts.BRACKET_MAX_DIGITS + '}';
+  var regexBracketString = makeRegexStringForBrackets(text, regexString);
+  return new RegExp(regexBracketString, sharedRegexFlags);
+};
 
-var makeRegexStringForComma = function(regexString) {
-  return makeRegexStringForBrackets("", regexString)
-}
+var makeRegexStringForComma = function makeRegexStringForComma(regexString) {
+  return makeRegexStringForBrackets('', regexString);
+};
 
 
-var regexStringInteger = "[" + esc(consts.CHAR_COMMA_POWER) + " 0-9]*"
-var regexStringFraction = regexStringInteger + esc(consts.CHAR_COMMA_DIVIDE) + regexStringInteger
-var stringBracketedCommaFraction = makeRegexStringForComma(regexStringFraction)
-var stringBracketedCommaInteger = makeRegexStringForComma(regexStringInteger)
+var regexStringInteger = '[' + esc(consts.CHAR_COMMA_POWER) + ' 0-9]*';
+var regexStringFraction = regexStringInteger + esc(consts.CHAR_COMMA_DIVIDE) + regexStringInteger;
+var stringBracketedCommaFraction = makeRegexStringForComma(regexStringFraction);
+var stringBracketedCommaInteger = makeRegexStringForComma(regexStringInteger);
 
 // Errors are of form (.ERR) or (..ERR)
-var regexErrorString = esc(consts.BRACKET_LEFT_STANDARD) + ".{0," + consts.ERROR_MAX_CHARS + "}" + esc(consts.ERROR_TEXT + consts.BRACKET_RIGHT_STANDARD)
-var regexAnyError = new RegExp(regexErrorString, sharedRegexFlags)
+var regexErrorString = esc(consts.BRACKET_LEFT_STANDARD) + '.{0,' + consts.ERROR_MAX_CHARS + '}' + esc(consts.ERROR_TEXT + consts.BRACKET_RIGHT_STANDARD);
+var regexAnyError = new RegExp(regexErrorString, sharedRegexFlags);
 
 module.exports = {
   REGEX_ANY_ERROR: regexAnyError,
@@ -68,8 +68,8 @@ module.exports = {
   REGEX_CHAR_SMALL_COMMA_REMOVE: new RegExp(esc(consts.CHAR_SMALL_OFF), sharedRegexFlags),
   REGEX_CHAR_TINY_COMMA_ADD: new RegExp(esc(consts.CHAR_TINY_ON), sharedRegexFlags),
   REGEX_CHAR_TINY_COMMA_REMOVE: new RegExp(esc(consts.CHAR_TINY_OFF), sharedRegexFlags),
-  REGEX_CHAR_DIATONIC: new RegExp("[A-G]", sharedRegexFlags),
-  REGEX_CHAR_OCTAVE: new RegExp("[0-9]", sharedRegexFlags),
+  REGEX_CHAR_DIATONIC: new RegExp('[A-G]', sharedRegexFlags),
+  REGEX_CHAR_OCTAVE: new RegExp('[0-9]', sharedRegexFlags),
 
-  DUMMY: "DUMMY"
-}
+  DUMMY: 'DUMMY'
+};

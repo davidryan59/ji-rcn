@@ -1,8 +1,8 @@
-var recalcStartAndEndFrequencies = require('../../freq/recalcStartAndEndFrequencies')
+var recalcStartAndEndFrequencies = require('../../freq/recalcStartAndEndFrequencies');
 
-var getEndFreqText = function(inputtedStartFreqHz) {
+var getEndFreqText = function getEndFreqText(inputtedStartFreqHz) {
   var endFreqObject = recalcStartAndEndFrequencies(this, inputtedStartFreqHz);
   return endFreqObject.txt;
-}
+};
 
-module.exports = getEndFreqText
+module.exports = getEndFreqText;

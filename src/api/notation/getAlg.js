@@ -1,6 +1,6 @@
-var getAlg = function() {
+var getAlg = function getAlg() {
   // Must return a string.
-  return this.alg || ""
-}
+  return this.alg || '';
+};
 
-module.exports = getAlg
+module.exports = getAlg;
