@@ -29,12 +29,6 @@ var initialise = function(jint, argumentArray) {
     return
   }
 
-  // Check for Fraction case
-  if (arg0 instanceof Fraction) {
-    initialiseFromPeo(jint, new Peo(arg0), arg1)
-    return
-  }
-
   // Check for numeric case - Integer
   if (Number.isInteger(arg0)) {
     var peo = null
