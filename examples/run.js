@@ -192,7 +192,7 @@ for (var i = 0; i < array.length; i++) {
 
 console.log('');
 console.log('Constructing a JInterval for small number "77/65"');
-jint = new JInterval(77/65);
+jint = new JInterval(77 / 65);
 jint.getEndPitchNotation();
 jint.getEndFreqHz();
 console.log(jint);

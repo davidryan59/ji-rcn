@@ -7,9 +7,9 @@ var recalcStartAndEndNotations = function recalcStartAndEndNotations(jint, input
   // - Otherwise calculate the end notation from the start notation and interval width
 
   // Check if correct result has been cached. If so, return it.
-  if (jint.notation.start.pitch) {
+  if (jint.notation.start.inputPitch) {
     // There is a cached result
-    if (inputtedStartNotation === jint.notation.start.pitch) {
+    if (inputtedStartNotation === jint.notation.start.inputPitch) {
       // Asking for same cached result. Return it.
       return jint.notation.end;
     } else if (!inputtedStartNotation) {
@@ -33,6 +33,7 @@ var recalcStartAndEndNotations = function recalcStartAndEndNotations(jint, input
   var endNotationResults = calcNotation(endNotationPeo, alg);
 
   // Cache the results for reuse
+  jint.notation.start.inputPitch = inputtedStartNotation;
   jint.notation.start.pitch = startNotationResults.pitch;
   jint.notation.start.pclass = startNotationResults.pclass;
   jint.notation.end.pitch = endNotationResults.pitch;

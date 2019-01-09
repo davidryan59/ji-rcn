@@ -95,7 +95,8 @@ jint.getAlg()            // Return algorithm for the JInterval
 jint.getEndPitchNotation(startPitchNotation) // If this interval starts at inputted notation, calculate the end notation
 jint.getEndPitchNotation()        // Calculate end notation based on default or previous start notation
 jint.getEndPitchClassNotation()   // Return the end notation, minus its octave information
-jint.getStartPitchNotation()      // Return previous or default starting pitch notation
+jint.getStartPitchNotation()      // Return previous starting pitch notation (parsed, standard format), or default
+jint.getStartPitchInputNotation() // Return previous starting pitch notation (as input), or default
 jint.getStartPitchClassNotation() // Return the start notation, minus its octave information
 ```
 

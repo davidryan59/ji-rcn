@@ -4,7 +4,7 @@ var initialise = require('./initialisers/initialise');
 // Object's purpose is to translate between a fraction (in Peo format)
 // and a notation (text)
 function JInterval() {
-  this.compress()   // (Re)constructs object stores
+  this.compress();   // (Re)constructs object stores
   initialise(this, arguments);
 }
 
@@ -37,6 +37,7 @@ JInterval.prototype.getAlg = require('./api/notation/getAlg');
 JInterval.prototype.getEndPitchClassNotation = require('./api/notation/getEndPitchClassNotation');
 JInterval.prototype.getEndPitchNotation = require('./api/notation/getEndPitchNotation');
 JInterval.prototype.getStartPitchClassNotation = require('./api/notation/getStartPitchClassNotation');
+JInterval.prototype.getStartPitchInputNotation = require('./api/notation/getStartPitchInputNotation');
 JInterval.prototype.getStartPitchNotation = require('./api/notation/getStartPitchNotation');
 
 module.exports = JInterval;
