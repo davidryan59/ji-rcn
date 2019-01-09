@@ -54,10 +54,13 @@ var initialise = function initialise(jint, argumentArray) {
   if (isString(arg0)) {
     var numChar = Number.parseFloat(arg0[0]);
     if (Number.isNaN(numChar)) {
-      // Its a string string
-      // This one's different, its notation -> jint
-      // Going to try and parse a notation here...
-      initialiseFromNotation(jint, arg0);
+      // Could not parse a number. Try parsing notations.
+      // Support these cases:
+      // (arg0) = (endNotation)
+      // (arg0, arg1) = (endNotation, algorithm)
+      // (arg0, arg1) = (startNotation, endNotation)
+      // (arg0, arg1, arg2) = (startNotation, endNotation, algorithm)
+      initialiseFromNotation(jint, arg0, arg1, arg2);
       return;
     }
     // Its a number presented as a string

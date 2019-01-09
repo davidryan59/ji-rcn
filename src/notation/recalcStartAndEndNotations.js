@@ -33,7 +33,7 @@ var recalcStartAndEndNotations = function recalcStartAndEndNotations(jint, input
   var endNotationResults = calcNotation(endNotationPeo, alg);
 
   // Cache the results for reuse
-  jint.notation.start.inputPitch = inputtedStartNotation;
+  if (inputtedStartNotation) jint.notation.start.inputPitch = inputtedStartNotation;
   jint.notation.start.pitch = startNotationResults.pitch;
   jint.notation.start.pclass = startNotationResults.pclass;
   jint.notation.end.pitch = endNotationResults.pitch;

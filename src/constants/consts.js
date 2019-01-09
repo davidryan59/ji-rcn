@@ -41,7 +41,12 @@ module.exports = {
   ERROR_MAX_CHARS: 2,
   COMMA_MAX_DIGITS: 3,
   REPEAT_MAX_CHARS: 4,
-  BRACKET_MAX_DIGITS: 15,      // Shouldn't be higher than 15 (1e15). Could be as low as 4 or 6.
+  BRACKET_MAX_DIGITS: 15,
+
+  ALG_DR: 'DR',
+  ALG_SAG: 'SAG',
+  ALG_KG: 'KG2',
+  ALG_BAD: 'BAD',
 
   DUMMY: 'DUMMY'
 };
