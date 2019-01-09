@@ -1,7 +1,7 @@
 {
   "name": "ji-rcn",
   "version": "8.0.0",
-  "description": "Functions for converting between numbers and JI musical notations",
+  "description": "Just Intonation musical interval conversion between rational numbers and Rational Comma Notation",
   "author": {
     "name": "David Ryan",
     "email": "davidryan1998@hotmail.com",

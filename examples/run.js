@@ -191,9 +191,18 @@ for (var i = 0; i < array.length; i++) {
 }
 
 console.log('');
+console.log('Constructing a JInterval for small number "77/65"');
+jint = new JInterval(77/65);
+jint.getEndPitchNotation();
+jint.getEndFreqHz();
+console.log(jint);
+console.log('');
+
+console.log('');
 console.log('Constructing a JInterval for factorial of 60 (big number)');
 jint = new JInterval(Peo.fact(60));
 jint.getEndPitchNotation();
+jint.getEndFreqHz();
 console.log(jint);
 console.log('');
 console.log('JInterval can go much higher than this - factorial of 1000000 should be fine to calculate, but take a while to print!');
