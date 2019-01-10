@@ -1,3 +1,10 @@
+// This notation parsing function outputs a number (as a Peo)
+// for the interval between C4 and the inputted notation.
+// In order to find a general interval between any two notes,
+// simply need to find ratio between the two Peos.
+// Hence this parseNotation function will be made perfectly general
+// in JInterval, even though parseNotation always measures from C4.
+
 var Peo = require('peo');
 var esc = require('escape-string-regexp');
 

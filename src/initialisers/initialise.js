@@ -1,84 +1,81 @@
 var Peo = require('peo');
 var isString = require('is-string');
 
+var initialiseFromObject = require('./initialiseFromObject');
+var initialiseFromAnotherJInterval = require('./initialiseFromAnotherJInterval');
+var initialiseFromDecimal = require('./initialiseFromDecimal');
+var initialiseFromFraction = require('./initialiseFromFraction');
+var initialiseFromNotations = require('./initialiseFromNotations');
 var initialiseFromPeo = require('./initialiseFromPeo');
-var initialiseFromNotation = require('./initialiseFromNotation');
+
+var parseAlg = require('../commas/parseAlg');
+
+
+var canInitialiseFromObject = function canInitialiseFromObject(obj) {
+  if (obj.startPitchNotation || obj.endPitchNotation || obj.startFreqHz || obj.endFreqHz || obj.jint || obj.peo || obj.width || obj.num || obj.denom) {
+    return true;
+  }
+  return false;
+};
 
 var initialise = function initialise(jint, argumentArray) {
-  // argumentArray should contain first a number, fraction, Peo or JInterval
-  // representing the frequency shift of the interval.
-  // Args can then contain an optional algorithm string: "DR" (default), "SAG", "KG2"
+  // Standard way of initialising a JInterval is via an object in various ways,
+  // see initialiseFromObject method.
 
-  // Get the first few arguments given to JInterval constructor
+  // Most of the cases below are shortcut methods, to initialise directly on a number, fraction, etc.
+  // optionally specifying the algorithm too
+
   var arg0 = argumentArray[0];
   var arg1 = argumentArray[1];
   var arg2 = argumentArray[2];
+  var algor1 = parseAlg(arg1);
+  var algor2 = parseAlg(arg2);
 
-  // Declare variables
-  var peo = null;
-  var alg = null;
-
-  // Case: new JInterval(jint)
   if (arg0 instanceof jint.constructor) {
-    initialiseFromPeo(jint, arg0.peo, arg1 || arg0.getAlg());
-    return;
-  }
-
-  // Case: new JInterval(peo)
-  if (arg0 instanceof Peo) {
-    initialiseFromPeo(jint, arg0, arg1);
-    return;
-  }
-
-  // Check for numeric case - Integer
-  if (Number.isInteger(arg0)) {
-    if (Number.isInteger(arg1)) {
-      peo = new Peo(arg0, arg1);
-      alg = arg2;
+    // Case: new JInterval(jint, [alg])
+    initialiseFromAnotherJInterval(jint, arg0, algor1);
+  } else if (arg0 instanceof Peo) {
+    // Case: new JInterval(peo, [alg])
+    initialiseFromPeo(jint, arg0, algor1);
+  } else if (Number.isInteger(arg0) && arg0 > 0) {
+    // Integer cases
+    if (Number.isInteger(arg1) && arg1 > 0) {
+      // Case: new JInterval(num, denom, [alg])
+      initialiseFromFraction(jint, arg0, arg1, algor2);
     } else {
-      peo = new Peo(arg0);
-      alg = arg1;
+      // Case: new JInterval(integer, [alg])
+      initialiseFromFraction(jint, arg0, 1, algor1);
     }
-    initialiseFromPeo(jint, peo, alg);
-    return;
-  }
-
-  // Check for numeric case - Decimal
-  // Pass through to Peo to parse
-  if (Number.isFinite(arg0)) {
-    initialiseFromPeo(jint, new Peo(arg0), arg1);
-    return;
-  }
-
-  // Check for text case
-  if (isString(arg0)) {
+  } else if (Number.isFinite(arg0) && arg0 > 0) {
+    // Case: new JInterval(decimal, [alg])
+    initialiseFromDecimal(jint, arg0, algor1);
+  } else if (isString(arg0)) {
+    // Text cases
     var numChar = Number.parseFloat(arg0[0]);
     if (Number.isNaN(numChar)) {
-      // Could not parse a number. Try parsing notations.
-      // Support these cases:
-      // (arg0) = (endNotation)
-      // (arg0, arg1) = (endNotation, algorithm)
-      // (arg0, arg1) = (startNotation, endNotation)
-      // (arg0, arg1, arg2) = (startNotation, endNotation, algorithm)
-      initialiseFromNotation(jint, arg0, arg1, arg2);
-      return;
+      // First character of string is not a number. Treat as a notation.
+      // Case: new JInterval(startNotation, endNotation, [alg])
+      // (Force arg0 and arg1 to strings)
+      initialiseFromNotations(jint, '' + arg0, '' + arg1, algor2);
+    } else {
+      // First character of string is a number.
+      // Use Peo to parse it fully.
+      // Case: new JInterval("decimal", [alg])
+      initialiseFromPeo(jint, new Peo(arg0), algor1);
     }
-    // Its a number presented as a string
-    // Pass through to Peo to parse it
-    initialiseFromPeo(jint, new Peo(arg0), arg1);
-    return;
+  } else if (typeof arg0 === 'object' && arg0 !== null) {
+    // Object cases
+    if (canInitialiseFromObject(arg0)) {
+      // Case: new JInterval(options)
+      initialiseFromObject(jint, arg0);
+    } else {
+      // Case: new JInterval({p1:e1, ...pi:ei})
+      initialiseFromPeo(jint, new Peo(arg0), algor1);
+    }
+  } else {
+    // If all else fails, initialise on fraction of unison interval
+    initialiseFromFraction(jint, 1, 1);
   }
-
-  // Need to do this check last, since its 'object', the most general!
-  if (typeof arg0 === 'object' && arg0 !== null) {
-    // Assuming {p1:e1, ...pi:ei} format for object
-    peo = new Peo(arg0);
-    initialiseFromPeo(jint, peo, arg1);
-    return;
-  }
-
-  // If all else fails, return 1/1 as default JInterval
-  initialiseFromPeo(jint, new Peo(1));
 };
 
 module.exports = initialise;

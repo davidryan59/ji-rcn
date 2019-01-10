@@ -40,28 +40,28 @@ describe(fnName, function () {
 
   it('can initialise from new JInterval(14)', function () {
     var jint = new JInterval(14, 'SAG');
-    var txt = jint.getPeo().getAsFractionText();
+    var txt = jint.toFractionText();
     assert.strictEqual(txt, '14');
     assert.strictEqual(jint.getAlg(), 'SAG');
   });
 
   it('can initialise from new JInterval(14, 15)', function () {
     var jint = new JInterval(14, 15, 'KG2');
-    var txt = jint.getPeo().getAsFractionText();
+    var txt = jint.toFractionText();
     assert.strictEqual(txt, '14/15');
     assert.strictEqual(jint.getAlg(), 'KG2');
   });
 
   it('can initialise from new JInterval({2:1, 3:1, 5:-2, 13:-4})', function () {
     var jint = new JInterval({2: 1, 3: 1, 5: -2, 13: -4}, 'SAG');
-    var txt = jint.getPeo().getAsFractionText();
+    var txt = jint.toFractionText();
     assert.strictEqual(txt, '6/714025');
     assert.strictEqual(jint.getAlg(), 'SAG');
   });
 
   it('can initialise from new JInterval()', function () {
     var jint = new JInterval();
-    var txt = jint.getPeo().getAsFractionText();
+    var txt = jint.toFractionText();
     assert.strictEqual(jint.getAlg(), '');
     assert.strictEqual(txt, '1');
   });
@@ -193,14 +193,14 @@ describe(fnName, function () {
     assert.strictEqual(jint.getEndFreqText(), '10752 Hz');
   });
 
-  it('new JInterval("Eb.5") agrees with new Peo(12, 5)', function () {
-    var jint = new JInterval('Eb.5');
-    var peo = new Peo(12, 5);
-    assert.strictEqual(jint.getPeo().getAsFractionText(), peo.getAsFractionText());
+  it('new JInterval("C4", "Eb.5") agrees with new Peo(12, 5)', function () {
+    var jint = new JInterval('C4', 'Eb.5');
+    assert.strictEqual(jint.toFractionText(), '12/5');
   });
 
-  it('new JInterval("E\'4") gives value of 1.25', function () {
-    var jint = new JInterval("E'4");
-    assert.strictEqual(jint.toDecimal(), 1.25);
+  it('new JInterval(\'Bb[7]5\', "E\'4", "SAG") gives value of 5/14', function () {
+    var jint = new JInterval('Bb[7]5', "E'4", 'SAG');
+    assert.strictEqual(jint.toFractionText(), '5/14');
+    assert.strictEqual(jint.getAlg(), 'SAG');
   });
 });

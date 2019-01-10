@@ -4,7 +4,6 @@ var compress = function compress() {
   this.freq = {};
   this.freq.start = {};
   this.freq.end = {};
-  this.tuning = {};
   this.notation = {};
   this.notation.start = {};
   this.notation.end = {};

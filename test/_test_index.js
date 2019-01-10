@@ -10,6 +10,7 @@ module.exports = {
   getComma: require('../' + testDir + '/api/class/getComma'),
   getDiatonicArray: require('../' + testDir + '/notation/getDiatonicArray'),
   getOctaveArray: require('../' + testDir + '/notation/getOctaveArray'),
+  initialiseFromObject: require('../' + testDir + '/initialisers/initialiseFromObject'),
   getSharpFlatArray: require('../' + testDir + '/notation/getSharpFlatArray'),
   parseNotation: require('../' + testDir + '/notation/parseNotation'),
   parseAlg: require('../' + testDir + '/commas/parseAlg')
