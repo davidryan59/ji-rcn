@@ -4,7 +4,7 @@ var algorithmIndex = require('../../commas/algIndex');
 var parseCommaAlgText = require('../../commas/parseCommaAlgText');
 
 var getPeo1 = function getPeo1() {return new Peo(1);};
-var defaultAlg = algorithmIndex.DEFAULT;
+var defaultAlg = algorithmIndex.DEFAULT_ALG;
 
 
 var getComma = function getComma(inputPrime, inputAlg) {
@@ -26,18 +26,17 @@ var getComma = function getComma(inputPrime, inputAlg) {
     // Note that 2, 3 should have zero comma in RCN system.
   }
 
-  // // Has user supplied a custom algorithm function?
-  // if (inputAlg instanceof Function) {
-  //   // Case: user has supplied a custom comma algorithm
-  //   var userAlgResult = inputAlg(inputPrime)
-  //   if (userAlgResult instanceof Peo) {
-  //     // Result is valid
-  //     return userAlgResult
-  //   } else {
-  //     // Result is invalid. Use default algorithm instead.
-  //     return defaultAlg(inputPrime)
-  //   }
-  // }
+  // Has user supplied a custom algorithm function?
+  if (inputAlg instanceof Function) {
+    // Case: user has supplied a custom comma algorithm
+    var userAlgResult = inputAlg(inputPrime);
+    if (userAlgResult instanceof Peo) {
+      // Result is valid
+      return userAlgResult;
+    }
+    // Result is invalid. Use default algorithm instead.
+    return defaultAlg(inputPrime);
+  }
 
   // Has user supplied text description of an algorithm?
   var theAlgText = parseCommaAlgText(inputAlg);
