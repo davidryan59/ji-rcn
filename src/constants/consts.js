@@ -43,7 +43,7 @@ module.exports = {
   REPEAT_MAX_CHARS: 4,
   BRACKET_MAX_DIGITS: 15,
 
-  ALG_DR: 'DR',
+  ALG_DR: 'DR',      // See list in algIndex file
   ALG_SAG: 'SAG',
   ALG_KG: 'KG2',
   ALG_BAD: 'BAD',

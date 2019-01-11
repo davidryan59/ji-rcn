@@ -1,18 +1,25 @@
 // Algorithm index.
-// Output of parseCommaAlgText can be used to obtain the algorithm from here
+// Look up algorithms by text strings (outputted from parseCommaAlgText)
+
+var consts = require('../constants/consts');
+
 var getCommaDR = require('./getCommaDR');
 var getCommaSAG = require('./getCommaSAG');
 var getCommaKG2 = require('./getCommaKG2');
 var getCommaBAD = require('./getCommaBAD');
+
 var returnNull = function returnNull() {return null;};
 
-module.exports = {
+
+var theObject = {
   DEFAULT_ALG: getCommaDR,
-
-  DR: getCommaDR,     // ALG_DR (These keys must match values in constants file)
-  SAG: getCommaSAG,   // ALG_SAG
-  KG2: getCommaKG2,   // ALG_KG
-  BAD: getCommaBAD,   // ALG_BAD
-
-  NUL: returnNull     // Used for testing when bad value returned
+  NUL: returnNull           // Used for testing when bad value returned from this object
 };
+
+theObject[consts.ALG_DR] = getCommaDR;     // See list in constants file
+theObject[consts.ALG_SAG] = getCommaSAG;
+theObject[consts.ALG_KG] = getCommaKG2;
+theObject[consts.ALG_BAD] = getCommaBAD;
+
+
+module.exports = theObject;
