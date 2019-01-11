@@ -41,6 +41,9 @@ var initialiseFromObject = function initialiseFromObject(jint, theObject) {
     initialiseFromAnotherJInterval(jint, jint2, alg);
   } else if (peo && peo.constructor.name === Peo.name) {
     // Case: interval width = size of Peo
+    //
+    // Note: 'peo instanceof Peo' should have worked here, but for unknown reasons did not...
+    // Checking by a string (class name) text isn't ideal, since another class could have same name...
     initialiseFromPeo(jint, peo, alg);
   } else if (Number.isInteger(num) && num > 0) {
     if (Number.isInteger(denom) && denom > 0) {
@@ -51,13 +54,13 @@ var initialiseFromObject = function initialiseFromObject(jint, theObject) {
       initialiseFromFraction(jint, num, 1, alg);
     }
   } else if (Number.isInteger(denom) && denom > 0) {
-    // Case: interval width is 1/denom
+    // Case: interval width is 1/denom, subharmonic series
     initialiseFromFraction(jint, 1, denom, alg);
   } else if (Number.isFinite(width) && width > 0) {
-    // Case: interval width directly inputted (can be integer )
+    // Case: interval width directly inputted as any positive number (decimal or integer)
     initialiseFromDecimal(jint, width, alg);
   } else {
-    // Case: default case, interval of unison
+    // Case: parsing options failed, so return default case, a interval of unison
     initialiseFromFraction(jint, 1, 1, alg);
   }
   setOtherOptions(jint, theObject);
