@@ -2,7 +2,7 @@ var isString = require('is-string');
 
 var consts = require('../constants/consts');
 
-var parseAlg = function parseAlg(input) {
+var parseCommaAlgText = function parseCommaAlgText(input) {
   // Is input a string containing an algorithm name?
   if (!isString(input)) return '';
   if (input.length > 3) return '';
@@ -19,4 +19,4 @@ var parseAlg = function parseAlg(input) {
   return '';
 };
 
-module.exports = parseAlg;
+module.exports = parseCommaAlgText;

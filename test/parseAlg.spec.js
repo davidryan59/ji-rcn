@@ -3,12 +3,12 @@
 var assert = require('assert');
 
 var testIndex = require('./_test_index');
-var parseAlg = testIndex.parseAlg;
+var parseCommaAlgText = testIndex.parseCommaAlgText;
 
-var fnName = 'parseAlg';
+var fnName = 'parseCommaAlgText';
 describe(fnName, function () {
   var runTest = function (input, expectedString, comment) {
-    var actual = parseAlg(input);
+    var actual = parseCommaAlgText(input);
     var commentText = (comment) ? ' (' + comment + ')' : '';
     var label = fnName + '(' + input + ') = ' + JSON.stringify(expectedString) + commentText;
     it(label, function () {

@@ -8,7 +8,7 @@ var initialiseFromFraction = require('./initialiseFromFraction');
 var initialiseFromNotations = require('./initialiseFromNotations');
 var initialiseFromPeo = require('./initialiseFromPeo');
 
-var parseAlg = require('../commas/parseAlg');
+var parseCommaAlgText = require('../commas/parseCommaAlgText');
 
 
 var canInitialiseFromObject = function canInitialiseFromObject(obj) {
@@ -28,8 +28,8 @@ var initialise = function initialise(jint, argumentArray) {
   var arg0 = argumentArray[0];
   var arg1 = argumentArray[1];
   var arg2 = argumentArray[2];
-  var algor1 = parseAlg(arg1);
-  var algor2 = parseAlg(arg2);
+  var algor1 = parseCommaAlgText(arg1);
+  var algor2 = parseCommaAlgText(arg2);
 
   if (arg0 instanceof jint.constructor) {
     // Case: new JInterval(jint, [alg])

@@ -7,7 +7,7 @@ var initialiseFromFraction = require('./initialiseFromFraction');
 var initialiseFromNotations = require('./initialiseFromNotations');
 var initialiseFromPeo = require('./initialiseFromPeo');
 
-var parseAlg = require('../commas/parseAlg');
+var parseCommaAlgText = require('../commas/parseCommaAlgText');
 var setOtherOptions = require('./setOtherOptions');
 
 
@@ -27,7 +27,7 @@ var initialiseFromObject = function initialiseFromObject(jint, theObject) {
 
   // Optional
   // var tuning = parseTuning(theObject.tuning);  // Example: theObject.tuning = {notation: "A4", freqHz: 440 }
-  var alg = parseAlg(theObject.alg); // Specify algorithm here
+  var alg = parseCommaAlgText(theObject.alg); // Specify algorithm here
 
   if (isString(startPitchNotation) && isString(endPitchNotation)) {
     // Case: interval width is from pitch difference of two notations

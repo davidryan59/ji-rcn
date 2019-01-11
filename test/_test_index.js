@@ -13,5 +13,5 @@ module.exports = {
   initialiseFromObject: require('../' + testDir + '/initialisers/initialiseFromObject'),
   getSharpFlatArray: require('../' + testDir + '/notation/getSharpFlatArray'),
   parseNotation: require('../' + testDir + '/notation/parseNotation'),
-  parseAlg: require('../' + testDir + '/commas/parseAlg')
+  parseCommaAlgText: require('../' + testDir + '/commas/parseCommaAlgText')
 };
