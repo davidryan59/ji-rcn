@@ -31,7 +31,9 @@ describe(fnName, function () {
     ['kg', 'KG2'],
     ['KG2', 'KG2'],
     ['xKg', 'KG2'],
-    ['bad', 'BAD'],
+    ['EMP', 'EMP', 'Test value only'],
+    ['NUL', 'NUL', 'Test value only'],
+    ['bad', 'BAD', 'Test a bad comma algorithm'],
 
     ['', '']
   ];

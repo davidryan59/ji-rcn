@@ -15,6 +15,10 @@ var parseCommaAlgText = function parseCommaAlgText(input) {
     return consts.ALG_BAD;
   } else if (theAlg.includes('dr')) {
     return consts.ALG_DR;
+  } else if (theAlg === 'emp') {
+    return 'EMP';                 // Test value only - key intentionally missing from algIndex
+  } else if (theAlg === 'nul') {
+    return 'NUL';                 // Test value only - algorithm returns null
   }
   return '';
 };

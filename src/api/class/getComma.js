@@ -1,49 +1,49 @@
 var Peo = require('peo');
 
-var getCommaDR = require('../../commas/getCommaDR');
-var getCommaSAG = require('../../commas/getCommaSAG');
-var getCommaKG2 = require('../../commas/getCommaKG2');
-var getCommaBAD = require('../../commas/getCommaBAD');
+var algorithmIndex = require('../../commas/algIndex');
+var parseCommaAlgText = require('../../commas/parseCommaAlgText');
 
-var defaultResult = function defaultResult() {return new Peo(1);};
+var getPeo1 = function getPeo1() {return new Peo(1);};
+var defaultAlg = algorithmIndex.DEFAULT;
 
-var getComma = function getComma(p, algType) {
-  // Calculate a prime comma, according to the specified algorithm
-  // This function is only intended to have prime numbers inputted as p.
-  // It will allow composite numbers such as 77 to pass, since primality checking
-  // would slow the algorithm down, however it will not guarantee correct results,
-  // e.g. getComma(77) is not guaranteed to equal getComma(7)*getComma(11)
 
-  // All prime numbers are finite integers
-  // Return default if p is not a finite integer
-  if (!Number.isInteger(p)) {
-    return defaultResult();
+var getComma = function getComma(inputPrime, inputAlg) {
+  // Calculate comma of the prime number inputPrime,
+  // according to the specified algorithm inputAlg.
+
+  // inputAlg can be text that parses to match a key in algIndex
+  // inputAlg can be a function that takes in a prime number, and returns a Peo.
+
+  // getComma will allow composite numbers such as 253 = 11 * 23 to pass, since primality checking
+  // would slow the algorithm down, however it will not guarantee correct results on composites,
+  // e.g. getComma(253) is not guaranteed to equal getComma(11) * getComma(23)
+
+  // Check if inputPrime is OK
+  if (!Number.isInteger(inputPrime) || inputPrime < 5 || inputPrime > 5e15) {
+    // inputPrime is either: not numeric, too small, or too big.
+    // Return zero comma (interval of unison, 1)
+    return getPeo1();
+    // Note that 2, 3 should have zero comma in RCN system.
   }
 
-  // p ought to be between 5 and upper limit of integer precision.
-  // Otherwise return the default.
-  if (p < 5) {
-    return defaultResult();
-  } else if (p > 5e15) {
-    // Integer arithmetic starts failing above this number,
-    // which is nearly Number.MAX_SAFE_INTEGER
-    return defaultResult();
-  }
+  // // Has user supplied a custom algorithm function?
+  // if (inputAlg instanceof Function) {
+  //   // Case: user has supplied a custom comma algorithm
+  //   var userAlgResult = inputAlg(inputPrime)
+  //   if (userAlgResult instanceof Peo) {
+  //     // Result is valid
+  //     return userAlgResult
+  //   } else {
+  //     // Result is invalid. Use default algorithm instead.
+  //     return defaultAlg(inputPrime)
+  //   }
+  // }
 
-  // Algorithm types include: DR (default), SAG, KG2
-  // Also have DK as an alias for SAG
-  // Algorithm BAD added to test bad value for getComma(5) parses correctly
-  var lowerAlgType = (algType || 'DR').toLowerCase();
-
-  if (lowerAlgType.includes('sag') || lowerAlgType.includes('dk')) {
-    return getCommaSAG(p);
-  } else if (lowerAlgType.includes('kg')) {
-    return getCommaKG2(p);
-  } else if (lowerAlgType.includes('bad')) {
-    return getCommaBAD(p);
-  }
-  // Use algorithm DR by default
-  return getCommaDR(p);
+  // Has user supplied text description of an algorithm?
+  var theAlgText = parseCommaAlgText(inputAlg);
+  var theAlgFn = (theAlgText) ? algorithmIndex[theAlgText] : defaultAlg;
+  var theResult = (theAlgFn) ? theAlgFn(inputPrime) : defaultAlg(inputPrime);
+  return (theResult) ? theResult : defaultAlg(inputPrime);
 };
 
 module.exports = getComma;

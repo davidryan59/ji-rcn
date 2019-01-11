@@ -36,4 +36,14 @@ describe(fnName, function () {
     var result = getComma(5e15 + 1);
     assert.deepStrictEqual(result.getPrimeExps(), {});
   });
+
+  it('comma alg EMP (covers a branch)', function () {
+    var result = getComma(5, 'EMP');
+    assert.deepStrictEqual(result.getAsFractionText(), '80/81');
+  });
+
+  it('comma alg NUL (covers a branch)', function () {
+    var result = getComma(5, 'NUL');
+    assert.deepStrictEqual(result.getAsFractionText(), '80/81');
+  });
 });
