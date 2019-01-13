@@ -10,7 +10,6 @@ var getCommaBAD = require('./getCommaBAD');
 
 var returnNull = function returnNull() {return null;};
 
-
 var theObject = {
   DEFAULT_ALG: getCommaDR,
   NUL: returnNull           // Used for testing when bad value returned from this object

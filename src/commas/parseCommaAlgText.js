@@ -17,9 +17,9 @@ var parseCommaAlgText = function parseCommaAlgText(input) {
   } else if (theAlgLowerCase.includes('dr')) {
     return consts.ALG_DR;
   } else if (theAlgLowerCase === 'emp') {
-    return 'EMP';                 // Test value only - key intentionally missing from algIndex
+    return 'EMP';  // Test value only - key intentionally missing from algIndex
   } else if (theAlgLowerCase === 'nul') {
-    return 'NUL';                 // Test value only - algorithm returns null
+    return 'NUL';  // Test value only - algorithm returns null
   }
   return '';
 };

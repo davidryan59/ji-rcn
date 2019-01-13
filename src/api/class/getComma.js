@@ -45,9 +45,9 @@ var getComma = function getComma(inputPrime, inputAlg) {
   // Has user supplied text description of an algorithm?
   var theAlgText = parseCommaAlgText(inputAlg);
   var theAlgFn = (theAlgText) ? algorithmIndex[theAlgText] : defaultAlg;
-  var theResult = (theAlgFn) ? theAlgFn(inputPrime) : defaultAlg(inputPrime);
-  theResult = (theResult) ? theResult : defaultAlg(inputPrime);
-  return theResult;
+  var theAlgResult = (theAlgFn) ? theAlgFn(inputPrime) : defaultAlg(inputPrime);
+  var theCheckedResult = (theAlgResult) ? theAlgResult : defaultAlg(inputPrime);
+  return theCheckedResult;
 };
 
 module.exports = getComma;
