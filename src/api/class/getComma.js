@@ -10,9 +10,12 @@ var defaultAlg = algorithmIndex.DEFAULT_ALG;
 var getComma = function getComma(inputPrime, inputAlg) {
   // Calculate comma of the prime number inputPrime,
   // according to the specified algorithm inputAlg.
+  // Comma algorithm should be defined on the '5-rough' numbers,
+  // e.g. those positive integers with no factors of 2 or 3.
 
-  // inputAlg can be text that parses to match a key in algIndex
-  // inputAlg can be a function that takes in a prime number, and returns a Peo.
+  // inputAlg can be text that parses via parseCommaAlgText to match a key in algIndex
+  // inputAlg can be a custom function that takes in a prime number, and returns a Peo.
+  // (This peo must have highest prime inputPrime, with exponent 1, otherwise default comma is used.)
 
   // getComma will allow composite numbers such as 253 = 11 * 23 to pass, since primality checking
   // would slow the algorithm down, however it will not guarantee correct results on composites,
@@ -44,7 +47,6 @@ var getComma = function getComma(inputPrime, inputAlg) {
   var theAlgFn = (theAlgText) ? algorithmIndex[theAlgText] : defaultAlg;
   var theResult = (theAlgFn) ? theAlgFn(inputPrime) : defaultAlg(inputPrime);
   theResult = (theResult) ? theResult : defaultAlg(inputPrime);
-  // console.log(theResult);
   return theResult;
 };
 
