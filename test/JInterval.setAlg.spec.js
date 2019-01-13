@@ -84,4 +84,13 @@ describe(fnName, function () {
     assert.strictEqual(jint.getAlgText(), 'EMP');
     assert.strictEqual(jint.getAlgFn().name, 'getCommaDR');
   });
+
+  it('sets alg correctly using a jint copied from a jint with alg set by object with fn, name', function () {
+    var jint = new JInterval(1, {txt: 'ID', fn: identityFn});
+    var jint2 = jint.copy();
+    assert.strictEqual(jint.getAlgText(), 'ID');
+    assert.strictEqual(jint.getAlgFn().name, 'identityFn');
+    assert.strictEqual(jint2.getAlgText(), 'ID');
+    assert.strictEqual(jint2.getAlgFn().name, 'identityFn');
+  });
 });
