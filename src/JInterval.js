@@ -33,7 +33,8 @@ JInterval.prototype.mult = require('./api/maths/mult');
 JInterval.prototype.pow = require('./api/maths/pow');
 
 // Notation
-JInterval.prototype.getAlg = require('./api/notation/getAlg');
+JInterval.prototype.getAlgFn = require('./api/notation/getAlgFn');
+JInterval.prototype.getAlgText = require('./api/notation/getAlgText');
 JInterval.prototype.getEndPitchClassNotation = require('./api/notation/getEndPitchClassNotation');
 JInterval.prototype.getEndPitchNotation = require('./api/notation/getEndPitchNotation');
 JInterval.prototype.getStartPitchClassNotation = require('./api/notation/getStartPitchClassNotation');

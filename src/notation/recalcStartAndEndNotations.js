@@ -20,7 +20,7 @@ var recalcStartAndEndNotations = function recalcStartAndEndNotations(jint, input
 
   // Need to calculate and cache a new start and end notation.
   // Use as appropriate either inputted, cached or default start notation
-  var alg = jint.getAlg();
+  var alg = jint.getAlgText();
   var startNotation = inputtedStartNotation || jint.getStartPitchNotation();
 
   // Calculate Peos

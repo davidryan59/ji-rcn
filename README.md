@@ -91,7 +91,8 @@ jint.mult(jint2, pow)    // Same as previous, but jint2 is first raised to power
 jint.pow(pow)            // Return new JInterval based on its peo being raised to power 'pow'
 
 // Notation methods
-jint.getAlg()            // Return algorithm for the JInterval
+jint.getAlgText()        // Return acronym (string) for the algorithm, if specified
+jint.getAlgFn()          // Return the function used to calculate commas for this JInterval, if specified
 jint.getEndPitchNotation(startPitchNotation) // If this interval starts at inputted notation, calculate the end notation
 jint.getEndPitchNotation()        // Calculate end notation based on default or previous start notation
 jint.getEndPitchClassNotation()   // Return the end notation, minus its octave information

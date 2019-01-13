@@ -6,12 +6,12 @@ var testDir = 'src';
 module.exports = {
   ji: require('../' + testDir + '/index'),
   JInterval: require('../' + testDir + '/JInterval'),
-  get5Label: require('../' + testDir + '/notation/get5Label'),
   getComma: require('../' + testDir + '/api/class/getComma'),
+  get5Label: require('../' + testDir + '/notation/get5Label'),
   getDiatonicArray: require('../' + testDir + '/notation/getDiatonicArray'),
   getOctaveArray: require('../' + testDir + '/notation/getOctaveArray'),
-  initialiseFromObject: require('../' + testDir + '/initialisers/initialiseFromObject'),
   getSharpFlatArray: require('../' + testDir + '/notation/getSharpFlatArray'),
   parseNotation: require('../' + testDir + '/notation/parseNotation'),
-  parseCommaAlgText: require('../' + testDir + '/commas/parseCommaAlgText')
+  parseCommaAlgText: require('../' + testDir + '/commas/parseCommaAlgText'),
+  initialiseFromObject: require('../' + testDir + '/initialisers/initialiseFromObject')
 };

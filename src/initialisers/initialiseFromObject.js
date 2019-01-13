@@ -1,13 +1,12 @@
-var isString = require('is-string');
 var Peo = require('peo');
+var isString = require('is-string');
 
-var initialiseFromAnotherJInterval = require('./initialiseFromAnotherJInterval');
-var initialiseFromDecimal = require('./initialiseFromDecimal');
-var initialiseFromFraction = require('./initialiseFromFraction');
-var initialiseFromNotations = require('./initialiseFromNotations');
-var initialiseFromPeo = require('./initialiseFromPeo');
+var initialiseUsingAnotherJInterval = require('./initialiseUsingAnotherJInterval');
+var initialiseUsingDecimal = require('./initialiseUsingDecimal');
+var initialiseUsingFraction = require('./initialiseUsingFraction');
+var initialiseUsingNotations = require('./initialiseUsingNotations');
+var initialiseUsingPeo = require('./initialiseUsingPeo');
 
-var parseCommaAlgText = require('../commas/parseCommaAlgText');
 var setOtherOptions = require('./setOtherOptions');
 
 
@@ -27,41 +26,41 @@ var initialiseFromObject = function initialiseFromObject(jint, theObject) {
 
   // Optional
   // var tuning = parseTuning(theObject.tuning);  // Example: theObject.tuning = {notation: "A4", freqHz: 440 }
-  var alg = parseCommaAlgText(theObject.alg); // Specify algorithm here
+  var alg = theObject.alg;        // Algorithm text acronym or function: Number -> Peo
 
   if (isString(startPitchNotation) && isString(endPitchNotation)) {
     // Case: interval width is from pitch difference of two notations
-    initialiseFromNotations(jint, startPitchNotation, endPitchNotation, alg);
+    initialiseUsingNotations(jint, startPitchNotation, endPitchNotation, alg);
   } else if (Number.isFinite(startFreqHz) && Number.isFinite(endFreqHz) && startFreqHz > 0 && endFreqHz > 0) {
     // Case: interval width = ratio of two frequencies in Hz
     var intervalWidth = endFreqHz / startFreqHz;
-    initialiseFromDecimal(jint, intervalWidth, alg);
+    initialiseUsingDecimal(jint, intervalWidth, alg);
   } else if (jint2 instanceof jint.constructor) {
     // Case: interval width copied from another JInterval
-    initialiseFromAnotherJInterval(jint, jint2, alg);
+    initialiseUsingAnotherJInterval(jint, jint2, alg);
   } else if (peo && peo.constructor.name === Peo.name) {
     // Case: interval width = size of Peo
     //
     // Note: 'peo instanceof Peo' should have worked here, but for unknown reasons did not...
     // Checking by a string (class name) text isn't ideal, since another class could have same name...
-    initialiseFromPeo(jint, peo, alg);
+    initialiseUsingPeo(jint, peo, alg);
   } else if (Number.isInteger(num) && num > 0) {
     if (Number.isInteger(denom) && denom > 0) {
       // Case: interval width is a rational number, num/denom
-      initialiseFromFraction(jint, num, denom, alg);
+      initialiseUsingFraction(jint, num, denom, alg);
     } else {
       // Case: interval width = num, in harmonic series
-      initialiseFromFraction(jint, num, 1, alg);
+      initialiseUsingFraction(jint, num, 1, alg);
     }
   } else if (Number.isInteger(denom) && denom > 0) {
     // Case: interval width is 1/denom, subharmonic series
-    initialiseFromFraction(jint, 1, denom, alg);
+    initialiseUsingFraction(jint, 1, denom, alg);
   } else if (Number.isFinite(width) && width > 0) {
     // Case: interval width directly inputted as any positive number (decimal or integer)
-    initialiseFromDecimal(jint, width, alg);
+    initialiseUsingDecimal(jint, width, alg);
   } else {
     // Case: parsing options failed, so return default case, a interval of unison
-    initialiseFromFraction(jint, 1, 1, alg);
+    initialiseUsingFraction(jint, 1, 1, alg);
   }
   setOtherOptions(jint, theObject);
 };

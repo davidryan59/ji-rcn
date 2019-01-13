@@ -30,7 +30,8 @@ var getComma = function getComma(inputPrime, inputAlg) {
   if (inputAlg instanceof Function) {
     // Case: user has supplied a custom comma algorithm
     var userAlgResult = inputAlg(inputPrime);
-    if (userAlgResult instanceof Peo) {
+    if (userAlgResult instanceof Peo && userAlgResult.getPrimeExp(inputPrime) === 1 && userAlgResult.getHighestPrime() === inputPrime) {
+      // user alg result is: Peo, contains inputPrime to power 1, and inputPrime is the highest prime
       // Result is valid
       return userAlgResult;
     }
@@ -42,7 +43,9 @@ var getComma = function getComma(inputPrime, inputAlg) {
   var theAlgText = parseCommaAlgText(inputAlg);
   var theAlgFn = (theAlgText) ? algorithmIndex[theAlgText] : defaultAlg;
   var theResult = (theAlgFn) ? theAlgFn(inputPrime) : defaultAlg(inputPrime);
-  return (theResult) ? theResult : defaultAlg(inputPrime);
+  theResult = (theResult) ? theResult : defaultAlg(inputPrime);
+  // console.log(theResult);
+  return theResult;
 };
 
 module.exports = getComma;

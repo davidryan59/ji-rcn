@@ -24,7 +24,7 @@ var removeSpacesAroundPowerSymbol = function removeSpacesAroundPowerSymbol(theTe
 var addSpacesAroundDivideSymbol = function addSpacesAroundDivideSymbol(theText) {return theText.replace(/\//g, ' / ');};
 var commaSplitRegex = new RegExp('[' + esc(' ' + consts.BRACKET_ALLOWED_CHARS) + ']', 'g');
 
-var processCommaText = function processCommaText(commaText, algType) {
+var processCommaText = function processCommaText(commaText, inputAlg) {
   var tempText = commaText;
   tempText = removeSpacesAroundPowerSymbol(tempText);
   tempText = addSpacesAroundDivideSymbol(tempText);
@@ -61,14 +61,14 @@ var processCommaText = function processCommaText(commaText, algType) {
   for (var k = 0; k < keyArray.length; k++) {
     var prime = Number.parseInt(keyArray[k], 10);
     var power = primeExps[prime];
-    var commaPeo = getComma(prime, algType);
+    var commaPeo = getComma(prime, inputAlg);
     secondPeo = secondPeo.mult(commaPeo, power);
   }
   return secondPeo;
 };
 
-var reduceCommasToPeo = function reduceCommasToPeo(algType) {
-  return function f1(acc, elt) {return acc.mult(processCommaText(elt, algType));};
+var reduceCommasToPeo = function reduceCommasToPeo(inputAlg) {
+  return function f1(acc, elt) {return acc.mult(processCommaText(elt, inputAlg));};
 };
 
 var reduceToCount = function reduceToCount(acc) {return acc + 1;};
@@ -84,8 +84,8 @@ var peoPower = function peoPower(peo, outerPower) {
 var reduceDiatonicLettersToPeo = function reduceDiatonicLettersToPeo(acc, elt) {return acc.mult(peos[elt]);};
 var identityFunction = function identityFunction(anything) {return anything;};
 
-var parseNotation = function parseNotation(notation, algType) {
-  // algType is optional, and is passed straight through to getComma
+var parseNotation = function parseNotation(notation, inputAlg) {
+  // inputAlg is optional, and is passed straight through to getComma
 
   // Variables to iterate on
   var tempResult = 0;
@@ -95,7 +95,7 @@ var parseNotation = function parseNotation(notation, algType) {
   var tempNotation = notation;
   var tempPeo = null;
   var resultsPeo = new Peo();
-  var peoSyntonic = getComma(5, algType);
+  var peoSyntonic = getComma(5, inputAlg);
 
   // Function to iterate on the variables
   var analyseNotation = function analyseNotation(options) {
@@ -210,14 +210,14 @@ var parseNotation = function parseNotation(notation, algType) {
   // Do the commas next
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_COMMA_FRACTION,
-    reduceMatch: reduceCommasToPeo(algType),
+    reduceMatch: reduceCommasToPeo(inputAlg),
     initialValue: new Peo(),
     mapReducerResultToPeo: identityFunction
   });
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKETED_COMMA_INTEGER,
-    reduceMatch: reduceCommasToPeo(algType),
+    reduceMatch: reduceCommasToPeo(inputAlg),
     initialValue: new Peo(),
     mapReducerResultToPeo: identityFunction
   });
