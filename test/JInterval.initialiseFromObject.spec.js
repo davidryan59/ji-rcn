@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 
 var assert = require('assert');
-var Peo = require('Peo');
+var Peo = require('peo');
 
 var testIndex = require('./_test_index');
 var JInterval = testIndex.JInterval;
