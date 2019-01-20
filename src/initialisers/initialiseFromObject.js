@@ -4,6 +4,7 @@ var isString = require('is-string');
 var initialiseUsingAnotherJInterval = require('./initialiseUsingAnotherJInterval');
 var initialiseUsingDecimal = require('./initialiseUsingDecimal');
 var initialiseUsingFraction = require('./initialiseUsingFraction');
+var initialiseUsingFrequencies = require('./initialiseUsingFrequencies');
 var initialiseUsingNotations = require('./initialiseUsingNotations');
 var initialiseUsingPeo = require('./initialiseUsingPeo');
 
@@ -32,9 +33,8 @@ var initialiseFromObject = function initialiseFromObject(jint, theObject) {
     // Case: interval width is from pitch difference of two notations
     initialiseUsingNotations(jint, startPitchNotation, endPitchNotation, alg);
   } else if (Number.isFinite(startFreqHz) && Number.isFinite(endFreqHz) && startFreqHz > 0 && endFreqHz > 0) {
-    // Case: interval width = ratio of two frequencies in Hz
-    var intervalWidth = endFreqHz / startFreqHz;
-    initialiseUsingDecimal(jint, intervalWidth, alg);
+    // Case: interval width is from ratio of two frequencies in Hz
+    initialiseUsingFrequencies(jint, startFreqHz, endFreqHz, alg);
   } else if (jint2 instanceof jint.constructor) {
     // Case: interval width copied from another JInterval
     initialiseUsingAnotherJInterval(jint, jint2, alg);

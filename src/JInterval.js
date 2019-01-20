@@ -19,6 +19,7 @@ JInterval.prototype.getEndFreqHz = require('./api/freq/getEndFreqHz');
 JInterval.prototype.getEndFreqText = require('./api/freq/getEndFreqText');
 JInterval.prototype.getStartFreqHz = require('./api/freq/getStartFreqHz');
 JInterval.prototype.getStartFreqText = require('./api/freq/getStartFreqText');
+JInterval.prototype.hasFreq = require('./api/freq/hasFreq');
 
 // General
 JInterval.prototype.compress = require('./api/general/compress');
@@ -41,5 +42,10 @@ JInterval.prototype.getEndPitchNotation = require('./api/notation/getEndPitchNot
 JInterval.prototype.getStartPitchClassNotation = require('./api/notation/getStartPitchClassNotation');
 JInterval.prototype.getStartPitchInputNotation = require('./api/notation/getStartPitchInputNotation');
 JInterval.prototype.getStartPitchNotation = require('./api/notation/getStartPitchNotation');
+JInterval.prototype.hasNotation = require('./api/notation/hasNotation');
+
+// Notation
+JInterval.prototype.getTuningMultHz = require('./api/tuning/getTuningMultHz');
+JInterval.prototype.hasTuning = require('./api/tuning/hasTuning');
 
 module.exports = JInterval;

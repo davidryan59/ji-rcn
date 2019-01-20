@@ -1,6 +1,6 @@
 var getFreqText = require('./getFreqText');
 
-var recalcStartAndEndFrequencies = function recalcStartAndEndFrequencies(jint, inputtedStartFreqHz) {
+var recalcStartAndEndFrequencies = function recalcStartAndEndFrequencies(jint, inputStartFreqHz) {
   // Given a start frequency for a JInterval:
   // - Return the end frequency, if answer is already cached
   // - Otherwise calculate the end frequency from the start frequency and interval width
@@ -8,11 +8,11 @@ var recalcStartAndEndFrequencies = function recalcStartAndEndFrequencies(jint, i
   // Check if correct result has been cached. If so, return it.
   if (jint.freq.start.hz) {
     // There is a cached result
-    if (inputtedStartFreqHz === jint.freq.start.hz) {
+    if (inputStartFreqHz === jint.freq.start.hz) {
       // Asking for same cached result. Return it.
       return jint.freq.end;
-    } else if (!inputtedStartFreqHz) {
-      // No inputtedStartFreqHz specified. Repeat previous result
+    } else if (!inputStartFreqHz) {
+      // No inputStartFreqHz specified. Repeat previous result
       return jint.freq.end;
     }
   }
@@ -20,7 +20,7 @@ var recalcStartAndEndFrequencies = function recalcStartAndEndFrequencies(jint, i
   // Need to calculate and cache a new start and end frequency.
   // Get and clean the start frequency
   var startFreqCheckedHz = jint.getStartFreqHz();
-  if (Number.isFinite(inputtedStartFreqHz) && inputtedStartFreqHz > 0) startFreqCheckedHz = inputtedStartFreqHz;
+  if (Number.isFinite(inputStartFreqHz) && inputStartFreqHz > 0) startFreqCheckedHz = inputStartFreqHz;
 
   // Calculate the interval and end frequency
   var intervalDecimal = jint.toDecimal();

@@ -23,8 +23,6 @@ The purpose of the `ji-rcn` npm package is to help convert between:
 
 Currently the API contains two items: a class `JInterval` which automates all the RCN calculations, and a function `getComma` which provides direct access to the calculation of prime commas for each prime and algorithm.
 
-There is a full test suite using Mocha (`mocha`) for testing and Istanbul (`nyc`) for coverage. Currently all tests pass and coverage is 100%.
-
 
 ## Install
 `npm install ji-rcn`  

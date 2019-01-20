@@ -1,4 +1,5 @@
 var Peo = require('peo');
+
 var setAlg = require('./setAlg');
 
 var initialiseUsingDecimal = function initialiseUsingDecimal(jint, width, alg) {
