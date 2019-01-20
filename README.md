@@ -1,7 +1,7 @@
 # Just Intonation - Rational Comma Notation
 JI-RCN, `ji-rcn` module. Find [module on npm](https://www.npmjs.com/package/ji-rcn) and [code repo with examples on GitHub](https://github.com/davidryan59/ji-rcn).
 
-[![npm version](https://badge.fury.io/js/ji-rcn.png)](https://badge.fury.io/js/ji-rcn)
+[![npm version](https://badge.fury.io/js/ji-rcn.png)](https://badge.fury.io/js/ji-rcn)[![Build status](https://travis-ci.org/davidryan59/ji-rcn.svg?master)](https://travis-ci.org/davidryan59)
 
 **Just Intonation** (JI) is a system of musical tuning where intervals and chords can be expressed as ratios between whole numbers. It is also called Rational Intonation (RI) since it is based on rational numbers of the form `a/b`, or ratios of the form `a:b`, `a:b:c`, etc.
 - Examples of intervals include: an octave (1:2), a perfect fifth (2:3), a perfect fourth (3:4), a major third (4:5)
