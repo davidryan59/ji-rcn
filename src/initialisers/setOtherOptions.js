@@ -12,26 +12,26 @@ var setOtherOptions = function setOtherOptions(jint, theOptions) {
 
   if (theOptions.tuning) {
     var thePeo = null;
-    var correctedPitchNotationObject = null;
     var tuningMultHz = null;
+    var pitchNotation = null;
+    var inputPitchNotation = theOptions.tuning.pitchNotation;
     var freqHz = theOptions.tuning.freqHz;
-    var pitchNotation = theOptions.tuning.pitchNotation;
     if (!freqHz) freqHz = consts.DEFAULT_FREQ_HZ;
-    if (!pitchNotation) {
+    if (!inputPitchNotation) {
       thePeo = new Peo(1);
-      correctedPitchNotationObject = consts.DEFAULT_PITCH_NOTATION;
+      pitchNotation = consts.DEFAULT_PITCH_NOTATION;
       tuningMultHz = freqHz;
     } else {
-      thePeo = parseNotation(pitchNotation, theAlg);
-      correctedPitchNotationObject = calcNotationObject(thePeo, theAlg).pitch;
+      thePeo = parseNotation(inputPitchNotation, theAlg);
+      pitchNotation = calcNotationObject(thePeo, theAlg).pitch;
       tuningMultHz = thePeo.mult(freqHz, -1).pow(-1).getAsDecimal();   // freq/peo = (peo * freq^-1)^-1
     }
     jint.tuning = {
       freqHz: freqHz,
-      pitchNotation: correctedPitchNotationObject,
+      pitchNotation: pitchNotation,
       multHz: tuningMultHz
     };
-    if (pitchNotation) jint.tuning.inputPitchNotation = pitchNotation;
+    if (inputPitchNotation && inputPitchNotation !== pitchNotation) jint.tuning.inputPitchNotation = inputPitchNotation;
 
     // Some automatic population of values based on tuning
     if (jint.hasTuning() && jint.hasFreq() && !jint.hasNotation()) {

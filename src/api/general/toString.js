@@ -1,8 +1,12 @@
 var toString = function toString() {
-  var endNotation = this.getEndPitchNotation();
-  var startNotation = this.getStartPitchNotation();
-  var fractionText = this.toFractionText();
-  return 'Interval of ' + fractionText + ' from ' + startNotation + ' to ' + endNotation;
+  var startText = 'Interval of ' + this.toFractionText();
+  var endText = '';
+  if (this.hasNotation()) {
+    endText = ' from ' + this.getStartPitchNotation() + ' to ' + this.getEndPitchNotation();
+  } else if (this.hasFreq()) {
+    endText = ' from ' + this.getStartFreqHz() + ' to ' + this.getEndFreqHz();
+  }
+  return startText + endText;
 };
 
 module.exports = toString;

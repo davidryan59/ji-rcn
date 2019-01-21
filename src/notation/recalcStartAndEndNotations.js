@@ -9,9 +9,9 @@ var recalcStartAndEndNotations = function recalcStartAndEndNotations(jint, input
   // inputEndN is optional, not used to calculate, only to cache value at end.
 
   // Check if correct result has been cached. If so, return it.
-  if (jint.notation.start.inputPitch) {
+  if (jint.notation.start.pitch) {
     // There is a cached result
-    if (inputStartN === jint.notation.start.inputPitch) {
+    if (inputStartN === jint.notation.start.inputPitch || inputStartN === jint.notation.start.pitch) {
       // Asking for same cached result. Return it.
       return jint.notation.end;
     } else if (!inputStartN) {
@@ -37,12 +37,20 @@ var recalcStartAndEndNotations = function recalcStartAndEndNotations(jint, input
   // Cache the results for reuse
   // Start notations
   var startPitchNotation = startNotationObject.pitch;
-  if (inputStartN && inputStartN !== startPitchNotation) jint.notation.start.inputPitch = inputStartN;
+  if (inputStartN && inputStartN !== startPitchNotation) {
+    jint.notation.start.inputPitch = inputStartN;
+  } else {
+    delete jint.notation.start.inputPitch;
+  }
   jint.notation.start.pitch = startPitchNotation;
   jint.notation.start.pclass = startNotationObject.pclass;
   // End notations
   var endPitchNotation = endNotationObject.pitch;
-  if (inputEndN && inputEndN !== endPitchNotation) jint.notation.end.inputPitch = inputEndN;
+  if (inputEndN && inputEndN !== endPitchNotation) {
+    jint.notation.end.inputPitch = inputEndN;
+  } else {
+    delete jint.notation.end.inputPitch;
+  }
   jint.notation.end.pitch = endPitchNotation;
   jint.notation.end.pclass = endNotationObject.pclass;
 
