@@ -1,7 +1,6 @@
 var resetFreq = function resetFreq(jint) {
-  jint.freq = {};
-  jint.freq.start = {};
-  jint.freq.end = {};
+  // .freq is a cache. It can be removed.
+  delete jint.freq;
 };
 
 module.exports = resetFreq;

@@ -1,7 +1,6 @@
 var resetNotation = function resetNotation(jint) {
-  jint.notation = {};
-  jint.notation.start = {};
-  jint.notation.end = {};
+  // .notation is a cache. It can be removed.
+  delete jint.notation;
 };
 
 module.exports = resetNotation;
