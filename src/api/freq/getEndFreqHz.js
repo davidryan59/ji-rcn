@@ -1,7 +1,7 @@
-var recalcStartAndEndFrequencies = require('../../freq/recalcStartAndEndFrequencies');
+var setFrequency = require('../../freq/setFrequency');
 
 var getEndFreqHz = function getEndFreqHz(inputtedStartFreqHz) {
-  var endFreqObject = recalcStartAndEndFrequencies(this, inputtedStartFreqHz);
+  var endFreqObject = setFrequency(this, inputtedStartFreqHz);
   return endFreqObject.hz;
 };
 

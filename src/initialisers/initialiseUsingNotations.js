@@ -1,6 +1,6 @@
-var setAlg = require('./setAlg');
+var setAlg = require('../commas/setAlg');
 var parseNotation = require('../notation/parseNotation');
-var recalcStartAndEndNotations = require('../notation/recalcStartAndEndNotations');
+var setNotation = require('../notation/setNotation');
 
 var initialiseUsingNotations = function initialiseUsingNotations(jint, startN, endN, alg) {
   setAlg(jint, alg);
@@ -8,7 +8,7 @@ var initialiseUsingNotations = function initialiseUsingNotations(jint, startN, e
   var endPeo = parseNotation(endN, jint.getAlgFn());
   var intervalPeo = endPeo.mult(startPeo, -1);
   jint.peo = intervalPeo;
-  recalcStartAndEndNotations(jint, startN, endN);
+  setNotation(jint, startN, endN);
 };
 
 module.exports = initialiseUsingNotations;

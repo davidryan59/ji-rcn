@@ -1,4 +1,4 @@
-var setAlg = require('./setAlg');
+var setAlg = require('../commas/setAlg');
 
 var initialiseUsingPeo = function initialiseUsingPeo(jint, peo, alg) {
   setAlg(jint, alg);

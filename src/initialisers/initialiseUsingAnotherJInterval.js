@@ -1,4 +1,4 @@
-var setAlg = require('./setAlg');
+var setAlg = require('../commas/setAlg');
 
 var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(jint, jint2, alg) {
   setAlg(jint, alg, jint2);

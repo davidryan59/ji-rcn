@@ -1,6 +1,6 @@
 var getFreqText = require('./getFreqText');
 
-var recalcStartAndEndFrequencies = function recalcStartAndEndFrequencies(jint, inputStartFreqHz) {
+var setFrequency = function setFrequency(jint, inputStartFreqHz) {
   // Given a start frequency for a JInterval:
   // - Return the end frequency, if answer is already cached
   // - Otherwise calculate the end frequency from the start frequency and interval width
@@ -40,4 +40,4 @@ var recalcStartAndEndFrequencies = function recalcStartAndEndFrequencies(jint, i
   return jint.freq.end;
 };
 
-module.exports = recalcStartAndEndFrequencies;
+module.exports = setFrequency;

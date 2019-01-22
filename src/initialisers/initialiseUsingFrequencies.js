@@ -1,12 +1,12 @@
 var Peo = require('peo');
 
-var setAlg = require('./setAlg');
-var recalcStartAndEndFrequencies = require('../freq/recalcStartAndEndFrequencies');
+var setAlg = require('../commas/setAlg');
+var setFrequency = require('../freq/setFrequency');
 
 var initialiseUsingFrequencies = function initialiseUsingFrequencies(jint, startFreqHz, endFreqHz, alg) {
   setAlg(jint, alg);
   jint.peo = new Peo(endFreqHz / startFreqHz);
-  recalcStartAndEndFrequencies(jint, startFreqHz);
+  setFrequency(jint, startFreqHz);
 };
 
 module.exports = initialiseUsingFrequencies;

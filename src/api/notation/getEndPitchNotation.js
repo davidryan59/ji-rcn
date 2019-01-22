@@ -1,7 +1,7 @@
-var recalcStartAndEndNotations = require('../../notation/recalcStartAndEndNotations');
+var setNotation = require('../../notation/setNotation');
 
 var getEndPitchNotation = function getEndPitchNotation(inputtedStartNotation) {
-  var endNotationObject = recalcStartAndEndNotations(this, inputtedStartNotation);
+  var endNotationObject = setNotation(this, inputtedStartNotation);
   return endNotationObject.pitch;
 };
 

@@ -111,12 +111,12 @@ describe(fnName, function () {
     assert.strictEqual(jint.getStartPitchClassNotation(), 'C');
   });
 
-  it('check default (starting) frequency is 256 Hz', function () {
+  it('check default (starting) frequency is 256.00 Hz', function () {
     var jint = new JInterval(13, 8);
-    assert.strictEqual(jint.getStartFreqText(), '256 Hz');
+    assert.strictEqual(jint.getStartFreqText(), '256.00 Hz');
   });
 
-  it('cover three branches on recalcStartAndEndNotations', function () {
+  it('cover three branches on recalc notation', function () {
     var jint = new JInterval(2, 1);
     var endNotation = jint.getEndPitchNotation('G4');
     assert.strictEqual(endNotation, 'G5');
@@ -154,22 +154,22 @@ describe(fnName, function () {
     assert.strictEqual(jint1.mult(jint2, 2).getEndPitchNotation(), "F#'5");   // 45/16
   });
 
-  it('default JInterval has frequency Hz and text of 256 Hz', function () {
+  it('default JInterval has frequency Hz and text of 256.00 Hz', function () {
     var jint = new JInterval();
     assert.strictEqual(jint.getEndFreqHz(), 256);
-    assert.strictEqual(jint.getEndFreqText(), '256 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '256.00 Hz');
   });
 
-  it('new JInterval(5, 4) is 320 Hz', function () {
+  it('new JInterval(5, 4) is 320.00 Hz', function () {
     var jint = new JInterval(5, 4);
     assert.strictEqual(jint.getEndFreqHz(), 320);
-    assert.strictEqual(jint.getEndFreqText(), '320 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '320.00 Hz');
   });
 
-  it('new JInterval("42") is 10752 Hz', function () {
+  it('new JInterval("42") is 10752.00 Hz', function () {
     var jint = new JInterval('42');
     assert.strictEqual(jint.getEndFreqHz(), 10752);
-    assert.strictEqual(jint.getEndFreqText(), '10752 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '10752.00 Hz');
   });
 
   it('new JInterval("6/7") has correct frequency Hz and text approx 219.43 Hz', function () {
@@ -185,14 +185,14 @@ describe(fnName, function () {
     assert.strictEqual(jint.getEndFreqHz(248), 279);  // 248 * 9/8 = 279
     assert.strictEqual(jint.getEndFreqHz(248), 279);  // Coverage of caching values
     assert.strictEqual(jint.getEndFreqHz(), 279);     // Previous start value is cached
-    assert.strictEqual(jint.getEndFreqText(), '279 Hz');
-    assert.strictEqual(jint.getEndFreqText(256), '288 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '279.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(256), '288.00 Hz');
   });
 
   it('new JInterval("42") and global default start freq of 256 Hz gives 10752 Hz', function () {
     var jint = new JInterval('42');
     assert.strictEqual(jint.getEndFreqHz(), 10752);     // 256 Hz in defaults
-    assert.strictEqual(jint.getEndFreqText(), '10752 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '10752.00 Hz');
   });
 
   it('new JInterval("C4", "Eb.5") agrees with new Peo(12, 5)', function () {
