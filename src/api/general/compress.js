@@ -6,6 +6,7 @@ var compress = function compress() {
   // May be needed when there are millions of JIntervals
   removeFrequency(this);
   removeNotation(this);
+  this.peo.compress();
 };
 
 module.exports = compress;
