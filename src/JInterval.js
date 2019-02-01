@@ -16,6 +16,7 @@ JInterval.getCommaAlgs = require('./api/class/getCommaAlgs');
 // Algorithm
 JInterval.prototype.getAlgFn = require('./api/alg/getAlgFn');
 JInterval.prototype.getAlgText = require('./api/alg/getAlgText');
+JInterval.prototype.hasAlg = require('./api/alg/hasAlg');
 
 // Frequency
 JInterval.prototype.getEndFreqHz = require('./api/freq/getEndFreqHz');

@@ -3,7 +3,11 @@ var algIndex = require('../commas/algIndex');
 var consts = require('../constants/consts');
 
 var setAlg = function setAlg(jint, inputAlg, inputJint2) {
-  // Deal with setting the .alg property of jint. Reset it first:
+  // If there's no algorithm in either inputAlg or inputJint2,
+  // have no algorithm here either.
+  if (!inputAlg && !(inputJint2 && inputJint2.hasAlg())) return;
+
+  // Have algorithm here. Make a new blank property.
   jint.alg = {};
 
   // First, copy any settings from inputJint2 if it has been supplied:
