@@ -2,34 +2,17 @@ var parseCommaAlgText = require('../commas/parseCommaAlgText');
 var algIndex = require('../commas/algIndex');
 var consts = require('../constants/consts');
 
-var setAlg = function setAlg(jint, inputAlg, inputJint2) {
-  // If there's no algorithm in either inputAlg or inputJint2,
-  // have no algorithm here either.
-  if (!inputAlg && !(inputJint2 && inputJint2.hasAlg())) return;
+var setAlg = function setAlg(jint, inputAlg) {
+  // If inputAlg missing, do nothing further
+  if (!inputAlg) return;
 
   // Have algorithm here. Make a new blank property.
   jint.alg = {};
 
-  // First, copy any settings from inputJint2 if it has been supplied:
-  if (inputJint2) {
-    // Copy the function first
-    jint.alg.fn = inputJint2.getAlgFn();
-    // Copy the text second, and overwrite function if it exists
-    var txt2 = inputJint2.getAlgText();
-    if (txt2) {
-      jint.alg.txt = txt2;
-      var txt2fn = algIndex[txt2];
-      if (txt2fn) jint.alg.fn = txt2fn;
-    }
-  }
-
-  // Second, use inputAlg to setup .alg on this jint
-  // Three formats to deal with:
+  // Three inputAlg formats to deal with:
   // Case 1: inputAlg = "ALG"
   // Case 2: inputAlg = aFunction
   // Case 3: inputAlg = {txt: 'ALG', fn: aFunction}   (could be 0 or 1 inputs)
-  // If inputAlg missing, do nothing further
-  if (!inputAlg) return;
 
   var inputAlgText = parseCommaAlgText(inputAlg);
   if (inputAlgText) {

@@ -16,6 +16,7 @@ JInterval.getCommaAlgs = require('./api/class/getCommaAlgs');
 // Algorithm
 JInterval.prototype.getAlgFn = require('./api/alg/getAlgFn');
 JInterval.prototype.getAlgText = require('./api/alg/getAlgText');
+JInterval.prototype.getAlgSetupObject = require('./api/alg/getAlgSetupObject');
 JInterval.prototype.hasAlg = require('./api/alg/hasAlg');
 
 // Frequency
@@ -52,6 +53,7 @@ JInterval.prototype.getTuningFreqHz = require('./api/tuning/getTuningFreqHz');
 JInterval.prototype.getTuningMultHz = require('./api/tuning/getTuningMultHz');
 JInterval.prototype.getTuningInputPitchNotation = require('./api/tuning/getTuningInputPitchNotation');
 JInterval.prototype.getTuningPitchNotation = require('./api/tuning/getTuningPitchNotation');
+JInterval.prototype.getTuningSetupObject = require('./api/tuning/getTuningSetupObject');
 JInterval.prototype.hasTuning = require('./api/tuning/hasTuning');
 
 module.exports = JInterval;

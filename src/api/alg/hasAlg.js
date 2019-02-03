@@ -1,6 +1,6 @@
-// Does this JInterval have a custom algorithm?
+// Does this JInterval have a non-default algorithm?
 var hasAlg = function hasAlg() {
-  if (this.alg) return true;   // Case: Custom
+  if (this.alg) return true;   // Case: non-default
   return false;                // Case: Default
 };
 

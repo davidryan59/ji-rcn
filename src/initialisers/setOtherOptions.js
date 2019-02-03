@@ -1,10 +1,10 @@
-var setTuning = require('../tuning/setTuning');
-
 var setOtherOptions = function setOtherOptions(jint, theOptions) {
   // Do specific things to object initialisation
-  if (theOptions.tuning) {
-    setTuning(jint, theOptions.tuning);
-  }
+  jint.doNothing;
+  theOptions.doNothing;
+  // if (theOptions.anOption) {
+  //   doSomething(jint, theOptions.anOption);
+  // }
 };
 
 module.exports = setOtherOptions;

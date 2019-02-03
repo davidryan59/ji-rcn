@@ -1,8 +1,6 @@
 var Peo = require('peo');
-var setAlg = require('../commas/setAlg');
 
-var initialiseUsingFraction = function initialiseUsingFraction(jint, num, denom, alg) {
-  setAlg(jint, alg);
+var initialiseUsingFraction = function initialiseUsingFraction(jint, num, denom) {
   jint.peo = new Peo(num, denom);
 };
 

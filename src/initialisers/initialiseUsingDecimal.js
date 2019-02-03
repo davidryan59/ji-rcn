@@ -1,9 +1,6 @@
 var Peo = require('peo');
 
-var setAlg = require('../commas/setAlg');
-
-var initialiseUsingDecimal = function initialiseUsingDecimal(jint, width, alg) {
-  setAlg(jint, alg);
+var initialiseUsingDecimal = function initialiseUsingDecimal(jint, width) {
   jint.peo = new Peo(width);
 };
 

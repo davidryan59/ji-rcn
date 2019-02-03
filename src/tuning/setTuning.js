@@ -7,6 +7,8 @@ var setNotation = require('../notation/setNotation');
 var setFrequency = require('../freq/setFrequency');
 
 var setTuning = function setTuning(jint, theTuning) {
+  if (!theTuning) return;
+
   var theAlg = jint.getAlgFn();
 
   var thePeo = null;
