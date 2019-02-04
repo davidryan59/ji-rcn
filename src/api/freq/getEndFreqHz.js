@@ -1,8 +1,8 @@
-var setFrequency = require('../../freq/setFrequency');
+var setFreqThenNotation = require('../../freq/setFreqThenNotation');
 
 var getEndFreqHz = function getEndFreqHz(inputtedStartFreqHz) {
-  var endFreqObject = setFrequency(this, inputtedStartFreqHz);
-  return endFreqObject.hz;
+  setFreqThenNotation(this, inputtedStartFreqHz);
+  return this.freq.end.hz;
 };
 
 module.exports = getEndFreqHz;

@@ -1,8 +1,8 @@
-var setNotation = require('../../notation/setNotation');
+var setNoteThenFreq = require('../../notation/setNoteThenFreq');
 
 var getEndPitchNotation = function getEndPitchNotation(inputtedStartNotation) {
-  var endNotationObject = setNotation(this, inputtedStartNotation);
-  return endNotationObject.pitch;
+  setNoteThenFreq(this, inputtedStartNotation);
+  return this.notation.end.pitch;
 };
 
 module.exports = getEndPitchNotation;

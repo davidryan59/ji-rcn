@@ -259,4 +259,65 @@ describe(fnName, function () {
     assert.strictEqual(jint.getAlgText(), 'SAG');
     assert(jint.hasTuning());
   });
+
+  // Tests that frequencies and notations interact correctly
+  // via tuning (which sits in the background)
+  it('new JInterval("E\'5") should be from C4 to E\'5', function () {
+    var jint = new JInterval("E'5");     // Should be same as C4 to E'5
+    assert.strictEqual(jint.toFractionText(), '5/2');
+    assert.strictEqual(jint.getStartPitchNotation(), 'C4');
+    assert.strictEqual(jint.getEndPitchNotation(), "E'5");
+    assert.strictEqual(jint.getStartFreqText(), '256.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '640.00 Hz');
+  });
+
+  it('Check getEndPitchNotation resets notations and frequencies', function () {
+    var jint = new JInterval("E'5");
+    jint.getEndPitchNotation('Bb[7](o+3)');   // Change start to Bb[7]3
+    assert.strictEqual(jint.toFractionText(), '5/2');
+    assert.strictEqual(jint.getStartPitchNotation(), 'Bb[7]3');
+    assert.strictEqual(jint.getEndPitchNotation(), "D'[7]5");
+    assert.strictEqual(jint.getStartFreqText(), '224.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '560.00 Hz');
+  });
+
+  it('Check getEndPitchInputNotation resets notations and frequencies', function () {
+    var jint = new JInterval("E'5");
+    jint.getEndPitchInputNotation('Bb[7](o+5)');   // Change start to Bb[7]5
+    assert.strictEqual(jint.toFractionText(), '5/2');
+    assert.strictEqual(jint.getStartPitchNotation(), 'Bb[7]5');
+    assert.strictEqual(jint.getEndPitchNotation(), "D'[7]7");
+    assert.strictEqual(jint.getStartFreqText(), '896.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '2240.00 Hz');
+  });
+
+  it('Check getEndPitchClassNotation resets notations and frequencies', function () {
+    var jint = new JInterval("E'5");
+    jint.getEndPitchClassNotation('Bb[7](o+6)');   // Change start to Bb[7]6
+    assert.strictEqual(jint.toFractionText(), '5/2');
+    assert.strictEqual(jint.getStartPitchNotation(), 'Bb[7]6');
+    assert.strictEqual(jint.getEndPitchNotation(), "D'[7]8");
+    assert.strictEqual(jint.getStartFreqText(), '1792.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '4480.00 Hz');
+  });
+
+  it('Check getEndFreqHz resets frequencies and notations', function () {
+    var jint = new JInterval("E'5");
+    jint.getEndFreqHz(200);                    // Change start to 200 Hz
+    assert.strictEqual(jint.toFractionText(), '5/2');
+    assert.strictEqual(jint.getStartFreqText(), '200.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '500.00 Hz');
+    assert.strictEqual(jint.getStartPitchNotation(), "G#''3");
+    assert.strictEqual(jint.getEndPitchNotation(), "B#'''4");
+  });
+
+  it('Check getEndFreqText resets frequencies and notations', function () {
+    var jint = new JInterval("E'5");
+    jint.getEndFreqText(400);                    // Change start to 200 Hz
+    assert.strictEqual(jint.toFractionText(), '5/2');
+    assert.strictEqual(jint.getStartFreqText(), '400.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '1000.00 Hz');
+    assert.strictEqual(jint.getStartPitchNotation(), "G#''4");
+    assert.strictEqual(jint.getEndPitchNotation(), "B#'''5");
+  });
 });

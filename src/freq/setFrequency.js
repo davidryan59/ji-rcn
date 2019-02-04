@@ -8,13 +8,9 @@ var setFrequency = function setFrequency(jint, inputStartFreqHz) {
   // Check if correct result has been cached. If so, return it.
   if (jint.freq && jint.freq.start && jint.freq.end && jint.freq.start.hz) {
     // There is a cached result
-    if (inputStartFreqHz === jint.freq.start.hz) {
-      // Asking for same cached result. Return it.
-      return jint.freq.end;
-    } else if (!inputStartFreqHz) {
-      // No inputStartFreqHz specified. Repeat previous result
-      return jint.freq.end;
-    }
+    // Use cached result (i.e. return without updating) in these two cases:
+    if (inputStartFreqHz === jint.freq.start.hz) return false;
+    if (!inputStartFreqHz) return false;
   }
 
   // Need to calculate and cache a new start and end frequency.
@@ -37,7 +33,8 @@ var setFrequency = function setFrequency(jint, inputStartFreqHz) {
   jint.freq.end.hz = endFreqHz;
   jint.freq.end.txt = getFreqText(endFreqHz);
 
-  return jint.freq.end;
+  // Return this result for reuse
+  return startFreqCheckedHz;
 };
 
 module.exports = setFrequency;

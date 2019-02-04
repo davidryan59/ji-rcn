@@ -58,7 +58,7 @@ var initialise = function initialise(jint, argumentArray) {
       // Case: new JInterval(startNotation, endNotation)
       // (Force arg0 and arg1 to strings)
       setAlg(jint, alg2);
-      initialiseUsingNotations(jint, '' + arg0, '' + arg1);
+      initialiseUsingNotations(jint, arg0, arg1);
     } else {
       // First character of string is a number.
       // Use Peo to parse it fully.

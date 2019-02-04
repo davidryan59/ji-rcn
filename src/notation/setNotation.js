@@ -11,18 +11,15 @@ var setNotation = function setNotation(jint, inputStartN, inputEndN) {
   // Check if correct result has been cached. If so, return it.
   if (jint.notation && jint.notation.start && jint.notation.end && jint.notation.start.pitch) {
     // There is a cached result
-    if (inputStartN === jint.notation.start.inputPitch || inputStartN === jint.notation.start.pitch) {
-      // Asking for same cached result. Return it.
-      return jint.notation.end;
-    } else if (!inputStartN) {
-      // No inputStartN specified. Repeat previous result
-      return jint.notation.end;
-    }
+    // Use cached result (i.e. return without updating) in these three cases:
+    if (inputStartN === jint.notation.start.inputPitch ) return false;
+    if (inputStartN === jint.notation.start.pitch) return false;
+    if (!inputStartN) return false;
   }
 
   // Need to calculate and cache a new start and end notation.
   // Use as appropriate either inputted, cached or default start notation
-  var alg = jint.getAlgText();
+  var alg = jint.getAlgFn();
   var startNotation = inputStartN || jint.getStartPitchNotation();
 
   // Calculate Peos
@@ -49,7 +46,8 @@ var setNotation = function setNotation(jint, inputStartN, inputEndN) {
   jint.notation.end.pitch = endPitchNotation;
   jint.notation.end.pclass = endNotationObject.pclass;
 
-  return jint.notation.end;
+  // Return the peo for starting notation, for reuse
+  return startNotationPeo;
 };
 
 module.exports = setNotation;
