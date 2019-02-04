@@ -28,14 +28,14 @@ var initialise = function initialise(jint, argumentArray) {
 
   var alg1 = argumentArray[1];
   var alg2 = argumentArray[2];
-  setAlg(jint, alg1);          // A couple of cases its alg2 not alg1. If so, overwrite later.
-  // Won't set a tuning here. Only deal with tuning for i) inside object, ii) inside other JInterval.
 
   if (arg0 instanceof jint.constructor) {
     // Case: new JInterval(jint)
+    setAlg(jint, alg1);
     initialiseUsingAnotherJInterval(jint, arg0);
   } else if (arg0 instanceof Peo) {
     // Case: new JInterval(peo)
+    setAlg(jint, alg1);
     initialiseUsingPeo(jint, arg0);
   } else if (Number.isInteger(arg0) && arg0 > 0) {
     // Integer cases
@@ -45,10 +45,12 @@ var initialise = function initialise(jint, argumentArray) {
       initialiseUsingFraction(jint, arg0, arg1);
     } else {
       // Case: new JInterval(integer)
+      setAlg(jint, alg1);
       initialiseUsingFraction(jint, arg0, 1);
     }
   } else if (Number.isFinite(arg0) && arg0 > 0) {
     // Case: new JInterval(decimal)
+    setAlg(jint, alg1);
     initialiseUsingDecimal(jint, arg0);
   } else if (isString(arg0)) {
     // Text cases
@@ -63,19 +65,23 @@ var initialise = function initialise(jint, argumentArray) {
       // First character of string is a number.
       // Use Peo to parse it fully.
       // Case: new JInterval("decimal")
+      setAlg(jint, alg1);
       initialiseUsingPeo(jint, new Peo(arg0));
     }
   } else if (typeof arg0 === 'object' && arg0 !== null) {
     // Object cases
     if (canInitialiseFromObject(arg0)) {
       // Case: new JInterval(options)
+      setAlg(jint, alg1);
       initialiseFromObject(jint, arg0);
     } else {
       // Case: new JInterval({p1:e1, ...pi:ei})
+      setAlg(jint, alg1);
       initialiseUsingPeo(jint, new Peo(arg0));
     }
   } else {
     // If all else fails, initialise on fraction of unison interval
+    setAlg(jint, alg1);
     initialiseUsingFraction(jint, 1, 1);
   }
 };

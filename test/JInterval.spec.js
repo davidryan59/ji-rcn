@@ -301,4 +301,57 @@ describe(fnName, function () {
     assert.strictEqual(jint.getStartPitchNotation(), 'Bb[7]5');
     assert.strictEqual(jint.getEndPitchNotation(), 'C6');
   });
+
+  it('Can remove non-essential information', function () {
+    var jint = new JInterval('F5', 'G5');
+    assert(jint.notation);
+    assert(jint.freq);
+    jint.compress();
+    assert(!jint.notation);
+    assert(!jint.freq);
+  });
+
+  it('Test start notation values', function () {
+    var jint = new JInterval(3);   // In this test, the value doesn't matter
+    assert.strictEqual(jint.getStartPitchNotation(), 'C4');
+    assert.strictEqual(jint.getStartPitchClassNotation(), 'C');
+    assert.strictEqual(jint.getStartPitchInputNotation(), 'C4');
+    jint.getEndPitchClassNotation('D#b4');
+    assert.strictEqual(jint.getStartPitchNotation(), 'D4');
+    assert.strictEqual(jint.getStartPitchClassNotation(), 'D');
+    assert.strictEqual(jint.getStartPitchInputNotation(), 'D#b4');
+    // Cover 3rd case on getStartPitchInputNotation
+    delete jint.notation.start.inputPitch;
+    delete jint.notation.start.pitch;
+    assert.strictEqual(jint.getStartPitchInputNotation(), 'C4');
+  });
+
+
+  it('Test toString without notation', function () {
+    var jint = new JInterval('9/8');
+    var theString = jint.toString();
+    assert(!jint.hasFreq());
+    assert(!jint.hasNotation());
+    assert.strictEqual(theString, 'Interval of 9/8');
+  });
+
+  it('Test toString with notation', function () {
+    var jint = new JInterval('Gbb##4', "A'..'4");
+    var theString = jint.toString();
+    var theAlgSetupObject = jint.getAlgSetupObject();
+    assert(jint.hasFreq());
+    assert(jint.hasNotation());
+    assert.strictEqual(theString, 'Interval of 9/8 from G4 to A4');
+    assert(!theAlgSetupObject);
+  });
+
+  it('Test toString without notation but with alg', function () {
+    var jint = new JInterval('9/8', 'sag');
+    var theString = jint.toString();
+    var theAlgSetupObject = jint.getAlgSetupObject();
+    assert(!jint.hasFreq());
+    assert(!jint.hasNotation());
+    assert.strictEqual(theString, 'Interval of 9/8');
+    assert.strictEqual(theAlgSetupObject.txt, 'SAG');
+  });
 });

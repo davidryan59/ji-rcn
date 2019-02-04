@@ -42,7 +42,13 @@ describe(fnName, function () {
     assert.strictEqual(jint.getEndFreqText(), '384.00 Hz');
     assert.strictEqual(jint.getStartPitchNotation(), 'E[1/11]4');
     assert.strictEqual(jint.getEndPitchNotation(), 'G.[1/11]4');
+    assert.strictEqual(jint.getTuningPitchNotation(), 'A4');
+    assert.strictEqual(jint.getTuningFreqHz(), 440);
+    assert.strictEqual(jint.getTuningInputPitchNotation(), 'A4');
     assert(jint.hasTuning());
+    // Cover 1 more case
+    delete jint.tuning.pitchNotation;  // Can't see another way to cover 3rd case...
+    assert.strictEqual(jint.getTuningInputPitchNotation(), 'C4');
   });
 
   // Can initialise correctly using frequencies only. Default tuning gives correct note names.
@@ -57,6 +63,9 @@ describe(fnName, function () {
     assert.strictEqual(jint.getEndFreqText(), '384.00 Hz');
     assert.strictEqual(jint.getStartPitchNotation(), "E'4");
     assert.strictEqual(jint.getEndPitchNotation(), 'G4');
+    assert.strictEqual(jint.getTuningPitchNotation(), 'C4');  // Default notation
+    assert.strictEqual(jint.getTuningFreqHz(), 256);
+    assert.strictEqual(jint.getTuningInputPitchNotation(), 'C4');
     assert(!jint.hasTuning());
   });
 
@@ -184,6 +193,9 @@ describe(fnName, function () {
     assert.strictEqual(jint2.getEndPitchNotation(), 'F[83]6');
     assert.strictEqual(jint2.getStartFreqText(), '211.85 Hz');
     assert.strictEqual(jint2.getEndFreqText(), '1352.59 Hz');
+    assert.strictEqual(jint.getTuningPitchNotation(), 'A4');
+    assert.strictEqual(jint.getTuningFreqHz(), 440);
+    assert.strictEqual(jint.getTuningInputPitchNotation(), 'G##d4');
     assert(jint2.hasAlg());
     assert.strictEqual(jint2.getAlgText(), 'KG2');
     assert(jint2.hasTuning());
@@ -258,6 +270,32 @@ describe(fnName, function () {
     assert(jint.hasAlg());
     assert.strictEqual(jint.getAlgText(), 'SAG');
     assert(jint.hasTuning());
+  });
+
+  var testObj7a = {
+    width: 1.3,
+    tuning: {
+      // pitchNotation: 'C4'
+      freqHz: 260
+    }
+  };
+  it(`new JInterval(${JSON.stringify(testObj7a)}) works`, function () {
+    var jint = new JInterval(testObj7a);
+    assert.strictEqual(jint.toFractionText(), '13/10');
+    assert.strictEqual(jint.getTuningMultHz(), 260);
+  });
+
+  var testObj7b = {
+    width: 1.5,
+    tuning: {
+      pitchNotation: 'Bb3'
+      // freqHz: 256
+    }
+  };
+  it(`new JInterval(${JSON.stringify(testObj7b)}) works`, function () {
+    var jint = new JInterval(testObj7b);
+    assert.strictEqual(jint.toFractionText(), '3/2');
+    assert.strictEqual(jint.getTuningMultHz(), 288);
   });
 
   // Tests that frequencies and notations interact correctly
