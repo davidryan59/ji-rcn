@@ -354,4 +354,20 @@ describe(fnName, function () {
     assert.strictEqual(theString, 'Interval of 9/8');
     assert.strictEqual(theAlgSetupObject.txt, 'SAG');
   });
+
+  it('Test fraction text on 15 digits works', function () {
+    var jint = new JInterval({2: 48, 3: -30});
+    assert(jint.toDecimal() > 1.367105877);      // 1.3671058770091216
+    assert(jint.toDecimal() < 1.367105878);
+    assert.strictEqual(jint.toFractionText(), '281474976710656/205891132094649');
+    assert.strictEqual(jint.toString(), 'Interval of 281474976710656/205891132094649');
+  });
+
+  it('Test fraction text on 16 digits fails', function () {
+    var jint = new JInterval({2: 50, 3: -30});
+    assert(jint.toDecimal() > 5.468423508);      // 5.468423508036486
+    assert(jint.toDecimal() < 5.468423509);
+    assert.strictEqual(jint.toFractionText(), 'NA');
+    assert.strictEqual(jint.toString(), 'Interval of NA');
+  });
 });
