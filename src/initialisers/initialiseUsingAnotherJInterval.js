@@ -1,6 +1,9 @@
+var Peo = require('peo');
+
 var setAlg = require('../commas/setAlg');
 var setTuning = require('../tuning/setTuning');
 var setFrequency = require('../freq/setFrequency');
+var calcNotationObject = require('../notation/calcNotationObject');
 var setNotation = require('../notation/setNotation');
 
 var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(jint, otherJint) {
@@ -24,14 +27,17 @@ var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(j
   // If either of notation or frequency are specified on otherJint,
   // specify them here too.
   if (otherJint.hasNotation() || otherJint.hasFreq()) {
-    // Bring notation over unchanged
-    var startNotation = otherJint.getStartPitchNotation();
-    setNotation(jint, startNotation);
-    // Scale frequencies according to any tuning shift
-    var mult1 = jint.getTuningMultHz();
-    var mult2 = otherJint.getTuningMultHz();
-    var startFreqHz = otherJint.getStartFreqHz() * (mult1 / mult2);
+    // Bring frequencies across, scaled by any tuning shift
+    var otherMult = otherJint.getTuningMultHz();
+    var startWidth = otherJint.getStartFreqHz() / otherMult;
+    var thisMult = jint.getTuningMultHz();
+    var startFreqHz = startWidth * thisMult;
     setFrequency(jint, startFreqHz);
+    // Recalculate notations
+    var startNotationPeo = new Peo(startWidth);
+    var startNotationObject = calcNotationObject(startNotationPeo, jint.getAlgFn());
+    var startPitchNotation = startNotationObject.pitch;
+    setNotation(jint, startPitchNotation);
   }
 };
 
