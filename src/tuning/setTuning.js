@@ -16,7 +16,7 @@ var setTuning = function setTuning(jint, theTuning) {
     pitchNotation = consts.DEFAULT_PITCH_NOTATION;
     tuningMultHz = freqHz;
   } else {
-    var thePeo = parseNotation(inputPitchNotation, theAlg);
+    var thePeo = parseNotation(jint, inputPitchNotation);
     pitchNotation = calcNotationObject(thePeo, theAlg).pitch;
     tuningMultHz = thePeo.mult(freqHz, -1).pow(-1).getAsDecimal();   // freq/peo = (peo * freq^-1)^-1
   }

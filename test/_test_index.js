@@ -12,6 +12,5 @@ module.exports = {
   getOctaveArray: require('../' + testDir + '/notation/getOctaveArray'),
   getSharpFlatArray: require('../' + testDir + '/notation/getSharpFlatArray'),
   parseNotation: require('../' + testDir + '/notation/parseNotation'),
-  parseCommaAlgText: require('../' + testDir + '/commas/parseCommaAlgText'),
-  initialiseFromObject: require('../' + testDir + '/initialisers/initialiseFromObject')
+  parseCommaAlgText: require('../' + testDir + '/commas/parseCommaAlgText')
 };

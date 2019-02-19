@@ -7,7 +7,7 @@ var setupPosFromNotation = function setupPosFromNotation(jint, inputStartNotatio
     // Absolute position (pos) not yet set
     // Create position using inputted start notation, or failing that, default start notation
     var theStartNotation = (!inputStartNotation) ? consts.DEFAULT_PITCH_NOTATION : inputStartNotation;
-    var theStartPeo1 = parseNotation(theStartNotation, jint.getAlgFn());
+    var theStartPeo1 = parseNotation(jint, theStartNotation);
     setPos(jint, theStartPeo1);
   } else {
     // Absolute position has already been set
@@ -16,7 +16,7 @@ var setupPosFromNotation = function setupPosFromNotation(jint, inputStartNotatio
     // Reuse if input start notation matches the stored value (or the stored input value)
     if (inputStartNotation === (jint.pos.start.inputPitch || jint.pos.start.pitch)) return;
     // Cannot reuse. Must reset.
-    var theStartPeo2 = parseNotation(inputStartNotation, jint.getAlgFn());
+    var theStartPeo2 = parseNotation(jint, inputStartNotation);
     setPos(jint, theStartPeo2);
   }
   // Set the input notations here if they are not the same
