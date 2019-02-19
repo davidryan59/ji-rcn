@@ -1,10 +1,6 @@
-var Peo = require('peo');
-
 var setAlg = require('../commas/setAlg');
 var setTuning = require('../tuning/setTuning');
-var setFrequency = require('../freq/setFrequency');
-var calcNotationObject = require('../notation/calcNotationObject');
-var setNotation = require('../notation/setNotation');
+var setupPosFromNotation = require('../pos/setupPosFromNotation');
 
 var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(jint, otherJint) {
   // Ought to have already set tuning of jint to thisTuning
@@ -24,20 +20,11 @@ var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(j
   var thePeo = otherJint.getPeo();  // Creates a copy
   jint.peo = thePeo;
 
-  // If either of notation or frequency are specified on otherJint,
-  // specify them here too.
-  if (otherJint.hasNotation() || otherJint.hasFreq()) {
-    // Bring frequencies across, scaled by any tuning shift
-    var otherMult = otherJint.getTuningMultHz();
-    var startWidth = otherJint.getStartFreqHz() / otherMult;
-    var thisMult = jint.getTuningMultHz();
-    var startFreqHz = startWidth * thisMult;
-    setFrequency(jint, startFreqHz);
-    // Recalculate notations
-    var startNotationPeo = new Peo(startWidth);
-    var startNotationObject = calcNotationObject(startNotationPeo, jint.getAlgFn());
-    var startPitchNotation = startNotationObject.pitch;
-    setNotation(jint, startPitchNotation);
+  // If absolute position is specified on otherJint, copy it to this jint
+  if (otherJint.hasPos()) {
+    var startNote = otherJint.getStartPitchInputNotation();
+    var endNote = otherJint.getEndPitchInputNotation();
+    setupPosFromNotation(jint, startNote, endNote);
   }
 };
 

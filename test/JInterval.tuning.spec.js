@@ -19,6 +19,8 @@ describe(fnName, function () {
   it(`new JInterval(${JSON.stringify(testObj1)}) works`, function () {
     var jint = new JInterval(testObj1);
     assert.strictEqual(jint.toFractionText(), '6/5');
+    assert(jint.getStartFreqHz() > 319.99);
+    assert(jint.getStartFreqHz() < 320.01);
     assert.strictEqual(jint.getStartFreqText(), '320.00 Hz');
     assert.strictEqual(jint.getEndFreqText(), '384.00 Hz');
     assert.strictEqual(jint.getStartPitchNotation(), "E'4");

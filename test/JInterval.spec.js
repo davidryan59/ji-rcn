@@ -304,11 +304,9 @@ describe(fnName, function () {
 
   it('Can remove non-essential information', function () {
     var jint = new JInterval('F5', 'G5');
-    assert(jint.notation);
-    assert(jint.freq);
+    assert(jint.pos);
     jint.compress();
-    assert(!jint.notation);
-    assert(!jint.freq);
+    assert(!jint.pos);
   });
 
   it('Test start notation values', function () {
@@ -320,18 +318,12 @@ describe(fnName, function () {
     assert.strictEqual(jint.getStartPitchNotation(), 'D4');
     assert.strictEqual(jint.getStartPitchClassNotation(), 'D');
     assert.strictEqual(jint.getStartPitchInputNotation(), 'D#b4');
-    // Cover 3rd case on getStartPitchInputNotation
-    delete jint.notation.start.inputPitch;
-    delete jint.notation.start.pitch;
-    assert.strictEqual(jint.getStartPitchInputNotation(), 'C4');
   });
-
 
   it('Test toString without notation', function () {
     var jint = new JInterval('9/8');
     var theString = jint.toString();
-    assert(!jint.hasFreq());
-    assert(!jint.hasNotation());
+    assert(!jint.hasPos());
     assert.strictEqual(theString, 'Interval of 9/8');
   });
 
@@ -339,8 +331,7 @@ describe(fnName, function () {
     var jint = new JInterval('Gbb##4', "A'..'4");
     var theString = jint.toString();
     var theAlgSetupObject = jint.getAlgSetupObject();
-    assert(jint.hasFreq());
-    assert(jint.hasNotation());
+    assert(jint.hasPos());
     assert.strictEqual(theString, 'Interval of 9/8 from G4 to A4');
     assert(!theAlgSetupObject);
   });
@@ -349,8 +340,7 @@ describe(fnName, function () {
     var jint = new JInterval('9/8', 'sag');
     var theString = jint.toString();
     var theAlgSetupObject = jint.getAlgSetupObject();
-    assert(!jint.hasFreq());
-    assert(!jint.hasNotation());
+    assert(!jint.hasPos());
     assert.strictEqual(theString, 'Interval of 9/8');
     assert.strictEqual(theAlgSetupObject.txt, 'SAG');
   });

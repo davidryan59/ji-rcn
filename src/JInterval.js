@@ -19,12 +19,18 @@ JInterval.prototype.getAlgText = require('./api/alg/getAlgText');
 JInterval.prototype.getAlgSetupObject = require('./api/alg/getAlgSetupObject');
 JInterval.prototype.hasAlg = require('./api/alg/hasAlg');
 
-// Frequency
-JInterval.prototype.getEndFreqHz = require('./api/freq/getEndFreqHz');
-JInterval.prototype.getEndFreqText = require('./api/freq/getEndFreqText');
-JInterval.prototype.getStartFreqHz = require('./api/freq/getStartFreqHz');
-JInterval.prototype.getStartFreqText = require('./api/freq/getStartFreqText');
-JInterval.prototype.hasFreq = require('./api/freq/hasFreq');
+// Absolute Position
+JInterval.prototype.getEndFreqHz = require('./api/pos/getEndFreqHz');
+JInterval.prototype.getEndFreqText = require('./api/pos/getEndFreqText');
+JInterval.prototype.getStartFreqHz = require('./api/pos/getStartFreqHz');
+JInterval.prototype.getStartFreqText = require('./api/pos/getStartFreqText');
+JInterval.prototype.getEndPitchClassNotation = require('./api/pos/getEndPitchClassNotation');
+JInterval.prototype.getEndPitchInputNotation = require('./api/pos/getEndPitchInputNotation');
+JInterval.prototype.getEndPitchNotation = require('./api/pos/getEndPitchNotation');
+JInterval.prototype.getStartPitchClassNotation = require('./api/pos/getStartPitchClassNotation');
+JInterval.prototype.getStartPitchInputNotation = require('./api/pos/getStartPitchInputNotation');
+JInterval.prototype.getStartPitchNotation = require('./api/pos/getStartPitchNotation');
+JInterval.prototype.hasPos = require('./api/pos/hasPos');
 
 // General
 JInterval.prototype.compress = require('./api/general/compress');
@@ -38,15 +44,6 @@ JInterval.prototype.toString = require('./api/general/toString');
 JInterval.prototype.get1 = require('./api/maths/get1');
 JInterval.prototype.mult = require('./api/maths/mult');
 JInterval.prototype.pow = require('./api/maths/pow');
-
-// Notation
-JInterval.prototype.getEndPitchClassNotation = require('./api/notation/getEndPitchClassNotation');
-JInterval.prototype.getEndPitchInputNotation = require('./api/notation/getEndPitchInputNotation');
-JInterval.prototype.getEndPitchNotation = require('./api/notation/getEndPitchNotation');
-JInterval.prototype.getStartPitchClassNotation = require('./api/notation/getStartPitchClassNotation');
-JInterval.prototype.getStartPitchInputNotation = require('./api/notation/getStartPitchInputNotation');
-JInterval.prototype.getStartPitchNotation = require('./api/notation/getStartPitchNotation');
-JInterval.prototype.hasNotation = require('./api/notation/hasNotation');
 
 // Notation
 JInterval.prototype.getTuningFreqHz = require('./api/tuning/getTuningFreqHz');

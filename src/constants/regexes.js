@@ -1,6 +1,6 @@
 var esc = require('escape-string-regexp');
 
-var consts = require('../constants/consts');
+var consts = require('./consts');
 
 var sharedRegexFlags = 'g';
 
