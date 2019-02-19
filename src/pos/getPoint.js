@@ -1,6 +1,8 @@
 var getFreqText = require('./getFreqText');
 var calcNotationObject = require('../notation/calcNotationObject');
 
+var largeLimit = 1e15;
+
 var getPoint = function getPoint(jint, thePeo) {
   var result = {};
   result.peo = thePeo;
@@ -8,11 +10,11 @@ var getPoint = function getPoint(jint, thePeo) {
   var peoAsDecimal = thePeo.getAsDecimal();
   var tuningMultHz = jint.getTuningMultHz();
   var frequencyHz = peoAsDecimal * tuningMultHz;
-  if (frequencyHz > 1e15) frequencyHz = 0;
+  if (frequencyHz > largeLimit) frequencyHz = 0;
   result.freqHz = frequencyHz;
   result.freqTxt = getFreqText(frequencyHz);
 
-  var notationObject = calcNotationObject(thePeo, jint.getAlgFn());
+  var notationObject = calcNotationObject(jint, thePeo);
   result.pitch = notationObject.pitch;
   result.pclass = notationObject.pclass;
 
