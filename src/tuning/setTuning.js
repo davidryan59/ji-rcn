@@ -1,5 +1,3 @@
-var Peo = require('peo');
-
 var consts = require('../constants/consts');
 var parseNotation = require('../notation/parseNotation');
 var calcNotationObject = require('../notation/calcNotationObject');
@@ -9,18 +7,16 @@ var setTuning = function setTuning(jint, theTuning) {
 
   var theAlg = jint.getAlgFn();
 
-  var thePeo = null;
   var tuningMultHz = null;
   var pitchNotation = null;
   var inputPitchNotation = theTuning.pitchNotation;
   var freqHz = theTuning.freqHz;
   if (!freqHz) freqHz = consts.DEFAULT_FREQ_HZ;
   if (!inputPitchNotation) {
-    thePeo = new Peo(1);
     pitchNotation = consts.DEFAULT_PITCH_NOTATION;
     tuningMultHz = freqHz;
   } else {
-    thePeo = parseNotation(inputPitchNotation, theAlg);
+    var thePeo = parseNotation(inputPitchNotation, theAlg);
     pitchNotation = calcNotationObject(thePeo, theAlg).pitch;
     tuningMultHz = thePeo.mult(freqHz, -1).pow(-1).getAsDecimal();   // freq/peo = (peo * freq^-1)^-1
   }

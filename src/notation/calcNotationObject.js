@@ -9,7 +9,7 @@ var getOctaveArray = require('./getOctaveArray');
 var calcNotationObject = function calcNotationObject(thePeo, alg) {
   // Split up Peo of this JInterval into components:  2,3  ;  5  ;  primes 7+
   var splitArray = thePeo.split([2, 3], 5);  // [Peo({2:a,3:b}), Peo({5:c}), Peo(the rest)]
-  var pythagPeo = splitArray[0];             // Pythagorean = primes 2 and 3 only
+  // var pythagPeo = splitArray[0];             // Pythagorean = primes 2 and 3 only
   var prime5Peo = splitArray[1];
   var primes7PlusPeo = splitArray[2];
 
@@ -28,7 +28,7 @@ var calcNotationObject = function calcNotationObject(thePeo, alg) {
   }
   // Divide comma5PlusPeo out of original Peo
   // to get a Pythagorean component
-  pythagPeo = thePeo.mult(comma5PlusPeo, -1);
+  var pythagPeo = thePeo.mult(comma5PlusPeo, -1);
 
   // Get labels for the prime components 5+
   var prime5Text = get5Label(prime5Peo.getPrimeExp(5));
@@ -54,8 +54,8 @@ var calcNotationObject = function calcNotationObject(thePeo, alg) {
   var exp2 = pythagPeo.getPrimeExp(2);
   var octaveArray = getOctaveArray(exp2);
   var octaveText = octaveArray[0];
-  var octavePeo = octaveArray[1];
-  pythagPeo = pythagPeo.mult(octavePeo, -1);
+  // var octavePeo = octaveArray[1];              // Not used
+  // pythagPeo = pythagPeo.mult(octavePeo, -1);   // Not used
 
   // Should be down to 1 on the pythagPeo now.
 
