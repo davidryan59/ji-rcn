@@ -70,7 +70,7 @@ new JInterval({p1:e1,p2:e2...}) // Create interval with fractional width specifi
 new JInterval()                 // Create unison interval with width 1/1
 ```
 
-A JInterval instance stores its interval width internally as a Peo, for exact representations of positive integers and fractions. All the different width formats available in the constructer will get converted into a suitable Peo.
+A `JInterval` instance stores its interval width internally as a `Peo`, for exact representations of positive integers and fractions. All the different width formats available in the constructer will get converted into a suitable `Peo`.
 
 The shorthand constructors above can have an extra argument to specify an algorithm, which may be given as a string acronym, a function, or an object combining these (as described above), e.g. `new JInterval(peo, algAcronym)`, `new JInterval(num, denom, algFn)` etc.
 
@@ -80,16 +80,16 @@ JInterval.getComma     // Returns the getComma function, which calculates a comm
 JInterval.getCommaAlgs // Returns an object which maps algorithm acronyms to algorithm functions, e.g. maps 'SAG' to the SAG comma algorithm function.
 ```
 
-Examples for using getComma are given below. Format is either `getComma(p)` or `getComma(p, alg)`, which both return a `Peo`.
+Examples for using `getComma` are given below. Format is either `getComma(p)` or `getComma(p, alg)`, which both return a `Peo`.
 
 ## JInterval API - Instance Methods
 
 ### General
 ``` js
 // General methods
-jint.compress()  // Remove all cached information on a JInterval. This includes: absolute position, cache on peo.
-jint.copy()      // Returns a deep copy of a JInterval
-jint.toString()  // Returns a text description of JInterval
+jint.compress()      // Remove all cached information on a JInterval. This includes: absolute position, cache on peo.
+jint.copy()          // Returns a deep copy of a JInterval
+jint.toString()      // Returns a text description of JInterval
 ```
 
 ### Interval Width (Relative Position, Relative Size)
@@ -101,9 +101,9 @@ jint.widthPeo()          // Returns the interval width as a Peo - this is a copy
 
 ### Absolute Position
 
-Every JInterval has a interval width, its relative size. It is possible to add an absolute position, either by constructing using notations or frequencies, or by using the functions below. The absolute value, especially the frequency in Hz, is likely to be useful when using this `ji-rcn` module to create music apps featuring Just Intonation.
+Every `JInterval` has a interval width, its relative size. It is possible to add an absolute position, either by constructing using notations or frequencies, or by using the functions below. The absolute value, especially the frequency in Hz, is likely to be useful when using this `ji-rcn` module to create music apps featuring Just Intonation.
 
-Absolute position means a JInterval starts at a certain frequency or notation, and ends at another frequency or notation. Since every JInterval has a tuning, by specifying either a start frequency or a start notation, the whole of the absolute position can be calculated. Each JInterval caches the last absolute position calculated, and reuses cached values if possible. Changing the start notation or frequency will recalculate absolute position and overwrite this cache.
+Absolute position means a `JInterval` starts at a certain frequency or notation, and ends at another frequency or notation. Since every `JInterval` has a tuning, by specifying either a start frequency or a start notation, the whole of the absolute position can be calculated. Each `JInterval` caches the last absolute position calculated, and reuses cached values if possible. Changing the start notation or frequency will recalculate absolute position and overwrite this cache.
 
 In the functions below, `startFreqHz` and `startNotation` are optional, and default to either the previous value or the default value (`256` Hz and `'C4'` respectively).
 
@@ -123,7 +123,7 @@ jint.hasPos()                                // Returns boolean value: true if a
 
 ### Maths
 
-Create new JIntervals using mathematical operations on existing JIntervals. Any extra constructor options will be taken from the first `jint`.
+Create a new `JInterval` using mathematical operations on existing intervals. Any extra constructor options will be taken from `jint`.
 
 ``` js
 jint.get1()              // Returns a new JInterval with unison interval of 1/1
@@ -134,7 +134,7 @@ jint.pow(pow)            // Returns a new JInterval with width of jint raised to
 
 ### Algorithm
 
-An algorithm can be specified on a JInterval during construction. Default algorithm is `{txt: 'DR', fn: getCommaDR}` where `getCommaDR(p)` is equivalent to `getComma(p)` or `getComma(p, 'DR')`.
+An algorithm can be specified on a `JInterval` during construction. Default algorithm is `{txt: 'DR', fn: getCommaDR}` where `getCommaDR(p)` is equivalent to `getComma(p)` or `getComma(p, 'DR')`.
 
 ``` js
 jint.getAlgText()        // Returns text acronym for algorithm, or blank for default algorithm. (Custom algorithms supplied without a text acronym also return blank here.)
@@ -145,7 +145,7 @@ jint.hasAlg()            // Returns boolean value: false for default comma algor
 
 ### Tuning
 
-A tuning can be specified on a JInterval during construction. Default tuning is `{pitchNotation: 'C4', freqHz: 256}`.
+A tuning can be specified on a `JInterval` during construction. Default tuning is `{pitchNotation: 'C4', freqHz: 256}`.
 
 ``` js
 jint.getTuningFreqHz()             // Tuning frequency, in Hz
