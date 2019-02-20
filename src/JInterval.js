@@ -26,14 +26,14 @@ JInterval.prototype.widthPeo = require('./api/width/widthPeo');
 // Absolute Position
 JInterval.prototype.getEndFreqHz = require('./api/pos/getEndFreqHz');
 JInterval.prototype.getEndFreqText = require('./api/pos/getEndFreqText');
-JInterval.prototype.getEndPitchClassNotation = require('./api/pos/getEndPitchClassNotation');
-JInterval.prototype.getEndPitchInputNotation = require('./api/pos/getEndPitchInputNotation');
 JInterval.prototype.getEndPitchNotation = require('./api/pos/getEndPitchNotation');
+JInterval.prototype.getEndPitchInputNotation = require('./api/pos/getEndPitchInputNotation');
+JInterval.prototype.getEndPitchClassNotation = require('./api/pos/getEndPitchClassNotation');
 JInterval.prototype.getStartFreqHz = require('./api/pos/getStartFreqHz');
 JInterval.prototype.getStartFreqText = require('./api/pos/getStartFreqText');
-JInterval.prototype.getStartPitchClassNotation = require('./api/pos/getStartPitchClassNotation');
-JInterval.prototype.getStartPitchInputNotation = require('./api/pos/getStartPitchInputNotation');
 JInterval.prototype.getStartPitchNotation = require('./api/pos/getStartPitchNotation');
+JInterval.prototype.getStartPitchInputNotation = require('./api/pos/getStartPitchInputNotation');
+JInterval.prototype.getStartPitchClassNotation = require('./api/pos/getStartPitchClassNotation');
 JInterval.prototype.hasPos = require('./api/pos/hasPos');
 
 // Maths
@@ -49,9 +49,9 @@ JInterval.prototype.hasAlg = require('./api/alg/hasAlg');
 
 // Tuning
 JInterval.prototype.getTuningFreqHz = require('./api/tuning/getTuningFreqHz');
-JInterval.prototype.getTuningMultHz = require('./api/tuning/getTuningMultHz');
 JInterval.prototype.getTuningInputPitchNotation = require('./api/tuning/getTuningInputPitchNotation');
 JInterval.prototype.getTuningPitchNotation = require('./api/tuning/getTuningPitchNotation');
+JInterval.prototype.getTuningMultHz = require('./api/tuning/getTuningMultHz');
 JInterval.prototype.getTuningSetupObject = require('./api/tuning/getTuningSetupObject');
 JInterval.prototype.hasTuning = require('./api/tuning/hasTuning');
 
