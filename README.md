@@ -9,11 +9,11 @@ JI can also be called Rational Intonation (RI) since its interval widths are rat
 - Examples of intervals include: an octave (1:2), a perfect fifth (2:3), a perfect fourth (3:4), a major third (4:5)
 - Examples of chords include: a major triad (4:5:6), a minor triad (10:12:15), an extended seventh chord (4:6:7:10)
 
-The tempered tuning 12TET has only 12 notes in the octave. However, Just Intonation has an unlimited number of notes available in the octave. This gives more musical variety, but it poses a greater notational challenge. The whole of 12TET can be notated with less than 100 notations of the form `'C4'`, `'Bb7'`, `'E0'`, etc. However, how is it possible to notate the whole of JI, which has infinite note combinations?
+The tempered tuning 12TET has only 12 notes in the octave. However, Just Intonation has an unlimited number of notes available in the octave. This gives more musical variety, but it poses a greater notational challenge. The whole of 12TET can be notated with less than 100 notations of the form `'C4'`, `'Bb7'`, `'E0'`, etc. However, how is it possible to notate the whole of JI, where there are a potentially infinite number of different notes and chords?
 
 **Rational Comma Notation** (RCN) was designed to solve this problem. It was developed by David Ryan between 2015 and 2017, and [is documented in this paper](https://arxiv.org/abs/1612.01860).
 
-For RCN it is necessary to specify an algorithm which maps any prime `p` to its prime comma `n/m`. For example, primes `5` and `7` are usually given commas `80/81` and `63/64` respectively. The primes used in the comma for `p` are usually `2`, `3` and `p` only. Even with that constraint, algorithms tend to vary for higher primes. Three algorithms which have been developed are: `'DR'`, `'SAG'`, and `'KG2'`; these are each described in the paper above.
+For RCN it is necessary to specify an algorithm which maps any prime `p` to its prime comma `n/m`. For example, primes `5` and `7` are usually given commas `80/81` and `63/64` respectively. The primes used in the comma for `p` are usually `2`, `3` and `p` only (since limiting commas to these three prime components reduces computational complexity). Even with that constraint, algorithms tend to vary for higher primes. Three algorithms which have been developed are: `'DR'`, `'SAG'`, and `'KG2'`; these are each described in the paper above.
 
 The purpose of the `ji-rcn` npm package is to help convert between:
 - A musical interval with a width/size expressed as a rational number
@@ -23,7 +23,7 @@ The purpose of the `ji-rcn` npm package is to help convert between:
 
 ## Get started with JI-RCN
 - `npm i ji-rcn` to install
-- `npm test` to test
+- `npm test` to run all tests
 - `npm run examples` to run examples, which can be found in the GitHub `examples` directory
 
 ## Contents of index
@@ -34,7 +34,7 @@ var getComma = ji.getComma          // A function mapping primes to commas as Pe
 var getCommaAlgs = ji.getCommaAlgs  // An object mapping acronym strings (DR, SAG, KG2) to algorithm functions
 ```
 
-Note that the `JInterval` class is built upon the `Peo` class, which stands for 'Prime Exponent Object'. `Peo` allows exact representations of positive fractions with potentially large numerators and denominators. This is achieved by splitting both numerator and denominator into prime components, and keeping track of each prime with its exponent using a JSON object. An example is the fraction `45/28` which can be represented as `{2:-2, 3:2, 5:1, 7:-1}`. The Peo class wraps this object, and provides it with a suitable set of methods, including multiplication. Use `require('peo')` to access the `Peo` class.
+Note that the `JInterval` class is built upon the `Peo` class, which stands for 'Prime Exponent Object'. `Peo` allows exact representations of positive fractions with potentially large numerators and denominators. This is achieved by splitting both numerator and denominator into prime components, and keeping track of exponents of each prime separately using a JSON object. An example is the fraction `45/28` which can be represented as `{2:-2, 3:2, 5:1, 7:-1}`. The Peo class wraps this object, and provides it with a suitable set of methods, including multiplication. Use `require('peo')` to access the `Peo` class.
 
 ## Constructors for JInterval
 
@@ -70,17 +70,17 @@ new JInterval({p1:e1,p2:e2...}) // Create interval with fractional width specifi
 new JInterval()                 // Create unison interval with width 1/1
 ```
 
-A JInterval instance stores its interval width internally as a Peo. This allows exact representations of positive integers and fractions. All the different width formats available in the constructer will get converted into a suitable Peo.
+A JInterval instance stores its interval width internally as a Peo, for exact representations of positive integers and fractions. All the different width formats available in the constructer will get converted into a suitable Peo.
 
-All of the shorthand versions above can have an extra argument to specify an algorithm, which may be given as a string acronym, a function, or an object combining these (as described above), e.g. `new JInterval(peo, algAcronym)`, `new JInterval(num, denom, algFn)` etc.
+The shorthand constructors above can have an extra argument to specify an algorithm, which may be given as a string acronym, a function, or an object combining these (as described above), e.g. `new JInterval(peo, algAcronym)`, `new JInterval(num, denom, algFn)` etc.
 
 ## JInterval API - Static or Class methods
 ``` js
 JInterval.getComma     // Returns the getComma function, which calculates a comma in Peo format for each prime p. Uses either default or specified algorithm.
-JInterval.getCommaAlgs // Returns an object which maps algorithm acronyms to algorithm functions.
+JInterval.getCommaAlgs // Returns an object which maps algorithm acronyms to algorithm functions, e.g. maps 'SAG' to the SAG comma algorithm function.
 ```
 
-See the
+Examples for using getComma are given below. Format is either `getComma(p)` or `getComma(p, alg)`, which both return a `Peo`.
 
 ## JInterval API - Instance Methods
 
@@ -101,11 +101,11 @@ jint.widthPeo()          // Returns the interval width as a Peo - this is a copy
 
 ### Absolute Position
 
-Every JInterval has a interval width, its relative size. It is possible to add an absolute position, either by constructing using notations or frequencies, or by using the functions below. The absolute value, especially the frequency in Hz, is likely to be useful when using `ji-rcn` module as a component of music apps.
+Every JInterval has a interval width, its relative size. It is possible to add an absolute position, either by constructing using notations or frequencies, or by using the functions below. The absolute value, especially the frequency in Hz, is likely to be useful when using this `ji-rcn` module to create music apps featuring Just Intonation.
 
-Absolute position means a JInterval starts at a certain frequency or notation, and ends at another frequency or notation. Since every JInterval has a tuning, by specifying either a start frequency or a start notation, the whole of the absolute position can be calculated. Each JInterval caches the last absolute position calculated, which are reused if possible. Changing the start notation or frequency will recalculate absolute position and overwrite this cache.
+Absolute position means a JInterval starts at a certain frequency or notation, and ends at another frequency or notation. Since every JInterval has a tuning, by specifying either a start frequency or a start notation, the whole of the absolute position can be calculated. Each JInterval caches the last absolute position calculated, and reuses cached values if possible. Changing the start notation or frequency will recalculate absolute position and overwrite this cache.
 
-In the functions below, `startFreqHz` and `startNotation` are optional, and default to either the previous value or the default value (`'C4'`, `256` Hz).
+In the functions below, `startFreqHz` and `startNotation` are optional, and default to either the previous value or the default value (`256` Hz and `'C4'` respectively).
 
 ``` js
 jint.getEndFreqHz(startFreqHz)               // Returns numeric end frequency in Hz
@@ -134,7 +134,7 @@ jint.pow(pow)            // Returns a new JInterval with width of jint raised to
 
 ### Algorithm
 
-Algorithm can only be specified on JInterval construction. Default algorithm is `'DR'`.
+An algorithm can be specified on a JInterval during construction. Default algorithm is `{txt: 'DR', fn: getCommaDR}` where `getCommaDR(p)` is equivalent to `getComma(p)` or `getComma(p, 'DR')`.
 
 ``` js
 jint.getAlgText()        // Returns text acronym for algorithm, or blank for default algorithm. (Custom algorithms supplied without a text acronym also return blank here.)
@@ -145,7 +145,7 @@ jint.hasAlg()            // Returns boolean value: false for default comma algor
 
 ### Tuning
 
-Tuning can only be specified on JInterval construction. Default tuning is `{pitchNotation: 'C4', freqHz: 256}`.
+A tuning can be specified on a JInterval during construction. Default tuning is `{pitchNotation: 'C4', freqHz: 256}`.
 
 ``` js
 jint.getTuningFreqHz()             // Tuning frequency, in Hz
