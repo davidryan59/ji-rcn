@@ -29,11 +29,11 @@ describe('Performance of JInterval', function () {
     return new JInterval({startFreqHz: i, endFreqHz: 210});
   });
 
-  runTest(1, 20, 1500, 'average < 1500us for new JInterval({startPitchNotation: \'C4\', endPitchNotation: \'G4\'}) using simple notations', function (i) {
+  runTest(1, 20, 1500, 'average < 1500us for new JInterval({startPitchNotation: \'C4\', endPitchNotation: \'G4\'}) using simple notations', function () {
     return new JInterval({startPitchNotation: 'C4', endPitchNotation: 'G4'});
   });
 
-  runTest(1, 20, 2000, 'average < 2000us for new JInterval({startPitchNotation: txt1, endPitchNotation: txt2}) using more complex notations', function (i) {
+  runTest(1, 20, 2000, 'average < 2000us for new JInterval({startPitchNotation: txt1, endPitchNotation: txt2}) using more complex notations', function () {
     return new JInterval({startPitchNotation: "E#''[7/11]6", endPitchNotation: 'Db.[101/257](o-4)'});
   });
 });
