@@ -13,7 +13,7 @@ The contemporary scale of 12-tone equal temperament (12TET) has only 12 notes in
 
 **Rational Comma Notation** (RCN) was designed to solve this problem. It was developed by David Ryan between 2015 and 2017, and [is documented in this paper](https://arxiv.org/abs/1612.01860).
 
-For RCN it is necessary to specify an algorithm which maps any prime `p` to its prime comma `n/m`. For example, primes `5` and `7` are usually given commas `80/81` and `63/64` respectively. Algorithms tend to vary for higher primes. Three algorithms which are currently available are `"DR"`, `"SAG"`, and `"KG2"`; all three algorithms are described in the paper above.
+For RCN it is necessary to specify an algorithm which maps any prime `p` to its prime comma `n/m`. For example, primes `5` and `7` are usually given commas `80/81` and `63/64` respectively. Algorithms tend to vary for higher primes. Three algorithms which are currently available are `'DR'`, `'SAG'`, and `'KG2'`; all three algorithms are described in the paper above.
 
 The purpose of the `ji-rcn` npm package is to help convert between:
 - An interval expressed as a single rational number
@@ -23,109 +23,154 @@ The purpose of the `ji-rcn` npm package is to help convert between:
 
 Currently the API contains two items: a class `JInterval` which automates all the RCN calculations, and a function `getComma` which provides direct access to the calculation of prime commas for each prime and algorithm.
 
+To install, use `npm i ji-rcn`. To test, `npm test`. For examples of usage see Github `examples` directory, via `npm run examples`.
 
-## Install
-`npm install ji-rcn`  
-
-## Test
-`npm test`  
-`npm run examples`  
-
-## API
+## Contents of index
 ``` js
 var ji = require('ji-rcn')
+var JInterval = ji.JInterval        // The main JInterval class. Can also use ji.jinterval
+var getComma = ji.getComma          // A function mapping primes to commas (as Peo instances)
+var getCommaAlgs = ji.getCommaAlgs  // An object mapping acronym strings (DR, SAG, KG2) to algorithm functions
+```
 
-var JInterval = ji.JInterval       // ji.jinterval also works
-var getComma = ji.getComma
+## Constructors
 
-// getComma
-getComma(p)          // Calculate a comma (in Peo format) for prime p under default ("DR") algorithm
-getComma(p, alg)     // Calculate a comma for prime p under other algorithm, e.g. "SAG", "KG2"
+### General constructors using objects
+``` js
+new JInterval({startPitchNotation:txt1, endPitchNotation:txt2})  // Create new interval from txt1 to txt2
+new JInterval({startFreqHz:freq1, endFreqHz:freq2})  // Create new interval from freq1 to freq2 (numbers)
+new JInterval({jint:otherJint})  // Create new interval based on another interval otherJint
+new JInterval({peo:inputPeo})  // Create new interval based on an inputted peo (see Peo package)
+new JInterval({num:num, denom:denom})  // Create an interval based on integers num, denom, e.g. rational number num/denom
+new JInterval({width:width})  // Create an interval of size width (numeric)
+```
 
-// JInterval class
+### Constructor object extra options
+``` js
+{alg: txt}                                    // Specify an comma algorithm by text acronym txt. Values include DR, SAG, KG2. Default is DR.
+{alg: someFn}                                 // Specify a comma algorithm function directly. Function must return a Peo, given an inputted prime number p, and output peo must have highest prime p with exponent 1.
+{alg: {txt: txt, fn: someFn}}                 // Both acronym and function can be specified together.
+{tuning: {pitchNotation: txt1, freqHz: num1}} // Specifies that a notation txt1 maps to a frequency in Hz num1. Default is notation C4 maps to 256 Hz.
+```
 
-// Class methods
-JInterval.getComma(p, alg)       // getComma is also provided as class method for JInterval
+### Shorthand constructors
+``` js
+new JInterval(otherJint)        // Create new JInterval with same width as otherJint
+new JInterval(peo)              // Create new interval with width described by a Peo instance (see Peo package)
+new JInterval(num, denom)       // Create new interval with fractional width num/denom from two integers num, denom
+new JInterval(integer)          // Create new interval with integer width
+new JInterval(decimal)          // Create new interval with fractional width - the decimal value is automatically converted into a suitable fraction.
+new JInterval(numericString)    // Create new interval with integer or fractional width, from converting numericString into a number
+new JInterval({p1:e1,p2:e2...}) // Create new interval with fractional width specified as prime factors and exponents in an object
+new JInterval()                 // Create new unison interval with width 1/1
+```
 
-// Constructors
-var jint = new JInterval()         // Can initialise with no args. JInterval for 1/1
-var jint = new JInterval(7)        // Can initialise from an integer. JInterval for 7/1
-var jint = new JInterval(14, 15)   // Can initialise from fraction specified as integers. JInterval for 14/15
-var jint = new JInterval(0.75)     // Can initialise from a decimal number (this example is JInterval for 3/4)
-var jint = new JInterval("14/15")  // Can initialise from fraction in text format
-var jint2 = new JInterval(jint)    // Can initialise from another JInterval (equivalent to copying the JInterval)
-var jint = new JInterval(peo)      // Can initialise from a Prime Exponent Object (Peo instance)
-var jint = new JInterval(jint2)    // Can initialise from another JInterval
-var jint = new JInterval(object)   // Can initialise from an object similar to {2:3, 7:-1} for 8/7
+JIntervals store their interval width as a Peo, which give exact representations of positive integers and fractions. Any width used in the constructor gets converted into a suitable Peo.
 
-// Constructors with algorithm
-// Currently algorithm should be one of "DR" (default), "SAG" or "KG2"
-var jint = new JInterval(139, alg)    // Can initialise from an integer using specified algorithm alg
-var jint = new JInterval(14, 15, alg)
-var jint = new JInterval(0.75, alg)
-var jint = new JInterval("14/15", alg)
-var jint2 = new JInterval(jint, alg)    // This is equivalent to copying the JInterval, but switching the algorithm
-var jint = new JInterval(peo, alg)
-var jint = new JInterval(object, alg)
+All of the shorthand versions above can have an extra argument to specify an algorithm, which may be given in any of the three formats in the previous section, e.g. `new JInterval(width, algAcronym)` etc.
 
-// Frequency calculations
-jint.getEndFreqHz(startFreqHz) // Given positive number startFreqHz, calculate the end frequency of this interval
-jint.getEndFreqHz()      // If startFreqHz omitted, use either previously supplied value or global default (256 Hz)
-jint.getEndFreqText()    // Return text description of end frequency in format like "300 Hz" (integer) or "123.45 Hz" (decimal)
-jint.getStartFreqHz()    // Return previous or default start frequency
-jint.getStartFreqText()  // Return text description of start frequency
+## JInterval API - Static or Class methods
+``` js
+JInterval.getComma(p)             // Calculate a Peo which represents the prime comma for p under default algorithm (DR)
+JInterval.getComma(p, algAcronym) // Use a text acronym (SAG, KG2) to access alternative comma functions
+JInterval.getComma(p, algFn)      // Calculate comma using a specified function that inputs a prime p and outputs a Peo with highest prime p, exponent of 1.
+JInterval.getCommaAlgs            // Returns an object which maps algorithm acronyms to algorithm functions.
+```
 
+## JInterval API - Instance Methods
+
+### General
+``` js
 // General methods
-jint.copy()              // Return a deep copy of a JInterval
-jint.getPeo()            // Returns the underlying Peo for this JInterval
-jint.toDecimal()         // Return a positive number representing relative frequency of JInterval
-jint.toFractionText()    // Returns a text representation of fraction for this JInterval
-jint.toString()          // Returns text description of JInterval
+jint.compress()  // Remove anything on a JInterval that is cached, including absolute position and the peo cache
+jint.copy()      // Returns a deep copy of a JInterval
+jint.toString()  // Returns a text description of JInterval
+```
 
-// Maths methods
-jint.get1()              // Return a new identity JInterval (from any JInterval)
-jint.mult(jint2)         // Returns new JInterval based on peo of jint multiplied by peo of jint2
-jint.mult(jint2, pow)    // Same as previous, but jint2 is first raised to power 'pow'
-jint.pow(pow)            // Return new JInterval based on its peo being raised to power 'pow'
+### Interval Width (Relative Position, Relative Size)
+``` js
+jint.width()             // Returns a positive number representing the width or relative size of a JInterval
+jint.widthFractionText() // Returns the interval width as a fraction, in string format 'NN/NN'
+jint.widthPeo()          // Returns the interval width as a Peo - this is a copy of the underlying Peo of the JInterval
+```
 
-// Notation methods
-jint.getAlgText()        // Return acronym (string) for the algorithm, if specified
-jint.getAlgFn()          // Return the function used to calculate commas for this JInterval, if specified
-jint.getEndPitchNotation(startPitchNotation) // If this interval starts at inputted notation, calculate the end notation
-jint.getEndPitchNotation()        // Calculate end notation based on default or previous start notation
-jint.getEndPitchClassNotation()   // Return the end notation, minus its octave information
-jint.getStartPitchNotation()      // Return previous starting pitch notation (parsed, standard format), or default
-jint.getStartPitchInputNotation() // Return previous starting pitch notation (as input), or default
-jint.getStartPitchClassNotation() // Return the start notation, minus its octave information
+### Absolute Position
+Absolute position means a JInterval starts at a certain frequency or notation, and ends at another frequency or notation. Since every JInterval has a tuning, by specifying either a start frequency or a start notation, the whole of the Absolute Position will be reset. In the functions below, `startFreqHz` and `startNotation` are optional, and default to either the previous value or the default value (`'C4'`, `256` Hz). Recalculation is minimised by caching values after they have been calculated.
+``` js
+jint.getEndFreqHz(startFreqHz)               // Returns numeric end frequency in Hz
+jint.getEndFreqText(startFreqHz)             // Returns formatted string 'NNN.NN Hz' for end frequency
+jint.getEndPitchNotation(startNotation)      // Returns pitch notation for end of interval in standard notation
+jint.getEndPitchInputNotation(startNotation) // Returns pitch notation for end of interval, as inputted
+jint.getEndPitchClassNotation(startNotation) // Returns pitch class of end of interval - pitch class is a notation without an octave value
+jint.getStartFreqHz()                        // Returns numeric start frequency in Hz
+jint.getStartFreqText()                      // Returns formatted string 'NNN.NN Hz' for start frequency
+jint.getStartPitchNotation()                 // Returns pitch notation for start of interval in standard notation
+jint.getStartPitchInputNotation()            // Returns pitch notation for start of interval, as inputted
+jint.getStartPitchClassNotation()            // Returns pitch class of start of interval
+jint.hasPos()                                // Returns boolean value - true if an absolute position has been calculated, false otherwise
+```
+
+### Maths
+Create new JIntervals using mathematical operations on existing JIntervals. (Any extra constructor options will be taken from `jint`.)
+``` js
+jint.get1()              // Returns a new JInterval with unison interval of 1/1
+jint.mult(jint2)         // Returns a new JInterval formed by multiplying widths of jint and jint2
+jint.mult(jint2, pow)    // Returns a new JInterval formed by multiplying widths of jint and jint2^pow
+jint.pow(pow)            // Returns a new JInterval with width of jint raised to power pow
+```
+
+### Algorithm
+Algorithm can only be specified on JInterval construction. Default algorithm is `'DR'`.
+``` js
+jint.getAlgText()        // Returns text acronym for algorithm, if it has been specified. Both default algorithm and custom algorithm functions return empty string.
+jint.getAlgFn()          // Returns the algorithm function which takes in a prime and outputs a comma Peo instance.
+jint.getAlgSetupObject() // Returns an object representing setup of algorithm
+jint.hasAlg()            // Returns boolean value - false for default comma algorithm, true otherwise
+```
+
+### Tuning
+Tuning can only be specified on JInterval construction. Default tuning is `{pitchNotation: 'C4', freqHz: 256}`.
+``` js
+jint.getTuningFreqHz()             // Tuning frequency, in Hz
+jint.getTuningInputPitchNotation() // Tuning notation, as input
+jint.getTuningPitchNotation()      // Tuning notation, in standard format
+jint.getTuningMultHz()             // Multiplier representing Hz for notation 'C4'
+jint.getTuningSetupObject()        // Returns an object representing setup of tuning
+jint.hasTuning()                   // Returns boolean value - false for default tuning, true otherwise
 ```
 
 ## Examples
+Also see the examples directory on GitHub, use `npm run examples`.
 
 ### getComma
 ``` js
-getComma(5)               // returns (a Peo for) 80/81
-getComma(7)               // returns 63/64
-getComma(11)              // returns 33/32
-getComma(11, "DR")        // returns 33/32
-getComma(11, "SAG")       // returns 33/32
-getComma(11, "KG2")       // returns 704/729
-getComma(13)              // returns 26/27
-getComma(59)              // returns 236/243
-getComma(59, "DR")        // returns 236/243
-getComma(59, "SAG")       // returns 531/512
-getComma(59, "KG2")       // returns 236/243
-getComma(139, "DR")       // returns 2224/2187
-getComma(139, "SAG")      // returns 139/144
-getComma(139, "KG2")      // returns 33777/32768
-getComma(59051, "DR")     // returns 59051/59049
-getComma(59051, "SAG")    // returns 531459/524288
-getComma(59051, "KG2")    // returns 531459/524288
-getComma(65537, "DR")     // returns 65537/65536
-getComma(65537, "SAG")    // returns 65537/65536
-getComma(65537, "KG2")    // returns 65537/65536
-getComma(2499949, "DR")   // returns 2499949/2519424
-getComma(2499949, "SAG")  // returns 67498623/67108864
-getComma(2499949, "KG2")  // returns 67498623/67108864
+var ji = require('ji-rcn')
+var getComma = ji.getComma
+getComma(5)                // returns (a Peo for) 80/81
+getComma(7)                // returns 63/64
+getComma(11)               // returns 33/32
+getComma(11, 'DR')         // returns 33/32
+getComma(11, 'SAG')        // returns 33/32
+getComma(11, 'KG2')        // returns 704/729
+getComma(11,p=>new Peo(p)) // returns 11/1 using a custom algorithm which maps each prime to a Peo on that prime
+getComma(13)               // returns 26/27
+getComma(59)               // returns 236/243
+getComma(59, 'DR')         // returns 236/243
+getComma(59, 'SAG')        // returns 531/512
+getComma(59, 'KG2')        // returns 236/243
+getComma(139, 'DR')        // returns 2224/2187
+getComma(139, 'SAG')       // returns 139/144
+getComma(139, 'KG2')       // returns 33777/32768
+getComma(139, p => new Peo(p/2)) // returns 139/2 using a custom algorithm
+getComma(59051, 'DR')      // returns 59051/59049
+getComma(59051, 'SAG')     // returns 531459/524288
+getComma(59051, 'KG2')     // returns 531459/524288
+getComma(65537, 'DR')      // returns 65537/65536
+getComma(65537, 'SAG')     // returns 65537/65536
+getComma(65537, 'KG2')     // returns 65537/65536
+getComma(2499949, 'DR')    // returns 2499949/2519424
+getComma(2499949, 'SAG')   // returns 67498623/67108864
+getComma(2499949, 'KG2')   // returns 67498623/67108864
 ```
 
 ### JInterval
@@ -153,6 +198,6 @@ getComma(2499949, "KG2")  // returns 67498623/67108864
 (new JInterval({2:66, 5:40, 7:-40, 11:20, 13:-30})).getEndPitchNotation() // returns "E(#18)('40)4 [11^20 / 7^40 13^30]" which is in octave 4
 ```
 
-These higher prime commas and notations are being made available to enable writing beautiful JI music that goes way outside the 12 notes of the standard scale. A piece of music written at the prime limit of 2499949 is available [here](https://soundcloud.com/davidryan59/ryan-example-primenumberedblues) (which used the `"DR"` comma given above), and the rest of the author's music is available [here](https://soundcloud.com/davidryan59/tracks).
+These higher prime commas and notations are being made available to enable writing beautiful JI music that goes way outside the 12 notes of the standard scale. A piece of music written at the prime limit of 2499949 is available [here](https://soundcloud.com/davidryan59/ryan-example-primenumberedblues) (which used the `'DR'` comma given above), and the rest of the author's music is available [here](https://soundcloud.com/davidryan59/tracks).
 
 *Hope you will enjoy the infinite possibilities of justly intoned music!*
