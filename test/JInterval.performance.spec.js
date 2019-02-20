@@ -1,4 +1,6 @@
-/* eslint-disable func-names */
+/* eslint-disable func-names*/
+/* eslint-disable no-unused-vars*/
+/* eslint-disable no-console*/
 
 var assert = require('assert');
 
@@ -11,9 +13,12 @@ var getTimeMS = function () {
 
 var runTest = function (startAtNumber, totalLoops, maxTimeMicroseconds, testLabel, functionToCall) {
   it(testLabel, function () {
+    var exampleOutput = null;
     var startTimeMS = getTimeMS();
-    for (var i = startAtNumber; i < startAtNumber + totalLoops; i++) functionToCall(i);
+    for (var i = startAtNumber; i < startAtNumber + totalLoops; i++) exampleOutput = functionToCall(i);
     var endTimeMS = getTimeMS();
+    // console.log(`Example output:`)
+    // console.log(exampleOutput)
     var timeInMicroseconds = Math.round((endTimeMS - startTimeMS) * 1000 / totalLoops);
     console.log(`Average time was ${timeInMicroseconds}us, tested on ${totalLoops} instances from ${startAtNumber} to ${startAtNumber + totalLoops - 1}, total time ${endTimeMS - startTimeMS}ms.`);
     assert(timeInMicroseconds < maxTimeMicroseconds);
