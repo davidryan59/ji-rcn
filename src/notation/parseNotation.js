@@ -84,8 +84,8 @@ var peoPower = function peoPower(peo, outerPower) {
 var reduceDiatonicLettersToPeo = function reduceDiatonicLettersToPeo(acc, elt) {return acc.mult(peos[elt]);};
 var identityFunction = function identityFunction(anything) {return anything;};
 
-var parseNotation = function parseNotation(notation, inputAlg) {
-  // inputAlg is optional, and is passed straight through to getComma
+var parseNotation = function parseNotation(jint, notation) {
+  var inputAlg = jint.getAlgFn();
 
   // Variables to iterate on
   var tempResult = 0;

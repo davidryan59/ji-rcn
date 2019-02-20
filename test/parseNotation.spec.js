@@ -4,6 +4,7 @@ var assert = require('assert');
 var Peo = require('peo');
 
 var testIndex = require('./_test_index');
+var JInterval = testIndex.JInterval;
 var parseNotation = testIndex.parseNotation;
 
 describe('parseNotation measures intervals correctly from C4', function () {
@@ -160,14 +161,16 @@ describe('parseNotation measures intervals correctly from C4', function () {
     ['', '1', '']
   ];
 
-  var runTest = function (notationToParse, peoConstructorData, algType, comment) {
-    var peoFromParsing = parseNotation(notationToParse, algType);
+  var runTest = function (notationToParse, peoConstructorData, algAcronym, comment) {
+    var obj = (algAcronym) ? {width: 1, alg: algAcronym} : {};
+    var jintWithAlg = new JInterval(obj);
+    var peoFromParsing = parseNotation(jintWithAlg, notationToParse);
     var peoFromSpec = new Peo(peoConstructorData);
     var parseText = JSON.stringify(peoFromParsing.getPrimeExps());
     var specText = JSON.stringify(peoFromSpec.getPrimeExps());
-    var algTypeText = (algType) ? ', ' + algType : '';
+    var algText = (algAcronym) ? ', ' + algAcronym + ' alg' : '';
     var commentText = (comment) ? ' (' + comment + ')' : '';
-    var label = 'parseNotation("' + notationToParse + algTypeText + '") has prime exponents ' + specText + commentText;
+    var label = 'parseNotation("' + notationToParse + '") has prime exponents ' + specText + algText + commentText;
     it(label, function () {assert.strictEqual(parseText, specText);});
   };
 

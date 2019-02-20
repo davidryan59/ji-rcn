@@ -18,7 +18,9 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj1)}) works`, function () {
     var jint = new JInterval(testObj1);
-    assert.strictEqual(jint.toFractionText(), '6/5');
+    assert.strictEqual(jint.widthFractionText(), '6/5');
+    assert(jint.getStartFreqHz() > 319.99);
+    assert(jint.getStartFreqHz() < 320.01);
     assert.strictEqual(jint.getStartFreqText(), '320.00 Hz');
     assert.strictEqual(jint.getEndFreqText(), '384.00 Hz');
     assert.strictEqual(jint.getStartPitchNotation(), "E'4");
@@ -37,7 +39,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj1a)}) works`, function () {
     var jint = new JInterval(testObj1a);
-    assert.strictEqual(jint.toFractionText(), '6/5');
+    assert.strictEqual(jint.widthFractionText(), '6/5');
     assert.strictEqual(jint.getStartFreqText(), '320.00 Hz');
     assert.strictEqual(jint.getEndFreqText(), '384.00 Hz');
     assert.strictEqual(jint.getStartPitchNotation(), 'E[1/11]4');
@@ -58,7 +60,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj2)}) works`, function () {
     var jint = new JInterval(testObj2);
-    assert.strictEqual(jint.toFractionText(), '6/5');
+    assert.strictEqual(jint.widthFractionText(), '6/5');
     assert.strictEqual(jint.getStartFreqText(), '320.00 Hz');
     assert.strictEqual(jint.getEndFreqText(), '384.00 Hz');
     assert.strictEqual(jint.getStartPitchNotation(), "E'4");
@@ -81,7 +83,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj3)}) works`, function () {
     var jint = new JInterval(testObj3);
-    assert.strictEqual(jint.toFractionText(), '6/5');
+    assert.strictEqual(jint.widthFractionText(), '6/5');
     assert.strictEqual(jint.getStartPitchNotation(), "E'4");
     assert.strictEqual(jint.getEndPitchNotation(), 'G4');
     assert.strictEqual(jint.getStartFreqText(), '320.00 Hz');
@@ -100,7 +102,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj3a)}) works`, function () {
     var jint = new JInterval(testObj3a);
-    assert.strictEqual(jint.toFractionText(), '6/5');
+    assert.strictEqual(jint.widthFractionText(), '6/5');
     assert.strictEqual(jint.getStartPitchNotation(), "E'4");
     assert.strictEqual(jint.getEndPitchNotation(), 'G4');
     assert.strictEqual(jint.getStartFreqText(), '325.93 Hz');
@@ -120,7 +122,7 @@ describe(fnName, function () {
   it(`new JInterval(new JInterval(${JSON.stringify(testObj3b)})) works`, function () {
     var jint = new JInterval(testObj3b);
     var jint2 = new JInterval(jint);
-    assert.strictEqual(jint2.toFractionText(), '6/5');
+    assert.strictEqual(jint2.widthFractionText(), '6/5');
     assert.strictEqual(jint2.getStartPitchNotation(), "E'4");
     assert.strictEqual(jint2.getEndPitchNotation(), 'G4');
     assert.strictEqual(jint2.getStartFreqText(), '325.93 Hz');
@@ -135,7 +137,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj4)}) works`, function () {
     var jint = new JInterval(testObj4);
-    assert.strictEqual(jint.toFractionText(), '6/5');
+    assert.strictEqual(jint.widthFractionText(), '6/5');
     assert.strictEqual(jint.getStartPitchNotation(), "E'4");
     assert.strictEqual(jint.getEndPitchNotation(), 'G4');
     assert.strictEqual(jint.getStartFreqText(), '320.00 Hz');
@@ -150,7 +152,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj5a)}) works`, function () {
     var jint = new JInterval(testObj5a);
-    assert.strictEqual(jint.toFractionText(), '83/13');
+    assert.strictEqual(jint.widthFractionText(), '83/13');
     assert.strictEqual(jint.getStartPitchNotation(), 'A[13]3');
     assert.strictEqual(jint.getEndPitchNotation(), 'E[83]6');
     assert.strictEqual(jint.getStartFreqText(), '208.00 Hz');
@@ -166,7 +168,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj5b)}) works`, function () {
     var jint = new JInterval(testObj5b);
-    assert.strictEqual(jint.toFractionText(), '83/13');
+    assert.strictEqual(jint.widthFractionText(), '83/13');
     assert.strictEqual(jint.getStartPitchNotation(), 'Ab[13]3');
     assert.strictEqual(jint.getEndPitchNotation(), 'F[83]6');
     assert.strictEqual(jint.getStartFreqText(), '208.00 Hz');
@@ -188,7 +190,7 @@ describe(fnName, function () {
   it(`new JInterval(${JSON.stringify(testObj5c)}) works`, function () {
     var jint = new JInterval(testObj5c);
     var jint2 = new JInterval(jint);
-    assert.strictEqual(jint2.toFractionText(), '83/13');
+    assert.strictEqual(jint2.widthFractionText(), '83/13');
     assert.strictEqual(jint2.getStartPitchNotation(), 'Ab[13]3');
     assert.strictEqual(jint2.getEndPitchNotation(), 'F[83]6');
     assert.strictEqual(jint2.getStartFreqText(), '211.85 Hz');
@@ -208,7 +210,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj6a)}) works`, function () {
     var jint = new JInterval(testObj6a);
-    assert.strictEqual(jint.toFractionText(), '89/74');
+    assert.strictEqual(jint.widthFractionText(), '89/74');
     assert.strictEqual(jint.getStartPitchNotation(), 'A[37]4');
     assert.strictEqual(jint.getEndPitchNotation(), 'C#[89]5');
     assert.strictEqual(jint.getStartFreqText(), '444.00 Hz');
@@ -224,7 +226,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj6b)}) works`, function () {
     var jint = new JInterval(testObj6b);
-    assert.strictEqual(jint.toFractionText(), '89/74');
+    assert.strictEqual(jint.widthFractionText(), '89/74');
     assert.strictEqual(jint.getStartPitchNotation(), 'A[37]4');
     assert.strictEqual(jint.getEndPitchNotation(), 'Db[89]5');
     assert.strictEqual(jint.getStartFreqText(), '444.00 Hz');
@@ -241,7 +243,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj6c)}) works`, function () {
     var jint = new JInterval(testObj6c);
-    assert.strictEqual(jint.toFractionText(), '89/74');
+    assert.strictEqual(jint.widthFractionText(), '89/74');
     assert.strictEqual(jint.getStartPitchNotation(), 'Bb[37]4');
     assert.strictEqual(jint.getEndPitchNotation(), 'C#[89]5');
     assert.strictEqual(jint.getStartFreqText(), '444.00 Hz');
@@ -262,7 +264,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj6d)}) works`, function () {
     var jint = new JInterval(testObj6d);
-    assert.strictEqual(jint.toFractionText(), '89/74');
+    assert.strictEqual(jint.widthFractionText(), '89/74');
     assert.strictEqual(jint.getStartPitchNotation(), 'A.[37/11]4');
     assert.strictEqual(jint.getEndPitchNotation(), 'Db.[89/11]5');
     assert.strictEqual(jint.getStartFreqText(), '444.00 Hz');
@@ -281,7 +283,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj7a)}) works`, function () {
     var jint = new JInterval(testObj7a);
-    assert.strictEqual(jint.toFractionText(), '13/10');
+    assert.strictEqual(jint.widthFractionText(), '13/10');
     assert.strictEqual(jint.getTuningMultHz(), 260);
   });
 
@@ -294,7 +296,7 @@ describe(fnName, function () {
   };
   it(`new JInterval(${JSON.stringify(testObj7b)}) works`, function () {
     var jint = new JInterval(testObj7b);
-    assert.strictEqual(jint.toFractionText(), '3/2');
+    assert.strictEqual(jint.widthFractionText(), '3/2');
     assert.strictEqual(jint.getTuningMultHz(), 288);
   });
 
@@ -302,7 +304,7 @@ describe(fnName, function () {
   // via tuning (which sits in the background)
   it('new JInterval("E\'5") should be from C4 to E\'5', function () {
     var jint = new JInterval("E'5");     // Should be same as C4 to E'5
-    assert.strictEqual(jint.toFractionText(), '5/2');
+    assert.strictEqual(jint.widthFractionText(), '5/2');
     assert.strictEqual(jint.getStartPitchNotation(), 'C4');
     assert.strictEqual(jint.getEndPitchNotation(), "E'5");
     assert.strictEqual(jint.getStartFreqText(), '256.00 Hz');
@@ -312,7 +314,7 @@ describe(fnName, function () {
   it('Check getEndPitchNotation resets notations and frequencies', function () {
     var jint = new JInterval("E'5");
     jint.getEndPitchNotation('Bb[7](o+3)');   // Change start to Bb[7]3
-    assert.strictEqual(jint.toFractionText(), '5/2');
+    assert.strictEqual(jint.widthFractionText(), '5/2');
     assert.strictEqual(jint.getStartPitchNotation(), 'Bb[7]3');
     assert.strictEqual(jint.getEndPitchNotation(), "D'[7]5");
     assert.strictEqual(jint.getStartFreqText(), '224.00 Hz');
@@ -322,7 +324,7 @@ describe(fnName, function () {
   it('Check getEndPitchInputNotation resets notations and frequencies', function () {
     var jint = new JInterval("E'5");
     jint.getEndPitchInputNotation('Bb[7](o+5)');   // Change start to Bb[7]5
-    assert.strictEqual(jint.toFractionText(), '5/2');
+    assert.strictEqual(jint.widthFractionText(), '5/2');
     assert.strictEqual(jint.getStartPitchNotation(), 'Bb[7]5');
     assert.strictEqual(jint.getEndPitchNotation(), "D'[7]7");
     assert.strictEqual(jint.getStartFreqText(), '896.00 Hz');
@@ -332,7 +334,7 @@ describe(fnName, function () {
   it('Check getEndPitchClassNotation resets notations and frequencies', function () {
     var jint = new JInterval("E'5");
     jint.getEndPitchClassNotation('Bb[7](o+6)');   // Change start to Bb[7]6
-    assert.strictEqual(jint.toFractionText(), '5/2');
+    assert.strictEqual(jint.widthFractionText(), '5/2');
     assert.strictEqual(jint.getStartPitchNotation(), 'Bb[7]6');
     assert.strictEqual(jint.getEndPitchNotation(), "D'[7]8");
     assert.strictEqual(jint.getStartFreqText(), '1792.00 Hz');
@@ -342,7 +344,7 @@ describe(fnName, function () {
   it('Check getEndFreqHz resets frequencies and notations', function () {
     var jint = new JInterval("E'5");
     jint.getEndFreqHz(200);                    // Change start to 200 Hz
-    assert.strictEqual(jint.toFractionText(), '5/2');
+    assert.strictEqual(jint.widthFractionText(), '5/2');
     assert.strictEqual(jint.getStartFreqText(), '200.00 Hz');
     assert.strictEqual(jint.getEndFreqText(), '500.00 Hz');
     assert.strictEqual(jint.getStartPitchNotation(), "G#''3");
@@ -352,7 +354,7 @@ describe(fnName, function () {
   it('Check getEndFreqText resets frequencies and notations', function () {
     var jint = new JInterval("E'5");
     jint.getEndFreqText(400);                    // Change start to 200 Hz
-    assert.strictEqual(jint.toFractionText(), '5/2');
+    assert.strictEqual(jint.widthFractionText(), '5/2');
     assert.strictEqual(jint.getStartFreqText(), '400.00 Hz');
     assert.strictEqual(jint.getEndFreqText(), '1000.00 Hz');
     assert.strictEqual(jint.getStartPitchNotation(), "G#''4");

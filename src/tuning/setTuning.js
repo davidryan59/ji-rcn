@@ -4,9 +4,6 @@ var calcNotationObject = require('../notation/calcNotationObject');
 
 var setTuning = function setTuning(jint, theTuning) {
   if (!theTuning) return;
-
-  var theAlg = jint.getAlgFn();
-
   var tuningMultHz = null;
   var pitchNotation = null;
   var inputPitchNotation = theTuning.pitchNotation;
@@ -16,8 +13,8 @@ var setTuning = function setTuning(jint, theTuning) {
     pitchNotation = consts.DEFAULT_PITCH_NOTATION;
     tuningMultHz = freqHz;
   } else {
-    var thePeo = parseNotation(inputPitchNotation, theAlg);
-    pitchNotation = calcNotationObject(thePeo, theAlg).pitch;
+    var thePeo = parseNotation(jint, inputPitchNotation);
+    pitchNotation = calcNotationObject(jint, thePeo).pitch;
     tuningMultHz = thePeo.mult(freqHz, -1).pow(-1).getAsDecimal();   // freq/peo = (peo * freq^-1)^-1
   }
   jint.tuning = {

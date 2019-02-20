@@ -6,7 +6,7 @@ var getSharpFlatArray = require('./getSharpFlatArray');
 var getDiatonicArray = require('./getDiatonicArray');
 var getOctaveArray = require('./getOctaveArray');
 
-var calcNotationObject = function calcNotationObject(thePeo, alg) {
+var calcNotationObject = function calcNotationObject(jint, thePeo) {
   // Split up Peo of this JInterval into components:  2,3  ;  5  ;  primes 7+
   var splitArray = thePeo.split([2, 3], 5);  // [Peo({2:a,3:b}), Peo({5:c}), Peo(the rest)]
   // var pythagPeo = splitArray[0];             // Pythagorean = primes 2 and 3 only
@@ -23,7 +23,7 @@ var calcNotationObject = function calcNotationObject(thePeo, alg) {
     var val = obj[key];
     var prime = Number.parseInt(key, 10);
     var exp = Number.parseInt(val, 10);
-    var thisComma = getComma(prime, alg);
+    var thisComma = getComma(prime, jint.getAlgFn());
     comma5PlusPeo = comma5PlusPeo.mult(thisComma, exp);
   }
   // Divide comma5PlusPeo out of original Peo
