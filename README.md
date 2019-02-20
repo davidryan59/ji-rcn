@@ -3,35 +3,38 @@ JI-RCN, `ji-rcn` module. Find [module on npm](https://www.npmjs.com/package/ji-r
 
 [![npm version](https://badge.fury.io/js/ji-rcn.png)](https://badge.fury.io/js/ji-rcn)[![Build status](https://travis-ci.org/davidryan59/ji-rcn.svg?master)](https://travis-ci.org/davidryan59)
 
-**Just Intonation** (JI) is a system of musical tuning where intervals and chords can be expressed as ratios between whole numbers. It is also called Rational Intonation (RI) since it is based on rational numbers of the form `a/b`, or ratios of the form `a:b`, `a:b:c`, etc.
+**Just Intonation** (JI) tunes musical instruments to have whole number ratios between frequencies of different notes. This is the natural system of tuning for many important musical instruments, including the human voice, stringed instruments, and wind instruments. For such instruments, JI tuning sounds better than tempered tuning (e.g. the contemporary scale of splitting an octave into 12 equal semitones, which is 12TET).
+
+JI can also be called Rational Intonation (RI) since it is based on rational numbers of the form `a/b`, or ratios of the form `a:b`, `a:b:c`, etc.
 - Examples of intervals include: an octave (1:2), a perfect fifth (2:3), a perfect fourth (3:4), a major third (4:5)
 - Examples of chords include: a major triad (4:5:6), a minor triad (10:12:15), an extended seventh chord (4:6:7:10)
 
-One good reason to use Just Intonation is that it is the natural system of tuning for harmonic instruments such as stringed instruments, wind instruments, and the human voice itself.
-
-The contemporary scale of 12-tone equal temperament (12TET) has only 12 notes in the octave. However, Just Intonation has a infinite number of notes in the octave. This makes it trickier to design a notation system that can cope with any possible interval and note in JI.
+The tempered tuning 12TET has only 12 notes in the octave. However, Just Intonation has an infinite number of notes in the octave. This both gives more musical variety, and poses a greater challenge to design a notation system that can cope with any possible interval and note in JI.
 
 **Rational Comma Notation** (RCN) was designed to solve this problem. It was developed by David Ryan between 2015 and 2017, and [is documented in this paper](https://arxiv.org/abs/1612.01860).
 
 For RCN it is necessary to specify an algorithm which maps any prime `p` to its prime comma `n/m`. For example, primes `5` and `7` are usually given commas `80/81` and `63/64` respectively. Algorithms tend to vary for higher primes. Three algorithms which are currently available are `'DR'`, `'SAG'`, and `'KG2'`; all three algorithms are described in the paper above.
 
 The purpose of the `ji-rcn` npm package is to help convert between:
-- An interval expressed as a single rational number
+- A musical interval with a width/size expressed as a rational number
 - Start and end points of the interval expressed as:
   - Notations from the RCN scheme
   - Frequencies in Hz
 
-Currently the API contains two items: a class `JInterval` which automates all the RCN calculations, and a function `getComma` which provides direct access to the calculation of prime commas for each prime and algorithm.
-
-To install, use `npm i ji-rcn`. To test, `npm test`. For examples of usage see Github `examples` directory, via `npm run examples`.
+## Get started with JI-RCN
+- To install, use `npm i ji-rcn`
+- To test, `npm test`
+- To run examples, `npm run examples` which are in the GitHub `examples` directory
 
 ## Contents of index
 ``` js
 var ji = require('ji-rcn')
 var JInterval = ji.JInterval        // The main JInterval class. Can also use ji.jinterval
-var getComma = ji.getComma          // A function mapping primes to commas (as Peo instances)
+var getComma = ji.getComma          // A function mapping primes to commas as Peo instances
 var getCommaAlgs = ji.getCommaAlgs  // An object mapping acronym strings (DR, SAG, KG2) to algorithm functions
 ```
+
+Note that the `JInterval` class is built upon the `Peo` class, which stands for 'Prime Exponent Object'. It allows exact representations of positive fractions with potentially large numerators and denominators, by splitting them up into prime components. An example is the fraction `45/28` which can be represented as `{2:-2, 3:2, 5:1, 7:-1}`. The Peo class wraps this object, providing it with methods such as object multiplication. Use `require('peo')` to access the `Peo` class.
 
 ## Constructors
 
@@ -40,7 +43,7 @@ var getCommaAlgs = ji.getCommaAlgs  // An object mapping acronym strings (DR, SA
 new JInterval({startPitchNotation:txt1, endPitchNotation:txt2})  // Create new interval from txt1 to txt2
 new JInterval({startFreqHz:freq1, endFreqHz:freq2})  // Create new interval from freq1 to freq2 (numbers)
 new JInterval({jint:otherJint})  // Create new interval based on another interval otherJint
-new JInterval({peo:inputPeo})  // Create new interval based on an inputted peo (see Peo package)
+new JInterval({peo:inputPeo})  // Create new interval based on an inputted peo
 new JInterval({num:num, denom:denom})  // Create an interval based on integers num, denom, e.g. rational number num/denom
 new JInterval({width:width})  // Create an interval of size width (numeric)
 ```
@@ -56,7 +59,7 @@ new JInterval({width:width})  // Create an interval of size width (numeric)
 ### Shorthand constructors
 ``` js
 new JInterval(otherJint)        // Create new JInterval with same width as otherJint
-new JInterval(peo)              // Create new interval with width described by a Peo instance (see Peo package)
+new JInterval(peo)              // Create new interval with width described by a Peo instance
 new JInterval(num, denom)       // Create new interval with fractional width num/denom from two integers num, denom
 new JInterval(integer)          // Create new interval with integer width
 new JInterval(decimal)          // Create new interval with fractional width - the decimal value is automatically converted into a suitable fraction.
