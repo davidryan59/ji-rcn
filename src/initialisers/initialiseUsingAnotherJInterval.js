@@ -17,7 +17,7 @@ var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(j
   }
 
   // Set the interval width from otherJint
-  var thePeo = otherJint.getPeo();  // Creates a copy
+  var thePeo = otherJint.widthPeo();  // Creates a copy
   jint.peo = thePeo;
 
   // If absolute position is specified on otherJint, copy it to this jint

@@ -14,7 +14,7 @@ describe(fnName, function () {
     var origPeo = new Peo(14, 15);
     var jint = new JInterval(origPeo, 'KG2');
     var jintPeoPrivate = jint.peo;
-    var jintPeoPublicCopy = jint.getPeo();
+    var jintPeoPublicCopy = jint.widthPeo();
     var origPrimeExps = origPeo.getPrimeExps();
     var jintPrimeExps = jintPeoPrivate.getPrimeExps();
     // Different object identities
@@ -25,7 +25,7 @@ describe(fnName, function () {
     assert.deepStrictEqual(jintPeoPrivate, jintPeoPublicCopy);
     assert.deepStrictEqual(jintPeoPrivate, origPeo);
     assert.deepStrictEqual(jintPrimeExps, origPrimeExps);
-    assert.strictEqual(jint.toFractionText(), '14/15');
+    assert.strictEqual(jint.widthFractionText(), '14/15');
     assert.strictEqual(jint.getAlgText(), 'KG2');
   });
 
@@ -33,8 +33,8 @@ describe(fnName, function () {
     var peo = new Peo(14, 15);
     var jint1 = new JInterval(peo, 'SAG');
     var jint2 = new JInterval(jint1);
-    var ob1 = jint1.getPeo().getPrimeExps();
-    var ob2 = jint2.getPeo().getPrimeExps();
+    var ob1 = jint1.widthPeo().getPrimeExps();
+    var ob2 = jint2.widthPeo().getPrimeExps();
     assert(jint1 !== jint2, 'Different JInterval objects');
     assert.deepStrictEqual(ob1, ob2, 'Represent same note');
     assert.strictEqual(jint2.getAlgText(), 'SAG');
@@ -42,28 +42,28 @@ describe(fnName, function () {
 
   it('can initialise from new JInterval(14)', function () {
     var jint = new JInterval(14, 'SAG');
-    var txt = jint.toFractionText();
+    var txt = jint.widthFractionText();
     assert.strictEqual(txt, '14');
     assert.strictEqual(jint.getAlgText(), 'SAG');
   });
 
   it('can initialise from new JInterval(14, 15)', function () {
     var jint = new JInterval(14, 15, 'KG2');
-    var txt = jint.toFractionText();
+    var txt = jint.widthFractionText();
     assert.strictEqual(txt, '14/15');
     assert.strictEqual(jint.getAlgText(), 'KG2');
   });
 
   it('can initialise from new JInterval({2:1, 3:1, 5:-2, 13:-4})', function () {
     var jint = new JInterval({2: 1, 3: 1, 5: -2, 13: -4}, 'SAG');
-    var txt = jint.toFractionText();
+    var txt = jint.widthFractionText();
     assert.strictEqual(txt, '6/714025');
     assert.strictEqual(jint.getAlgText(), 'SAG');
   });
 
   it('can initialise from new JInterval()', function () {
     var jint = new JInterval();
-    var txt = jint.toFractionText();
+    var txt = jint.widthFractionText();
     assert.strictEqual(jint.getAlgText(), '');
     assert.strictEqual(txt, '1');
   });
@@ -197,12 +197,12 @@ describe(fnName, function () {
 
   it('new JInterval("C4", "Eb.5") agrees with new Peo(12, 5)', function () {
     var jint = new JInterval('C4', 'Eb.5');
-    assert.strictEqual(jint.toFractionText(), '12/5');
+    assert.strictEqual(jint.widthFractionText(), '12/5');
   });
 
   it('new JInterval(\'Bb[7]5\', "E\'4", "SAG") gives value of 5/14', function () {
     var jint = new JInterval('Bb[7]5', "E'4", 'SAG');
-    assert.strictEqual(jint.toFractionText(), '5/14');
+    assert.strictEqual(jint.widthFractionText(), '5/14');
     assert.strictEqual(jint.getAlgText(), 'SAG');
   });
 
@@ -210,32 +210,32 @@ describe(fnName, function () {
 
   it('new JInterval("D5", "F[11]5") gives value of 11/9', function () {
     var jint = new JInterval('D5', 'F[11]5');
-    assert.strictEqual(jint.toFractionText(), '11/9');
+    assert.strictEqual(jint.widthFractionText(), '11/9');
     assert.strictEqual(jint.getAlgText(), '');
   });
 
   it('new JInterval("D5", "F[11]5", "DR") gives value of 11/9', function () {
     var jint = new JInterval('D5', 'F[11]5', 'DR');
-    assert.strictEqual(jint.toFractionText(), '11/9');
+    assert.strictEqual(jint.widthFractionText(), '11/9');
     assert.strictEqual(jint.getAlgText(), 'DR');
   });
 
   it('new JInterval("D5", "F[11]5", "KG") gives value of 22528/19683', function () {
     var jint = new JInterval('D5', 'F[11]5', 'KG');
-    assert.strictEqual(jint.toFractionText(), '22528/19683');
+    assert.strictEqual(jint.widthFractionText(), '22528/19683');
     assert.strictEqual(jint.getAlgText(), 'KG2');
   });
 
   it('new JInterval("D5", "F[11]5", identityFn) gives value of 352/27', function () {
     var jint = new JInterval('D5', 'F[11]5', identityFn);
     assert.strictEqual(identityFn(19).toString(), '{"19":1}');
-    assert.strictEqual(jint.toFractionText(), '352/27');
+    assert.strictEqual(jint.widthFractionText(), '352/27');
     assert.strictEqual(jint.getAlgText(), 'CUSTOM');
   });
 
   it('new JInterval("D5", "F[11]5", {txt:"ID",fn:identityFn}) gives value of 352/27', function () {
     var jint = new JInterval('D5', 'F[11]5', {txt: 'ID', fn: identityFn});
-    assert.strictEqual(jint.toFractionText(), '352/27');
+    assert.strictEqual(jint.widthFractionText(), '352/27');
     assert.strictEqual(jint.getAlgText(), 'ID');
   });
 
@@ -243,37 +243,37 @@ describe(fnName, function () {
 
   it('new JInterval({startPitchNotation:"D5", endPitchNotation:"F[11]5"}) gives value of 11/9', function () {
     var jint = new JInterval({startPitchNotation: 'D5', endPitchNotation: 'F[11]5'});
-    assert.strictEqual(jint.toFractionText(), '11/9');
+    assert.strictEqual(jint.widthFractionText(), '11/9');
     assert.strictEqual(jint.getAlgText(), '');
   });
 
   it('new JInterval({startPitchNotation:"D5", endPitchNotation:"F[11]5", alg:"DR"}) gives value of 11/9', function () {
     var jint = new JInterval({startPitchNotation: 'D5', endPitchNotation: 'F[11]5', alg: 'DR'});
-    assert.strictEqual(jint.toFractionText(), '11/9');
+    assert.strictEqual(jint.widthFractionText(), '11/9');
     assert.strictEqual(jint.getAlgText(), 'DR');
   });
 
   it('new JInterval({startPitchNotation:"D5", endPitchNotation:"F[11]5", alg:"KG"}) gives value of 22528/19683', function () {
     var jint = new JInterval({startPitchNotation: 'D5', endPitchNotation: 'F[11]5', alg: 'KG'});
-    assert.strictEqual(jint.toFractionText(), '22528/19683');
+    assert.strictEqual(jint.widthFractionText(), '22528/19683');
     assert.strictEqual(jint.getAlgText(), 'KG2');
   });
 
   it('new JInterval({startPitchNotation:"D5", endPitchNotation:"F[11]5", alg:identityFn}) gives value of 352/27', function () {
     var jint = new JInterval({startPitchNotation: 'D5', endPitchNotation: 'F[11]5', alg: identityFn});
-    assert.strictEqual(jint.toFractionText(), '352/27');
+    assert.strictEqual(jint.widthFractionText(), '352/27');
     assert.strictEqual(jint.getAlgText(), 'CUSTOM');
   });
 
   it('new JInterval({startPitchNotation:"D5", endPitchNotation:"F[11]5", alg:{txt:"ID",fn:identityFn}) gives value of 352/27', function () {
     var jint = new JInterval({startPitchNotation: 'D5', endPitchNotation: 'F[11]5', alg: {txt: 'ID', fn: identityFn}});
-    assert.strictEqual(jint.toFractionText(), '352/27');
+    assert.strictEqual(jint.widthFractionText(), '352/27');
     assert.strictEqual(jint.getAlgText(), 'ID');
   });
 
   it('new JInterval({startPitchNotation:"D5", endPitchNotation:"F[11]5", alg:{txt:"KG",fn:identityFn}) overrides fn, uses KG, and gives value of 22528/19683', function () {
     var jint = new JInterval({startPitchNotation: 'D5', endPitchNotation: 'F[11]5', alg: {txt: 'KG', fn: identityFn}});
-    assert.strictEqual(jint.toFractionText(), '22528/19683');
+    assert.strictEqual(jint.widthFractionText(), '22528/19683');
     assert.strictEqual(jint.getAlgText(), 'KG2');
   });
 
@@ -347,17 +347,17 @@ describe(fnName, function () {
 
   it('Test fraction text on 15 digits works', function () {
     var jint = new JInterval({2: 48, 3: -30});
-    assert(jint.toDecimal() > 1.367105877);      // 1.3671058770091216
-    assert(jint.toDecimal() < 1.367105878);
-    assert.strictEqual(jint.toFractionText(), '281474976710656/205891132094649');
+    assert(jint.width() > 1.367105877);      // 1.3671058770091216
+    assert(jint.width() < 1.367105878);
+    assert.strictEqual(jint.widthFractionText(), '281474976710656/205891132094649');
     assert.strictEqual(jint.toString(), 'Interval of 281474976710656/205891132094649');
   });
 
   it('Test fraction text on 16 digits fails', function () {
     var jint = new JInterval({2: 50, 3: -30});
-    assert(jint.toDecimal() > 5.468423508);      // 5.468423508036486
-    assert(jint.toDecimal() < 5.468423509);
-    assert.strictEqual(jint.toFractionText(), 'NA');
+    assert(jint.width() > 5.468423508);      // 5.468423508036486
+    assert(jint.width() < 5.468423509);
+    assert.strictEqual(jint.widthFractionText(), 'NA');
     assert.strictEqual(jint.toString(), 'Interval of NA');
   });
 });
