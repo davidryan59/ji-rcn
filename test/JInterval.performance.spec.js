@@ -9,37 +9,31 @@ var getTimeMS = function () {
   return new Date().getTime();
 };
 
+var runTest = function (startAtNumber, totalLoops, maxTimeMicroseconds, testLabel, functionToCall) {
+  it(testLabel, function () {
+    var startTimeMS = getTimeMS();
+    for (var i = startAtNumber; i < startAtNumber + totalLoops; i++) functionToCall(i);
+    var endTimeMS = getTimeMS();
+    var timeInMicroseconds = Math.round((endTimeMS - startTimeMS) * 1000 / totalLoops);
+    console.log(`Average time was ${timeInMicroseconds}us, tested on ${totalLoops} instances from ${startAtNumber} to ${startAtNumber + totalLoops - 1}, total time ${endTimeMS - startTimeMS}ms.`);
+    assert(timeInMicroseconds < maxTimeMicroseconds);
+  });
+};
+
 describe('Performance of JInterval', function () {
-  // Typical time: 22ms
-  it('Can create 2000 JIntervals on rationals of order 1e6 in less than 100ms', function () {
-    var startTimeMS = getTimeMS();
-    for (var i = 1000000; i < 1002000; i++) {
-      var jint = new JInterval(i, 77);
-    }
-    var endTimeMS = getTimeMS();
-    assert(endTimeMS - startTimeMS < 100);
-    assert(jint);
+  runTest(1000000, 2000, 70, 'average < 70us (microseconds) for new JInterval(integer, 91)', function (i) {
+    return new JInterval(i, 91);
   });
 
-  // Typical time: 70ms
-  it('Can create 100 JIntervals on frequency ranges in less than 200ms', function () {
-    var startTimeMS = getTimeMS();
-    for (var i = 150; i < 250; i++) {
-      var jint = new JInterval({startFreqHz: i, endFreqHz: 210});
-    }
-    var endTimeMS = getTimeMS();
-    assert(endTimeMS - startTimeMS < 200);
-    assert(jint);
+  runTest(150, 100, 1200, 'average < 1200us for new JInterval({startFreqHz: integer, endFreqHz: 210})', function (i) {
+    return new JInterval({startFreqHz: i, endFreqHz: 210});
   });
 
-  // Typical time: 70ms
-  it('Can create 20 JIntervals on notation ranges in less than 200ms', function () {
-    var startTimeMS = getTimeMS();
-    for (var i = 0; i < 20; i++) {
-      var jint = new JInterval({startPitchNotation: "E#''[7/11]6", endPitchNotation: 'Db.[101/257](o-4)'});
-    }
-    var endTimeMS = getTimeMS();
-    assert(endTimeMS - startTimeMS < 200);
-    assert(jint);
+  runTest(1, 20, 1500, 'average < 1500us for new JInterval({startPitchNotation: \'C4\', endPitchNotation: \'G4\'}) using simple notations', function (i) {
+    return new JInterval({startPitchNotation: 'C4', endPitchNotation: 'G4'});
+  });
+
+  runTest(1, 20, 2000, 'average < 2000us for new JInterval({startPitchNotation: txt1, endPitchNotation: txt2}) using more complex notations', function (i) {
+    return new JInterval({startPitchNotation: "E#''[7/11]6", endPitchNotation: 'Db.[101/257](o-4)'});
   });
 });
