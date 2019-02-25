@@ -37,11 +37,18 @@ var regexAnyError = new RegExp(regexErrorString, sharedRegexFlags);
 
 module.exports = {
   REGEX_ANY_ERROR: regexAnyError,
+  REGEX_HIGHER_PYTHAG_EXISTS: new RegExp('[' + esc(
+    consts.CHAR_PYTHAG_ON + consts.CHAR_PYTHAG_OFF + consts.CHAR_MERCATOR_ON + consts.CHAR_MERCATOR_OFF +
+    consts.CHAR_SMALL_ON + consts.CHAR_SMALL_OFF + consts.CHAR_TINY_ON + consts.CHAR_TINY_OFF
+  ) + ']', sharedRegexFlags),
+  REGEX_COMMA_EXISTS: new RegExp('[' + esc(consts.BRACKET_ALLOWED_CHARS) + ']', sharedRegexFlags),
+  REGEX_COMMA_SPLIT: new RegExp('[' + esc(' ' + consts.BRACKET_ALLOWED_CHARS) + ']', sharedRegexFlags),
 
   REGEX_BRACKETED_OCTAVES_UP: makeRegexForVariableDigits(consts.CHAR_OCTAVE_MARK + consts.CHAR_OCTAVE_UP),
   REGEX_BRACKETED_OCTAVES_DOWN: makeRegexForVariableDigits(consts.CHAR_OCTAVE_MARK + consts.CHAR_OCTAVE_DOWN),
   REGEX_BRACKETED_SHARPS: makeRegexForVariableDigits(consts.CHAR_SHARP),
   REGEX_BRACKETED_FLATS: makeRegexForVariableDigits(consts.CHAR_FLAT),
+
   REGEX_BRACKETED_PYTHAG_COMMA_ADD: makeRegexForVariableDigits(consts.CHAR_PYTHAG_ON),
   REGEX_BRACKETED_PYTHAG_COMMA_REMOVE: makeRegexForVariableDigits(consts.CHAR_PYTHAG_OFF),
   REGEX_BRACKETED_MERCATOR_COMMA_ADD: makeRegexForVariableDigits(consts.CHAR_MERCATOR_ON),
@@ -50,6 +57,7 @@ module.exports = {
   REGEX_BRACKETED_SMALL_COMMA_REMOVE: makeRegexForVariableDigits(consts.CHAR_SMALL_OFF),
   REGEX_BRACKETED_TINY_COMMA_ADD: makeRegexForVariableDigits(consts.CHAR_TINY_ON),
   REGEX_BRACKETED_TINY_COMMA_REMOVE: makeRegexForVariableDigits(consts.CHAR_TINY_OFF),
+
   REGEX_BRACKETED_SYNTONIC_COMMA_ADD: makeRegexForVariableDigits(consts.CHAR_SYNTONIC_ON),
   REGEX_BRACKETED_SYNTONIC_COMMA_REMOVE: makeRegexForVariableDigits(consts.CHAR_SYNTONIC_OFF),
 

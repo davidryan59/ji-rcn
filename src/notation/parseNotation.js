@@ -22,13 +22,12 @@ var getIntFromChars = function getIntFromChars(theText) {
 
 var removeSpacesAroundPowerSymbol = function removeSpacesAroundPowerSymbol(theText) {return theText.replace(/ *\^ */g, '^');};
 var addSpacesAroundDivideSymbol = function addSpacesAroundDivideSymbol(theText) {return theText.replace(/\//g, ' / ');};
-var commaSplitRegex = new RegExp('[' + esc(' ' + consts.BRACKET_ALLOWED_CHARS) + ']', 'g');
 
 var processCommaText = function processCommaText(commaText, inputAlg) {
   var tempText = commaText;
   tempText = removeSpacesAroundPowerSymbol(tempText);
   tempText = addSpacesAroundDivideSymbol(tempText);
-  var splitArray = tempText.split(commaSplitRegex);
+  var splitArray = tempText.split(rxs.REGEX_COMMA_SPLIT);
   var sign = 1;      // -1 after divide symbol
   var firstPeo = new Peo();
   for (var i = 0; i < splitArray.length; i++) {
