@@ -36,23 +36,23 @@ describe('Performance of JInterval', function () {
     return new JInterval({startPitchNotation: "E#''pd[7/11]6", endPitchNotation: 'Db.ty[101/257](o-4)'});
   });
 
-  var jint1 = new JInterval(2)
-  jint1.getEndPitchClassNotation('D4')
+  var jint1 = new JInterval(2);
+  jint1.getEndPitchClassNotation('D4');
   runTest(1, 50000, 17, 'average < 17us for fetching precalculated end notation', function () {
-    return jint1.getEndPitchClassNotation()
+    return jint1.getEndPitchClassNotation();
   });
 
-  var jint2 = new JInterval(2)
-  var arr2 = ['D4', 'E4']
-  jint1.getEndPitchClassNotation('F4')
+  var jint2 = new JInterval(2);
+  var arr2 = ['D4', 'E4'];
+  jint1.getEndPitchClassNotation('F4');
   runTest(1, 200, 550, 'average < 550us for recalculating simple notations', function (i) {
-    return jint2.getEndPitchClassNotation(arr2[i%2]) // Swap between two simple end notations
+    return jint2.getEndPitchClassNotation(arr2[i % 2]); // Swap between two simple end notations
   });
 
-  var jint3 = new JInterval(2)
-  var arr3 = ['D##b#bb(p2)4', 'E...\'\'\'(d2)4']
-  jint1.getEndPitchClassNotation('F[77/77]#b(p2)4')
+  var jint3 = new JInterval(2);
+  var arr3 = ['D##b#bb(p2)4', 'E...\'\'\'(d2)4'];
+  jint1.getEndPitchClassNotation('F[77/77]#b(p2)4');
   runTest(1, 200, 760, 'average < 760us for recalculating complex notations', function (i) {
-    return jint3.getEndPitchClassNotation(arr3[i%2]) // Swap between two simple end notations
+    return jint3.getEndPitchClassNotation(arr3[i % 2]); // Swap between two simple end notations
   });
 });
