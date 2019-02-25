@@ -33,15 +33,14 @@ var stringBracketedCommaInteger = makeRegexStringForComma(regexStringInteger);
 
 // Errors are of form (.ERR) or (..ERR)
 var regexErrorString = esc(consts.BRACKET_LEFT_STANDARD) + '.{0,' + consts.ERROR_MAX_CHARS + '}' + esc(consts.ERROR_TEXT + consts.BRACKET_RIGHT_STANDARD);
-var regexAnyError = new RegExp(regexErrorString, sharedRegexFlags);
 
 module.exports = {
-  REGEX_ANY_ERROR: regexAnyError,
+  REGEX_ANY_ERROR: new RegExp(regexErrorString, sharedRegexFlags),
+  REGEX_BRACKET_EXISTS: new RegExp('[' + esc(consts.BRACKET_ALLOWED_CHARS) + ']', sharedRegexFlags),
   REGEX_HIGHER_PYTHAG_EXISTS: new RegExp('[' + esc(
     consts.CHAR_PYTHAG_ON + consts.CHAR_PYTHAG_OFF + consts.CHAR_MERCATOR_ON + consts.CHAR_MERCATOR_OFF +
     consts.CHAR_SMALL_ON + consts.CHAR_SMALL_OFF + consts.CHAR_TINY_ON + consts.CHAR_TINY_OFF
   ) + ']', sharedRegexFlags),
-  REGEX_COMMA_EXISTS: new RegExp('[' + esc(consts.BRACKET_ALLOWED_CHARS) + ']', sharedRegexFlags),
   REGEX_COMMA_SPLIT: new RegExp('[' + esc(' ' + consts.BRACKET_ALLOWED_CHARS) + ']', sharedRegexFlags),
 
   REGEX_BRACKETED_OCTAVES_UP: makeRegexForVariableDigits(consts.CHAR_OCTAVE_MARK + consts.CHAR_OCTAVE_UP),

@@ -6,10 +6,8 @@
 // in JInterval, even though parseNotation always measures from C4.
 
 var Peo = require('peo');
-var esc = require('escape-string-regexp');
 
 var getComma = require('../api/class/getComma');
-var consts = require('../constants/consts');
 var peos = require('../constants/peos');
 var rxs = require('../constants/regexes');
 
@@ -117,109 +115,117 @@ var parseNotation = function parseNotation(jint, notation) {
     }, '');
   };
 
-  // Remove all error conditions from the text to parse.
-  // They have a standard format.
-  analyseNotation({rgx: rxs.REGEX_ANY_ERROR});
+  // -1: the higher pythag notation not found
+  // 0, 1...: the higher pythag notation is found. need to do more analysis!
+  var thereAreHigherPythags = (tempNotation.search(rxs.REGEX_HIGHER_PYTHAG_EXISTS) > -1);
+  // if (thereAreHigherPythags) {
+  //      console.log('HIGHER SEARCH CARRIED OUT')
+  // } else {
+  //   console.log('No search')
+  // }
 
-  // Analyse and remove valid bracketed expressions from the text
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_OCTAVES_UP,
-    reduceMatch: reduceToSumOfIntsMinus4,
-    mapReducerResultToPeo: peoPower(peos.PEO_OCTAVE)
-  });
+  var thereAreBrackets = (tempNotation.search(rxs.REGEX_BRACKET_EXISTS) > -1);
 
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_OCTAVES_DOWN,
-    reduceMatch: reduceToSumOfIntsMinus4,
-    mapReducerResultToPeo: peoPower(peos.PEO_OCTAVE)
-  });
+  if (thereAreBrackets) {
+    // Remove all error conditions from the text to parse.
+    // They have a standard format, which includes at least 1 bracket.
+    analyseNotation({rgx: rxs.REGEX_ANY_ERROR});
 
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_SHARPS,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_SHARP)
-  });
+    // Analyse and remove valid bracketed expressions from the text
+    analyseNotation({
+      rgx: rxs.REGEX_BRACKETED_OCTAVES_UP,
+      reduceMatch: reduceToSumOfIntsMinus4,
+      mapReducerResultToPeo: peoPower(peos.PEO_OCTAVE)
+    });
 
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_FLATS,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_SHARP, -1)
-  });
+    analyseNotation({
+      rgx: rxs.REGEX_BRACKETED_OCTAVES_DOWN,
+      reduceMatch: reduceToSumOfIntsMinus4,
+      mapReducerResultToPeo: peoPower(peos.PEO_OCTAVE)
+    });
 
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_PYTHAG_COMMA_ADD,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_PYTHAG)
-  });
+    analyseNotation({
+      rgx: rxs.REGEX_BRACKETED_SHARPS,
+      reduceMatch: reduceToSumOfInts,
+      mapReducerResultToPeo: peoPower(peos.PEO_SHARP)
+    });
 
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_PYTHAG_COMMA_REMOVE,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_PYTHAG, -1)
-  });
+    analyseNotation({
+      rgx: rxs.REGEX_BRACKETED_FLATS,
+      reduceMatch: reduceToSumOfInts,
+      mapReducerResultToPeo: peoPower(peos.PEO_SHARP, -1)
+    });
 
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_MERCATOR_COMMA_ADD,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_MERCATOR)
-  });
+    analyseNotation({
+      rgx: rxs.REGEX_BRACKETED_SYNTONIC_COMMA_ADD,
+      reduceMatch: reduceToSumOfInts,
+      mapReducerResultToPeo: peoPower(peoSyntonic)
+    });
 
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_MERCATOR_COMMA_REMOVE,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_MERCATOR, -1)
-  });
+    analyseNotation({
+      rgx: rxs.REGEX_BRACKETED_SYNTONIC_COMMA_REMOVE,
+      reduceMatch: reduceToSumOfInts,
+      mapReducerResultToPeo: peoPower(peoSyntonic, -1)
+    });
 
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_SMALL_COMMA_ADD,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_SMALL)
-  });
+    if (thereAreHigherPythags) {
+      analyseNotation({
+        rgx: rxs.REGEX_BRACKETED_PYTHAG_COMMA_ADD,
+        reduceMatch: reduceToSumOfInts,
+        mapReducerResultToPeo: peoPower(peos.PEO_PYTHAG)
+      });
+      analyseNotation({
+        rgx: rxs.REGEX_BRACKETED_PYTHAG_COMMA_REMOVE,
+        reduceMatch: reduceToSumOfInts,
+        mapReducerResultToPeo: peoPower(peos.PEO_PYTHAG, -1)
+      });
+      analyseNotation({
+        rgx: rxs.REGEX_BRACKETED_MERCATOR_COMMA_ADD,
+        reduceMatch: reduceToSumOfInts,
+        mapReducerResultToPeo: peoPower(peos.PEO_MERCATOR)
+      });
+      analyseNotation({
+        rgx: rxs.REGEX_BRACKETED_MERCATOR_COMMA_REMOVE,
+        reduceMatch: reduceToSumOfInts,
+        mapReducerResultToPeo: peoPower(peos.PEO_MERCATOR, -1)
+      });
+      analyseNotation({
+        rgx: rxs.REGEX_BRACKETED_SMALL_COMMA_ADD,
+        reduceMatch: reduceToSumOfInts,
+        mapReducerResultToPeo: peoPower(peos.PEO_SMALL)
+      });
+      analyseNotation({
+        rgx: rxs.REGEX_BRACKETED_SMALL_COMMA_REMOVE,
+        reduceMatch: reduceToSumOfInts,
+        mapReducerResultToPeo: peoPower(peos.PEO_SMALL, -1)
+      });
+      analyseNotation({
+        rgx: rxs.REGEX_BRACKETED_TINY_COMMA_ADD,
+        reduceMatch: reduceToSumOfInts,
+        mapReducerResultToPeo: peoPower(peos.PEO_TINY)
+      });
+      analyseNotation({
+        rgx: rxs.REGEX_BRACKETED_TINY_COMMA_REMOVE,
+        reduceMatch: reduceToSumOfInts,
+        mapReducerResultToPeo: peoPower(peos.PEO_TINY, -1)
+      });
+    }
 
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_SMALL_COMMA_REMOVE,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_SMALL, -1)
-  });
+    // Do the commas - must be after all the others are removed, due to similar formats
+    analyseNotation({
+      rgx: rxs.REGEX_BRACKETED_COMMA_FRACTION,
+      reduceMatch: reduceCommasToPeo(inputAlg),
+      initialValue: new Peo(),
+      mapReducerResultToPeo: identityFunction
+    });
 
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_TINY_COMMA_ADD,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_TINY)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_TINY_COMMA_REMOVE,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_TINY, -1)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_SYNTONIC_COMMA_ADD,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peoSyntonic)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_SYNTONIC_COMMA_REMOVE,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peoSyntonic, -1)
-  });
-
-  // Do the commas next
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_COMMA_FRACTION,
-    reduceMatch: reduceCommasToPeo(inputAlg),
-    initialValue: new Peo(),
-    mapReducerResultToPeo: identityFunction
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_COMMA_INTEGER,
-    reduceMatch: reduceCommasToPeo(inputAlg),
-    initialValue: new Peo(),
-    mapReducerResultToPeo: identityFunction
-  });
+    analyseNotation({
+      rgx: rxs.REGEX_BRACKETED_COMMA_INTEGER,
+      reduceMatch: reduceCommasToPeo(inputAlg),
+      initialValue: new Peo(),
+      mapReducerResultToPeo: identityFunction
+    });
+  }
 
   // Analyse and remove some valid single characters from the text
   analyseNotation({
@@ -246,56 +252,48 @@ var parseNotation = function parseNotation(jint, notation) {
     mapReducerResultToPeo: peoPower(peos.PEO_SHARP, -1)
   });
 
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_PYTHAG_COMMA_ADD,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_PYTHAG)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_PYTHAG_COMMA_REMOVE,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_PYTHAG, -1)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_MERCATOR_COMMA_ADD,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_MERCATOR)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_MERCATOR_COMMA_REMOVE,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_MERCATOR, -1)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_SMALL_COMMA_ADD,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_SMALL)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_SMALL_COMMA_REMOVE,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_SMALL, -1)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_TINY_COMMA_ADD,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_TINY)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_TINY_COMMA_REMOVE,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_TINY, -1)
-  });
-
-  // Remove any error conditions designated by individual characters
-  analyseNotation({rgx: rxs.REGEX_CHAR_ERROR});
+  if (thereAreHigherPythags) {
+    analyseNotation({
+      rgx: rxs.REGEX_CHAR_PYTHAG_COMMA_ADD,
+      reduceMatch: reduceToCount,
+      mapReducerResultToPeo: peoPower(peos.PEO_PYTHAG)
+    });
+    analyseNotation({
+      rgx: rxs.REGEX_CHAR_PYTHAG_COMMA_REMOVE,
+      reduceMatch: reduceToCount,
+      mapReducerResultToPeo: peoPower(peos.PEO_PYTHAG, -1)
+    });
+    analyseNotation({
+      rgx: rxs.REGEX_CHAR_MERCATOR_COMMA_ADD,
+      reduceMatch: reduceToCount,
+      mapReducerResultToPeo: peoPower(peos.PEO_MERCATOR)
+    });
+    analyseNotation({
+      rgx: rxs.REGEX_CHAR_MERCATOR_COMMA_REMOVE,
+      reduceMatch: reduceToCount,
+      mapReducerResultToPeo: peoPower(peos.PEO_MERCATOR, -1)
+    });
+    analyseNotation({
+      rgx: rxs.REGEX_CHAR_SMALL_COMMA_ADD,
+      reduceMatch: reduceToCount,
+      mapReducerResultToPeo: peoPower(peos.PEO_SMALL)
+    });
+    analyseNotation({
+      rgx: rxs.REGEX_CHAR_SMALL_COMMA_REMOVE,
+      reduceMatch: reduceToCount,
+      mapReducerResultToPeo: peoPower(peos.PEO_SMALL, -1)
+    });
+    analyseNotation({
+      rgx: rxs.REGEX_CHAR_TINY_COMMA_ADD,
+      reduceMatch: reduceToCount,
+      mapReducerResultToPeo: peoPower(peos.PEO_TINY)
+    });
+    analyseNotation({
+      rgx: rxs.REGEX_CHAR_TINY_COMMA_REMOVE,
+      reduceMatch: reduceToCount,
+      mapReducerResultToPeo: peoPower(peos.PEO_TINY, -1)
+    });
+  }
 
   // Finally analyse the note char and octave number
   analyseNotation({

@@ -13,7 +13,7 @@ module.exports = {
 
   CHAR_SHARP: '#',
   CHAR_FLAT: 'b',
-  
+
   CHAR_PYTHAG_ON: 'p',
   CHAR_PYTHAG_OFF: 'd',
   CHAR_MERCATOR_ON: 'm',
