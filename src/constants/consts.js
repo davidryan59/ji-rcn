@@ -5,9 +5,7 @@
 
 module.exports = {
   DEFAULT_PITCH_NOTATION: 'C4',
-  DEFAULT_PITCH_CLASS_NOTATION: 'C',
   DEFAULT_FREQ_HZ: 256,
-  DEFAULT_FREQ_TXT: '256.00 Hz',
 
   CHAR_OCTAVE_MARK: 'o',
   CHAR_OCTAVE_UP: '+',
@@ -15,6 +13,7 @@ module.exports = {
 
   CHAR_SHARP: '#',
   CHAR_FLAT: 'b',
+  
   CHAR_PYTHAG_ON: 'p',
   CHAR_PYTHAG_OFF: 'd',
   CHAR_MERCATOR_ON: 'm',
