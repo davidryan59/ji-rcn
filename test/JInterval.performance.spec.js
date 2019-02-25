@@ -7,18 +7,12 @@ var assert = require('assert');
 var testIndex = require('./_test_index');
 var JInterval = testIndex.JInterval;
 
-var getTimeMS = function () {
-  return new Date().getTime();
-};
-
 var runTest = function (startAtNumber, totalLoops, maxTimeMicroseconds, testLabel, functionToCall) {
   it(testLabel, function () {
     var exampleOutput = null;
-    var startTimeMS = getTimeMS();
+    var startTimeMS = Date.now();
     for (var i = startAtNumber; i < startAtNumber + totalLoops; i++) exampleOutput = functionToCall(i);
-    var endTimeMS = getTimeMS();
-    // console.log(`Example output:`)
-    // console.log(exampleOutput)
+    var endTimeMS = Date.now();
     var timeInMicroseconds = Math.round((endTimeMS - startTimeMS) * 1000 / totalLoops);
     console.log(`Average time was ${timeInMicroseconds}us, tested on ${totalLoops} instances from ${startAtNumber} to ${startAtNumber + totalLoops - 1}, total time ${endTimeMS - startTimeMS}ms.`);
     assert(timeInMicroseconds < maxTimeMicroseconds);
