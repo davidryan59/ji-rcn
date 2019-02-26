@@ -2,22 +2,27 @@ var setPos = require('./setPos');
 var consts = require('../constants/consts');
 var parseNotation = require('../notation/parseNotation');
 
-var setupPosFromNotation = function setupPosFromNotation(jint, inputStartNotation, inputEndNotation) {
+var setupPosFromNotation = function setupPosFromNotation(jint, inputStartNotation, inputEndNotation, optionalStartPeo) {
+  // optionalStartPeo can speed up calculation by cutting out slow parseNotation steps
   if (!jint.hasPos()) {
     // Absolute position (pos) not yet set
     // Create position using inputted start notation, or failing that, default start notation
-    var theStartNotation = (!inputStartNotation) ? consts.DEFAULT_PITCH_NOTATION : inputStartNotation;
-    var theStartPeo1 = parseNotation(jint, theStartNotation);
-    setPos(jint, theStartPeo1);
+    if (optionalStartPeo) {
+      setPos(jint, optionalStartPeo);
+    } else {
+      var theStartNotation = (!inputStartNotation) ? consts.DEFAULT_PITCH_NOTATION : inputStartNotation;
+      setPos(jint, parseNotation(jint, theStartNotation));
+    }
   } else {
     // Absolute position has already been set
-    // Reuse if no inputStartNotation has been inputted
-    if (!inputStartNotation) return;
+    // Reuse if no inputStartNotation has been inputted (and no start peo value)
+    if (!(inputStartNotation || optionalStartPeo)) return;
     // Reuse if input start notation matches the stored value (or the stored input value)
     if (inputStartNotation === (jint.pos.start.inputPitch || jint.pos.start.pitch)) return;
     // Cannot reuse. Must reset.
-    var theStartPeo2 = parseNotation(jint, inputStartNotation);
-    setPos(jint, theStartPeo2);
+    // optionalStartPeo only used on initialisation,
+    // so wouldn't be available here for amending the start position
+    setPos(jint, parseNotation(jint, inputStartNotation));
   }
   // Set the input notations here if they are not the same
   if (inputStartNotation && inputStartNotation !== jint.pos.start.pitch) jint.pos.start.inputPitch = inputStartNotation;

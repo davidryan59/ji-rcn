@@ -28,7 +28,7 @@ describe('Performance of JInterval', function () {
     return new JInterval({startFreqHz: i, endFreqHz: 210});
   });
 
-  runTest(1, 20, 1500, 'average < 1500us for new JInterval({startPitchNotation: \'C4\', endPitchNotation: \'G4\'}) using simple notations', function () {
+  runTest(1, 50, 1500, 'average < 1500us for new JInterval({startPitchNotation: \'C4\', endPitchNotation: \'G4\'}) using simple notations', function () {
     return new JInterval({startPitchNotation: 'C4', endPitchNotation: 'G4'});
   });
 

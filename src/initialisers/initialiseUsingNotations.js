@@ -9,7 +9,7 @@ var initialiseUsingNotations = function initialiseUsingNotations(jint, startNInp
   var endPeo = parseNotation(jint, endNote);
   var intervalPeo = endPeo.mult(startPeo, -1);
   jint.peo = intervalPeo;
-  setupPosFromNotation(jint, startNote, endNote);
+  setupPosFromNotation(jint, startNote, endNote, startPeo);
 };
 
 module.exports = initialiseUsingNotations;
