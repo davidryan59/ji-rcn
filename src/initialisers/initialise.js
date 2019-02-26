@@ -11,8 +11,9 @@ var initialiseUsingPeo = require('./initialiseUsingPeo');
 var setAlg = require('../commas/setAlg');
 
 var canInitialiseFromObject = function canInitialiseFromObject(obj) {
-  if (obj.startPitchNotation || obj.endPitchNotation || obj.startFreqHz || obj.endFreqHz || obj.jint || obj.peo || obj.width || obj.num || obj.denom) return true;
-  return false;
+  return obj.startPitchNotation || obj.endPitchNotation ||
+         obj.startFreqHz || obj.endFreqHz ||
+         obj.jint || obj.peo || obj.num || obj.denom || obj.width
 };
 
 

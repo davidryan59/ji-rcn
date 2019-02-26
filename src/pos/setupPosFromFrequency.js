@@ -7,8 +7,7 @@ var smallLimit = 1e-12;
 var largeLimit = 1e15;
 
 var checkInput = function checkInput(numericInput) {
-  if (Number.isFinite(numericInput) && numericInput > 0 && numericInput < largeLimit) return true;
-  return false;
+  return Number.isFinite(numericInput) && numericInput > 0 && numericInput < largeLimit
 };
 
 var setupPosFromFrequency = function setupPosFromFrequency(jint, inputStartFreqHz) {
