@@ -1,6 +1,5 @@
 var hasPos = function hasPos() {
-  if (this.pos) return true;
-  return false;
+  return !!(this.pos);
 };
 
 module.exports = hasPos;
