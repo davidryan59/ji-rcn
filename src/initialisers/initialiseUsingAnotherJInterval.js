@@ -22,8 +22,8 @@ var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(j
 
   // If absolute position is specified on otherJint, copy it to this jint
   if (otherJint.hasPos()) {
-    var startNote = otherJint.getStartPitchInputNotation();
-    var endNote = otherJint.getEndPitchInputNotation();
+    var startNote = otherJint.getStartInputPitchNotation();
+    var endNote = otherJint.getEndInputPitchNotation();
     setupPosFromNotation(jint, startNote, endNote);
   }
 };

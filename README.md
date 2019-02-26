@@ -90,6 +90,7 @@ Examples for using `getComma` are given below. Format is either `getComma(p)` or
 jint.compress()      // Remove all cached information on a JInterval. This includes: absolute position, cache on peo.
 jint.copy()          // Returns a deep copy of a JInterval
 jint.toString()      // Returns a text description of JInterval
+jint.getOptionsSetupObject() // Returns an object describing the setup options of JInterval
 ```
 
 ### Interval Width (Relative Position, Relative Size)
@@ -110,13 +111,13 @@ In the functions below, `startFreqHz` and `startNotation` are optional, and defa
 ``` js
 jint.getEndFreqHz(startFreqHz)               // Returns numeric end frequency in Hz
 jint.getEndFreqText(startFreqHz)             // Returns formatted string 'NNN.NN Hz' for end frequency
+jint.getEndInputPitchNotation(startNotation) // Returns pitch notation for end of interval, as inputted
 jint.getEndPitchNotation(startNotation)      // Returns pitch notation for end of interval in standard notation
-jint.getEndPitchInputNotation(startNotation) // Returns pitch notation for end of interval, as inputted
 jint.getEndPitchClassNotation(startNotation) // Returns pitch class of end of interval - pitch class is a notation without an octave value
 jint.getStartFreqHz()                        // Returns numeric start frequency in Hz
 jint.getStartFreqText()                      // Returns formatted string 'NNN.NN Hz' for start frequency
+jint.getStartInputPitchNotation()            // Returns pitch notation for start of interval, as inputted
 jint.getStartPitchNotation()                 // Returns pitch notation for start of interval in standard notation
-jint.getStartPitchInputNotation()            // Returns pitch notation for start of interval, as inputted
 jint.getStartPitchClassNotation()            // Returns pitch class of start of interval
 jint.hasPos()                                // Returns boolean value: true if an absolute position has been calculated, false otherwise
 ```

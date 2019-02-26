@@ -1,7 +1,8 @@
 var copy = function copy() {
-  // The constructor initialised from a JInterval copies the JInterval
-  var copyJInterval = new this.constructor(this);
-  return copyJInterval;
+  // Return a copy of this JInterval, with same options via initialising on the original
+  var JIntervalConstructor = this.constructor;
+  var copyJint = new JIntervalConstructor(this);
+  return copyJint;
 };
 
 module.exports = copy;

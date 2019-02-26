@@ -1,13 +1,11 @@
-// Multiply one JInterval by another, optionally to a power (repeated that many times)
+var mathsFnJIntervalCreator = require('../../maths/mathsFnJIntervalCreator');
+
+// Return JInterval with frequency ratio (width) equal to product of
+// frequency ratio of this interval and
+// frequency ratio of another interval (optionally to a specified power)
+// Use .mult on Peo to achieve the multiplication
 var mult = function mult(otherJInterval, power) {
-  // Use Peo to do a multiplication
-  var thisPeo = this.peo;
-  var thatPeo = otherJInterval.peo;
-  var peoMult = thisPeo.mult(thatPeo, power);
-  // Use the constructor to make a new JInterval based on peoMult
-  var JIntervalConstructor = this.constructor;
-  var newJInterval = new JIntervalConstructor(peoMult);
-  return newJInterval;
+  return mathsFnJIntervalCreator(this, {peo: this.peo.mult(otherJInterval.peo, power)});
 };
 
 module.exports = mult;

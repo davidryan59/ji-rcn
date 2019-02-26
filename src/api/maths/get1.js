@@ -1,7 +1,8 @@
-// Return an identity JInterval, representing an interval of unison, 1/1
+var mathsFnJIntervalCreator = require('../../maths/mathsFnJIntervalCreator');
+
+// Return JInterval of unison, 1/1
 var get1 = function get1() {
-  var JIntervalConstructor = this.constructor;
-  return new JIntervalConstructor();
+  return mathsFnJIntervalCreator(this, {width: 1});
 };
 
 module.exports = get1;

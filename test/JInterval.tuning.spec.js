@@ -321,9 +321,9 @@ describe(fnName, function () {
     assert.strictEqual(jint.getEndFreqText(), '560.00 Hz');
   });
 
-  it('Check getEndPitchInputNotation resets notations and frequencies', function () {
+  it('Check getEndInputPitchNotation resets notations and frequencies', function () {
     var jint = new JInterval("E'5");
-    jint.getEndPitchInputNotation('Bb[7](o+5)');   // Change start to Bb[7]5
+    jint.getEndInputPitchNotation('Bb[7](o+5)');   // Change start to Bb[7]5
     assert.strictEqual(jint.widthFractionText(), '5/2');
     assert.strictEqual(jint.getStartPitchNotation(), 'Bb[7]5');
     assert.strictEqual(jint.getEndPitchNotation(), "D'[7]7");

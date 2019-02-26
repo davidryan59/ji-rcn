@@ -17,6 +17,7 @@ JInterval.getCommaAlgs = require('./api/class/getCommaAlgs');
 JInterval.prototype.compress = require('./api/general/compress');
 JInterval.prototype.copy = require('./api/general/copy');
 JInterval.prototype.toString = require('./api/general/toString');
+JInterval.prototype.getOptionsSetupObject = require('./api/general/getOptionsSetupObject');
 
 // Interval Width (Relative Position)
 JInterval.prototype.width = require('./api/width/width');
@@ -26,13 +27,13 @@ JInterval.prototype.widthPeo = require('./api/width/widthPeo');
 // Absolute Position
 JInterval.prototype.getEndFreqHz = require('./api/pos/getEndFreqHz');
 JInterval.prototype.getEndFreqText = require('./api/pos/getEndFreqText');
+JInterval.prototype.getEndInputPitchNotation = require('./api/pos/getEndInputPitchNotation');
 JInterval.prototype.getEndPitchNotation = require('./api/pos/getEndPitchNotation');
-JInterval.prototype.getEndPitchInputNotation = require('./api/pos/getEndPitchInputNotation');
 JInterval.prototype.getEndPitchClassNotation = require('./api/pos/getEndPitchClassNotation');
 JInterval.prototype.getStartFreqHz = require('./api/pos/getStartFreqHz');
 JInterval.prototype.getStartFreqText = require('./api/pos/getStartFreqText');
+JInterval.prototype.getStartInputPitchNotation = require('./api/pos/getStartInputPitchNotation');
 JInterval.prototype.getStartPitchNotation = require('./api/pos/getStartPitchNotation');
-JInterval.prototype.getStartPitchInputNotation = require('./api/pos/getStartPitchInputNotation');
 JInterval.prototype.getStartPitchClassNotation = require('./api/pos/getStartPitchClassNotation');
 JInterval.prototype.hasPos = require('./api/pos/hasPos');
 

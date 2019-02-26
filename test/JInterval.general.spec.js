@@ -8,7 +8,7 @@ var JInterval = testIndex.JInterval;
 
 var identityFn = function identityFn(p) {return new Peo(p);};
 
-var fnName = 'JInterval';
+var fnName = 'JInterval general tests';
 describe(fnName, function () {
   it('can initialise from new JInterval(new Peo(14, 15)), and objects get copied correctly', function () {
     var origPeo = new Peo(14, 15);
@@ -279,9 +279,9 @@ describe(fnName, function () {
 
   it('Deals with non-standard start pitch notation G#b5 (equivalent to G5)', function () {
     var jint = new JInterval(5 / 6);
-    assert.strictEqual(jint.getStartPitchInputNotation(), 'C4'); // Test the default notation start value
+    assert.strictEqual(jint.getStartInputPitchNotation(), 'C4'); // Test the default notation start value
     jint.getEndPitchNotation('G#b5');                            // Sets all notation start and end values
-    assert.strictEqual(jint.getStartPitchInputNotation(), 'G#b5');
+    assert.strictEqual(jint.getStartInputPitchNotation(), 'G#b5');
     assert.strictEqual(jint.getStartPitchNotation(), 'G5');
     assert.strictEqual(jint.getEndPitchNotation(), "E'5");
   });
@@ -289,7 +289,7 @@ describe(fnName, function () {
   it("Deals with non-standard start pitch notation '.. (equivalent to C.4)", function () {
     var jint = new JInterval('9/8');
     jint.getEndPitchNotation("'..");
-    assert.strictEqual(jint.getStartPitchInputNotation(), "'..");
+    assert.strictEqual(jint.getStartInputPitchNotation(), "'..");
     assert.strictEqual(jint.getStartPitchNotation(), 'C.4');
     assert.strictEqual(jint.getEndPitchNotation(), 'D.4');
   });
@@ -297,7 +297,7 @@ describe(fnName, function () {
   it('Deals with non-standard start pitch notation Bb[49/7]5 (equivalent to Bb[7]5)', function () {
     var jint = new JInterval(8 / 7);
     jint.getEndPitchNotation('Bb[49/7]5');
-    assert.strictEqual(jint.getStartPitchInputNotation(), 'Bb[49/7]5');
+    assert.strictEqual(jint.getStartInputPitchNotation(), 'Bb[49/7]5');
     assert.strictEqual(jint.getStartPitchNotation(), 'Bb[7]5');
     assert.strictEqual(jint.getEndPitchNotation(), 'C6');
   });
@@ -313,11 +313,11 @@ describe(fnName, function () {
     var jint = new JInterval(3);   // In this test, the value doesn't matter
     assert.strictEqual(jint.getStartPitchNotation(), 'C4');
     assert.strictEqual(jint.getStartPitchClassNotation(), 'C');
-    assert.strictEqual(jint.getStartPitchInputNotation(), 'C4');
+    assert.strictEqual(jint.getStartInputPitchNotation(), 'C4');
     jint.getEndPitchClassNotation('D#b4');
     assert.strictEqual(jint.getStartPitchNotation(), 'D4');
     assert.strictEqual(jint.getStartPitchClassNotation(), 'D');
-    assert.strictEqual(jint.getStartPitchInputNotation(), 'D#b4');
+    assert.strictEqual(jint.getStartInputPitchNotation(), 'D#b4');
   });
 
   it('Test toString without notation', function () {
