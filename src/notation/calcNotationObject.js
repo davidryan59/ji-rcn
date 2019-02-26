@@ -7,8 +7,9 @@ var getDiatonicArray = require('./getDiatonicArray');
 var getOctaveArray = require('./getOctaveArray');
 
 var calcNotationObject = function calcNotationObject(jint, thePeo) {
-  // Split up Peo of this JInterval into components:  2,3  ;  5  ;  primes 7+
-  var splitArray = thePeo.split([2, 3], 5);  // [Peo({2:a,3:b}), Peo({5:c}), Peo(the rest)]
+  // Split up Peo of this JInterval into components:  2,3  ;  5 (optional)  ;  primes 7+ (or 5+)
+  var fiveOrZero = (jint.useComma5Syntonic()) ? 5 : 0;
+  var splitArray = thePeo.split([2, 3], fiveOrZero);  // [Peo({2:a,3:b}), Peo({5:c}), Peo(the rest)]
   // var pythagPeo = splitArray[0];             // Pythagorean = primes 2 and 3 only
   var prime5Peo = splitArray[1];
   var primes7PlusPeo = splitArray[2];

@@ -56,4 +56,11 @@ JInterval.prototype.getTuningMultHz = require('./api/tuning/getTuningMultHz');
 JInterval.prototype.getTuningSetupObject = require('./api/tuning/getTuningSetupObject');
 JInterval.prototype.hasTuning = require('./api/tuning/hasTuning');
 
+// Display
+JInterval.prototype.useComma5Syntonic = require('./api/display/useComma5Syntonic');
+JInterval.prototype.useComma12Pythag = require('./api/display/useComma12Pythag');
+JInterval.prototype.useComma57Mercator = require('./api/display/useComma57Mercator');
+JInterval.prototype.useComma665Small = require('./api/display/useComma665Small');
+JInterval.prototype.useComma190137Tiny = require('./api/display/useComma190137Tiny');
+
 module.exports = JInterval;
