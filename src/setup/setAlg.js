@@ -3,12 +3,12 @@ var algIndex = require('../commas/algIndex');
 var consts = require('../constants/consts');
 
 var setAlg = function setAlg(jint, theAlg) {
-  // Three theAlg formats to deal with:
-  // Case 1: theAlg = "ALG"
-  // Case 2: theAlg = aFunction
-  // Case 3: theAlg = {txt: 'ALG', fn: aFunction}   (could be 0 or 1 inputs)
+  // Format - 3 cases
+  // Case 1 Text:        theAlg = "ALG"
+  // Case 2 Function:    theAlg = aFunction
+  // Case 3 Object:      theAlg = {txt: 'ALG', fn: aFunction}   (could be 0 or 1 inputs)
 
-  // If theAlg missing, do nothing further
+  // Return if no alg inputted
   if (!theAlg) return;
 
   // Have algorithm here. Make a new blank property.

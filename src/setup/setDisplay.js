@@ -1,24 +1,34 @@
 var setDisplay = function setDisplay(jint, theDisplay) {
-  // if (!theTuning) return;
-  // var tuningMultHz = null;
-  // var pitchNotation = null;
-  // var inputPitchNotation = theTuning.pitchNotation;
-  // var freqHz = theTuning.freqHz;
-  // if (!freqHz) freqHz = consts.DEFAULT_FREQ_HZ;
-  // if (!inputPitchNotation) {
-  //   pitchNotation = consts.DEFAULT_PITCH_NOTATION;
-  //   tuningMultHz = freqHz;
-  // } else {
-  //   var thePeo = parseNotation(jint, inputPitchNotation);
-  //   pitchNotation = calcNotationObject(jint, thePeo).pitch;
-  //   tuningMultHz = thePeo.mult(freqHz, -1).pow(-1).getAsDecimal();   // freq/peo = (peo * freq^-1)^-1
+  // Format:
+  // {
+  //   hide5: true,
+  //   show12: true,
+  //   show57: true,
+  //   show665: true,
+  //   show190137: true,
   // }
-  // jint.setup.tuning = {
-  //   freqHz: freqHz,
-  //   pitchNotation: pitchNotation,
-  //   multHz: tuningMultHz
-  // };
-  // if (inputPitchNotation && inputPitchNotation !== pitchNotation) jint.setup.tuning.inputPitchNotation = inputPitchNotation;
+
+  // Return if no options supplied
+  if (!theDisplay) return;
+
+  var hide5 = theDisplay.hide5
+  var show12 = theDisplay.show12
+  var show57 = theDisplay.show57
+  var show665 = theDisplay.show665
+  var show190137 = theDisplay.show190137
+
+  // Return if none of the switches are on
+  if (!(hide5 || show12 || show57 || show665 || show190137)) return
+
+  // We've got at least one non-default display option.
+  // Store them here.
+  jint.setup.disp = {}
+
+  if (hide5) jint.setup.disp.hide5 = true
+  if (show12) jint.setup.disp.show12 = true
+  if (show57) jint.setup.disp.show57 = true
+  if (show665) jint.setup.disp.show665 = true
+  if (show190137) jint.setup.disp.show190137 = true
 };
 
 module.exports = setDisplay;
