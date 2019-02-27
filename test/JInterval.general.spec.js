@@ -345,7 +345,7 @@ describe(fnName, function () {
     assert.strictEqual(theAlgSetupObject.txt, 'SAG');
   });
 
-  it('Test fraction text on 15 digits works', function () {
+  it('Test fraction text on 15 digits uses the fraction', function () {
     var jint = new JInterval({2: 48, 3: -30});
     assert(jint.width() > 1.367105877);      // 1.3671058770091216
     assert(jint.width() < 1.367105878);
@@ -353,11 +353,11 @@ describe(fnName, function () {
     assert.strictEqual(jint.toString(), 'Interval of 281474976710656/205891132094649');
   });
 
-  it('Test fraction text on 16 digits fails', function () {
+  it('Test fraction text on 16 digits uses the decimal', function () {
     var jint = new JInterval({2: 50, 3: -30});
     assert(jint.width() > 5.468423508);      // 5.468423508036486
     assert(jint.width() < 5.468423509);
     assert.strictEqual(jint.widthFractionText(), 'NA');
-    assert.strictEqual(jint.toString(), 'Interval of NA');
+    assert.strictEqual(jint.toString(), 'Interval of 5.468423508036486');
   });
 });
