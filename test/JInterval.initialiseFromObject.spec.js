@@ -17,7 +17,7 @@ describe('Test general initialiser from object', function () {
       endPitchNotation: "E'5"
     };
     jint = new JInterval(theObject);
-    assert.strictEqual(jint.widthFractionText(), '5/3');
+    assert.strictEqual(jint.ratioFractionText(), '5/3');
   });
 
   it('Initialise interval from frequencies in Hz, 300 -> 380', function () {
@@ -26,7 +26,7 @@ describe('Test general initialiser from object', function () {
       endFreqHz: 380
     };
     jint = new JInterval(theObject);
-    assert.strictEqual(jint.widthFractionText(), '19/15');
+    assert.strictEqual(jint.ratioFractionText(), '19/15');
   });
 
   it('Initialise interval from another JInterval', function () {
@@ -35,7 +35,7 @@ describe('Test general initialiser from object', function () {
       jint: jint2
     };
     jint = new JInterval(theObject);
-    assert.strictEqual(jint.widthFractionText(), '2/5');
+    assert.strictEqual(jint.ratioFractionText(), '2/5');
     assert(jint !== jint2);
   });
 
@@ -45,7 +45,7 @@ describe('Test general initialiser from object', function () {
       peo: thePeo
     };
     jint = new JInterval(theObject);
-    assert.strictEqual(jint.widthFractionText(), '10/91');
+    assert.strictEqual(jint.ratioFractionText(), '10/91');
   });
 
   it('Initialise interval from an integer', function () {
@@ -53,7 +53,7 @@ describe('Test general initialiser from object', function () {
       num: 28
     };
     jint = new JInterval(theObject);
-    assert.strictEqual(jint.widthFractionText(), '28');
+    assert.strictEqual(jint.ratioFractionText(), '28');
   });
 
   it('Initialise interval from a reciprocal', function () {
@@ -61,7 +61,7 @@ describe('Test general initialiser from object', function () {
       denom: 13
     };
     jint = new JInterval(theObject);
-    assert.strictEqual(jint.widthFractionText(), '1/13');
+    assert.strictEqual(jint.ratioFractionText(), '1/13');
   });
 
   it('Initialise interval from a rational number', function () {
@@ -70,15 +70,15 @@ describe('Test general initialiser from object', function () {
       denom: 39
     };
     jint = new JInterval(theObject);
-    assert.strictEqual(jint.widthFractionText(), '125/39');
+    assert.strictEqual(jint.ratioFractionText(), '125/39');
   });
 
   it('Initialise interval from a decimal number', function () {
     theObject = {
-      width: 23.3927
+      ratio: 23.3927
     };
     jint = new JInterval(theObject);
-    assert.strictEqual(jint.widthFractionText(), '233927/10000');
+    assert.strictEqual(jint.ratioFractionText(), '233927/10000');
   });
 
   it('Invalid inputs result in JInterval for unison', function () {
@@ -86,7 +86,7 @@ describe('Test general initialiser from object', function () {
       startFreqHz: 'invalid value'
     };
     jint = new JInterval(theObject);
-    assert.strictEqual(jint.widthFractionText(), '1');
+    assert.strictEqual(jint.ratioFractionText(), '1');
   });
 
   // Tests end

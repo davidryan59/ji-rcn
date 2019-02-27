@@ -3,9 +3,9 @@ JI-RCN, `ji-rcn` module. Find [module on npm](https://www.npmjs.com/package/ji-r
 
 [![npm version](https://badge.fury.io/js/ji-rcn.png)](https://badge.fury.io/js/ji-rcn)[![Build status](https://travis-ci.org/davidryan59/ji-rcn.svg?master)](https://travis-ci.org/davidryan59)
 
-**Just Intonation** (JI) tunes musical instruments to have whole number ratios between note frequencies. This is the natural system of tuning for many important musical instruments, including the human voice, stringed instruments, and wind instruments. For such instruments, JI tuning sounds better than tempered tuning. A common example of tempered tuning is 12TET (12 tone equal temperament) which splits the octave into 12 equal semitones.
+**Just Intonation** (JI) tunes musical instruments to have whole number frequency ratios between notes. This is the natural system of tuning for many important musical instruments, including the human voice, stringed instruments, and wind instruments. For such instruments, JI tuning sounds better than tempered tuning. A common example of tempered tuning is 12TET (12 tone equal temperament) which splits the octave into 12 equal semitones.
 
-JI can also be called Rational Intonation (RI) since its interval widths are rational numbers of the form `a/b`, or equivalently simple ratios of the form `a:b`. In JI chords with three or more notes make complex ratios of the form `a:b:c`, `a:b:c:d`, etc.
+JI can also be called Rational Intonation (RI) since its interval ratios are rational numbers of the form `a/b`, or equivalently simple ratios of the form `a:b`. In JI chords with three or more notes make complex ratios of the form `a:b:c`, `a:b:c:d`, etc.
 - Examples of intervals include: an octave (1:2), a perfect fifth (2:3), a perfect fourth (3:4), a major third (4:5)
 - Examples of chords include: a major triad (4:5:6), a minor triad (10:12:15), an extended seventh chord (4:6:7:10)
 
@@ -16,7 +16,7 @@ The tempered tuning 12TET has only 12 notes in the octave. However, Just Intonat
 For RCN it is necessary to specify an algorithm which maps any prime `p` to its prime comma `n/m`. For example, primes `5` and `7` are usually given commas `80/81` and `63/64` respectively. The primes used in the comma for `p` are usually `2`, `3` and `p` only (since limiting commas to these three prime components reduces computational complexity). Even with that constraint, algorithms tend to vary for higher primes. Three algorithms which have been developed are: `'DR'`, `'SAG'`, and `'KG2'`; these are each described in the paper above.
 
 The purpose of the `ji-rcn` npm package is to help convert between:
-- A musical interval with a width/size expressed as a rational number
+- A musical interval with a frequency ratio expressed as a rational number
 - Start and end points of the interval expressed as:
   - Notations from an RCN scheme
   - Frequencies in Hz
@@ -42,10 +42,10 @@ Note that the `JInterval` class is built upon the `Peo` class, which stands for 
 ``` js
 new JInterval({startPitchNotation:txt1, endPitchNotation:txt2}) // Create a new JInterval between two (RCN) notations txt1 and txt2
 new JInterval({startFreqHz:freq1, endFreqHz:freq2})             // Create interval between two numeric frequencies freq1 and freq2 in Hz
-new JInterval({jint:otherJint})                                 // Create interval using same interval width as otherJint
-new JInterval({peo:peo})                                        // Create interval with width peo
-new JInterval({num:num, denom:denom})                           // Create interval with width num/denom, where num, denom are positive integers
-new JInterval({width:width})                                    // Create interval of size width (any positive number)
+new JInterval({jint:otherJint})                                 // Create interval using same interval ratio as otherJint
+new JInterval({peo:peo})                                        // Create interval with ratio peo
+new JInterval({num:num, denom:denom})                           // Create interval with ratio num/denom, where num, denom are positive integers
+new JInterval({ratio:ratio})                                    // Create interval of size ratio (any positive number)
 ```
 
 ### Constructor object extra options
@@ -60,17 +60,17 @@ Add any options to the object, then pass into `new JInterval({...})`.
 
 ### Shorthand constructors
 ``` js
-new JInterval(otherJint)        // Create a new JInterval with same width as otherJint
-new JInterval(peo)              // Create interval with width peo
-new JInterval(num, denom)       // Create interval with width num/denom, where num, denom are positive integers
-new JInterval(integer)          // Create interval with integer width
-new JInterval(decimal)          // Create interval with fractional width - the decimal value is automatically converted into a suitable fraction.
-new JInterval(numericString)    // Create interval with integer or fractional width, from converting numericString into a number
-new JInterval({p1:e1,p2:e2...}) // Create interval with fractional width specified as prime factors and exponents in an object
-new JInterval()                 // Create unison interval with width 1/1
+new JInterval(otherJint)        // Create a new JInterval with same ratio as otherJint
+new JInterval(peo)              // Create interval with ratio peo
+new JInterval(num, denom)       // Create interval with ratio num/denom, where num, denom are positive integers
+new JInterval(integer)          // Create interval with integer ratio
+new JInterval(decimal)          // Create interval with fractional ratio - the decimal value is automatically converted into a suitable fraction.
+new JInterval(numericString)    // Create interval with integer or fractional ratio, from converting numericString into a number
+new JInterval({p1:e1,p2:e2...}) // Create interval with fractional ratio specified as prime factors and exponents in an object
+new JInterval()                 // Create unison interval with ratio 1/1
 ```
 
-A `JInterval` instance stores its interval width internally as a `Peo`, for exact representations of positive integers and fractions. All the different width formats available in the constructer will get converted into a suitable `Peo`.
+A `JInterval` instance stores its interval frequency ratio internally as a `Peo`, for exact representations of positive integers and fractions. All the different ratio formats available in the constructor will get converted into a suitable `Peo`.
 
 The shorthand constructors above can have an extra argument to specify an algorithm, which may be given as a string acronym, a function, or an object combining these (as described above), e.g. `new JInterval(peo, algAcronym)`, `new JInterval(num, denom, algFn)` etc.
 
@@ -93,16 +93,19 @@ jint.toString()      // Returns a text description of JInterval
 jint.getSetupObject() // Returns an object describing the setup options of JInterval
 ```
 
-### Interval Width (Relative Position, Relative Size)
+### Interval Frequency Ratio
+
+(Interval width, size, relative position)
+
 ``` js
-jint.width()             // Returns a positive number representing the width or relative size of a JInterval
-jint.widthFractionText() // Returns the interval width as a fraction in string format 'NN/NN'
-jint.widthPeo()          // Returns the interval width as a Peo - this is a copy of the underlying Peo of the JInterval
+jint.ratio()             // Returns a positive number representing the frequency ratio or relative size of a JInterval
+jint.ratioFractionText() // Returns the interval frequency ratio as a fraction in string format 'NN/NN'
+jint.ratioPeo()          // Returns the interval frequency ratio as a Peo - this is a copy of the underlying Peo of the JInterval
 ```
 
 ### Absolute Position
 
-Every `JInterval` has a interval width, its relative size. It is possible to add an absolute position, either by constructing using notations or frequencies, or by using the functions below. The absolute value, especially the frequency in Hz, is likely to be useful when using this `ji-rcn` module to create music apps featuring Just Intonation.
+Every `JInterval` has a interval frequency ratio, its relative size. It is possible to add an absolute position, either by constructing using notations or frequencies, or by using the functions below. The absolute value, especially the frequency in Hz, is likely to be useful when using this `ji-rcn` module to create music apps featuring Just Intonation.
 
 Absolute position means a `JInterval` starts at a certain frequency or notation, and ends at another frequency or notation. Since every `JInterval` has a tuning, by specifying either a start frequency or a start notation, the whole of the absolute position can be calculated. Each `JInterval` caches the last absolute position calculated, and reuses cached values if possible. Changing the start notation or frequency will recalculate absolute position and overwrite this cache.
 
@@ -128,9 +131,9 @@ Create a new `JInterval` using mathematical operations on existing intervals. An
 
 ``` js
 jint.get1()              // Returns a new JInterval with unison interval of 1/1
-jint.mult(jint2)         // Returns a new JInterval formed by multiplying widths of jint and jint2
-jint.mult(jint2, pow)    // Returns a new JInterval formed by multiplying widths of jint and jint2^pow
-jint.pow(pow)            // Returns a new JInterval with width of jint raised to power pow
+jint.mult(jint2)         // Returns a new JInterval formed by multiplying ratios of jint and jint2
+jint.mult(jint2, pow)    // Returns a new JInterval formed by multiplying ratios of jint and jint2^pow
+jint.pow(pow)            // Returns a new JInterval with ratio of jint raised to power pow
 ```
 
 ### Algorithm
@@ -194,11 +197,11 @@ getComma(2499949, 'KG2')   // returns 67498623/67108864
 
 ### JInterval - general
 ``` js
-(new JInterval(3/2)).width()                   // returns 1.5
-(new JInterval(3/2)).widthFractionText()       // returns '3/2'
-(new JInterval(3/2)).widthPeo()                // returns a Peo on {2:-1, 3:1}
-(new JInterval(5/4)).mult(new JInterval(6/5))  // returns a JInterval with width 5/4 x 6/5 = 6/4 = 3/2 = 1.5
-(new JInterval(5/4)).pow(3)                    // returns a JInterval with width 125/64
+(new JInterval(3/2)).ratio()                   // returns 1.5
+(new JInterval(3/2)).ratioFractionText()       // returns '3/2'
+(new JInterval(3/2)).ratioPeo()                // returns a Peo on {2:-1, 3:1}
+(new JInterval(5/4)).mult(new JInterval(6/5))  // returns a JInterval with ratio 5/4 x 6/5 = 6/4 = 3/2 = 1.5
+(new JInterval(5/4)).pow(3)                    // returns a JInterval with ratio 125/64
 ```
 
 ### JInterval - frequency

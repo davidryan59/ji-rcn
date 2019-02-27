@@ -21,10 +21,10 @@ JInterval.prototype.copy = require('./api/general/copy');
 JInterval.prototype.toString = require('./api/general/toString');
 JInterval.prototype.getSetupObject = require('./api/general/getSetupObject');
 
-// Interval Width (Relative Position)
-JInterval.prototype.width = require('./api/width/width');
-JInterval.prototype.widthFractionText = require('./api/width/widthFractionText');
-JInterval.prototype.widthPeo = require('./api/width/widthPeo');
+// Interval Frequency Ratio / Width / Relative Position
+JInterval.prototype.ratio = require('./api/freqRatio/ratio');
+JInterval.prototype.ratioFractionText = require('./api/freqRatio/ratioFractionText');
+JInterval.prototype.ratioPeo = require('./api/freqRatio/ratioPeo');
 
 // Absolute Position
 JInterval.prototype.getEndFreqHz = require('./api/pos/getEndFreqHz');

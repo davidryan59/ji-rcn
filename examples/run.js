@@ -64,7 +64,7 @@ console.log('');
 jint = new JInterval("D'[7]6");
 console.log(jint);
 console.log('');
-console.log(jint.widthFractionText());
+console.log(jint.ratioFractionText());
 console.log('');
 
 console.log('');
@@ -77,8 +77,8 @@ var jint2 = new JInterval('B#3');
 console.log(jint1);
 console.log(jint2);
 console.log('');
-console.log(jint1.widthFractionText());
-console.log(jint2.widthFractionText());
+console.log(jint1.ratioFractionText());
+console.log(jint2.ratioFractionText());
 console.log('');
 
 console.log('In the examples below, it is assumed 1/1 is notated C4, e.g. C4 is the base notation:');
@@ -117,7 +117,7 @@ for (var i = 1; i <= 49; i++) {
 console.log('');
 for (var i = 60; i <= 90; i++) {
   var jint = new JInterval(i, 60);
-  var fract = '' + jint.widthFractionText();
+  var fract = '' + jint.ratioFractionText();
   var fractText = fract + ' '.repeat(5 - fract.length);
   console.log(`${i}/60 = ${fractText}  ->  ${jint.getEndPitchNotation()}`);
 }
@@ -125,7 +125,7 @@ for (var i = 60; i <= 90; i++) {
 console.log('');
 for (var i = 65536; i <= 65536 + 15; i++) {
   var jint = new JInterval(i, 65536);
-  var fract = '' + jint.widthFractionText();
+  var fract = '' + jint.ratioFractionText();
   var fractText = fract + ' '.repeat(11 - fract.length);
   console.log(`${i}/65536 = ${fractText}  ->  ${jint.getEndPitchNotation()}`);
 }
@@ -154,7 +154,7 @@ var count = 15;
 var denom = 6930;
 for (var i = mid - count; i <= mid + count; i++) {
   var jint = new JInterval(i, denom);
-  var fract = '' + jint.widthFractionText();
+  var fract = '' + jint.ratioFractionText();
   var fractText = fract + ' '.repeat(11 - fract.length);
   console.log(`${i}/${denom} = ${fractText}  ->  ${jint.getEndPitchNotation()}`);
 }

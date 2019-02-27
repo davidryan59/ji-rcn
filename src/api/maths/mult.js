@@ -1,6 +1,6 @@
 var mathsFnJIntervalCreator = require('../../maths/mathsFnJIntervalCreator');
 
-// Return JInterval with frequency ratio (width) equal to product of
+// Return JInterval with frequency ratio equal to product of
 // frequency ratio of this interval and
 // frequency ratio of another interval (optionally to a specified power)
 // Use .mult on Peo to achieve the multiplication

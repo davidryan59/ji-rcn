@@ -162,7 +162,7 @@ describe('parseNotation measures intervals correctly from C4', function () {
   ];
 
   var runTest = function (notationToParse, peoConstructorData, algAcronym, comment) {
-    var obj = (algAcronym) ? {width: 1, alg: algAcronym} : {};
+    var obj = (algAcronym) ? {ratio: 1, alg: algAcronym} : {};
     var jintWithAlg = new JInterval(obj);
     var peoFromParsing = parseNotation(jintWithAlg, notationToParse);
     var peoFromSpec = new Peo(peoConstructorData);

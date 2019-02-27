@@ -1,7 +1,7 @@
 var toString = function toString() {
-  var width = this.widthFractionText()
-  if (width==='NA') width = this.width()
-  var startText = 'Interval of ' + width;
+  var intervalDescription = this.ratioFractionText();
+  if (intervalDescription === 'NA') intervalDescription = this.ratio();
+  var startText = 'Interval of ' + intervalDescription;
   var endText = '';
   if (this.hasPos()) {
     endText = ' from ' + this.getStartPitchNotation() + ' to ' + this.getEndPitchNotation();

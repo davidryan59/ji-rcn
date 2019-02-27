@@ -51,7 +51,7 @@ describe('Maths functions on JInterval', function () {
     assert.strictEqual(jint1Copy.getTuningFreqHz(), 363);
     assert.strictEqual(jint1Copy.getTuningMultHz(), 264);
 
-    assert.strictEqual(jint1Copy.widthFractionText(), '37/31');
+    assert.strictEqual(jint1Copy.ratioFractionText(), '37/31');
 
     assert(jint1Copy.hasPos());
     assert.strictEqual(jint1Copy.getStartInputPitchNotation(), "B'.[31]5");
@@ -62,7 +62,7 @@ describe('Maths functions on JInterval', function () {
     assert.strictEqual(jint1Copy.getEndFreqText(), '1221.00 Hz');
   });
 
-  it('Calling get1 on a JInterval brings over all relevant info but with width 1', function () {
+  it('Calling get1 on a JInterval brings over all relevant info but with frequency ratio 1', function () {
     var jint1c = new JInterval(testObj1);
     var jint1get1 = jint1c.get1();
 
@@ -76,7 +76,7 @@ describe('Maths functions on JInterval', function () {
     assert.strictEqual(jint1get1.getTuningFreqHz(), 363);
     assert.strictEqual(jint1get1.getTuningMultHz(), 264);
 
-    assert.strictEqual(jint1get1.widthFractionText(), '1');
+    assert.strictEqual(jint1get1.ratioFractionText(), '1');
 
     assert(jint1get1.hasPos());
   });
@@ -95,7 +95,7 @@ describe('Maths functions on JInterval', function () {
     assert.strictEqual(jint1Pow.getTuningFreqHz(), 363);
     assert.strictEqual(jint1Pow.getTuningMultHz(), 264);
 
-    assert.strictEqual(jint1Pow.widthFractionText(), '29791/50653');
+    assert.strictEqual(jint1Pow.ratioFractionText(), '29791/50653');
 
     assert(jint1Pow.hasPos());
     assert.strictEqual(jint1Pow.getStartInputPitchNotation(), "B'.[31]5");
@@ -116,7 +116,7 @@ describe('Maths functions on JInterval', function () {
     assert.strictEqual(jint12e.getTuningFreqHz(), 363);
     assert.strictEqual(jint12e.getTuningMultHz(), 264);
 
-    assert.strictEqual(jint12e.widthFractionText(), '629/2759');
+    assert.strictEqual(jint12e.ratioFractionText(), '629/2759');
 
     assert(jint12e.hasPos());
     assert.strictEqual(jint12e.getStartInputPitchNotation(), "B'.[31]5");
@@ -140,7 +140,7 @@ describe('Maths functions on JInterval', function () {
     // 37/31 * (17/89)^-2
     // 37 89 89 / 31 17 17
     // 293077 / 8959
-    assert.strictEqual(jint12f.widthFractionText(), '293077/8959');
+    assert.strictEqual(jint12f.ratioFractionText(), '293077/8959');
 
     assert(jint12f.hasPos());
     assert.strictEqual(jint12f.getStartInputPitchNotation(), "B'.[31]5");
