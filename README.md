@@ -87,15 +87,15 @@ Examples for using `getComma` are given below. Format is either `getComma(p)` or
 ### General
 ``` js
 // General methods
-jint.compress()      // Remove all cached information on a JInterval. This includes: absolute position, cache on peo.
-jint.copy()          // Returns a deep copy of a JInterval
-jint.toString()      // Returns a text description of JInterval
+jint.compress()       // Remove all cached information on a JInterval. This includes: absolute position, cache on peo.
+jint.copy()           // Returns a deep copy of a JInterval
+jint.toString()       // Returns a text description of JInterval
 jint.getSetupObject() // Returns an object describing the setup options of JInterval
 ```
 
 ### Interval Frequency Ratio
 
-(Interval width, size, relative position)
+(Also known as interval width, size, relative position)
 
 ``` js
 jint.ratio()             // Returns a positive number representing the frequency ratio or relative size of a JInterval
