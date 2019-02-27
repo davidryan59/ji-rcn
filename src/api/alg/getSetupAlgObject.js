@@ -1,4 +1,4 @@
-var getAlgSetupObject = function getAlgSetupObject() {
+var getSetupAlgObject = function getSetupAlgObject() {
   if (!this.hasAlg()) return null;
   return {
     txt: this.getAlgText(),
@@ -6,4 +6,4 @@ var getAlgSetupObject = function getAlgSetupObject() {
   };
 };
 
-module.exports = getAlgSetupObject;
+module.exports = getSetupAlgObject;

@@ -330,7 +330,7 @@ describe(fnName, function () {
   it('Test toString with notation', function () {
     var jint = new JInterval('Gbb##4', "A'..'4");
     var theString = jint.toString();
-    var theAlgSetupObject = jint.getAlgSetupObject();
+    var theAlgSetupObject = jint.getSetupAlgObject();
     assert(jint.hasPos());
     assert.strictEqual(theString, 'Interval of 9/8 from G4 to A4');
     assert(!theAlgSetupObject);
@@ -339,7 +339,7 @@ describe(fnName, function () {
   it('Test toString without notation but with alg', function () {
     var jint = new JInterval('9/8', 'sag');
     var theString = jint.toString();
-    var theAlgSetupObject = jint.getAlgSetupObject();
+    var theAlgSetupObject = jint.getSetupAlgObject();
     assert(!jint.hasPos());
     assert.strictEqual(theString, 'Interval of 9/8');
     assert.strictEqual(theAlgSetupObject.txt, 'SAG');

@@ -1,7 +1,7 @@
 var consts = require('../../constants/consts');
 
 var getTuningFreqHz = function getTuningFreqHz() {
-  if (this.tuning && this.tuning.freqHz) return this.tuning.freqHz;
+  if (this.setup.tuning && this.setup.tuning.freqHz) return this.setup.tuning.freqHz;
   return consts.DEFAULT_FREQ_HZ;
 };
 

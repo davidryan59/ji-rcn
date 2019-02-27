@@ -4,6 +4,8 @@ var initialise = require('./initialisers/initialise');
 // Object's purpose is to translate between a fraction (in Peo format)
 // and a notation (text)
 function JInterval() {
+  this.peo = null; // Want this key to appear first
+  this.setup = {};
   initialise(this, arguments);
 }
 
@@ -17,7 +19,7 @@ JInterval.getCommaAlgs = require('./api/class/getCommaAlgs');
 JInterval.prototype.compress = require('./api/general/compress');
 JInterval.prototype.copy = require('./api/general/copy');
 JInterval.prototype.toString = require('./api/general/toString');
-JInterval.prototype.getOptionsSetupObject = require('./api/general/getOptionsSetupObject');
+JInterval.prototype.getSetupObject = require('./api/general/getSetupObject');
 
 // Interval Width (Relative Position)
 JInterval.prototype.width = require('./api/width/width');
@@ -45,7 +47,7 @@ JInterval.prototype.pow = require('./api/maths/pow');
 // Algorithm
 JInterval.prototype.getAlgFn = require('./api/alg/getAlgFn');
 JInterval.prototype.getAlgText = require('./api/alg/getAlgText');
-JInterval.prototype.getAlgSetupObject = require('./api/alg/getAlgSetupObject');
+JInterval.prototype.getSetupAlgObject = require('./api/alg/getSetupAlgObject');
 JInterval.prototype.hasAlg = require('./api/alg/hasAlg');
 
 // Tuning
@@ -53,7 +55,7 @@ JInterval.prototype.getTuningFreqHz = require('./api/tuning/getTuningFreqHz');
 JInterval.prototype.getTuningInputPitchNotation = require('./api/tuning/getTuningInputPitchNotation');
 JInterval.prototype.getTuningPitchNotation = require('./api/tuning/getTuningPitchNotation');
 JInterval.prototype.getTuningMultHz = require('./api/tuning/getTuningMultHz');
-JInterval.prototype.getTuningSetupObject = require('./api/tuning/getTuningSetupObject');
+JInterval.prototype.getSetupTuningObject = require('./api/tuning/getSetupTuningObject');
 JInterval.prototype.hasTuning = require('./api/tuning/hasTuning');
 
 // Display
@@ -62,5 +64,7 @@ JInterval.prototype.useComma12Pythag = require('./api/display/useComma12Pythag')
 JInterval.prototype.useComma57Mercator = require('./api/display/useComma57Mercator');
 JInterval.prototype.useComma665Small = require('./api/display/useComma665Small');
 JInterval.prototype.useComma190137Tiny = require('./api/display/useComma190137Tiny');
+JInterval.prototype.getSetupDisplayObject = require('./api/display/getSetupDisplayObject');
+JInterval.prototype.hasDisplay = require('./api/display/hasDisplay');
 
 module.exports = JInterval;

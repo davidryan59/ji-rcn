@@ -90,7 +90,7 @@ Examples for using `getComma` are given below. Format is either `getComma(p)` or
 jint.compress()      // Remove all cached information on a JInterval. This includes: absolute position, cache on peo.
 jint.copy()          // Returns a deep copy of a JInterval
 jint.toString()      // Returns a text description of JInterval
-jint.getOptionsSetupObject() // Returns an object describing the setup options of JInterval
+jint.getSetupObject() // Returns an object describing the setup options of JInterval
 ```
 
 ### Interval Width (Relative Position, Relative Size)
@@ -140,7 +140,7 @@ An algorithm can be specified on a `JInterval` during construction. Default algo
 ``` js
 jint.getAlgText()        // Returns text acronym for algorithm, or blank for default algorithm. (Custom algorithms supplied without a text acronym also return blank here.)
 jint.getAlgFn()          // Returns the algorithm function which takes in a prime and outputs a comma in Peo format
-jint.getAlgSetupObject() // Returns an object representing algorithm setup
+jint.getSetupAlgObject() // Returns an object representing algorithm setup
 jint.hasAlg()            // Returns boolean value: false for default comma algorithm, true otherwise
 ```
 
@@ -153,7 +153,7 @@ jint.getTuningFreqHz()             // Tuning frequency, in Hz
 jint.getTuningInputPitchNotation() // Tuning notation, as input
 jint.getTuningPitchNotation()      // Tuning notation, in standard format
 jint.getTuningMultHz()             // Multiplier representing frequency in  Hz for notation 'C4'
-jint.getTuningSetupObject()        // Returns an object representing tuning setup
+jint.getSetupTuningObject()        // Returns an object representing tuning setup
 jint.hasTuning()                   // Returns boolean value: false for default tuning, true otherwise
 ```
 

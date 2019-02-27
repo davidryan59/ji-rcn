@@ -1,6 +1,6 @@
 // Multiply one JInterval by another, optionally to a power (repeated that many times)
 var mathsFnJIntervalCreator = function mathsFnJIntervalCreator(jint, extraOptions) {
-  var originalOptions = jint.getOptionsSetupObject();
+  var originalOptions = jint.getSetupObject();
   var useTheseOptions = {};
 
   // Retain the setup options of the current JInterval

@@ -1,4 +1,4 @@
-var getTuningSetupObject = function getTuningSetupObject() {
+var getSetupTuningObject = function getSetupTuningObject() {
   if (!this.hasTuning()) return null;
   return {
     pitchNotation: this.getTuningInputPitchNotation(),
@@ -6,4 +6,4 @@ var getTuningSetupObject = function getTuningSetupObject() {
   };
 };
 
-module.exports = getTuningSetupObject;
+module.exports = getSetupTuningObject;

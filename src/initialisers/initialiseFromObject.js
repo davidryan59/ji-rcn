@@ -8,9 +8,9 @@ var initialiseUsingFrequencies = require('./initialiseUsingFrequencies');
 var initialiseUsingNotations = require('./initialiseUsingNotations');
 var initialiseUsingPeo = require('./initialiseUsingPeo');
 
-var setAlg = require('../commas/setAlg');
-var setTuning = require('../tuning/setTuning');
-var setOtherOptions = require('./setOtherOptions');
+var setAlg = require('../setup/setAlg');
+var setTuning = require('../setup/setTuning');
+var setDisplay = require('../setup/setDisplay');
 
 
 var initialiseFromObject = function initialiseFromObject(jint, theObject) {
@@ -28,10 +28,12 @@ var initialiseFromObject = function initialiseFromObject(jint, theObject) {
   var width = theObject.width;    // Interval width, a rational (integer or decimal) number
 
   // Optional
-  var alg = theObject.alg;        // Three formats: Text Acronym, Function, Object. See setAlg.
-  var tuning = theObject.tuning;  // Specify a tuning in format {pitchNotation: "A4", freqHz: 443 }
+  var alg = theObject.alg;         // Three formats: Text Acronym, Function, Object. See setAlg.
+  var tuning = theObject.tuning;   // Specify a tuning in format {pitchNotation: "A4", freqHz: 443 }
+  var display = theObject.display; // Specify display options like {hide5: true, show12: true}
   setAlg(jint, alg);
   setTuning(jint, tuning);
+  setDisplay(jint, display);
 
   if (isString(startPitchNotation) && isString(endPitchNotation)) {
     // Case: interval width is from pitch difference of two notations
@@ -66,7 +68,6 @@ var initialiseFromObject = function initialiseFromObject(jint, theObject) {
     // Case: parsing options failed, so return default case, a interval of unison
     initialiseUsingFraction(jint, 1, 1);
   }
-  setOtherOptions(jint, theObject);
 };
 
 module.exports = initialiseFromObject;

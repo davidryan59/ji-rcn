@@ -31,7 +31,7 @@ describe('Maths functions on JInterval', function () {
   // Series of tests on maths functions on JIntervals from these objects
   it('Check the setup options', function () {
     var jint1a = new JInterval(testObj1);
-    var options1 = jint1a.getOptionsSetupObject();
+    var options1 = jint1a.getSetupObject();
     assert.strictEqual(options1.alg.txt, 'KG2');
     assert.strictEqual(options1.tuning.pitchNotation, 'F##b[11]4');
     assert.strictEqual(options1.tuning.freqHz, 363);

@@ -1,5 +1,5 @@
 var hasAlg = function hasAlg() {
-  return !!(this.alg);
+  return !!(this.setup.alg);
 };
 
 module.exports = hasAlg;

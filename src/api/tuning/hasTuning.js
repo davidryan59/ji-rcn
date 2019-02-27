@@ -1,5 +1,5 @@
 var hasTuning = function hasTuning() {
-  return !!(this.tuning && this.tuning.multHz);
+  return !!(this.setup.tuning && this.setup.tuning.multHz);
 };
 
 module.exports = hasTuning;

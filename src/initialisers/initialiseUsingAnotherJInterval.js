@@ -1,5 +1,5 @@
-var setAlg = require('../commas/setAlg');
-var setTuning = require('../tuning/setTuning');
+var setAlg = require('../setup/setAlg');
+var setTuning = require('../setup/setTuning');
 var setupPosFromNotation = require('../pos/setupPosFromNotation');
 
 var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(jint, otherJint) {
@@ -7,13 +7,13 @@ var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(j
 
   // Set algorithm from otherJint, if its blank
   if (!jint.hasAlg() && otherJint.hasAlg()) {
-    setAlg(jint, otherJint.getAlgSetupObject());
-    setTuning(jint, jint.getTuningSetupObject());    // Ought to reset after alg changes!
+    setAlg(jint, otherJint.getSetupAlgObject());
+    setTuning(jint, jint.getSetupTuningObject());    // Ought to reset after alg changes!
   }
 
   // Set tuning from otherJint, if its blank
   if (!jint.hasTuning() && otherJint.hasTuning()) {
-    setTuning(jint, otherJint.getTuningSetupObject());
+    setTuning(jint, otherJint.getSetupTuningObject());
   }
 
   // Set the interval width from otherJint
