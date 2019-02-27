@@ -26,7 +26,7 @@ var initialiseFromObject = function initialiseFromObject(jint, theObject) {
   var width = theObject.width;    // Interval width, a rational (integer or decimal) number
 
   // Setup JInterval here, before peo (width / frequency ratio) is set
-  setAllSetupOptions(jint, theObject)
+  setAllSetupOptions(jint, theObject);
 
 
   // // Optional

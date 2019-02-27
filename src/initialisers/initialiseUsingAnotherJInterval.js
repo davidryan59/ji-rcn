@@ -7,15 +7,14 @@ var setupPosFromNotation = require('../pos/setupPosFromNotation');
 var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(jint, otherJint) {
   // Ought to have already set tuning of jint to thisTuning
 
-  var otherJintSetupObject = otherJint.getSetupObject()
-  var jintSetupObject = jint.getSetupObject()
+  var otherJintSetupObject = otherJint.getSetupObject();
+  var jintSetupObject = jint.getSetupObject();
 
-  var useSetupObject = {}
-  Object.assign(useSetupObject, otherJintSetupObject, jintSetupObject)
+  var useSetupObject = {};
+  Object.assign(useSetupObject, otherJintSetupObject, jintSetupObject);
   // Properties from otherJintSetupObject overridden by properties from jintSetupObject
 
-  setAllSetupOptions(jint, useSetupObject)
-
+  setAllSetupOptions(jint, useSetupObject);
 
 
   // // Set algorithm from otherJint, if its blank
@@ -28,7 +27,6 @@ var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(j
   // if (!jint.hasTuning() && otherJint.hasTuning()) {
   //   setTuning(jint, otherJint.getSetupTuningObject());
   // }
-
 
 
   // Set the interval width from otherJint
