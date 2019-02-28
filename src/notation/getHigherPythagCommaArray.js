@@ -8,10 +8,10 @@ var bl = consts.BRACKET_LEFT_STANDARD;
 var br = consts.BRACKET_RIGHT_STANDARD;
 var numRepeats = consts.REPEAT_MAX_CHARS;
 var numError = Math.pow(10, consts.BRACKET_MAX_DIGITS);
-var zeroResult = function zeroResult(txtZero) {return [txtZero, new Peo(), 0];};
+var zeroResult = function zeroResult(txtZero) {return [txtZero, new Peo()];};
 
 var getHigherPythagCommaArray = function getHigherPythagCommaArray(exp3Input, exp3StartLevel, onPeo, onChar, offChar) {
-  // Format of result: [resultAsNotation, resultAsPeo, resultAsInteger]
+  // Format of result: [resultAsNotation, resultAsPeo]
 
   // Deal with input error
   if (!ibn(exp3Input, numError)) return zeroResult(getErrorNotation(onChar));
@@ -30,7 +30,7 @@ var getHigherPythagCommaArray = function getHigherPythagCommaArray(exp3Input, ex
 
   // Flip intRes if the input was negative
   if (exp3Input < 0) intRes = -intRes;
-  var getResult = function getResult(txtRes) {return [txtRes, new Peo(onPeo, intRes), intRes];};
+  var getResult = function getResult(txtRes) {return [txtRes, new Peo(onPeo, intRes)];};
 
   if (intRes > numRepeats) {
     return getResult('' + bl + onChar + intRes + br);

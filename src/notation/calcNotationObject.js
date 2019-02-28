@@ -1,10 +1,15 @@
 var getComma = require('../api/class/getComma');
 
+var peos = require('../constants/peos');
+var consts = require('../constants/consts');
+
 var getHigherPrimesArray = require('./getHigherPrimesArray');
 var get5Label = require('./get5Label');
+var getHigherPythagCommaArray = require('./getHigherPythagCommaArray');
 var getSharpFlatArray = require('./getSharpFlatArray');
 var getDiatonicArray = require('./getDiatonicArray');
 var getOctaveArray = require('./getOctaveArray');
+
 
 var calcNotationObject = function calcNotationObject(jint, thePeo) {
   // Split up Peo of this JInterval into components:  2,3  ;  5 (optional)  ;  primes 7+ (or 5+)
@@ -35,11 +40,32 @@ var calcNotationObject = function calcNotationObject(jint, thePeo) {
   var prime5Text = get5Label(prime5Peo.getPrimeExp(5));
   var primes7PlusArray = getHigherPrimesArray(primes7PlusPeo);
   var primes7PlusText = primes7PlusArray[0];
-  var commaSpacer = primes7PlusArray[1];
+  var theSpacer = primes7PlusArray[1];
 
   // The Pythagorean component has a 3-exponent.
-  // Use it first to get sharps and flats.
   var exp3 = pythagPeo.getPrimeExp(3);
+
+  // Handle four higher Pythagorean commas depending on display options on jint
+  var higherPythagNotation = '';
+  var handleHigherPythag = function handleHigherPythag(level, pythagCommaPeo, pythagOn, pythagOff) {
+    var resultArray = getHigherPythagCommaArray(exp3, level, pythagCommaPeo, pythagOn, pythagOff);
+    var resultNotation = resultArray[0];
+    var resultPeo = resultArray[1];
+    higherPythagNotation = resultNotation + higherPythagNotation;
+    exp3 = exp3 - resultPeo.getPrimeExp(3);
+    pythagPeo = pythagPeo.mult(resultPeo, -1);
+  };
+  var level = null;
+  level = jint.levelComma190537Tiny();
+  if (level) handleHigherPythag(level, peos.PEO_TINY, consts.CHAR_TINY_ON, consts.CHAR_TINY_OFF);
+  level = jint.levelComma665Small();
+  if (level) handleHigherPythag(level, peos.PEO_SMALL, consts.CHAR_SMALL_ON, consts.CHAR_SMALL_OFF);
+  level = jint.levelComma53Mercator();
+  if (level) handleHigherPythag(level, peos.PEO_MERCATOR, consts.CHAR_MERCATOR_ON, consts.CHAR_MERCATOR_OFF);
+  level = jint.levelComma12Pythag();
+  if (level) handleHigherPythag(level, peos.PEO_PYTHAG, consts.CHAR_PYTHAG_ON, consts.CHAR_PYTHAG_OFF);
+
+  // Use it first to get sharps and flats.
   var safArray = getSharpFlatArray(exp3);
   var safText = safArray[0];
   var safPeo = safArray[1];
@@ -63,12 +89,14 @@ var calcNotationObject = function calcNotationObject(jint, thePeo) {
   // Put all these text components together for a final notation
   var pitchText = '';
   var pitchClassText = '';
-  if (commaSpacer) {
-    pitchText = diatonicText + safText + prime5Text + octaveText + commaSpacer + primes7PlusText;
-    pitchClassText = diatonicText + safText + prime5Text + commaSpacer + primes7PlusText;
+  if (theSpacer) {
+    // theSpacer = ' '
+    pitchText = diatonicText + safText + higherPythagNotation + prime5Text + octaveText + theSpacer + primes7PlusText;
+    pitchClassText = diatonicText + safText + higherPythagNotation + prime5Text + theSpacer + primes7PlusText;
   } else {
-    pitchText = diatonicText + safText + prime5Text + primes7PlusText + octaveText;
-    pitchClassText = diatonicText + safText + prime5Text + primes7PlusText;
+    // theSpacer = ''
+    pitchText = diatonicText + safText + higherPythagNotation + prime5Text + primes7PlusText + octaveText;
+    pitchClassText = diatonicText + safText + higherPythagNotation + prime5Text + primes7PlusText;
   }
 
   var result = {};

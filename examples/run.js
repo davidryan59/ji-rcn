@@ -189,6 +189,25 @@ for (var i = 0; i < array.length; i++) {
   var jint = new JInterval(num, denom);
   console.log(`${num}/${denom}  ->  ${jint.getEndPitchNotation()}`);
 }
+console.log('');
+
+console.log('');
+console.log('Giving Pythagorean notations for circle of fifths, with higher Pythag commas switched on');
+console.log('(Pythagorean comma (12) switched on at 11, Mercator comma (53) switched on at 42)');
+var log32 = Math.log(3) / Math.log(2);
+for (var exp3 = 0; exp3 < 100; exp3++) {
+  var exp2 = -Math.floor(exp3 * log32);
+  var jint = new JInterval({
+    display: {lev12: 11, lev53: 42},
+    peo: new Peo({2: exp2, 3: exp3})
+  });
+  var note = jint.getEndPitchNotation();
+  var ratio = jint.ratio().toString().substr(0, 8);
+  var fract = jint.ratioFractionText();
+  if (fract === 'NA') fract = '';
+  console.log(`3^${exp3}:  ${note}  ${ratio}  ${fract}`);
+}
+console.log('');
 
 console.log('');
 console.log('Constructing a JInterval for small number "77/65"');

@@ -7,13 +7,18 @@ var getSetupDisplayObject = function getSetupDisplayObject() {
 
   // Should each type of 3-limit comma be used?
   // If so, above which 3-exponent?
+  // (Object describes answers to those questions)
+
   var lev12 = this.levelComma12Pythag();
-  var lev53 = this.levelComma53Mercator();
-  var lev665 = this.levelComma665Small();
-  var lev190537 = this.levelComma190537Tiny();
   if (lev12) result.lev12 = lev12;
+
+  var lev53 = this.levelComma53Mercator();
   if (lev53) result.lev53 = lev53;
+
+  var lev665 = this.levelComma665Small();
+
   if (lev665) result.lev665 = lev665;
+  var lev190537 = this.levelComma190537Tiny();
   if (lev190537) result.lev190537 = lev190537;
 
   return result;

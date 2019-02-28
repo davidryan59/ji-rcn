@@ -7,7 +7,8 @@ var checkLevel = function checkLevel(input, defaultLevel) {
   // Fine tune that using the input.
   var minLevel = Math.round(0.5 * defaultLevel);
   var maxLevel = 2 * defaultLevel;
-  if (minLevel <= input && input <= maxLevel) return input;
+  var checkedInput = Math.abs(input);
+  if (minLevel <= checkedInput && checkedInput <= maxLevel) return checkedInput;
   return defaultLevel;
 };
 
