@@ -86,4 +86,16 @@ describe('Display functions on JInterval', function () {
     jint1b.getEndPitchNotation();
     assert.deepStrictEqual(jint1b.getEndPitchNotation(), 'E#pppm(s71)(t5)4');
   });
+
+  it("Same as previous test, but copying the original JInterval, and some tweaks on the display options", function () {
+    var jint1b = new JInterval({
+      display: {hide5: true, lev12: 13, lev53: 52, lev665: 667, lev190537: 190538},
+      peo: new Peo({3: 1000000, 2: -1584962})
+    });
+    jint1b.getEndPitchNotation();
+    var jint2 = new JInterval(jint1b)
+    // As it happens, these slightly different options give the same notation
+    // lev12:11 would give a different notation!
+    assert.deepStrictEqual(jint2.getEndPitchNotation(), 'E#pppm(s71)(t5)4');
+  });
 });
