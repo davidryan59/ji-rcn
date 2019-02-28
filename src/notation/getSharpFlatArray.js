@@ -15,17 +15,18 @@ var numError = Math.pow(10, consts.BRACKET_MAX_DIGITS);
 var numRepeats = consts.REPEAT_MAX_CHARS;
 
 var getSharpFlatArray = function getSharpFlatArray(exp3) {
-  // Diatonic scale is between -1 and +5
-  // Centre of this scale is +2
-  // -> Subtract 2, then divide by 7, then round
-  // to get number of sharps (+ve) or flats (-ve)
+  // Format of result: [resultAsNotation, resultAsPeo, resultAsInteger]
 
   // Deal with error cases
   if (!ibn(exp3, numError)) {
     // Error output
     return [errorNotation, new Peo(), 0];
   }
-  // Its a valid number
+
+  // Diatonic scale is between -1 and +5
+  // Centre of this scale is +2
+  // -> Subtract 2, then divide by 7, then round
+  // to get number of sharps (+ve) or flats (-ve)
   var offset = Math.round(exp3) - 2;
   var sharps = Math.round(offset / 7);
   var peo = new Peo(peos.PEO_SHARP, sharps);

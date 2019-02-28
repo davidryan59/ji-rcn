@@ -16,7 +16,7 @@ var setDisplay = function setDisplay(jint, theDisplay) {
   // {
   //   hide5: boolean,
   //   lev12: integer,
-  //   lev57: integer,
+  //   lev53: integer,
   //   lev665: integer,
   //   lev190537: integer,
   // }
@@ -26,24 +26,24 @@ var setDisplay = function setDisplay(jint, theDisplay) {
 
   var hide5 = theDisplay.hide5;
   var lev12 = theDisplay.lev12;
-  var lev57 = theDisplay.lev57;
+  var lev53 = theDisplay.lev53;
   var lev665 = theDisplay.lev665;
   var lev190537 = theDisplay.lev190537;
 
   // Return if none of the switches are on
-  if (!(hide5 || lev12 || lev57 || lev665 || lev190537)) return;
+  if (!(hide5 || lev12 || lev53 || lev665 || lev190537)) return;
 
   // We've got at least one non-default display option.
   // Store them here.
   jint.setup.disp = {};
-  var disp = jint.setup.disp
+  var disp = jint.setup.disp;
 
   // Should syntonic commas be hidden from display?
   if (hide5) disp.hide5 = true;
 
   // Should each type of Pythagorean comma be used? If so, above which level?
   if (lev12) disp.lev12 = checkLevel(lev12, 12);
-  if (lev57) disp.lev57 = checkLevel(lev57, 57);
+  if (lev53) disp.lev53 = checkLevel(lev53, 53);
   if (lev665) disp.lev665 = checkLevel(lev665, 665);
   if (lev190537) disp.lev190537 = checkLevel(lev190537, 190537);
 };

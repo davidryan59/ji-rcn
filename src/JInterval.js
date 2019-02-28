@@ -61,7 +61,7 @@ JInterval.prototype.hasTuning = require('./api/tuning/hasTuning');
 // Display
 JInterval.prototype.hideComma5Syntonic = require('./api/display/hideComma5Syntonic');
 JInterval.prototype.levelComma12Pythag = require('./api/display/levelComma12Pythag');
-JInterval.prototype.levelComma57Mercator = require('./api/display/levelComma57Mercator');
+JInterval.prototype.levelComma53Mercator = require('./api/display/levelComma53Mercator');
 JInterval.prototype.levelComma665Small = require('./api/display/levelComma665Small');
 JInterval.prototype.levelComma190537Tiny = require('./api/display/levelComma190537Tiny');
 JInterval.prototype.getSetupDisplayObject = require('./api/display/getSetupDisplayObject');

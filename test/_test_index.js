@@ -1,7 +1,4 @@
-// Comment out right lines to test either src or build:
-
 var testDir = 'src';
-// var testDir = 'build';
 
 module.exports = {
   ji: require('../' + testDir + '/index'),
@@ -11,6 +8,9 @@ module.exports = {
   getDiatonicArray: require('../' + testDir + '/notation/getDiatonicArray'),
   getOctaveArray: require('../' + testDir + '/notation/getOctaveArray'),
   getSharpFlatArray: require('../' + testDir + '/notation/getSharpFlatArray'),
+  getHigherPythagCommaArray: require('../' + testDir + '/notation/getHigherPythagCommaArray'),
+  consts: require('../' + testDir + '/constants/consts'),
+  peos: require('../' + testDir + '/constants/peos'),
   parseNotation: require('../' + testDir + '/notation/parseNotation'),
   parseCommaAlgText: require('../' + testDir + '/commas/parseCommaAlgText')
 };
