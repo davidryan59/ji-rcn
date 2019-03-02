@@ -1,11 +1,17 @@
+var Peo = require('peo');
+var pf = require('primes-and-factors');
+
 var tripleToPeo = require('../maths/tripleToPeo');
 var calcExp2 = require('../maths/calcExp2');
 
 var getCommaDR = function getCommaDR(p) {
   // Calculate a prime comma, according to the DR algorithm
 
+  // If input not prime, return Peo for 1/1
+  if (!pf.isPrime(p)) return new Peo();
+
   // Some constants
-  var cmmin = 1e20;                // Unrealisticly high number
+  var cmmin = 1e20;  // This will get smaller!
   var result = tripleToPeo(1, 0, 0);
 
   // Calcs start

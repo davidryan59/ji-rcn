@@ -7,6 +7,8 @@ var calcCents = require('../maths/calcCents');
 var getCommaSAG = function getCommaSAG(p) {
   // Calculate a prime comma, according to the SAG algorithm
 
+  // Could add a primality check here
+
   var cutoff = 68.5725082211804;     // (3^19/2^30)^0.5 in cents
 
   // Check b in paired sequence: 0, (0), 1, -1, 2, -2, 3, -3, 4, -4, 5, -5, 6, -6

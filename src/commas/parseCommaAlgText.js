@@ -16,6 +16,8 @@ var parseCommaAlgText = function parseCommaAlgText(input) {
     return consts.ALG_BAD;
   } else if (theAlgLowerCase.includes('dr')) {
     return consts.ALG_DR;
+  } else if (theAlgLowerCase.includes('adj')) {
+    return consts.ALG_ADJ;
   } else if (theAlgLowerCase === 'emp') {
     return 'EMP';  // Test value only - key intentionally missing from algIndex
   } else if (theAlgLowerCase === 'nul') {

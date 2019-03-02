@@ -8,7 +8,7 @@ var br = consts.BRACKET_RIGHT_COMMA;
 var unsplitDigits = consts.COMMA_MAX_DIGITS;
 
 
-var getHigherPrimesArray = function getHigherPrimesArray(peo) {
+var getCommaTextArray = function getCommaTextArray(peo) {
   // These two will be modified and outputted
   var result = '';
   var spacer = '';
@@ -69,4 +69,4 @@ var getHigherPrimesArray = function getHigherPrimesArray(peo) {
   return [result, spacer];
 };
 
-module.exports = getHigherPrimesArray;
+module.exports = getCommaTextArray;

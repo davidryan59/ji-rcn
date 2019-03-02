@@ -28,14 +28,14 @@ describe(fnName, function () {
     assert.strictEqual(result.getAsFractionText(), '1');
   });
 
-  it("doesn't give default for getComma(5e15)", function () {
-    var result = getComma(5e15);
-    assert(result.getPrimeExp(2) !== 0);
+  it('getComma(77) is 1 (since 77 is composite)', function () {
+    var result = getComma(77);
+    assert.strictEqual(result.getAsFractionText(), '1');
   });
 
-  it('gives default for getComma(5e15+1)', function () {
-    var result = getComma(5e15 + 1);
-    assert.strictEqual(result.getAsFractionText(), '1');
+  it('comma alg EMP (covers a branch)', function () {
+    var result = getComma(5, 'EMP');
+    assert.strictEqual(result.getAsFractionText(), '80/81');
   });
 
   it('comma alg EMP (covers a branch)', function () {
@@ -56,5 +56,31 @@ describe(fnName, function () {
   it('if invalid algorithm supplied (returning non-Peos), use default algorithm', function () {
     var result = getComma(5, function () {return 'Puppies';});
     assert.strictEqual(result.getAsFractionText(), '80/81');
+  });
+
+  // Test an algorithm that produces commas with primes other than 2, 3, p
+  it('test ADJ algorithm on p=43 (follows DR alg)', function () {
+    var result = getComma(43, 'ADJ');
+    assert.deepStrictEqual(result.getPrimeExps(), {2: -7, 3: 1, 43: 1});
+  });
+
+  it('test ADJ algorithm on p=47 (diverges from DR alg)', function () {
+    var result = getComma(47, 'ADJ');
+    assert.deepStrictEqual(result.getPrimeExps(), {2: -4, 3: -1, 47: 1});
+  });
+
+  it('test ADJ algorithm on p=59 (uses 2, 3, 5, 59)', function () {
+    var result = getComma(59, 'ADJ');
+    assert.deepStrictEqual(result.getPrimeExps(),  {2: -2, 3: -1, 5: -1, 59: 1});
+  });
+
+  it('test ADJ algorithm on p=77 (not prime))', function () {
+    var result = getComma(77, 'ADJ');
+    assert.deepStrictEqual(result.getPrimeExps(), {});
+  });
+
+  it('test ADJ algorithm on p=463 (uses 2, 3, 7, 11, 463)', function () {
+    var result = getComma(463, 'ADJ');
+    assert.deepStrictEqual(result.getPrimeExps(), {2: -1, 3: -1, 7: -1, 11: -1, 463: 1});
   });
 });

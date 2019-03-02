@@ -1,9 +1,8 @@
-var getComma = require('../api/class/getComma');
-
 var peos = require('../constants/peos');
 var consts = require('../constants/consts');
 
-var getHigherPrimesArray = require('./getHigherPrimesArray');
+var getCommaPeosArray = require('./getCommaPeosArray');
+var getCommaTextArray = require('./getCommaTextArray');
 var get5Label = require('./get5Label');
 var getHigherPythagCommaArray = require('./getHigherPythagCommaArray');
 var getSharpFlatArray = require('./getSharpFlatArray');
@@ -12,38 +11,30 @@ var getOctaveArray = require('./getOctaveArray');
 
 
 var calcNotationObject = function calcNotationObject(jint, thePeo) {
-  // Split up Peo of this JInterval into components:  2,3  ;  5 (optional)  ;  primes 7+ (or 5+)
-  var fiveOrZero = (jint.hideComma5Syntonic()) ? 0 : 5;
-  var splitArray = thePeo.split([2, 3], fiveOrZero);  // [Peo({2:a,3:b}), Peo({5:c}), Peo(the rest)]
-  // var pythagPeo = splitArray[0];             // Pythagorean = primes 2 and 3 only
-  var prime5Peo = splitArray[1];
-  var primes7PlusPeo = splitArray[2];
+  // Calculate both pitch notation and pitch class notation of thePeo (where 1/1 is notated C4)
 
-  // Calculate comma5PlusPeo from 1/1 based on primes5PlusPeo and algorithm
-  var primes5PlusPeo = primes7PlusPeo.mult(prime5Peo);
-  var comma5PlusPeo = thePeo.get1();     // Use .get1 to get id=1 from any Peo
-  var obj = primes5PlusPeo.getPrimeExps();
-  var keys = Object.keys(obj);
-  for (var i = 0; i < keys.length; i++) {
-    var key = keys[i];
-    var val = obj[key];
-    var prime = Number.parseInt(key, 10);
-    var exp = Number.parseInt(val, 10);
-    var thisComma = getComma(prime, jint.getAlgFn());
-    comma5PlusPeo = comma5PlusPeo.mult(thisComma, exp);
+  // tempPeoRemaining will be repeatedly reduced to 1/1 as the notation is calculated
+  var tempPeoRemaining = thePeo;
+
+  // If not using syntonic shorthand, commas start at 5, otherwise at 7
+  var minPrimeToRemove = (jint.hideComma5Syntonic()) ? 5 : 7;
+  var commaPeosArray = getCommaPeosArray(jint, minPrimeToRemove, tempPeoRemaining);
+  tempPeoRemaining = commaPeosArray[0];
+  var commaTextArray = getCommaTextArray(commaPeosArray[1]);
+  var commaText = commaTextArray[0];
+  var theSpacer = commaTextArray[1];
+
+  var syntonicCommaShorthandText = '';
+  if (!jint.hideComma5Syntonic()) {
+    // Using syntonic comma shorthand
+    var syntonicCommaShorthandArray = getCommaPeosArray(jint, 5, tempPeoRemaining);
+    tempPeoRemaining = syntonicCommaShorthandArray[0];
+    syntonicCommaShorthandText = get5Label(syntonicCommaShorthandArray[1].getPrimeExp(5));
   }
-  // Divide comma5PlusPeo out of original Peo
-  // to get a Pythagorean component
-  var pythagPeo = thePeo.mult(comma5PlusPeo, -1);
 
-  // Get labels for the prime components 5+
-  var prime5Text = get5Label(prime5Peo.getPrimeExp(5));
-  var primes7PlusArray = getHigherPrimesArray(primes7PlusPeo);
-  var primes7PlusText = primes7PlusArray[0];
-  var theSpacer = primes7PlusArray[1];
-
-  // The Pythagorean component has a 3-exponent.
-  var exp3 = pythagPeo.getPrimeExp(3);
+  // tempPeoRemaining should be have all primes 5 and above removed by now.
+  // Going to reduce the 3-exponent next.
+  var exp3 = tempPeoRemaining.getPrimeExp(3);
 
   // Handle four higher Pythagorean commas depending on display options on jint
   var higherPythagNotation = '';
@@ -53,7 +44,7 @@ var calcNotationObject = function calcNotationObject(jint, thePeo) {
     var resultPeo = resultArray[1];
     higherPythagNotation = resultNotation + higherPythagNotation;
     exp3 = exp3 - resultPeo.getPrimeExp(3);
-    pythagPeo = pythagPeo.mult(resultPeo, -1);
+    tempPeoRemaining = tempPeoRemaining.mult(resultPeo, -1);
   };
   var level = null;
   level = jint.levelComma190537Tiny();
@@ -71,32 +62,31 @@ var calcNotationObject = function calcNotationObject(jint, thePeo) {
   var safPeo = safArray[1];
   var sharps = safArray[2];
   var exp3D = exp3 - 7 * sharps;
-  pythagPeo = pythagPeo.mult(safPeo, -1);
+  tempPeoRemaining = tempPeoRemaining.mult(safPeo, -1);
 
   var diatonicArray = getDiatonicArray(exp3D);
   var diatonicText = diatonicArray[0];
   var diatonicPeo = diatonicArray[1];
-  pythagPeo = pythagPeo.mult(diatonicPeo, -1);
+  tempPeoRemaining = tempPeoRemaining.mult(diatonicPeo, -1);
 
-  var exp2 = pythagPeo.getPrimeExp(2);
+  var exp2 = tempPeoRemaining.getPrimeExp(2);
   var octaveArray = getOctaveArray(exp2);
   var octaveText = octaveArray[0];
   // var octavePeo = octaveArray[1];              // Not used
-  // pythagPeo = pythagPeo.mult(octavePeo, -1);   // Not used
-
-  // Should be down to 1 on the pythagPeo now.
+  // tempPeoRemaining = tempPeoRemaining.mult(octavePeo, -1);   // Not used
+  // Should be down to 1 on the tempPeoRemaining now.
 
   // Put all these text components together for a final notation
   var pitchText = '';
   var pitchClassText = '';
   if (theSpacer) {
     // theSpacer = ' '
-    pitchText = diatonicText + safText + higherPythagNotation + prime5Text + octaveText + theSpacer + primes7PlusText;
-    pitchClassText = diatonicText + safText + higherPythagNotation + prime5Text + theSpacer + primes7PlusText;
+    pitchText = diatonicText + safText + higherPythagNotation + syntonicCommaShorthandText + octaveText + theSpacer + commaText;
+    pitchClassText = diatonicText + safText + higherPythagNotation + syntonicCommaShorthandText + theSpacer + commaText;
   } else {
     // theSpacer = ''
-    pitchText = diatonicText + safText + higherPythagNotation + prime5Text + primes7PlusText + octaveText;
-    pitchClassText = diatonicText + safText + higherPythagNotation + prime5Text + primes7PlusText;
+    pitchText = diatonicText + safText + higherPythagNotation + syntonicCommaShorthandText + commaText + octaveText;
+    pitchClassText = diatonicText + safText + higherPythagNotation + syntonicCommaShorthandText + commaText;
   }
 
   var result = {};

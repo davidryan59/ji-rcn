@@ -7,6 +7,7 @@ var getCommaDR = require('./getCommaDR');
 var getCommaSAG = require('./getCommaSAG');
 var getCommaKG2 = require('./getCommaKG2');
 var getCommaBAD = require('./getCommaBAD');
+var getCommaADJ = require('./getCommaADJ');
 
 var returnNull = function returnNull() {return null;};
 
@@ -20,6 +21,7 @@ theObject[consts.ALG_DR] = getCommaDR;     // List of comma algorithms. See list
 theObject[consts.ALG_SAG] = getCommaSAG;
 theObject[consts.ALG_KG] = getCommaKG2;
 theObject[consts.ALG_BAD] = getCommaBAD;
+theObject[consts.ALG_ADJ] = getCommaADJ;   // Uses some prime commas with 5+ in them (between 3 and p)
 
 
 module.exports = theObject;

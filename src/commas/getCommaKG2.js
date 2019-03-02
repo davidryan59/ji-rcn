@@ -4,6 +4,8 @@ var calcExp2 = require('../maths/calcExp2');
 var getCommaKG2 = function getCommaKG2(p) {
   // Calculate a prime comma, according to the KG2 algorithm
 
+  // Could add a primality check here
+
   var logp = Math.log(p);
   var log2 = Math.log(2);
   var log2p = logp / log2;   // Octaves

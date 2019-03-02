@@ -46,6 +46,7 @@ module.exports = {
   ALG_SAG: 'SAG',
   ALG_KG: 'KG2',
   ALG_BAD: 'BAD',
+  ALG_ADJ: 'ADJ',
 
   ALG_CUSTOM: 'CUSTOM',  // Default value if function supplied but no name
 
