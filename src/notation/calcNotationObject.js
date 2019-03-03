@@ -20,7 +20,7 @@ var calcNotationObject = function calcNotationObject(jint, thePeo) {
   var minPrimeToRemove = (jint.hideComma5Syntonic()) ? 5 : 7;
   var commaPeosArray = getCommaPeosArray(jint, minPrimeToRemove, tempPeoRemaining);
   tempPeoRemaining = commaPeosArray[0];
-  var commaTextArray = getCommaTextArray(commaPeosArray[1]);
+  var commaTextArray = getCommaTextArray(jint, commaPeosArray[1]);
   var commaText = commaTextArray[0];
   var theSpacer = commaTextArray[1];
 

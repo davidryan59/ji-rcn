@@ -98,4 +98,32 @@ describe('Display functions on JInterval', function () {
     // lev12:11 would give a different notation!
     assert.deepStrictEqual(jint2.getEndPitchNotation(), 'E#pppm(s71)(t5)4');
   });
+
+  it("Test comMax=300 ([299] doesn't split into [13][23])", function () {
+    var jint1b = new JInterval({
+      display: {comMax: 300},
+      ratio: 299 / 256
+    });
+    jint1b.getEndPitchNotation();
+    assert.deepStrictEqual(jint1b.getEndPitchNotation(), 'D#[299]4');
+  });
+
+  it('Test comMax=300 ([301] does split into [7][41])', function () {
+    var jint1b = new JInterval({
+      display: {comMax: 300},
+      ratio: 301 / 256
+    });
+    jint1b.getEndPitchNotation();
+    assert.deepStrictEqual(jint1b.getEndPitchNotation(), 'Eb4 [7 43]');
+  });
+
+  it('Test comMax=300 with copy JInterval to cover a branch ([301] again)', function () {
+    var jint1b = new JInterval({
+      display: {comMax: 300},
+      ratio: 301 / 256
+    });
+    var jint2 = new JInterval(jint1b)
+    jint1b.getEndPitchNotation();
+    assert.deepStrictEqual(jint2.getEndPitchNotation(), 'Eb4 [7 43]');
+  });
 });

@@ -228,10 +228,10 @@ console.log('JInterval can go much higher than this - factorial of 1000000 shoul
 console.log('');
 
 console.log('');
-console.log('Notations for 1 to 1300, where 1/1 is C(o-4), for six different algorithms or display styles');
+console.log('Notations for 1 to 512, where 1/1 is C(o-4), for six different algorithms or display styles');
 console.log('');
 console.log('i,DR,SAG,KG2,ADJ,Hide5,Lev12=11');
-for (var i = 1; i < 1300; i++) {
+for (var i = 1; i < 512; i++) {
   var jintDR = new JInterval({ratio: i / 256});
   var jintSAG = new JInterval({ratio: i / 256, alg: 'SAG'});
   var jintKG2 = new JInterval({ratio: i / 256, alg: 'KG2'});

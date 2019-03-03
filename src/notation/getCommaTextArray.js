@@ -5,18 +5,20 @@ var bmid = consts.CHAR_COMMA_DIVIDE;
 var bpow = consts.CHAR_COMMA_POWER;
 var br = consts.BRACKET_RIGHT_COMMA;
 
-var commaMaxUnsplitNumber = consts.COMMA_MAX_UNSPLIT;
+var commaMaxUnsplitDefault = consts.COMMA_MAX_UNSPLIT;
 
 
-var getCommaTextArray = function getCommaTextArray(peo) {
+var getCommaTextArray = function getCommaTextArray(jint, peo) {
   // These two will be modified and outputted
   var result = '';
   var spacer = '';
 
-  // If both numerator and denominator are up to commaMaxUnsplitNumber
+  var comMax = jint.getCommaMaxUnsplit() || commaMaxUnsplitDefault;
+
+  // If both numerator and denominator are up to comMax
   // use the text representation of the fraction instead of
   // splitting into prime factors
-  if (peo.getNum() <= commaMaxUnsplitNumber && peo.getDenom() <= commaMaxUnsplitNumber) {
+  if (peo.getNum() <= comMax && peo.getDenom() <= comMax) {
     if (peo.getAsDecimal() === 1) return ['', spacer];
     return ['' + bl + peo.getAsFractionText() + br, spacer];
   }

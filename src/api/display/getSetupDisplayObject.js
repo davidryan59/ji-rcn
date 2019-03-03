@@ -16,10 +16,13 @@ var getSetupDisplayObject = function getSetupDisplayObject() {
   if (lev53) result.lev53 = lev53;
 
   var lev665 = this.levelComma665Small();
-
   if (lev665) result.lev665 = lev665;
+
   var lev190537 = this.levelComma190537Tiny();
   if (lev190537) result.lev190537 = lev190537;
+
+  var comMax = this.getCommaMaxUnsplit();
+  if (comMax) result.comMax = comMax;
 
   return result;
 };

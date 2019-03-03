@@ -30,9 +30,10 @@ var setDisplay = function setDisplay(jint, theDisplay) {
   var lev53 = theDisplay.lev53;
   var lev665 = theDisplay.lev665;
   var lev190537 = theDisplay.lev190537;
+  var comMax = theDisplay.comMax;
 
   // Return if none of the switches are on
-  if (!(hide5 || lev12 || lev53 || lev665 || lev190537)) return;
+  if (!(hide5 || lev12 || lev53 || lev665 || lev190537 || comMax)) return;
 
   // We've got at least one non-default display option.
   // Store them here.
@@ -47,6 +48,10 @@ var setDisplay = function setDisplay(jint, theDisplay) {
   if (lev53) disp.lev53 = checkLevel(lev53, 53);
   if (lev665) disp.lev665 = checkLevel(lev665, 665);
   if (lev190537) disp.lev190537 = checkLevel(lev190537, 190537);
+
+  // Maximum number in comma that doesn't get split.
+  // E.g. if set to 1000, [1001] becomes [7 11 13].
+  if (Number.isInteger(comMax) && comMax >= 0) disp.comMax = comMax;
 };
 
 module.exports = setDisplay;
