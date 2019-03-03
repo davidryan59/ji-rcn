@@ -5,7 +5,7 @@ var bmid = consts.CHAR_COMMA_DIVIDE;
 var bpow = consts.CHAR_COMMA_POWER;
 var br = consts.BRACKET_RIGHT_COMMA;
 
-var unsplitDigits = consts.COMMA_MAX_DIGITS;
+var commaMaxUnsplitNumber = consts.COMMA_MAX_UNSPLIT;
 
 
 var getCommaTextArray = function getCommaTextArray(peo) {
@@ -13,13 +13,11 @@ var getCommaTextArray = function getCommaTextArray(peo) {
   var result = '';
   var spacer = '';
 
-  // If both numerator and denominator are of length max unsplitDigits
+  // If both numerator and denominator are up to commaMaxUnsplitNumber
   // use the text representation of the fraction instead of
   // splitting into prime factors
-  if (peo.getLogNum(10) < unsplitDigits && peo.getLogDenom(10) < unsplitDigits) {
-    if (peo.getLog(10) === 0) {
-      return ['', spacer];
-    }
+  if (peo.getNum() <= commaMaxUnsplitNumber && peo.getDenom() <= commaMaxUnsplitNumber) {
+    if (peo.getAsDecimal() === 1) return ['', spacer];
     return ['' + bl + peo.getAsFractionText() + br, spacer];
   }
 
