@@ -226,3 +226,17 @@ console.log(jint);
 console.log('');
 console.log('JInterval can go much higher than this - factorial of 1000000 should be fine to calculate, but take a while to print!');
 console.log('');
+
+console.log('');
+console.log('Notations for 1 to 1300, where 1/1 is C(o-4), for six different algorithms or display styles');
+console.log('');
+console.log('i,DR,SAG,KG2,ADJ,Hide5,Lev12=11');
+for (var i = 1; i < 1300; i++) {
+  var jintDR = new JInterval({ratio: i / 256});
+  var jintSAG = new JInterval({ratio: i / 256, alg: 'SAG'});
+  var jintKG2 = new JInterval({ratio: i / 256, alg: 'KG2'});
+  var jintADJ = new JInterval({ratio: i / 256, alg: 'ADJ'});
+  var jintH5 = new JInterval({ratio: i / 256, display: {hide5: true}});
+  var jintP12 = new JInterval({ratio: i / 256, display: {lev12: 11}});
+  console.log(`${i},${jintDR.getEndPitchNotation()},${jintSAG.getEndPitchNotation()},${jintKG2.getEndPitchNotation()},${jintADJ.getEndPitchNotation()},${jintH5.getEndPitchNotation()},${jintP12.getEndPitchNotation()}`);
+}
