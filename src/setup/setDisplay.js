@@ -31,9 +31,10 @@ var setDisplay = function setDisplay(jint, theDisplay) {
   var lev665 = theDisplay.lev665;
   var lev190537 = theDisplay.lev190537;
   var comMax = theDisplay.comMax;
+  var reps = theDisplay.reps;
 
   // Return if none of the switches are on
-  if (!(hide5 || lev12 || lev53 || lev665 || lev190537 || comMax)) return;
+  if (!(hide5 || lev12 || lev53 || lev665 || lev190537 || comMax || reps)) return;
 
   // We've got at least one non-default display option.
   // Store them here.
@@ -52,6 +53,10 @@ var setDisplay = function setDisplay(jint, theDisplay) {
   // Maximum number in comma that doesn't get split.
   // E.g. if set to 1000, [1001] becomes [7 11 13].
   if (Number.isInteger(comMax) && comMax >= 0) disp.comMax = comMax;
+
+  // Maximum number of repeated characters before it gets bracketed
+  // E.g. if set to 1000, [1001] becomes [7 11 13].
+  if (Number.isInteger(reps) && reps >= 2) disp.reps = reps;
 };
 
 module.exports = setDisplay;

@@ -65,6 +65,7 @@ JInterval.prototype.levelComma53Mercator = require('./api/display/levelComma53Me
 JInterval.prototype.levelComma665Small = require('./api/display/levelComma665Small');
 JInterval.prototype.levelComma190537Tiny = require('./api/display/levelComma190537Tiny');
 JInterval.prototype.getCommaMaxUnsplit = require('./api/display/getCommaMaxUnsplit');
+JInterval.prototype.getMaxRepeatChars = require('./api/display/getMaxRepeatChars');
 JInterval.prototype.getSetupDisplayObject = require('./api/display/getSetupDisplayObject');
 JInterval.prototype.hasDisplay = require('./api/display/hasDisplay');
 

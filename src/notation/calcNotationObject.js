@@ -29,7 +29,7 @@ var calcNotationObject = function calcNotationObject(jint, thePeo) {
     // Using syntonic comma shorthand
     var syntonicCommaShorthandArray = getCommaPeosArray(jint, 5, tempPeoRemaining);
     tempPeoRemaining = syntonicCommaShorthandArray[0];
-    syntonicCommaShorthandText = get5Label(syntonicCommaShorthandArray[1].getPrimeExp(5));
+    syntonicCommaShorthandText = get5Label(jint, syntonicCommaShorthandArray[1].getPrimeExp(5));
   }
 
   // tempPeoRemaining should be have all primes 5 and above removed by now.
@@ -39,7 +39,7 @@ var calcNotationObject = function calcNotationObject(jint, thePeo) {
   // Handle four higher Pythagorean commas depending on display options on jint
   var higherPythagNotation = '';
   var handleHigherPythag = function handleHigherPythag(level, pythagCommaPeo, pythagOn, pythagOff) {
-    var resultArray = getHigherPythagCommaArray(exp3, level, pythagCommaPeo, pythagOn, pythagOff);
+    var resultArray = getHigherPythagCommaArray(jint, exp3, level, pythagCommaPeo, pythagOn, pythagOff);
     var resultNotation = resultArray[0];
     var resultPeo = resultArray[1];
     higherPythagNotation = resultNotation + higherPythagNotation;
@@ -57,7 +57,7 @@ var calcNotationObject = function calcNotationObject(jint, thePeo) {
   if (level) handleHigherPythag(level, peos.PEO_PYTHAG, consts.CHAR_PYTHAG_ON, consts.CHAR_PYTHAG_OFF);
 
   // Use it first to get sharps and flats.
-  var safArray = getSharpFlatArray(exp3);
+  var safArray = getSharpFlatArray(jint, exp3);
   var safText = safArray[0];
   var safPeo = safArray[1];
   var sharps = safArray[2];

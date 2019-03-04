@@ -6,11 +6,11 @@ var getErrorNotation = require('./getErrorNotation');
 
 var bl = consts.BRACKET_LEFT_STANDARD;
 var br = consts.BRACKET_RIGHT_STANDARD;
-var numRepeats = consts.REPEAT_MAX_CHARS;
 var numError = Math.pow(10, consts.BRACKET_MAX_DIGITS);
 var zeroResult = function zeroResult(txtZero) {return [txtZero, new Peo()];};
 
-var getHigherPythagCommaArray = function getHigherPythagCommaArray(exp3Input, exp3StartLevel, onPeo, onChar, offChar) {
+
+var getHigherPythagCommaArray = function getHigherPythagCommaArray(jint, exp3Input, exp3StartLevel, onPeo, onChar, offChar) {
   // Format of result: [resultAsNotation, resultAsPeo]
 
   // Deal with input error
@@ -32,6 +32,7 @@ var getHigherPythagCommaArray = function getHigherPythagCommaArray(exp3Input, ex
   if (exp3Input < 0) intRes = -intRes;
   var getResult = function getResult(txtRes) {return [txtRes, new Peo(onPeo, intRes)];};
 
+  var numRepeats = jint.getMaxRepeatChars() || consts.REPEAT_MAX_CHARS;
   if (intRes > numRepeats) {
     return getResult('' + bl + onChar + intRes + br);
   } else if (intRes > 0) {

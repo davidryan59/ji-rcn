@@ -4,11 +4,14 @@ var assert = require('assert');
 
 var testIndex = require('./_test_index');
 var get5Label = testIndex.get5Label;
+var JInterval = testIndex.JInterval;
+var mockJint = new JInterval();
+
 
 var fnName = 'get5Label';
 describe(fnName, function () {
   var runTest = function (input, expected) {
-    var actual = get5Label(input);
+    var actual = get5Label(mockJint, input);
     var label = fnName + '(' + input + ') = ' + expected;
     it(label, function () {
       assert.strictEqual(actual, expected);

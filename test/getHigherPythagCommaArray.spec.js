@@ -6,6 +6,8 @@ var testIndex = require('./_test_index');
 var getHigherPythagCommaArray = testIndex.getHigherPythagCommaArray;
 var consts = testIndex.consts;
 var peos = testIndex.peos;
+var JInterval = testIndex.JInterval;
+var mockJint = new JInterval();
 
 var pythagArr = [
   peos.PEO_PYTHAG,
@@ -37,7 +39,7 @@ describe(fnName, function () {
   var runTest = function (input, arr, expected, startLevel) {
     // startLevel is optional
     var theStartLevel = startLevel || null;
-    var arrReturn = getHigherPythagCommaArray(input, theStartLevel, arr[0], arr[1], arr[2]);
+    var arrReturn = getHigherPythagCommaArray(mockJint, input, theStartLevel, arr[0], arr[1], arr[2]);
     var actual = arrReturn[0];
     var label = fnName + ' with ' + arr[1] + ' comma and ' + input + ' gives \'' + expected + '\'';
     if (startLevel) label += ' (start at ' + startLevel + ')';

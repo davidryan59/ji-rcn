@@ -4,11 +4,14 @@ var assert = require('assert');
 
 var testIndex = require('./_test_index');
 var getSharpFlatArray = testIndex.getSharpFlatArray;
+var JInterval = testIndex.JInterval;
+var mockJint = new JInterval();
+
 
 var fnName = 'getSharpFlatArray';
 describe(fnName, function () {
   var runTest = function (input, expected) {
-    var actual = getSharpFlatArray(input)[0];
+    var actual = getSharpFlatArray(mockJint, input)[0];
     var label = fnName + '(' + input + ') = ' + expected;
     it(label, function () {
       assert.strictEqual(actual, expected);

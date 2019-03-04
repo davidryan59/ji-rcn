@@ -10,11 +10,10 @@ var br = consts.BRACKET_RIGHT_STANDARD;
 var st = consts.CHAR_SHARP;
 var ft = consts.CHAR_FLAT;
 var errorNotation = getErrorNotation(st);
-
 var numError = Math.pow(10, consts.BRACKET_MAX_DIGITS);
-var numRepeats = consts.REPEAT_MAX_CHARS;
 
-var getSharpFlatArray = function getSharpFlatArray(exp3) {
+
+var getSharpFlatArray = function getSharpFlatArray(jint, exp3) {
   // Format of result: [resultAsNotation, resultAsPeo, resultAsInteger]
 
   // Deal with error cases
@@ -35,6 +34,7 @@ var getSharpFlatArray = function getSharpFlatArray(exp3) {
     return [txt, peo, sharps];
   };
 
+  var numRepeats = jint.getMaxRepeatChars() || consts.REPEAT_MAX_CHARS;
   if (sharps > numRepeats) {
     return getResult('' + bl + st + sharps + br);
   } else if (sharps > 0) {

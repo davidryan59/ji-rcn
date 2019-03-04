@@ -24,6 +24,9 @@ var getSetupDisplayObject = function getSetupDisplayObject() {
   var comMax = this.getCommaMaxUnsplit();
   if (comMax) result.comMax = comMax;
 
+  var reps = this.getMaxRepeatChars();
+  if (reps) result.reps = reps;
+
   return result;
 };
 
