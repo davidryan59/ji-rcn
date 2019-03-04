@@ -230,7 +230,7 @@ console.log('');
 console.log('');
 console.log('Notations for 1 to 512, where 1/1 is C(o-4), for six different algorithms or display styles');
 console.log('');
-console.log('i,DR,SAG,KG2,ADJ,Hide5,Lev12=11');
+console.log('i,DR,SAG,KG2,ADJ,Hide5,Lev12=11,Reps=1');
 for (var i = 1; i < 512; i++) {
   var jintDR = new JInterval({ratio: i / 256});
   var jintSAG = new JInterval({ratio: i / 256, alg: 'SAG'});
@@ -238,5 +238,6 @@ for (var i = 1; i < 512; i++) {
   var jintADJ = new JInterval({ratio: i / 256, alg: 'ADJ'});
   var jintH5 = new JInterval({ratio: i / 256, display: {hide5: true}});
   var jintP12 = new JInterval({ratio: i / 256, display: {lev12: 11}});
-  console.log(`${i},${jintDR.getEndPitchNotation()},${jintSAG.getEndPitchNotation()},${jintKG2.getEndPitchNotation()},${jintADJ.getEndPitchNotation()},${jintH5.getEndPitchNotation()},${jintP12.getEndPitchNotation()}`);
+  var jintR1 = new JInterval({ratio: i / 256, display: {reps: 1}});
+  console.log(`${i},${jintDR.getEndPitchNotation()},${jintSAG.getEndPitchNotation()},${jintKG2.getEndPitchNotation()},${jintADJ.getEndPitchNotation()},${jintH5.getEndPitchNotation()},${jintP12.getEndPitchNotation()},${jintR1.getEndPitchNotation()}`);
 }

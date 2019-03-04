@@ -56,7 +56,7 @@ var setDisplay = function setDisplay(jint, theDisplay) {
 
   // Maximum number of repeated characters before it gets bracketed
   // E.g. if set to 1000, [1001] becomes [7 11 13].
-  if (Number.isInteger(reps) && reps >= 2) disp.reps = reps;
+  if (Number.isInteger(reps) && reps >= 1) disp.reps = reps;
 };
 
 module.exports = setDisplay;
