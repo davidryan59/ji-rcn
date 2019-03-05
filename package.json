@@ -21,7 +21,7 @@
     "escape-string-regexp": "^1.0.5",
     "is-bounded-number": "^1.2.7",
     "is-string": "^1.0.4",
-    "peo": "^3.2.1"
+    "peo": "^3.3.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
