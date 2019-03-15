@@ -1,7 +1,5 @@
 var getCommaMaxUnsplit = function getCommaMaxUnsplit() {
-  var disp = this.set.ds;
-  if (disp && disp.cmx) return disp.cmx;
-  return false;
+  return (this.set && this.set.ds && this.set.ds.cmx) ? this.set.ds.cmx : false;
 };
 
 module.exports = getCommaMaxUnsplit;

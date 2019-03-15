@@ -1,7 +1,5 @@
 var levelComma53Mercator = function levelComma53Mercator() {
-  var disp = this.set.ds;
-  if (disp && disp.l53) return disp.l53;
-  return false;
+  return (this.set && this.set.ds && this.set.ds.l53) ? this.set.ds.l53 : false;
 };
 
 module.exports = levelComma53Mercator;

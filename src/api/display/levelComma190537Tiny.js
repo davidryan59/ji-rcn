@@ -1,7 +1,5 @@
 var levelComma190537Tiny = function levelComma190537Tiny() {
-  var disp = this.set.ds;
-  if (disp && disp.l190k) return disp.l190k;
-  return false;
+  return (this.set && this.set.ds && this.set.ds.l190k) ? this.set.ds.l190k : false;
 };
 
 module.exports = levelComma190537Tiny;
