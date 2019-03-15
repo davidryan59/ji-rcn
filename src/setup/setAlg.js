@@ -12,31 +12,31 @@ var setAlg = function setAlg(jint, theAlg) {
   if (!theAlg) return;
 
   // Have algorithm here. Make a new blank property.
-  jint.setup.alg = {};
+  jint.set.alg = {};
 
   var inputAlgText = parseCommaAlgText(theAlg);
   if (inputAlgText) {
     // Case 1: theAlg = 'ALG'
-    jint.setup.alg.txt = inputAlgText;
+    jint.set.alg.txt = inputAlgText;
     var inputAlgFn = algIndex[inputAlgText];
-    if (inputAlgFn) jint.setup.alg.fn = inputAlgFn;
+    if (inputAlgFn) jint.set.alg.fn = inputAlgFn;
   } else if (theAlg instanceof Function) {
     // Case 2: theAlg = aFunction
-    jint.setup.alg.fn = theAlg;
-    jint.setup.alg.txt = consts.ALG_CUSTOM;
+    jint.set.alg.fn = theAlg;
+    jint.set.alg.txt = consts.ALG_CUSTOM;
   } else if (typeof theAlg === 'object') {
     // Case 3: theAlg = {txt: 'ALG', fn: aFunction}   (could be 0 or 1 inputs)
     // Copy the function first, if it is there
     if (theAlg.fn instanceof Function) {
-      jint.setup.alg.fn = theAlg.fn;
-      jint.setup.alg.txt = theAlg.txt || consts.ALG_CUSTOM;
+      jint.set.alg.fn = theAlg.fn;
+      jint.set.alg.txt = theAlg.txt || consts.ALG_CUSTOM;
     }
     // Copy the text second, and overwrite the function if it is available
     var inputAlgTxtText = parseCommaAlgText(theAlg.txt);
     if (inputAlgTxtText) {
-      jint.setup.alg.txt = inputAlgTxtText;
+      jint.set.alg.txt = inputAlgTxtText;
       var inputAlgTxtFn = algIndex[inputAlgTxtText];
-      if (inputAlgTxtFn) jint.setup.alg.fn = inputAlgTxtFn;
+      if (inputAlgTxtFn) jint.set.alg.fn = inputAlgTxtFn;
     }
   }
 };

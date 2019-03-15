@@ -1,5 +1,5 @@
 var hasDisplay = function hasDisplay() {
-  return !!(this.setup.disp);
+  return !!(this.set && this.set.ds);
 };
 
 module.exports = hasDisplay;

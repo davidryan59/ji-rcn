@@ -1,7 +1,7 @@
 var consts = require('../../constants/consts');
 
 var getTuningPitchNotation = function getTuningPitchNotation() {
-  if (this.setup.tune && this.setup.tune.pitchNotation) return this.setup.tune.pitchNotation;
+  if (this.set && this.set.tn && this.set.tn.pn) return this.set.tn.pn;
   return consts.DEFAULT_PITCH_NOTATION;
 };
 

@@ -5,7 +5,7 @@ var initialise = require('./initialisers/initialise');
 // and a notation (text)
 function JInterval() {
   this.peo = null; // Want this key to appear first
-  this.setup = {};
+  this.set = {};
   initialise(this, arguments);
 }
 

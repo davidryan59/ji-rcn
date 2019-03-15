@@ -49,7 +49,7 @@ describe(fnName, function () {
     assert.strictEqual(jint.getTuningInputPitchNotation(), 'A4');
     assert(jint.hasTuning());
     // Cover 1 more case
-    delete jint.setup.tune.pitchNotation;  // Can't see another way to cover 3rd case...
+    delete jint.set.tn.pn;  // Can't see another way to cover 3rd case...
     assert.strictEqual(jint.getTuningInputPitchNotation(), 'C4');
   });
 

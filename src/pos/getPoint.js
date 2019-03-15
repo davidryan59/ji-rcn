@@ -11,12 +11,12 @@ var getPoint = function getPoint(jint, thePeo) {
   var tuningMultHz = jint.getTuningMultHz();
   var frequencyHz = peoAsDecimal * tuningMultHz;
   if (frequencyHz > largeLimit) frequencyHz = 0;
-  result.freqHz = frequencyHz;
-  result.freqTxt = getFreqText(frequencyHz);
+  result.fhz = frequencyHz;
+  result.ftx = getFreqText(frequencyHz);
 
   var notationObject = calcNotationObject(jint, thePeo);
-  result.pitch = notationObject.pitch;
-  result.pclass = notationObject.pclass;
+  result.pn = notationObject.pn;
+  result.pc = notationObject.pc;
 
   return result;
 };

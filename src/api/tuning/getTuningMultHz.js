@@ -1,7 +1,7 @@
 var consts = require('../../constants/consts');
 
 var getTuningMultHz = function getTuningMultHz() {
-  if (this.setup.tune && this.setup.tune.multHz) return this.setup.tune.multHz;
+  if (this.set && this.set.tn && this.set.tn.mhz) return this.set.tn.mhz;
   return consts.DEFAULT_FREQ_HZ;
 };
 

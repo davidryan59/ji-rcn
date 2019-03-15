@@ -211,10 +211,10 @@ for (var exp3 = 0; exp3 < 100; exp3++) {
 console.log('');
 
 console.log('');
-console.log('CSV table of notations from 1/1 to 512/1 with various options, where 1/1 is C(o-4)');
+console.log('CSV table of notations from 1/1 to 275/1 with various options, where 1/1 is C(o-4)');
 console.log('');
 console.log('i,DR,SAG,KG2,ADJ,Hide5,Lev12=11,Reps=1,ComMax=1');
-for (var i = 1; i <= 2310; i++) {
+for (var i = 1; i <= 275; i++) {
   var num = i / 256;
   var jintDR = new JInterval({ratio: num});
   var jintSAG = new JInterval({ratio: num, alg: 'SAG'});

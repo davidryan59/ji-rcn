@@ -1,7 +1,5 @@
 var getMaxRepeatChars = function getMaxRepeatChars() {
-  var disp = this.setup.disp;
-  if (disp && disp.reps) return disp.reps;
-  return false;
+  return (this.set && this.set.ds && this.set.ds.rps) ? this.set.ds.rps : false;
 };
 
 module.exports = getMaxRepeatChars;

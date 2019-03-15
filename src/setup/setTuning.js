@@ -6,25 +6,25 @@ var setTuning = function setTuning(jint, theTuning) {
   // Return if a tuning hasn't been supplied
   if (!theTuning) return;
 
-  var tuningMultHz = null;
+  var multHz = null;
   var pitchNotation = null;
   var inputPitchNotation = theTuning.pitchNotation;
   var freqHz = theTuning.freqHz;
   if (!freqHz) freqHz = consts.DEFAULT_FREQ_HZ;
   if (!inputPitchNotation) {
     pitchNotation = consts.DEFAULT_PITCH_NOTATION;
-    tuningMultHz = freqHz;
+    multHz = freqHz;
   } else {
     var thePeo = parseNotation(jint, inputPitchNotation);
-    pitchNotation = calcNotationObject(jint, thePeo).pitch;
-    tuningMultHz = thePeo.mult(freqHz, -1).pow(-1).getAsDecimal();   // freq/peo = (peo * freq^-1)^-1
+    pitchNotation = calcNotationObject(jint, thePeo).pn;
+    multHz = thePeo.mult(freqHz, -1).pow(-1).getAsDecimal();   // freq/peo = (peo * freq^-1)^-1
   }
-  jint.setup.tune = {
-    freqHz: freqHz,
-    pitchNotation: pitchNotation,
-    multHz: tuningMultHz
+  jint.set.tn = {
+    fhz: freqHz,
+    pn: pitchNotation,
+    mhz: multHz
   };
-  if (inputPitchNotation && inputPitchNotation !== pitchNotation) jint.setup.tune.inputPitchNotation = inputPitchNotation;
+  if (inputPitchNotation && inputPitchNotation !== pitchNotation) jint.set.tn.ipn = inputPitchNotation;
 };
 
 module.exports = setTuning;

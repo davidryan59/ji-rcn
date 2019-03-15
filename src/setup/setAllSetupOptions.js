@@ -5,7 +5,8 @@ var setDisplay = require('./setDisplay');
 var setAllSetupOptions = function setAllSetupOptions(jint, theOptions) {
   setAlg(jint, theOptions.alg);
   setDisplay(jint, theOptions.display);
-  setTuning(jint, theOptions.tuning);    // Must be done AFTER alg
+  // MUST do setTuning after setAlg
+  setTuning(jint, theOptions.tuning);
 };
 
 module.exports = setAllSetupOptions;
