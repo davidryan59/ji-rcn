@@ -1,6 +1,6 @@
 var levelComma12Pythag = function levelComma12Pythag() {
-  var disp = this.set.disp;
-  if (disp && disp.lev12) return disp.lev12;
+  var disp = this.set.ds;
+  if (disp && disp.l12) return disp.l12;
   return false;
 };
 

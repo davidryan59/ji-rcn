@@ -1,6 +1,6 @@
 var getCommaMaxUnsplit = function getCommaMaxUnsplit() {
-  var disp = this.set.disp;
-  if (disp && disp.comMax) return disp.comMax;
+  var disp = this.set.ds;
+  if (disp && disp.cmx) return disp.cmx;
   return false;
 };
 

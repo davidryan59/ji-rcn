@@ -8,7 +8,7 @@ var JInterval = testIndex.JInterval;
 
 
 describe('Display functions on JInterval', function () {
-  it('Test options when all switched on', function () {
+  it('Test several options switched on', function () {
     var jint = new JInterval({
       display: {hide5: true, lev12: true, lev53: true, lev665: true, lev190537: true},
       ratio: 1
@@ -21,7 +21,7 @@ describe('Display functions on JInterval', function () {
     assert.strictEqual(opts.display.lev190537, 190537);
   });
 
-  it('Test options when all switched off', function () {
+  it('Test several options switched off', function () {
     var jint = new JInterval({
       display: {hide5: false, lev12: false, lev53: false, lev665: false, lev190537: false},
       ratio: 1
@@ -30,7 +30,7 @@ describe('Display functions on JInterval', function () {
     assert.deepStrictEqual(opts, {});
   });
 
-  it('Test only hide5 display option on, others off', function () {
+  it('Test one option on', function () {
     var jint = new JInterval({
       display: {hide5: true},
       ratio: 1
