@@ -40,8 +40,8 @@ var setDisplay = function setDisplay(jint, theDisplay) {
 
   // We've got at least one non-default display option.
   // Store them here.
-  jint.setup.disp = {};
-  var disp = jint.setup.disp;
+  jint.set.disp = {};
+  var disp = jint.set.disp;
 
   // Should syntonic commas be hidden from display?
   if (hide5) disp.hide5 = true;

@@ -90,8 +90,8 @@ var calcNotationObject = function calcNotationObject(jint, thePeo) {
   }
 
   var result = {};
-  result.pitch = pitchText;
-  result.pclass = pitchClassText;
+  result.pn = pitchText;
+  result.pc = pitchClassText;
 
   return result;
 };

@@ -1,5 +1,5 @@
 var levelComma190537Tiny = function levelComma190537Tiny() {
-  var disp = this.setup.disp;
+  var disp = this.set.disp;
   if (disp && disp.lev190537) return disp.lev190537;
   return false;
 };

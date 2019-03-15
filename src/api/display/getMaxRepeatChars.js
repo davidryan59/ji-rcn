@@ -1,5 +1,5 @@
 var getMaxRepeatChars = function getMaxRepeatChars() {
-  var disp = this.setup.disp;
+  var disp = this.set.disp;
   if (disp && disp.reps) return disp.reps;
   return false;
 };

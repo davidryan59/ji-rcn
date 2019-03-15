@@ -1,5 +1,5 @@
 var hideComma5Syntonic = function hideComma5Syntonic() {
-  return !!(this.setup.disp && this.setup.disp.hide5);
+  return !!(this.set.disp && this.set.disp.hide5);
 };
 
 module.exports = hideComma5Syntonic;

@@ -22,7 +22,7 @@ var setupPosFromFrequency = function setupPosFromFrequency(jint, inputStartFreqH
     // Reuse if no (valid) start frequency has been inputted
     if (!checkInput(inputStartFreqHz)) return;
     // Reuse if input start frequency is close enough to existing frequency
-    if (Math.abs(jint.pos.start.freqHz - inputStartFreqHz) < smallLimit) return;
+    if (Math.abs(jint.pos.s.fhz - inputStartFreqHz) < smallLimit) return;
     // Cannot reuse. Must reset.
     var theStartPeo2 = new Peo(inputStartFreqHz / jint.getTuningMultHz());
     setPos(jint, theStartPeo2);

@@ -18,15 +18,15 @@ var setupPosFromNotation = function setupPosFromNotation(jint, inputStartNotatio
     // Reuse if no inputStartNotation has been inputted (and no start peo value)
     if (!(inputStartNotation || optionalStartPeo)) return;
     // Reuse if input start notation matches the stored value (or the stored input value)
-    if (inputStartNotation === (jint.pos.start.inputPitch || jint.pos.start.pitch)) return;
+    if (inputStartNotation === (jint.pos.s.ipn || jint.pos.s.pn)) return;
     // Cannot reuse. Must reset.
     // optionalStartPeo only used on initialisation,
     // so wouldn't be available here for amending the start position
     setPos(jint, parseNotation(jint, inputStartNotation));
   }
   // Set the input notations here if they are not the same
-  if (inputStartNotation && inputStartNotation !== jint.pos.start.pitch) jint.pos.start.inputPitch = inputStartNotation;
-  if (inputEndNotation && inputEndNotation !== jint.pos.end.pitch) jint.pos.end.inputPitch = inputEndNotation;
+  if (inputStartNotation && inputStartNotation !== jint.pos.s.pn) jint.pos.s.ipn = inputStartNotation;
+  if (inputEndNotation && inputEndNotation !== jint.pos.e.pn) jint.pos.e.ipn = inputEndNotation;
 };
 
 module.exports = setupPosFromNotation;

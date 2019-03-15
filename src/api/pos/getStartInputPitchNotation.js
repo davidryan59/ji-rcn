@@ -2,7 +2,7 @@ var setupPosFromNotation = require('../../pos/setupPosFromNotation');
 
 var getStartInputPitchNotation = function getStartInputPitchNotation() {
   setupPosFromNotation(this);
-  return this.pos.start.inputPitch || this.pos.start.pitch;
+  return this.pos.s.ipn || this.pos.s.pn;
 };
 
 module.exports = getStartInputPitchNotation;
