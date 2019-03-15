@@ -16,10 +16,12 @@ var setDisplay = function setDisplay(jint, theDisplay) {
   // Format:
   // {
   //   hide5: boolean,
-  //   lev12: integer,
-  //   lev53: integer,
-  //   lev665: integer,
-  //   lev190537: integer,
+  //   lev12: integer > 0,
+  //   lev53: integer > 0,
+  //   lev665: integer > 0,
+  //   lev190537: integer > 0,
+  //   comMax: integer > 0,
+  //   reps: integer > 0,
   // }
 
   // Return if no options supplied
@@ -52,11 +54,11 @@ var setDisplay = function setDisplay(jint, theDisplay) {
 
   // Maximum number in comma that doesn't get split.
   // E.g. if set to 1000, [1001] becomes [7 11 13].
-  if (Number.isInteger(comMax) && comMax >= 0) disp.comMax = comMax;
+  if (Number.isInteger(comMax) && comMax > 0) disp.comMax = comMax;
 
   // Maximum number of repeated characters before it gets bracketed
   // E.g. if set to 1000, [1001] becomes [7 11 13].
-  if (Number.isInteger(reps) && reps >= 1) disp.reps = reps;
+  if (Number.isInteger(reps) && reps > 0) disp.reps = reps;
 };
 
 module.exports = setDisplay;

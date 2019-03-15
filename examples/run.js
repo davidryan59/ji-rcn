@@ -192,8 +192,9 @@ for (var i = 0; i < array.length; i++) {
 console.log('');
 
 console.log('');
-console.log('Giving Pythagorean notations for circle of fifths, with higher Pythag commas switched on');
-console.log('(Pythagorean comma (12) switched on at 11, Mercator comma (53) switched on at 42)');
+console.log('Giving Pythagorean notations for circle of fifths using higher Pythagorean commas:');
+console.log('Pythagorean comma (12) switched on at 11');
+console.log('Mercator comma (53) switched on at 42');
 var log32 = Math.log(3) / Math.log(2);
 for (var exp3 = 0; exp3 < 100; exp3++) {
   var exp2 = -Math.floor(exp3 * log32);
@@ -209,6 +210,22 @@ for (var exp3 = 0; exp3 < 100; exp3++) {
 }
 console.log('');
 
+console.log('');
+console.log('CSV table of notations from 1/1 to 512/1 with various options, where 1/1 is C(o-4)');
+console.log('');
+console.log('i,DR,SAG,KG2,ADJ,Hide5,Lev12=11,Reps=1,ComMax=1');
+for (var i = 1; i <= 2310; i++) {
+  var num = i / 256;
+  var jintDR = new JInterval({ratio: num});
+  var jintSAG = new JInterval({ratio: num, alg: 'SAG'});
+  var jintKG2 = new JInterval({ratio: num, alg: 'KG2'});
+  var jintADJ = new JInterval({ratio: num, alg: 'ADJ'});
+  var jintH5 = new JInterval({ratio: num, display: {hide5: true}});
+  var jintP12 = new JInterval({ratio: num, display: {lev12: 11}});
+  var jintR1 = new JInterval({ratio: num, display: {reps: 1}});
+  var jintCM1 = new JInterval({ratio: num, display: {comMax: 1}});
+  console.log(`${i},${jintDR.getEndPitchNotation()},${jintSAG.getEndPitchNotation()},${jintKG2.getEndPitchNotation()},${jintADJ.getEndPitchNotation()},${jintH5.getEndPitchNotation()},${jintP12.getEndPitchNotation()},${jintR1.getEndPitchNotation()},${jintCM1.getEndPitchNotation()}`);
+}
 console.log('');
 console.log('Constructing a JInterval for small number "77/65"');
 jint = new JInterval(77 / 65);
@@ -226,18 +243,3 @@ console.log(jint);
 console.log('');
 console.log('JInterval can go much higher than this - factorial of 1000000 should be fine to calculate, but take a while to print!');
 console.log('');
-
-console.log('');
-console.log('Notations for 1 to 512, where 1/1 is C(o-4), for six different algorithms or display styles');
-console.log('');
-console.log('i,DR,SAG,KG2,ADJ,Hide5,Lev12=11,Reps=1');
-for (var i = 1; i < 512; i++) {
-  var jintDR = new JInterval({ratio: i / 256});
-  var jintSAG = new JInterval({ratio: i / 256, alg: 'SAG'});
-  var jintKG2 = new JInterval({ratio: i / 256, alg: 'KG2'});
-  var jintADJ = new JInterval({ratio: i / 256, alg: 'ADJ'});
-  var jintH5 = new JInterval({ratio: i / 256, display: {hide5: true}});
-  var jintP12 = new JInterval({ratio: i / 256, display: {lev12: 11}});
-  var jintR1 = new JInterval({ratio: i / 256, display: {reps: 1}});
-  console.log(`${i},${jintDR.getEndPitchNotation()},${jintSAG.getEndPitchNotation()},${jintKG2.getEndPitchNotation()},${jintADJ.getEndPitchNotation()},${jintH5.getEndPitchNotation()},${jintP12.getEndPitchNotation()},${jintR1.getEndPitchNotation()}`);
-}
