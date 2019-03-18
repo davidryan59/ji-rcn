@@ -31,8 +31,8 @@ module.exports = {
   REGEX_ANY_ERROR: new RegExp(regexErrorString, sharedRegexFlags),
   REGEX_COMMA_SPLIT: new RegExp('[' + esc(' ' + consts.BRACKET_LEFT_COMMA + consts.BRACKET_RIGHT_COMMA) + ']', sharedRegexFlags),
 
-  REGEX_BRACKETED_OCTAVES_UP: makeRegexForVariableDigits(consts.CHAR_OCTAVE_MARK + consts.CHAR_OCTAVE_UP),
-  REGEX_BRACKETED_OCTAVES_DOWN: makeRegexForVariableDigits(consts.CHAR_OCTAVE_MARK + consts.CHAR_OCTAVE_DOWN),
+  REGEX_BRACKETED_OCTAVES_UP: makeRegexForVariableDigits(consts.CHARS_OCTAVE_UP),
+  REGEX_BRACKETED_OCTAVES_DOWN: makeRegexForVariableDigits(consts.CHARS_OCTAVE_DOWN),
   REGEX_BRACKETED_SHARPS: makeRegexForVariableDigits(consts.CHAR_SHARP),
   REGEX_BRACKETED_FLATS: makeRegexForVariableDigits(consts.CHAR_FLAT),
 

@@ -5,11 +5,11 @@ var consts = require('../constants/consts');
 var getErrorNotation = require('./getErrorNotation');
 
 var bl = consts.BRACKET_LEFT_STANDARD;
-var on = consts.CHAR_OCTAVE_MARK;
-var su = consts.CHAR_OCTAVE_UP;
-// var sd = consts.CHAR_OCTAVE_DOWN;  // Negative numbers have hyphen already installed!
+var oe = consts.CHAR_OCTAVE_ERROR;
+var su = consts.CHARS_OCTAVE_UP;
+var sd = consts.CHARS_OCTAVE_DOWN;
 var br = consts.BRACKET_RIGHT_STANDARD;
-var errorNotation = getErrorNotation(on);
+var errorNotation = getErrorNotation(oe);
 
 var numError = Math.pow(10, consts.BRACKET_MAX_DIGITS);
 
@@ -32,13 +32,13 @@ var getOctaveArray = function getOctaveArray(exp2Input) {
   var standardOctaveNumber = exp2 + 4;     // For 1/1, exp2=0, and octave is 4 (e.g. C4)
   if (standardOctaveNumber > 9) {
     // Case 10...999999
-    return ['' + bl + on + su + standardOctaveNumber + br, peo];
+    return ['' + bl + su + standardOctaveNumber + br, peo];
   } else if (standardOctaveNumber >= 0) {
     // Case 0..9
     return ['' + standardOctaveNumber, peo];
   }
-  // Case -999999...-1. Minus sign already there! Don't need sd in middle
-  return ['' + bl + on + standardOctaveNumber + br, peo];
+  // Case -999999...-1
+  return ['' + bl + sd + (-standardOctaveNumber) + br, peo];
 };
 
 module.exports = getOctaveArray;

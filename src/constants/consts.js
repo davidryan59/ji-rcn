@@ -7,9 +7,9 @@ module.exports = {
   DEFAULT_PITCH_NOTATION: 'C4',
   DEFAULT_FREQ_HZ: 256,
 
-  CHAR_OCTAVE_MARK: 'o',
-  CHAR_OCTAVE_UP: '+',
-  CHAR_OCTAVE_DOWN: '-',
+  CHAR_OCTAVE_ERROR: 'o',
+  CHARS_OCTAVE_UP: 'o+',
+  CHARS_OCTAVE_DOWN: 'o-',
 
   CHAR_SHARP: '#',
   CHAR_FLAT: 'b',
