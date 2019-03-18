@@ -147,22 +147,7 @@ describe('parseNotation measures intervals correctly from C4', function () {
     ["G5E'6", '15/1', '', 'Concatenation of full notations multiplies them'],
     ['C(o+14)(o+15)', {2: 21}, '', 'Concatenation of separated brackets parses'],
     ['C(o+14)(#2)', {2: -12, 3: 14}],
-    ['C((o+14)#2)', {2: (8 - 11), 3: 7}, '', 'Nesting of brackets only parses the inner bracket'],  // Parses as C(o+14)#2 = C#(o+12)
-
-    ['[o-8]', {2: (-4 - 8)}, '', 'Non standard brackets still parse'],
-    ['<o+293>', {2: (-4 + 293)}],
-    ['{#3}', {3: (7 * 3), 2: (-11 * 3)}],
-    ['[b17]', {3: (7 * -17), 2: (-11 * -17)}],
-    ['<p209>', {3: (12 * 209), 2: (-19 * 209)}],
-    ['{d9763}', {3: (12 * -9763), 2: (-19 * -9763)}],
-    ["['72]", {2: (4 * 72), 3: (-4 * 72), 5: (1 * 72)}],
-    ['{.847}', {2: (4 * -847), 3: (-4 * -847), 5: (1 * -847)}],
-    ['(7)', '63/64'],
-    ['{7/11}', '21/22'],
-
-    ['(#3]', {3: (7 * 1), 2: (-11 * 1 - 1)}, '', 'Mis-formed brackets do not parse'],  // Should parse as #3
-
-    ['', '1', '']
+    ['C((o+14)#2)', {2: (8 - 11), 3: 7}, '', 'Nesting of brackets only parses the inner bracket']  // Parses as C(o+14)#2 = C#(o+12)
   ];
 
   var runTest = function (notationToParse, peoConstructorData, algAcronym, comment) {

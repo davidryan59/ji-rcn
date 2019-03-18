@@ -34,8 +34,6 @@ module.exports = {
   BRACKET_LEFT_COMMA: '[',
   BRACKET_RIGHT_COMMA: ']',
 
-  BRACKET_ALLOWED_CHARS: '[](){}<>',
-
   ERROR_TEXT: 'ERR',
   ERROR_MAX_CHARS: 2,
   COMMA_MAX_UNSPLIT: 1000,
