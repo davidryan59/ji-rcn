@@ -19,7 +19,7 @@ var peoTiny = new Peo({2: -301994, 3: 190537});
 // peoSyntonic not cached here since it could potentially change based on algorithm
 
 
-module.exports = {
+var result = {
   A: peoA,
   B: peoB,
   C: peoC,
@@ -42,7 +42,7 @@ module.exports = {
   PEO_PYTHAG: peoPythag,
   PEO_MERCATOR: peoMercator,
   PEO_SMALL: peoSmall,
-  PEO_TINY: peoTiny,
-
-  DUMMY: 'DUMMY'
+  PEO_TINY: peoTiny
 };
+
+module.exports = result;
