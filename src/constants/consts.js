@@ -8,12 +8,11 @@ module.exports = {
   DEFAULT_FREQ_HZ: 256,
 
   CHAR_OCTAVE_ERROR: 'o',
+
   CHARS_OCTAVE_UP: 'o+',
   CHARS_OCTAVE_DOWN: 'o-',
-
   CHAR_SHARP: '#',
   CHAR_FLAT: 'b',
-
   CHAR_PYTHAG_ON: 'p',
   CHAR_PYTHAG_OFF: 'd',
   CHAR_MERCATOR_ON: 'm',
@@ -22,17 +21,15 @@ module.exports = {
   CHAR_SMALL_OFF: 'r',
   CHAR_TINY_ON: 't',
   CHAR_TINY_OFF: 'y',
-
   CHAR_SYNTONIC_ON: "'",
   CHAR_SYNTONIC_OFF: '.',
-
-  CHAR_COMMA_DIVIDE: '/',
-  CHAR_COMMA_POWER: '^',
 
   BRACKET_LEFT_STANDARD: '(',
   BRACKET_RIGHT_STANDARD: ')',
   BRACKET_LEFT_COMMA: '[',
   BRACKET_RIGHT_COMMA: ']',
+  CHAR_COMMA_DIVIDE: '/',
+  CHAR_COMMA_POWER: '^',
 
   ERROR_TEXT: 'ERR',
   ERROR_MAX_CHARS: 2,
@@ -46,7 +43,5 @@ module.exports = {
   ALG_BAD: 'BAD',
   ALG_ADJ: 'ADJ',
 
-  ALG_CUSTOM: 'CUSTOM',  // Default value if function supplied but no name
-
-  DUMMY: 'DUMMY'
+  ALG_CUSTOM: 'CUSTOM'  // Default value if function supplied but no name
 };
