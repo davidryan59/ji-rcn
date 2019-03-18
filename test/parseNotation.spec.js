@@ -75,7 +75,7 @@ describe('parseNotation measures intervals correctly from C4', function () {
     ["F#'4", '45/32'],
     ['A(b3)(.2)(o+8)', {2: 25, 3: -10, 5: -2}],
 
-    ['(oERR)(3ERR)(5ERR)(#bERR)', '1/1', '', 'Test some error inputs'],
+    ['(oERR)(3ERR)(5ERR)(#ERR)', '1/1', '', 'Test some error inputs'],
 
     ['[2]', '1/1', '', 'Test parsing of integer commas using default and other algorithms'],
     ['[2]', '1/1', 'DR'],

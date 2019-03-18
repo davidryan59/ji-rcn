@@ -5,11 +5,10 @@ var consts = require('../constants/consts');
 var getErrorNotation = require('./getErrorNotation');
 
 var bl = consts.BRACKET_LEFT_STANDARD;
-var oe = consts.CHAR_OCTAVE_ERROR;
 var su = consts.CHARS_OCTAVE_UP;
 var sd = consts.CHARS_OCTAVE_DOWN;
 var br = consts.BRACKET_RIGHT_STANDARD;
-var errorNotation = getErrorNotation(oe);
+var errorNotation = getErrorNotation(su[0]);
 
 var numError = Math.pow(10, consts.BRACKET_MAX_DIGITS);
 

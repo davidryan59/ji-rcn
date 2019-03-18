@@ -15,8 +15,8 @@ var fractionRegexString = integerRegexString + esc(consts.CHAR_COMMA_DIVIDE) + i
 var integerCommaBracketRegex = new RegExp(makeCommaBracketRegexString(integerRegexString), sharedRegexFlags);
 var fractionCommaBracketRegex = new RegExp(makeCommaBracketRegexString(fractionRegexString), sharedRegexFlags);
 
-// Errors are of form (_ERR)
-var errorStringRegex = esc(consts.BRACKET_LEFT_STANDARD) + '.{1,' + consts.ERROR_MAX_CHARS + '}' + esc(consts.ERROR_TEXT + consts.BRACKET_RIGHT_STANDARD);
+// Errors are of form (.ERR) where . is any single character
+var errorStringRegex = esc(consts.BRACKET_LEFT_STANDARD) + '.' + esc(consts.ERROR_TEXT + consts.BRACKET_RIGHT_STANDARD);
 var errorRegex = new RegExp(errorStringRegex, sharedRegexFlags);
 
 var charsRegexString = '('
