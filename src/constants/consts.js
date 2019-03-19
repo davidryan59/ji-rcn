@@ -13,6 +13,7 @@ module.exports = {
 
   CHARS_OCTAVE_UP: 'o+',
   CHARS_OCTAVE_DOWN: 'o-',
+  
   CHAR_SHARP: '#',
   CHAR_FLAT: 'b',
   CHAR_PYTHAG_ON: 'p',

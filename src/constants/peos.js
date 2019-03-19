@@ -50,6 +50,7 @@ var result = {
 
 result[consts.CHARS_OCTAVE_UP] = peoOctaveUp;
 result[consts.CHARS_OCTAVE_DOWN] = peoOctaveDown;
+
 result[consts.CHAR_SHARP] = peoSharp;
 result[consts.CHAR_FLAT] = peoFlat;
 result[consts.CHAR_PYTHAG_ON] = peoPythagOn;
@@ -60,6 +61,10 @@ result[consts.CHAR_SMALL_ON] = peoSmallOn;
 result[consts.CHAR_SMALL_OFF] = peoSmallOff;
 result[consts.CHAR_TINY_ON] = peoTinyOn;
 result[consts.CHAR_TINY_OFF] = peoTinyOff;
+
+// Replace this with suitable functions!
+result[consts.CHAR_SYNTONIC_ON] = new Peo(80, 81)
+result[consts.CHAR_SYNTONIC_OFF] = new Peo(81, 80)
 
 
 module.exports = result;

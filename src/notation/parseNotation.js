@@ -25,7 +25,7 @@ var processCommaText = function processCommaText(commaText, inputAlg) {
   var tempText = commaText;
   tempText = removeSpacesAroundPowerSymbol(tempText);
   tempText = addSpacesAroundDivideSymbol(tempText);
-  var splitArray = tempText.split(rxs.REGEX_COMMA_SPLIT);
+  var splitArray = tempText.split(rxs.REGEX_BRACKET_COMMA_SPLIT);
   var sign = 1;      // -1 after divide symbol
   var firstPeo = new Peo();
   for (var i = 0; i < splitArray.length; i++) {
@@ -117,7 +117,7 @@ var parseNotation = function parseNotation(jint, notation) {
 
   // Remove all error conditions from the text to parse.
   // They have a standard format, which includes at least 1 bracket.
-  analyseNotation({rgx: rxs.REGEX_ANY_ERROR});
+  analyseNotation({rgx: rxs.REGEX_BRACKET_ERROR});
 
   // Analyse and remove valid bracketed expressions from the text
   analyseNotation({
@@ -199,14 +199,14 @@ var parseNotation = function parseNotation(jint, notation) {
 
   // Do the commas - must be after all the others are removed, due to similar formats
   analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_COMMA_FRACTION,
+    rgx: rxs.REGEX_BRACKET_COMMA_FRACTION,
     reduceMatch: reduceCommasToPeo(inputAlg),
     initialValue: new Peo(),
     mapReducerResultToPeo: identityFunction
   });
 
   analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_COMMA_INTEGER,
+    rgx: rxs.REGEX_BRACKET_COMMA_INTEGER,
     reduceMatch: reduceCommasToPeo(inputAlg),
     initialValue: new Peo(),
     mapReducerResultToPeo: identityFunction
