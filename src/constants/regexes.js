@@ -21,8 +21,9 @@ var fractionCommaBracketRegex = new RegExp(makeCommaBracketRegexString(fractionR
 var numberInBracketRegexString = '[0-9]{1,' + consts.BRACKET_MAX_DIGITS + '}';
 
 var bracketOctaveRegexString = esc('(')
-  + '(' + esc(consts.CHARS_OCTAVE_UP)
-  + '|' + esc(consts.CHARS_OCTAVE_DOWN)
+  + esc(consts.CHAR_OCTAVE)
+  + '(' + esc('+')
+  + '|' + esc('-')
   + ')' + numberInBracketRegexString
   + esc(')');
 var bracketOctaveRegex = new RegExp(bracketOctaveRegexString, sharedRegexFlags);
@@ -69,8 +70,6 @@ module.exports = {
 
   REGEX_BRACKET_COMMA_SPLIT: commaSplitRegex,
 
-  REGEX_BRACKETED_OCTAVES_UP: makeBracketRegex(consts.CHARS_OCTAVE_UP),
-  REGEX_BRACKETED_OCTAVES_DOWN: makeBracketRegex(consts.CHARS_OCTAVE_DOWN),
   REGEX_BRACKETED_SHARPS: makeBracketRegex(consts.CHAR_SHARP),
   REGEX_BRACKETED_FLATS: makeBracketRegex(consts.CHAR_FLAT),
   REGEX_BRACKETED_PYTHAG_COMMA_ADD: makeBracketRegex(consts.CHAR_PYTHAG_ON),

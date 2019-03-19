@@ -11,8 +11,7 @@ module.exports = {
   REPEAT_MAX_CHARS: 4,
   BRACKET_MAX_DIGITS: 15,
 
-  CHARS_OCTAVE_UP: 'o+',
-  CHARS_OCTAVE_DOWN: 'o-',
+  CHAR_OCTAVE: 'o',
 
   CHAR_SHARP: '#',
   CHAR_FLAT: 'b',

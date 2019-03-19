@@ -10,8 +10,7 @@ var peoA = new Peo(27, 16);
 var peoE = new Peo(81, 64);
 var peoB = new Peo(243, 128);
 
-var peoOctaveUp = new Peo(2);
-var peoOctaveDown = peoOctaveUp.pow(-1);
+var peoOctave = new Peo(2);
 
 var peoSharp = new Peo({2: -11, 3: 7});
 var peoFlat = peoSharp.pow(-1);
@@ -39,7 +38,7 @@ var result = {
   F: peoF,
   G: peoG,
 
-  PEO_OCTAVE: peoOctaveUp,
+  PEO_OCTAVE: peoOctave,
 
   PEO_SHARP: peoSharp,
   PEO_PYTHAG: peoPythagOn,
@@ -47,9 +46,6 @@ var result = {
   PEO_SMALL: peoSmallOn,
   PEO_TINY: peoTinyOn
 };
-
-result[consts.CHARS_OCTAVE_UP] = peoOctaveUp;
-result[consts.CHARS_OCTAVE_DOWN] = peoOctaveDown;
 
 result[consts.CHAR_SHARP] = peoSharp;
 result[consts.CHAR_FLAT] = peoFlat;
