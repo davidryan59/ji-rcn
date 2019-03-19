@@ -8,8 +8,11 @@
 var Peo = require('peo');
 
 var getComma = require('../api/class/getComma');
+var consts = require('../constants/consts');
 var peos = require('../constants/peos');
 var rxs = require('../constants/regexes');
+
+var charMatched = consts.CHAR_MATCHED;
 
 var getIntFromChars = function getIntFromChars(theText) {
   var regex = /[-+0-9]{1,}/g;        // Characters -+0123456789 only
@@ -88,7 +91,6 @@ var parseNotation = function parseNotation(jint, notation) {
   var tempResult = 0;
   var tempRx = null;
   var tempMatch = null;
-  var tempSplit = null;
   var tempNotation = notation;
   var tempPeo = null;
   var resultsPeo = new Peo();
@@ -107,12 +109,9 @@ var parseNotation = function parseNotation(jint, notation) {
       tempPeo = tempMapReducerResultToPeo(tempResult);
       resultsPeo = resultsPeo.mult(tempPeo);
     }
-    tempSplit = tempNotation.split(tempRx);
-    // Going to concatenate split array, but separate elements with ! symbol
-    // which prevents nested brackets from parsing
-    tempNotation = tempSplit.reduce(function f3(acc, elt, index) {
-      return acc + ((index > 0) ? '!' : '') + elt;
-    }, '');
+    // Replace matched items with a non-parsing character
+    // e.g. so that nested brackets parse only the inner bracket
+    tempNotation = tempNotation.replace(tempRx, charMatched);
   };
 
   // Remove all error conditions from the text to parse.

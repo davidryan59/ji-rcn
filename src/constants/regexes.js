@@ -24,10 +24,10 @@ var bracketOctaveRegexString = esc('(')
   + '(' + esc(consts.CHARS_OCTAVE_UP)
   + '|' + esc(consts.CHARS_OCTAVE_DOWN)
   + ')' + numberInBracketRegexString
-  + esc(')')
+  + esc(')');
 var bracketOctaveRegex = new RegExp(bracketOctaveRegexString, sharedRegexFlags);
 
-var anyBracketRegexString = esc('(') + '[^' + esc('()') + ']*' + esc(')')
+var anyBracketRegexString = esc('(') + '[^' + esc('()') + ']*' + esc(')');
 var anyBracketRegex = new RegExp(anyBracketRegexString, sharedRegexFlags);
 
 var singleCharRegexString = '['

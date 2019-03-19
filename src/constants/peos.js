@@ -63,8 +63,8 @@ result[consts.CHAR_TINY_ON] = peoTinyOn;
 result[consts.CHAR_TINY_OFF] = peoTinyOff;
 
 // Replace this with suitable functions!
-result[consts.CHAR_SYNTONIC_ON] = new Peo(80, 81)
-result[consts.CHAR_SYNTONIC_OFF] = new Peo(81, 80)
+result[consts.CHAR_SYNTONIC_ON] = new Peo(80, 81);
+result[consts.CHAR_SYNTONIC_OFF] = new Peo(81, 80);
 
 
 module.exports = result;
