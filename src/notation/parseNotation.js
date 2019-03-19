@@ -71,8 +71,6 @@ var reduceCommasToPeo = function reduceCommasToPeo(inputAlg) {
   return function f1(acc, elt) {return acc.mult(processCommaText(elt, inputAlg));};
 };
 
-var reduceToCount = function reduceToCount(acc) {return acc + 1;};
-
 var reduceOctaveCharToNum = function reduceOctaveCharToNum(acc, elt) {
   // C5 notation has elt '5' which reduces to 1
   // e.g. 1 octave above C4
@@ -94,6 +92,13 @@ var reduceAccidentalBracketsToPeo = function reduceAccidentalBracketsToPeo(acc, 
   return acc.mult(theStartPeo, thePower);
 };
 
+var reduceAccidentalCharToPeo = function reduceAccidentalCharToPeo(acc, elt) {
+  var theKey = elt[0];
+  var thePeo = peos[theKey];
+  if (!thePeo) return acc;
+  return acc.mult(thePeo);
+};
+
 var peoPower = function peoPower(peo, outerPower) {
   return function f2(innerPower) {
     return peo.pow(innerPower * (outerPower || 1));
@@ -113,7 +118,6 @@ var parseNotation = function parseNotation(jint, notation) {
   var tempNotation = notation;
   var tempPeo = null;
   var resultsPeo = new Peo();
-  var peoSyntonic = getComma(5, inputAlg);
 
   // Function to iterate on the variables
   var analyseNotation = function analyseNotation(options) {
@@ -169,68 +173,10 @@ var parseNotation = function parseNotation(jint, notation) {
 
   // Analyse and remove some valid single characters from the text
   analyseNotation({
-    rgx: rxs.REGEX_CHAR_SYNTONIC_COMMA_ADD,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peoSyntonic)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_SYNTONIC_COMMA_REMOVE,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peoSyntonic, -1)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_SHARP,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_SHARP)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_FLAT,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_SHARP, -1)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_PYTHAG_COMMA_ADD,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_PYTHAG)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_PYTHAG_COMMA_REMOVE,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_PYTHAG, -1)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_MERCATOR_COMMA_ADD,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_MERCATOR)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_MERCATOR_COMMA_REMOVE,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_MERCATOR, -1)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_SMALL_COMMA_ADD,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_SMALL)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_SMALL_COMMA_REMOVE,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_SMALL, -1)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_TINY_COMMA_ADD,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_TINY)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_CHAR_TINY_COMMA_REMOVE,
-    reduceMatch: reduceToCount,
-    mapReducerResultToPeo: peoPower(peos.PEO_TINY, -1)
+    rgx: rxs.REGEX_CHAR_ACCIDENTAL,
+    initialValue: new Peo(),
+    reduceMatch: reduceAccidentalCharToPeo,
+    mapReducerResultToPeo: identityFunction
   });
 
   // Finally analyse the note char and octave number

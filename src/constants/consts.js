@@ -25,6 +25,7 @@ module.exports = {
   CHAR_TINY_OFF: 'y',
   CHAR_SYNTONIC_ON: "'",
   CHAR_SYNTONIC_OFF: '.',
+  CHAR_IDENTITY: 'i',
 
   CHAR_MATCHED: '!',
 

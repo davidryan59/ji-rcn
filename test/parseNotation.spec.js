@@ -41,7 +41,6 @@ describe('parseNotation measures intervals correctly from C4', function () {
     ["'", '80/81', '', 'Syntonic commas'],
     ["'", '80/81', 'SAG'],
     ["'", '80/81', 'KG2'],
-    ["'", {2: -15, 3: 8, 5: 1}, 'BAD', 'Test bad algorithm with different getComma(5)'],
     ['.', '81/80'],
     ['(o-5)', {2: -9}, '', 'Bracketed items'],
     ['(o+4)', '1'],
@@ -149,7 +148,12 @@ describe('parseNotation measures intervals correctly from C4', function () {
     ['C(o+14)(#2)', {2: -12, 3: 14}],
     ['C(()#2)', {'2': -13, '3': 7}, '', 'Parses as C#2'],
     ['C((o+14)#2)', {'2': -3, '3': 7}, '', 'Parses as C(o+14)#2'],
-    ['C(#0)4', '1/1', '', 'Parses as C4']
+
+    ['C(#0)4', '1/1', '', 'Bracket with number 0 parses as identity, overall parse as C4'],
+    ['C(i5)4', '1/1', '', 'Identity char bracket parses as 1/1, overall parse as C4'],
+    ['Ci4', '1/1', '', 'Identity char parses as 1/1, overall parse as C4']
+
+    // ["'", {2: -15, 3: 8, 5: 1}, 'BAD', 'Test bad algorithm with different getComma(5)']
   ];
 
   var runTest = function (notationToParse, peoConstructorData, algAcronym, comment) {

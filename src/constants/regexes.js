@@ -41,6 +41,7 @@ var singleCharRegexString = '['
   + esc(consts.CHAR_SMALL_OFF)
   + esc(consts.CHAR_TINY_ON)
   + esc(consts.CHAR_TINY_OFF)
+  + esc(consts.CHAR_IDENTITY)
   + ']';
 var singleCharRegex = new RegExp(singleCharRegexString, sharedRegexFlags);
 
