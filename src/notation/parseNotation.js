@@ -84,21 +84,6 @@ var reduceOctaveBracketsToNum = function reduceOctaveBracketsToNum(acc, elt) {
   return acc + numInOctaveBracket - 4;
 };
 
-var reduceAccidentalBracketsToPeo = function reduceAccidentalBracketsToPeo(acc, elt) {
-  var theKey = elt[1];
-  var thePower = Number.parseInt(elt.slice(2, elt.length - 1), 10);
-  var theStartPeo = peos[theKey];
-  if (!(theStartPeo && thePower)) return acc;
-  return acc.mult(theStartPeo, thePower);
-};
-
-var reduceAccidentalCharToPeo = function reduceAccidentalCharToPeo(acc, elt) {
-  var theKey = elt[0];
-  var thePeo = peos[theKey];
-  if (!thePeo) return acc;
-  return acc.mult(thePeo);
-};
-
 var peoPower = function peoPower(peo, outerPower) {
   return function f2(innerPower) {
     return peo.pow(innerPower * (outerPower || 1));
@@ -118,6 +103,29 @@ var parseNotation = function parseNotation(jint, notation) {
   var tempNotation = notation;
   var tempPeo = null;
   var resultsPeo = new Peo();
+
+  // The next two functions might depend on jint, so need to be here
+
+  var reduceAccidentalBracketsToPeo = function reduceAccidentalBracketsToPeo(acc, elt) {
+    // elt is like (#12345) or (b102)
+    var theKey = elt[1];
+    // Extract the number in the bracket
+    var thePower = Number.parseInt(elt.slice(2, elt.length - 1), 10);
+    var accidentalPeo = peos[theKey];
+    if (!(accidentalPeo && thePower)) return acc;
+    // If peo depends on context (jint) then return a function to call on context to obtain peo
+    if (accidentalPeo instanceof Function) accidentalPeo = accidentalPeo(jint);
+    return acc.mult(accidentalPeo, thePower);
+  };
+
+  var reduceAccidentalCharToPeo = function reduceAccidentalCharToPeo(acc, elt) {
+    // elt is like # or b
+    var theKey = elt[0];
+    var accidentalPeo = peos[theKey];
+    if (!accidentalPeo) return acc;
+    if (accidentalPeo instanceof Function) accidentalPeo = accidentalPeo(jint);  // Use this if peo depends on jint context
+    return acc.mult(accidentalPeo);
+  };
 
   // Function to iterate on the variables
   var analyseNotation = function analyseNotation(options) {

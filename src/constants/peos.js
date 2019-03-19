@@ -1,5 +1,6 @@
 var Peo = require('peo');
 
+var getComma = require('../api/class/getComma');
 var consts = require('./consts');
 
 var peoF = new Peo(4, 3);
@@ -23,11 +24,6 @@ var peoSmallOn = new Peo({2: -1054, 3: 665});
 var peoSmallOff = peoSmallOn.pow(-1);
 var peoTinyOn = new Peo({2: -301994, 3: 190537});
 var peoTinyOff = peoTinyOn.pow(-1);
-
-// Any peo using primes 5 or above might depend on the choice of comma algorithm
-// e.g. peoSyntonic depends on choice of getComma(5) from algorithm.
-// so all peos here use primes 2 and 3 only.
-
 
 var result = {
   A: peoA,
@@ -58,9 +54,18 @@ result[consts.CHAR_SMALL_OFF] = peoSmallOff;
 result[consts.CHAR_TINY_ON] = peoTinyOn;
 result[consts.CHAR_TINY_OFF] = peoTinyOff;
 
-// Replace this with suitable functions!
-result[consts.CHAR_SYNTONIC_ON] = new Peo(80, 81);
-result[consts.CHAR_SYNTONIC_OFF] = new Peo(81, 80);
-
+// Any peo that depends on a prime 5 or above
+// (e.g. the syntonic comma or its inverse)
+// should have a function here, that when called on the context (jint)
+// returns a suitable comma or peo
+result[consts.CHAR_SYNTONIC_ON] = function comma5On(jint) {
+  var algFn = jint.getAlgFn();
+  return getComma(5, algFn);
+};
+result[consts.CHAR_SYNTONIC_OFF] = function comma5Off(jint) {
+  var algFn = jint.getAlgFn();
+  return getComma(5, algFn).pow(-1);
+};
+// Return type of these functions must be Peo
 
 module.exports = result;

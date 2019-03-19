@@ -151,9 +151,9 @@ describe('parseNotation measures intervals correctly from C4', function () {
 
     ['C(#0)4', '1/1', '', 'Bracket with number 0 parses as identity, overall parse as C4'],
     ['C(i5)4', '1/1', '', 'Identity char bracket parses as 1/1, overall parse as C4'],
-    ['Ci4', '1/1', '', 'Identity char parses as 1/1, overall parse as C4']
+    ['Ci4', '1/1', '', 'Identity char parses as 1/1, overall parse as C4'],
 
-    // ["'", {2: -15, 3: 8, 5: 1}, 'BAD', 'Test bad algorithm with different getComma(5)']
+    ["'", {2: -15, 3: 8, 5: 1}, 'BAD', 'Test bad algorithm with different getComma(5)']
   ];
 
   var runTest = function (notationToParse, peoConstructorData, algAcronym, comment) {
