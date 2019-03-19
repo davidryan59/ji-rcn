@@ -73,7 +73,19 @@ var reduceCommasToPeo = function reduceCommasToPeo(inputAlg) {
 
 var reduceToCount = function reduceToCount(acc) {return acc + 1;};
 var reduceToSumOfInts = function reduceToSumOfInts(acc, elt) {return acc + getIntFromChars(elt);};
-var reduceToSumOfIntsMinus4 = function reduceToSumOfIntsMinus4(acc, elt) {return acc + getIntFromChars(elt) - 4;};
+
+var reduceOctaveCharToNum = function reduceOctaveCharToNum(acc, elt) {
+  // C5 notation has elt '5' which reduces to 1
+  // e.g. 1 octave above C4
+  return acc + getIntFromChars(elt) - 4;
+};
+
+var reduceOctaveBracketsToNum = function reduceOctaveBracketsToNum(acc, elt) {
+  // elt of form (o+123) or (o-1234)
+  // C(o+4) parses to 1/1, so subtract 4
+  var numInOctaveBracket = Number.parseInt(elt.slice(2, elt.length - 1), 10);
+  return acc + numInOctaveBracket - 4;
+};
 
 var peoPower = function peoPower(peo, outerPower) {
   return function f2(innerPower) {
@@ -119,15 +131,11 @@ var parseNotation = function parseNotation(jint, notation) {
   analyseNotation({rgx: rxs.REGEX_BRACKET_ERROR});
 
   // Analyse and remove valid bracketed expressions from the text
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_OCTAVES_UP,
-    reduceMatch: reduceToSumOfIntsMinus4,
-    mapReducerResultToPeo: peoPower(peos.PEO_OCTAVE)
-  });
+
 
   analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_OCTAVES_DOWN,
-    reduceMatch: reduceToSumOfIntsMinus4,
+    rgx: rxs.REGEX_BRACKET_OCTAVE,
+    reduceMatch: reduceOctaveBracketsToNum,
     mapReducerResultToPeo: peoPower(peos.PEO_OCTAVE)
   });
 
@@ -287,7 +295,7 @@ var parseNotation = function parseNotation(jint, notation) {
 
   analyseNotation({
     rgx: rxs.REGEX_CHAR_OCTAVE,
-    reduceMatch: reduceToSumOfIntsMinus4,
+    reduceMatch: reduceOctaveCharToNum,
     mapReducerResultToPeo: peoPower(peos.PEO_OCTAVE)
   });
 
