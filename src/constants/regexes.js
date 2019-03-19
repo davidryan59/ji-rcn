@@ -27,6 +27,9 @@ var bracketOctaveRegexString = esc('(')
   + esc(')')
 var bracketOctaveRegex = new RegExp(bracketOctaveRegexString, sharedRegexFlags);
 
+var anyBracketRegexString = esc('(') + '[^' + esc('()') + ']*' + esc(')')
+var anyBracketRegex = new RegExp(anyBracketRegexString, sharedRegexFlags);
+
 var singleCharRegexString = '['
   + esc(consts.CHAR_SHARP)
   + esc(consts.CHAR_FLAT)
@@ -63,6 +66,7 @@ module.exports = {
   REGEX_BRACKET_OCTAVE: bracketOctaveRegex,
   REGEX_BRACKET_COMMA_INTEGER: integerCommaBracketRegex,
   REGEX_BRACKET_COMMA_FRACTION: fractionCommaBracketRegex,
+  REGEX_BRACKET_ANY: anyBracketRegex,
   REGEX_CHAR_ACCIDENTAL: singleCharRegex,
   REGEX_CHAR_DIATONIC: diatonicSingleCharRegex,
   REGEX_CHAR_OCTAVE: octaveNumberSingleCharRegex,
