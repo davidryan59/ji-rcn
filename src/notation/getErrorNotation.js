@@ -1,8 +1,9 @@
 var consts = require('../constants/consts');
 
 var getErrorNotation = function getErrorNotation(includeText) {
-  var theText = ('' + includeText).substr(0, consts.ERROR_MAX_CHARS);
-  return consts.BRACKET_LEFT_STANDARD + theText + consts.ERROR_TEXT + consts.BRACKET_RIGHT_STANDARD;
+  // Make error notation of form (.ERR) where . is the leftmost character of includeText
+  var theText = '' + includeText;
+  return consts.BRACKET_LEFT_STANDARD + theText[0] + consts.ERROR_TEXT + consts.BRACKET_RIGHT_STANDARD;
 };
 
 module.exports = getErrorNotation;

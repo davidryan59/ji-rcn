@@ -20,9 +20,7 @@ describe('API to calculate interval start and end notations', function () {
     [6 / 7, 'Bb[7]5', 'G5', 'decimal'],
     ['6/7', 'Bb[7]5', 'G5', 'string'],
     [0.25, 'F7', 'F5', 'decimal'],
-    ['0.25', 'F7', 'F5', 'string'],
-
-    ['1', 'C4', 'C4']
+    ['0.25', 'F7', 'F5', 'string']
   ];
 
   var runTest = function (jintConstructorData, startPitchNotation, expectedEndPitchNotation, comment) {

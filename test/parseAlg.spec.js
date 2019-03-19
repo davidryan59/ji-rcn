@@ -33,9 +33,7 @@ describe(fnName, function () {
     ['xKg', 'KG2'],
     ['EMP', 'EMP', 'Test value only'],
     ['NUL', 'NUL', 'Test value only'],
-    ['bad', 'BAD', 'Test a bad comma algorithm'],
-
-    ['', '']
+    ['bad', 'BAD', 'Test a bad comma algorithm']
   ];
 
   for (var i = 0; i < testArray.length; i++) {

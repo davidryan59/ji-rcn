@@ -17,19 +17,19 @@ var getDiatonicArray = function getDiatonicArray(exp3Input) {
   var exp3 = exp3Input;
   if (!ibn(exp3, numError)) {
     // Error output
-    return [errorNotation, peos.PEO_DIATONIC_C];
+    return [errorNotation, peos.C.copy()];
   }
   // Have a number
   exp3 = Math.round(exp3);
   switch (exp3) {
-  case -1: return ['F', peos.PEO_DIATONIC_F.copy()];
-  case 0: return ['C', peos.PEO_DIATONIC_C.copy()];
-  case 1: return ['G', peos.PEO_DIATONIC_G.copy()];
-  case 2: return ['D', peos.PEO_DIATONIC_D.copy()];
-  case 3: return ['A', peos.PEO_DIATONIC_A.copy()];
-  case 4: return ['E', peos.PEO_DIATONIC_E.copy()];
-  case 5: return ['B', peos.PEO_DIATONIC_B.copy()];
-  default: return [errorNotation, peos.PEO_DIATONIC_C];
+  case -1: return ['F', peos.F.copy()];
+  case 0: return ['C', peos.C.copy()];
+  case 1: return ['G', peos.G.copy()];
+  case 2: return ['D', peos.D.copy()];
+  case 3: return ['A', peos.A.copy()];
+  case 4: return ['E', peos.E.copy()];
+  case 5: return ['B', peos.B.copy()];
+  default: return [errorNotation, peos.C.copy()];
   }
 };
 

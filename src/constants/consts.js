@@ -7,13 +7,14 @@ module.exports = {
   DEFAULT_PITCH_NOTATION: 'C4',
   DEFAULT_FREQ_HZ: 256,
 
-  CHAR_OCTAVE_MARK: 'o',
-  CHAR_OCTAVE_UP: '+',
-  CHAR_OCTAVE_DOWN: '-',
+  COMMA_MAX_UNSPLIT: 1000,
+  REPEAT_MAX_CHARS: 4,
+  BRACKET_MAX_DIGITS: 15,
+
+  CHAR_OCTAVE: 'o',
 
   CHAR_SHARP: '#',
   CHAR_FLAT: 'b',
-
   CHAR_PYTHAG_ON: 'p',
   CHAR_PYTHAG_OFF: 'd',
   CHAR_MERCATOR_ON: 'm',
@@ -22,25 +23,18 @@ module.exports = {
   CHAR_SMALL_OFF: 'r',
   CHAR_TINY_ON: 't',
   CHAR_TINY_OFF: 'y',
-
   CHAR_SYNTONIC_ON: "'",
   CHAR_SYNTONIC_OFF: '.',
+  CHAR_IDENTITY: 'i',
 
-  CHAR_COMMA_DIVIDE: '/',
-  CHAR_COMMA_POWER: '^',
+  CHAR_MATCHED: '!',
 
   BRACKET_LEFT_STANDARD: '(',
   BRACKET_RIGHT_STANDARD: ')',
   BRACKET_LEFT_COMMA: '[',
   BRACKET_RIGHT_COMMA: ']',
-
-  BRACKET_ALLOWED_CHARS: '[](){}<>',
-
-  ERROR_TEXT: 'ERR',
-  ERROR_MAX_CHARS: 2,
-  COMMA_MAX_UNSPLIT: 1000,
-  REPEAT_MAX_CHARS: 4,
-  BRACKET_MAX_DIGITS: 15,
+  CHAR_COMMA_DIVIDE: '/',
+  CHAR_COMMA_POWER: '^',
 
   ALG_DR: 'DR',      // List of acronyms for comma algorithm. See function list in algIndex file
   ALG_SAG: 'SAG',
@@ -49,6 +43,5 @@ module.exports = {
   ALG_ADJ: 'ADJ',
 
   ALG_CUSTOM: 'CUSTOM',  // Default value if function supplied but no name
-
-  DUMMY: 'DUMMY'
+  ERROR_TEXT: 'ERR'
 };
