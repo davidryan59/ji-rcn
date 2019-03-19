@@ -147,7 +147,8 @@ describe('parseNotation measures intervals correctly from C4', function () {
     ["G5E'6", '15/1', '', 'Concatenation of full notations multiplies them'],
     ['C(o+14)(o+15)', {2: 21}, '', 'Concatenation of separated brackets parses'],
     ['C(o+14)(#2)', {2: -12, 3: 14}],
-    ['C((o+14)#2)', {2: (8 - 11), 3: 7}, '', 'Nesting of brackets only parses the inner bracket']  // Parses as C(o+14)#2 = C#(o+12)
+    ['C(()#2)', {'2': -13, '3': 7}, '', 'Parses as C#2'],
+    ['C((o+14)#2)', {'2': -3, '3': 7}, '', 'Parses as C(o+14)#2']
   ];
 
   var runTest = function (notationToParse, peoConstructorData, algAcronym, comment) {
