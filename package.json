@@ -21,7 +21,6 @@
     "escape-string-regexp": "^1.0.5",
     "is-bounded-number": "^1.2.7",
     "is-string": "^1.0.4",
-    "lodash": "^4.17.11",
     "peo": "^3.3.0"
   },
   "devDependencies": {
