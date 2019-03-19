@@ -72,7 +72,6 @@ var reduceCommasToPeo = function reduceCommasToPeo(inputAlg) {
 };
 
 var reduceToCount = function reduceToCount(acc) {return acc + 1;};
-var reduceToSumOfInts = function reduceToSumOfInts(acc, elt) {return acc + getIntFromChars(elt);};
 
 var reduceOctaveCharToNum = function reduceOctaveCharToNum(acc, elt) {
   // C5 notation has elt '5' which reduces to 1
@@ -85,6 +84,14 @@ var reduceOctaveBracketsToNum = function reduceOctaveBracketsToNum(acc, elt) {
   // C(o+4) parses to 1/1, so subtract 4
   var numInOctaveBracket = Number.parseInt(elt.slice(2, elt.length - 1), 10);
   return acc + numInOctaveBracket - 4;
+};
+
+var reduceAccidentalBracketsToPeo = function reduceAccidentalBracketsToPeo(acc, elt) {
+  var theKey = elt[1];
+  var thePower = Number.parseInt(elt.slice(2, elt.length - 1), 10);
+  var theStartPeo = peos[theKey];
+  if (!(theStartPeo && thePower)) return acc;
+  return acc.mult(theStartPeo, thePower);
 };
 
 var peoPower = function peoPower(peo, outerPower) {
@@ -132,6 +139,12 @@ var parseNotation = function parseNotation(jint, notation) {
 
   // Analyse and remove valid bracketed expressions from the text
 
+  analyseNotation({
+    rgx: rxs.REGEX_BRACKET_ACCIDENTAL,
+    initialValue: new Peo(),
+    reduceMatch: reduceAccidentalBracketsToPeo,
+    mapReducerResultToPeo: identityFunction
+  });
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKET_OCTAVE,
@@ -139,83 +152,18 @@ var parseNotation = function parseNotation(jint, notation) {
     mapReducerResultToPeo: peoPower(peos.PEO_OCTAVE)
   });
 
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_SHARPS,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_SHARP)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_FLATS,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_SHARP, -1)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_SYNTONIC_COMMA_ADD,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peoSyntonic)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_SYNTONIC_COMMA_REMOVE,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peoSyntonic, -1)
-  });
-
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_PYTHAG_COMMA_ADD,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_PYTHAG)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_PYTHAG_COMMA_REMOVE,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_PYTHAG, -1)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_MERCATOR_COMMA_ADD,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_MERCATOR)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_MERCATOR_COMMA_REMOVE,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_MERCATOR, -1)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_SMALL_COMMA_ADD,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_SMALL)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_SMALL_COMMA_REMOVE,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_SMALL, -1)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_TINY_COMMA_ADD,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_TINY)
-  });
-  analyseNotation({
-    rgx: rxs.REGEX_BRACKETED_TINY_COMMA_REMOVE,
-    reduceMatch: reduceToSumOfInts,
-    mapReducerResultToPeo: peoPower(peos.PEO_TINY, -1)
-  });
-
   // Do the commas - must be after all the others are removed, due to similar formats
   analyseNotation({
     rgx: rxs.REGEX_BRACKET_COMMA_FRACTION,
-    reduceMatch: reduceCommasToPeo(inputAlg),
     initialValue: new Peo(),
+    reduceMatch: reduceCommasToPeo(inputAlg),
     mapReducerResultToPeo: identityFunction
   });
 
   analyseNotation({
     rgx: rxs.REGEX_BRACKET_COMMA_INTEGER,
-    reduceMatch: reduceCommasToPeo(inputAlg),
     initialValue: new Peo(),
+    reduceMatch: reduceCommasToPeo(inputAlg),
     mapReducerResultToPeo: identityFunction
   });
 
@@ -288,8 +236,8 @@ var parseNotation = function parseNotation(jint, notation) {
   // Finally analyse the note char and octave number
   analyseNotation({
     rgx: rxs.REGEX_CHAR_DIATONIC,
-    reduceMatch: reduceDiatonicLettersToPeo,
     initialValue: new Peo(),
+    reduceMatch: reduceDiatonicLettersToPeo,
     mapReducerResultToPeo: identityFunction
   });
 
