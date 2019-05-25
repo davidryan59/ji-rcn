@@ -1,6 +1,6 @@
 {
   "name": "ji-rcn",
-  "version": "8.0.0",
+  "version": "9.0.0",
   "description": "Just Intonation musical interval conversion between rational numbers and Rational Comma Notation",
   "author": {
     "name": "David Ryan",
