@@ -354,6 +354,6 @@ describe(fnName, function () {
     assert(jint.ratio() > 5.468423508);      // 5.468423508036486
     assert(jint.ratio() < 5.468423509);
     assert.strictEqual(jint.ratioFractionText(), 'NA');
-    assert.strictEqual(jint.toString(), 'Interval of 5.468423508036486');
+    assert.strictEqual(jint.toString().slice(0, 21), 'Interval of 5.4684235');
   });
 });
