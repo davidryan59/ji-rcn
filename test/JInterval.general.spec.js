@@ -356,4 +356,21 @@ describe(fnName, function () {
     assert.strictEqual(jint.ratioFractionText(), 'NA');
     assert.strictEqual(jint.toString().slice(0, 21), 'Interval of 5.4684235');
   });
+
+  // Test setter functions for start frequency and notation
+
+  it('Test setStartFreqHz starting at 225 Hz on interval for 4/3 ends at 300 Hz', function () {
+    var jint = new JInterval({2: 2, 3: -1});  // 4/3
+    jint.setStartFreqHz(225);
+    assert.strictEqual(jint.getStartFreqHz(), 225);
+    assert.strictEqual(jint.getEndFreqHz(), 300);
+  });
+
+  it("Test setStartPitchNotation starting at E'5 on interval for 12/5 ends at G6", function () {
+    var jint = new JInterval({2: 2, 3: 1, 5: -1});  // 12/5
+    jint.setStartPitchNotation("E'#b5");
+    assert.strictEqual(jint.getStartPitchNotation(), "E'5");
+    assert.strictEqual(jint.getStartInputPitchNotation(), "E'#b5");
+    assert.strictEqual(jint.getEndPitchNotation(), 'G6');
+  });
 });
