@@ -5,7 +5,7 @@ var mathsFnJIntervalCreator = require('../../maths/mathsFnJIntervalCreator');
 // frequency ratio of another interval (optionally to a specified power)
 // Use .mult on Peo to achieve the multiplication
 var mult = function mult(otherJInterval, power) {
-  return mathsFnJIntervalCreator(this, {peo: this.peo.mult(otherJInterval.peo, power)});
+  return mathsFnJIntervalCreator(this, {peo: this.ratioPeo().mult(otherJInterval.ratioPeo(), power)});
 };
 
 module.exports = mult;

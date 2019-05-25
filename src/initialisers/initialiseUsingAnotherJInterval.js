@@ -15,7 +15,7 @@ var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(j
 
   // Interval ratios are described internally by Peos.
   // Give this JInterval a peo descriptor that is copy of other JInterval's peo.
-  jint.peo = otherJint.ratioPeo().copy();  
+  jint.peo = otherJint.ratioPeo().copy();
 
   // If absolute position is specified on otherJint, copy it to this jint
   if (otherJint.hasPos()) {
