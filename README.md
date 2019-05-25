@@ -109,24 +109,29 @@ jint.ratioFractionText() // Returns the interval frequency ratio as a fraction i
 
 ### Absolute Position
 
-Every `JInterval` has a interval frequency ratio, its relative size. It is possible to add an absolute position, either by constructing using notations or frequencies, or by using the functions below. The absolute value, especially the frequency in Hz, is likely to be useful when using this `ji-rcn` module to create music apps featuring Just Intonation.
+Every `JInterval` has a relative size, which a rational number describing the interval's frequency ratio; this is stored as a `Peo`, and stays constant after construction. Each `JInterval` also has a cached absolute position which stores start and end frequencies in Hz, and start and end notations in RCN. Frequencies and notations are related, based on a tuning which can be specified during `JInterval` construction. The tuning is fixed after construction, however the cache of absolute position (frequencies + notations) can be updated at any time using the functions below.
 
-Absolute position means a `JInterval` starts at a certain frequency or notation, and ends at another frequency or notation. Since every `JInterval` has a tuning, by specifying either a start frequency or a start notation, the whole of the absolute position can be calculated. Each `JInterval` caches the last absolute position calculated, and reuses cached values if possible. Changing the start notation or frequency will recalculate absolute position and overwrite this cache.
+The `get...` functions below have versions both with parameters (`startFreqHz`, `startNotation`) and without parameters. Specifying a parameter will recalculate the cache, if the parameter value has changed. Not specifying a parameter will return the previous cached value, or for the first call, calculate the cache based on default parameters of `256` Hz and `'C4'` notation.
 
-In the functions below, `startFreqHz` and `startNotation` are optional, and default to either the previous value or the default value (`256` Hz and `'C4'` respectively).
+Calculating notation is computationally quite expensive, so caching in this way allows efficient access to frequency and notation values for a `JInterval`.
 
 ``` js
-jint.getEndFreqHz(startFreqHz)               // Returns numeric end frequency in Hz
-jint.getEndFreqText(startFreqHz)             // Returns formatted string 'NNN.NN Hz' for end frequency
-jint.getEndInputPitchNotation(startNotation) // Returns pitch notation for end of interval, as inputted
-jint.getEndPitchNotation(startNotation)      // Returns pitch notation for end of interval in standard notation
-jint.getEndPitchClassNotation(startNotation) // Returns pitch class of end of interval - pitch class is a notation without an octave value
-jint.getStartFreqHz()                        // Returns numeric start frequency in Hz
-jint.getStartFreqText()                      // Returns formatted string 'NNN.NN Hz' for start frequency
-jint.getStartInputPitchNotation()            // Returns pitch notation for start of interval, as inputted
-jint.getStartPitchNotation()                 // Returns pitch notation for start of interval in standard notation
-jint.getStartPitchClassNotation()            // Returns pitch class of start of interval
-jint.hasPos()                                // Returns boolean value: true if an absolute position has been calculated, false otherwise
+jint.hasPos()                                // Returns boolean value: true if an absolute position has been calculated and cached, false otherwise
+
+jint.getStartFreqHz()                        // Returns cached numeric start frequency in Hz (*first call will calculate the cache)
+jint.getStartFreqText()                      // Returns cached formatted string 'NNN.NN Hz' for start frequency (*)
+jint.getStartInputPitchNotation()            // Returns cached pitch notation for start of interval, as inputted (*)
+jint.getStartPitchNotation()                 // Returns cached pitch notation for start of interval in standard notation (*)
+jint.getStartPitchClassNotation()            // Returns cached pitch class of start of interval (*)
+
+jint.setStartFreqHz(startFreqHz)             // Recalculate position cache based on specified frequency (and tuning specified at construction)
+jint.setStartPitchNotation(startNotation)    // Recalculate position cache based on specified notation (and tuning specified at construction)
+
+jint.getEndFreqHz(startFreqHz)               // Returns numeric end frequency in Hz - and sets (cached) start frequency
+jint.getEndFreqText(startFreqHz)             // Returns formatted string 'NNN.NN Hz' for end frequency - and sets start frequency
+jint.getEndInputPitchNotation(startNotation) // Returns pitch notation for end of interval, as inputted - and sets (cached) start notation
+jint.getEndPitchNotation(startNotation)      // Returns pitch notation for end of interval in standard notation - and sets start notation
+jint.getEndPitchClassNotation(startNotation) // Returns pitch class of end of interval - pitch class is a notation without an octave value - and sets start notation
 ```
 
 ### Maths
@@ -145,10 +150,10 @@ jint.pow(pow)            // Returns a new JInterval with ratio of jint raised to
 An algorithm can be specified on a `JInterval` during construction. Default algorithm is `{txt: 'DR', fn: getCommaDR}` where `getCommaDR(p)` is equivalent to `getComma(p)` or `getComma(p, 'DR')`.
 
 ``` js
+jint.hasAlg()            // Returns boolean value: false for default comma algorithm, true otherwise
 jint.getAlgText()        // Returns text acronym for algorithm, or blank for default algorithm. (Custom algorithms supplied without a text acronym also return blank here.)
 jint.getAlgFn()          // Returns the algorithm function which takes in a prime and outputs a comma in Peo format
 jint.getSetupAlgObject() // Returns an object representing algorithm setup
-jint.hasAlg()            // Returns boolean value: false for default comma algorithm, true otherwise
 ```
 
 ### Tuning
@@ -156,12 +161,12 @@ jint.hasAlg()            // Returns boolean value: false for default comma algor
 A tuning can be specified on a `JInterval` during construction. Default tuning is `{pitchNotation: 'C4', freqHz: 256}`.
 
 ``` js
+jint.hasTuning()                   // Returns boolean value: false for default tuning, true otherwise
 jint.getTuningFreqHz()             // Tuning frequency, in Hz
 jint.getTuningInputPitchNotation() // Tuning notation, as input
 jint.getTuningPitchNotation()      // Tuning notation, in standard format
 jint.getTuningMultHz()             // Multiplier representing frequency in  Hz for notation 'C4'
 jint.getSetupTuningObject()        // Returns an object representing tuning setup
-jint.hasTuning()                   // Returns boolean value: false for default tuning, true otherwise
 ```
 
 ## Examples
