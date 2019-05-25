@@ -100,7 +100,9 @@ jint.getSetupObject() // Returns an object describing the setup options of JInte
 ``` js
 jint.ratio()             // Returns a positive number representing the frequency ratio or relative size of a JInterval
 jint.ratioFractionText() // Returns the interval frequency ratio as a fraction in string format 'NN/NN'
-jint.ratioPeo()          // Returns the interval frequency ratio as a Peo - this is a copy of the underlying Peo of the JInterval
+jint.ratioPeo()          // Returns the Peo instance describing ratio of this JInterval.
+                         // Returns the original Peo, not a copy, so can call jint.ratioPeo().someFunctionOnPeo()
+                         // to access cached values on Peo, which are all calculated on the first call.
 ```
 
 ### Absolute Position

@@ -1,7 +1,8 @@
 var ratioPeo = function ratioPeo() {
-  // Its a Peo object.
-  // Need to copy it before releasing
-  return this.peo.copy();
+  // Return the actual Peo object describing this JInterval ratio.
+  // Original, not copy, so that cached values on Peo can be accessed
+  // e.g. jint.ratioPeo().getSomeProperty() accesses the cached value on Peo
+  return this.peo;
 };
 
 module.exports = ratioPeo;

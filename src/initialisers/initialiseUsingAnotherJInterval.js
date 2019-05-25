@@ -13,9 +13,9 @@ var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(j
   Object.assign(useSetupObject, otherJintSetupObject, jintSetupObject);
   setAllSetupOptions(jint, useSetupObject);
 
-  // Set the interval frequency ratio from otherJint
-  var thePeo = otherJint.ratioPeo();  // Creates a copy
-  jint.peo = thePeo;
+  // Interval ratios are described internally by Peos.
+  // Give this JInterval a peo descriptor that is copy of other JInterval's peo.
+  jint.peo = otherJint.ratioPeo().copy();  
 
   // If absolute position is specified on otherJint, copy it to this jint
   if (otherJint.hasPos()) {

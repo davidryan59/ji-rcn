@@ -13,18 +13,14 @@ describe(fnName, function () {
   it('can initialise from new JInterval(new Peo(14, 15)), and objects get copied correctly', function () {
     var origPeo = new Peo(14, 15);
     var jint = new JInterval(origPeo, 'KG2');
-    var jintPeoPrivate = jint.peo;
-    var jintPeoPublicCopy = jint.ratioPeo();
-    var origPrimeExps = origPeo.getPrimeExps();
-    var jintPrimeExps = jintPeoPrivate.getPrimeExps();
+    var jintPeoDirectAccess = jint.peo;
+    var jintPeoAPIAccess = jint.ratioPeo();
     // Different object identities
-    assert(jintPrimeExps !== origPrimeExps, 'Different Peo inner objects');
-    assert(jintPeoPrivate !== origPeo, 'Different Peo outer objects');
-    assert(jintPeoPrivate !== jintPeoPublicCopy, 'Different private and public objects');
+    assert(jintPeoDirectAccess !== origPeo, 'When initialising on peo, the peo gets copied, they are different');
+    assert(jintPeoDirectAccess === jintPeoAPIAccess, 'jint.peo and jint.ratioPeo(), they are the same');
     // Same contents
-    assert.deepStrictEqual(jintPeoPrivate, jintPeoPublicCopy);
-    assert.deepStrictEqual(jintPeoPrivate, origPeo);
-    assert.deepStrictEqual(jintPrimeExps, origPrimeExps);
+    assert.deepStrictEqual(jintPeoDirectAccess, jintPeoAPIAccess);
+    assert.deepStrictEqual(jintPeoDirectAccess, origPeo);
     assert.strictEqual(jint.ratioFractionText(), '14/15');
     assert.strictEqual(jint.getAlgText(), 'KG2');
   });
