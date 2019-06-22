@@ -8,12 +8,101 @@ var JInterval = testIndex.JInterval;
 
 var identityFn = function identityFn(p) {return new Peo(p);};
 
-var fnName = 'setAlgPrivate works';
+var fnName = 'setAlg and setAlgPrivate works';
 describe(fnName, function () {
-  it('sets alg correctly using a jint from empty arguments', function () {
-    var jint = new JInterval();
-    assert.strictEqual(jint.getAlgText(), '');
-    assert.strictEqual(jint.getAlgFn().name, 'getCommaDR');
+  it('removeAlg works', function () {
+    var jint = new JInterval(1);
+    assert(!jint.hasAlg())
+    jint.setAlg()    // Covers case where removeAlg has nothing to remove
+    assert(!jint.hasAlg())
+    jint.setAlg('DR')
+    assert(jint.hasAlg())
+  });
+  
+  it('setAlg works with higher prime in ratio', function () {
+    var jint = new JInterval({
+      ratio: 139 / 128,
+      alg: 'SAG'
+    });
+    assert(jint.hasAlg());
+    assert(!jint.hasPos());
+    assert.strictEqual(jint.getAlgText(), 'SAG');
+    jint.setStartPitchNotation('G5');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getEndPitchNotation(), 'A[139]5');
+    assert.strictEqual(jint.getStartFreqText(), '768.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '834.00 Hz');
+    jint.setAlg('Kg2');
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation('G5');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getEndPitchNotation(), 'Ab[139]5');
+    assert.strictEqual(jint.getStartFreqText(), '768.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '834.00 Hz');
+    jint.setAlg('');
+    assert(!jint.hasAlg());
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation('G5');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getEndPitchNotation(), 'G#[139]5');
+    assert.strictEqual(jint.getStartFreqText(), '768.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '834.00 Hz');
+    jint.setAlg('DR');
+    assert(jint.hasAlg());
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation('G5');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getEndPitchNotation(), 'G#[139]5');
+    assert.strictEqual(jint.getStartFreqText(), '768.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '834.00 Hz');
+  });
+
+  it('setAlg works with higher prime in tuning', function () {
+    var jint = new JInterval({
+      ratio: 5 / 4,
+      alg: 'SAG',
+      tuning: {
+        pitchNotation: 'C[139]4',
+        freqHz: 278
+      }
+    });
+    assert(jint.hasTuning());
+    assert(jint.hasAlg());
+    assert(!jint.hasPos());
+    assert.strictEqual(jint.getAlgText(), 'SAG');
+    assert.strictEqual(jint.getTuningFreqHz(), 278);
+    assert.strictEqual(jint.getTuningMultHz().toFixed(2), '288.00');
+    jint.setStartPitchNotation('G5');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getEndPitchNotation(), "B'5");
+    assert.strictEqual(jint.getStartFreqText(), '864.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '1080.00 Hz');
+    jint.setAlg('KG2');
+    assert(!jint.hasPos());
+    assert.strictEqual(jint.getTuningFreqHz(), 278);
+    assert.strictEqual(jint.getTuningMultHz().toFixed(2), '269.70');
+    jint.setStartPitchNotation('G5');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getStartFreqText(), '809.09 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '1011.36 Hz');
+    jint.setAlg('');
+    assert(!jint.hasAlg());
+    assert(!jint.hasPos());
+    assert.strictEqual(jint.getTuningFreqHz(), 278);
+    assert.strictEqual(jint.getTuningMultHz().toFixed(2), '273.38');
+    jint.setStartPitchNotation('G5');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getStartFreqText(), '820.13 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '1025.16 Hz');
+    jint.setAlg('DR');
+    assert(jint.hasAlg());
+    assert(!jint.hasPos());
+    assert.strictEqual(jint.getTuningFreqHz(), 278);
+    assert.strictEqual(jint.getTuningMultHz().toFixed(2), '273.38');
+    jint.setStartPitchNotation('G5');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getStartFreqText(), '820.13 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '1025.16 Hz');
   });
 
   it('sets alg correctly using a jint from another jint from empty arguments', function () {

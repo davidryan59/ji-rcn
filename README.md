@@ -154,6 +154,8 @@ jint.hasAlg()            // Returns boolean value: false for default comma algor
 jint.getAlgText()        // Returns text acronym for algorithm, or blank for default algorithm. (Custom algorithms supplied without a text acronym also return blank here.)
 jint.getAlgFn()          // Returns the algorithm function which takes in a prime and outputs a comma in Peo format
 jint.getSetupAlgObject() // Returns an object representing algorithm setup
+jint.setAlg(obj)         // Change the algorithm for this JInterval; obj has 3 formats,
+                         // getSetupAlgObject on another JInterval can be used as a template.
 ```
 
 ### Tuning

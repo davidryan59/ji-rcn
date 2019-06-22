@@ -54,6 +54,7 @@ JInterval.prototype.hasAlg = require('./api/alg/hasAlg');
 JInterval.prototype.getAlgFn = require('./api/alg/getAlgFn');
 JInterval.prototype.getAlgText = require('./api/alg/getAlgText');
 JInterval.prototype.getSetupAlgObject = require('./api/alg/getSetupAlgObject');
+JInterval.prototype.setAlg = require('./api/alg/setAlg');
 
 // Tuning
 JInterval.prototype.hasTuning = require('./api/tuning/hasTuning');
