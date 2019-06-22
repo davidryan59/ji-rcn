@@ -1,12 +1,12 @@
-var setAlg = require('./setAlg');
-var setTuning = require('./setTuning');
-var setDisplay = require('./setDisplay');
+var setAlgPrivate = require('./setAlgPrivate');
+var setTuningPrivate = require('./setTuningPrivate');
+var setDisplayPrivate = require('./setDisplayPrivate');
 
 var setAllSetupOptions = function setAllSetupOptions(jint, theOptions) {
-  setAlg(jint, theOptions.alg);
-  setDisplay(jint, theOptions.display);
-  // MUST do setTuning after setAlg
-  setTuning(jint, theOptions.tuning);
+  setAlgPrivate(jint, theOptions.alg);
+  setDisplayPrivate(jint, theOptions.display);
+  // MUST do setTuningPrivate after setAlgPrivate
+  setTuningPrivate(jint, theOptions.tuning);
 };
 
 module.exports = setAllSetupOptions;

@@ -12,7 +12,7 @@ var checkLevel = function checkLevel(input, defaultLevel) {
   return defaultLevel;
 };
 
-var setDisplay = function setDisplay(jint, theDisplay) {
+var setDisplayPrivate = function setDisplayPrivate(jint, theDisplay) {
   // Format:
   // {
   //   hide5: boolean,
@@ -61,4 +61,4 @@ var setDisplay = function setDisplay(jint, theDisplay) {
   if (Number.isInteger(reps) && reps > 0) disp.rps = reps;
 };
 
-module.exports = setDisplay;
+module.exports = setDisplayPrivate;

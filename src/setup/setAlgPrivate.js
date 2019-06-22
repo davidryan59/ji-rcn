@@ -2,7 +2,7 @@ var parseCommaAlgText = require('../commas/parseCommaAlgText');
 var algIndex = require('../commas/algIndex');
 var consts = require('../constants/consts');
 
-var setAlg = function setAlg(jint, theAlg) {
+var setAlgPrivate = function setAlgPrivate(jint, theAlg) {
   // Format - 3 cases
   // Case 1 Text:        theAlg = "ALG"
   // Case 2 Function:    theAlg = aFunction
@@ -41,4 +41,4 @@ var setAlg = function setAlg(jint, theAlg) {
   }
 };
 
-module.exports = setAlg;
+module.exports = setAlgPrivate;

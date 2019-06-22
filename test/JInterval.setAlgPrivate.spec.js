@@ -8,7 +8,7 @@ var JInterval = testIndex.JInterval;
 
 var identityFn = function identityFn(p) {return new Peo(p);};
 
-var fnName = 'setAlg works';
+var fnName = 'setAlgPrivate works';
 describe(fnName, function () {
   it('sets alg correctly using a jint from empty arguments', function () {
     var jint = new JInterval();

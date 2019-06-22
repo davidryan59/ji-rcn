@@ -1,5 +1,5 @@
-// var setAlg = require('../setup/setAlg');
-// var setTuning = require('../setup/setTuning');
+// var setAlgPrivate = require('../setup/setAlgPrivate');
+// var setTuningPrivate = require('../setup/setTuningPrivate');
 var setAllSetupOptions = require('../setup/setAllSetupOptions');
 
 var setupPosFromNotation = require('../pos/setupPosFromNotation');

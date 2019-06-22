@@ -2,7 +2,7 @@ var consts = require('../constants/consts');
 var parseNotation = require('../notation/parseNotation');
 var calcNotationObject = require('../notation/calcNotationObject');
 
-var setTuning = function setTuning(jint, theTuning) {
+var setTuningPrivate = function setTuningPrivate(jint, theTuning) {
   // Return if a tuning hasn't been supplied
   if (!theTuning) return;
 
@@ -27,4 +27,4 @@ var setTuning = function setTuning(jint, theTuning) {
   if (inputPitchNotation && inputPitchNotation !== pitchNotation) jint.set.tn.ipn = inputPitchNotation;
 };
 
-module.exports = setTuning;
+module.exports = setTuningPrivate;
