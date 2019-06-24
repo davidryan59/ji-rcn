@@ -12,13 +12,15 @@ var fnName = 'setAlg and setAlgPrivate works';
 describe(fnName, function () {
   it('removeAlg works', function () {
     var jint = new JInterval(1);
-    assert(!jint.hasAlg())
-    jint.setAlg()    // Covers case where removeAlg has nothing to remove
-    assert(!jint.hasAlg())
-    jint.setAlg('DR')
-    assert(jint.hasAlg())
+    assert(!jint.hasAlg());
+    jint.setAlg();    // Case where there is nothing to remove
+    assert(!jint.hasAlg());
+    jint.setAlg('DR');
+    assert(jint.hasAlg());
+    jint.setAlg();    // Case where there is something to remove
+    assert(!jint.hasAlg());
   });
-  
+
   it('setAlg works with higher prime in ratio', function () {
     var jint = new JInterval({
       ratio: 139 / 128,
