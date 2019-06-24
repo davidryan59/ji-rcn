@@ -1,5 +1,5 @@
 var getFreqText = require('./getFreqText');
-var calcNotationObject = require('../notation/calcNotationObject');
+var calcNotationObject = require('../../notation/calcNotationObject');
 
 var largeLimit = 1e15;
 

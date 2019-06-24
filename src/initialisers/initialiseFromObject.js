@@ -8,7 +8,7 @@ var initialiseUsingFrequencies = require('./initialiseUsingFrequencies');
 var initialiseUsingNotations = require('./initialiseUsingNotations');
 var initialiseUsingPeo = require('./initialiseUsingPeo');
 
-var setAllSetupOptions = require('../setup/setAllSetupOptions');
+var setAllSetupOptions = require('../properties/set/setAllSetupOptions');
 
 
 var initialiseFromObject = function initialiseFromObject(jint, theObject) {

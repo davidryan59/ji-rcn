@@ -1,6 +1,6 @@
 var setPos = require('./setPos');
-var consts = require('../constants/consts');
-var parseNotation = require('../notation/parseNotation');
+var consts = require('../../constants/consts');
+var parseNotation = require('../../notation/parseNotation');
 
 var setupPosFromNotation = function setupPosFromNotation(jint, inputStartNotation, inputEndNotation, optionalStartPeo) {
   // optionalStartPeo can speed up calculation by cutting out slow parseNotation steps

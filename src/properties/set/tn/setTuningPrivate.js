@@ -1,6 +1,6 @@
-var consts = require('../constants/consts');
-var parseNotation = require('../notation/parseNotation');
-var calcNotationObject = require('../notation/calcNotationObject');
+var consts = require('../../../constants/consts');
+var parseNotation = require('../../../notation/parseNotation');
+var calcNotationObject = require('../../../notation/calcNotationObject');
 
 var setTuningPrivate = function setTuningPrivate(jint, theTuning) {
   // Return if a tuning hasn't been supplied

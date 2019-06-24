@@ -8,7 +8,7 @@ var initialiseUsingFraction = require('./initialiseUsingFraction');
 var initialiseUsingNotations = require('./initialiseUsingNotations');
 var initialiseUsingPeo = require('./initialiseUsingPeo');
 
-var setAlgPrivate = require('../setup/setAlgPrivate');
+var setAlgPrivate = require('../properties/set/alg/setAlgPrivate');
 
 var canInitialiseFromObject = function canInitialiseFromObject(obj) {
   return obj.startPitchNotation || obj.endPitchNotation ||

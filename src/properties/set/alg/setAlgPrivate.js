@@ -1,6 +1,6 @@
-var parseCommaAlgText = require('../commas/parseCommaAlgText');
-var algIndex = require('../commas/algIndex');
-var consts = require('../constants/consts');
+var parseCommaAlgText = require('../../../commas/parseCommaAlgText');
+var algIndex = require('../../../commas/algIndex');
+var consts = require('../../../constants/consts');
 
 var setAlgPrivate = function setAlgPrivate(jint, theAlg) {
   // Format - 3 cases

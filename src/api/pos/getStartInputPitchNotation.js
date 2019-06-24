@@ -1,4 +1,4 @@
-var setupPosFromNotation = require('../../pos/setupPosFromNotation');
+var setupPosFromNotation = require('../../properties/pos/setupPosFromNotation');
 
 var getStartInputPitchNotation = function getStartInputPitchNotation() {
   setupPosFromNotation(this);

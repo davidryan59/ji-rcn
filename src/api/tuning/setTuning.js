@@ -1,5 +1,5 @@
-var removeTuning = require('../../setup/removeTuning');
-var setTuningPrivate = require('../../setup/setTuningPrivate');
+var removeTuning = require('../../properties/set/tn/removeTuning');
+var setTuningPrivate = require('../../properties/set/tn/setTuningPrivate');
 
 var setTuning = function setTuning(theTuning) {
   // theTuning is an object of format {pitchNotation:'C4', freqHz:256}

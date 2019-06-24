@@ -1,6 +1,6 @@
-var removeAlg = require('../../setup/removeAlg');
-var setAlgPrivate = require('../../setup/setAlgPrivate');
-var refreshTuning = require('../../setup/refreshTuning');
+var removeAlg = require('../../properties/set/alg/removeAlg');
+var setAlgPrivate = require('../../properties/set/alg/setAlgPrivate');
+var refreshTuning = require('../../properties/set/tn/refreshTuning');
 
 var setAlg = function setAlg(theAlg) {
   // theAlg has 3 possible formats, see private function for more info.

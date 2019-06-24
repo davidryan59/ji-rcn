@@ -1,6 +1,6 @@
-var setAlgPrivate = require('./setAlgPrivate');
-var setTuningPrivate = require('./setTuningPrivate');
-var setDisplayPrivate = require('./setDisplayPrivate');
+var setAlgPrivate = require('./alg/setAlgPrivate');
+var setTuningPrivate = require('./tn/setTuningPrivate');
+var setDisplayPrivate = require('./disp/setDisplayPrivate');
 
 var setAllSetupOptions = function setAllSetupOptions(jint, theOptions) {
   setAlgPrivate(jint, theOptions.alg);
