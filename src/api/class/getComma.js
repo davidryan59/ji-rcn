@@ -1,4 +1,4 @@
-var getCommaPrivate = require('../../commas/getCommaPrivate');
+var getCommaPrivate = require('../../notation/getCommaPrivate');
 
 var getComma = function getComma(inputPrime, inputAlg) {
   return getCommaPrivate(inputPrime, inputAlg);

@@ -1,4 +1,4 @@
-var algIndex = require('../../commas/algIndex');
+var algIndex = require('../../notation/algs/algIndex');
 
 var getAlgFn = function getAlgFn() {
   // Return the actual function used to calculate the commas

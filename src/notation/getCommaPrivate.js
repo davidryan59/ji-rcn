@@ -1,7 +1,7 @@
 var Peo = require('peo');
 
-var algorithmIndex = require('./algIndex');
-var parseCommaAlgText = require('./parseCommaAlgText');
+var algorithmIndex = require('./algs/algIndex');
+var parseAlgText = require('./algs/parseAlgText');
 
 var defaultAlg = algorithmIndex.DEFAULT_ALG;
 
@@ -13,7 +13,7 @@ var getCommaPrivate = function getCommaPrivate(inputPrime, inputAlg) {
   // e.g. those positive integers with no factors of 2 or 3.
   // Primality checking should be done on the actual algorithm, not here.
 
-  // inputAlg can be text that parses via parseCommaAlgText to match a key in algIndex
+  // inputAlg can be text that parses via parseAlgText to match a key in algIndex
   // inputAlg can be a custom function that takes in a prime number, and returns a Peo.
   // (This peo must have highest prime inputPrime, with exponent 1, otherwise default comma is used.)
 
@@ -39,7 +39,7 @@ var getCommaPrivate = function getCommaPrivate(inputPrime, inputAlg) {
   }
 
   // Has user supplied text description of an algorithm?
-  var theAlgText = parseCommaAlgText(inputAlg);
+  var theAlgText = parseAlgText(inputAlg);
   var theAlgFn = (theAlgText) ? algorithmIndex[theAlgText] : defaultAlg;
   var theAlgResult = (theAlgFn) ? theAlgFn(inputPrime) : defaultAlg(inputPrime);
   var theCheckedResult = (theAlgResult) ? theAlgResult : defaultAlg(inputPrime);

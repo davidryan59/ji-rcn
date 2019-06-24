@@ -1,8 +1,8 @@
 var isString = require('is-string');
 
-var consts = require('../constants/consts');
+var consts = require('../../constants/consts');
 
-var parseCommaAlgText = function parseCommaAlgText(input) {
+var parseAlgText = function parseAlgText(input) {
   // Is input a string containing an algorithm name/acronym?
   // Ought to return '' (falsy) if the input is not a valid algorithm acronym
   if (!isString(input)) return '';
@@ -26,4 +26,4 @@ var parseCommaAlgText = function parseCommaAlgText(input) {
   return '';
 };
 
-module.exports = parseCommaAlgText;
+module.exports = parseAlgText;

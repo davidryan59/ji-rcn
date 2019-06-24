@@ -1,13 +1,13 @@
 // Algorithm index.
-// Look up algorithms by text strings (outputted from parseCommaAlgText)
+// Look up algorithms by text strings (outputted from parseAlgText)
 
-var consts = require('../constants/consts');
+var consts = require('../../constants/consts');
 
-var getCommaDR = require('./algs/getCommaDR');
-var getCommaSAG = require('./algs/getCommaSAG');
-var getCommaKG2 = require('./algs/getCommaKG2');
-var getCommaBAD = require('./algs/getCommaBAD');
-var getCommaADJ = require('./algs/getCommaADJ');
+var getCommaDR = require('./getCommaDR');
+var getCommaSAG = require('./getCommaSAG');
+var getCommaKG2 = require('./getCommaKG2');
+var getCommaBAD = require('./getCommaBAD');
+var getCommaADJ = require('./getCommaADJ');
 
 var returnNull = function returnNull() {return null;};
 
