@@ -1,4 +1,4 @@
-var mathsFnJIntervalCreator = function mathsFnJIntervalCreator(jint, extraOptions) {
+var createJIntervalWithSetup = function createJIntervalWithSetup(jint, extraOptions) {
   // Make a new JInterval with same setup as jint,
   // but with size (ratio or peo) supplied in extraOptions.
   var originalOptions = jint.getSetupObject();
@@ -17,4 +17,4 @@ var mathsFnJIntervalCreator = function mathsFnJIntervalCreator(jint, extraOption
   return newJInterval;
 };
 
-module.exports = mathsFnJIntervalCreator;
+module.exports = createJIntervalWithSetup;
