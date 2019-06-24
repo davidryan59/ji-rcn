@@ -44,6 +44,10 @@ JInterval.prototype.getEndInputPitchNotation = require('./api/pos/getEndInputPit
 JInterval.prototype.getEndPitchNotation = require('./api/pos/getEndPitchNotation');
 JInterval.prototype.getEndPitchClassNotation = require('./api/pos/getEndPitchClassNotation');
 
+JInterval.prototype.getStartPeo = require('./api/pos/getStartPeo');
+JInterval.prototype.getEndPeo = require('./api/pos/getEndPeo');
+JInterval.prototype.setStartPeo = require('./api/pos/setStartPeo');
+
 // Maths
 JInterval.prototype.get1 = require('./api/maths/get1');
 JInterval.prototype.mult = require('./api/maths/mult');

@@ -373,4 +373,29 @@ describe(fnName, function () {
     assert.strictEqual(jint.getStartInputPitchNotation(), "E'#b5");
     assert.strictEqual(jint.getEndPitchNotation(), 'G6');
   });
+
+  it('get/set peo API works', function () {
+    var jint = new JInterval(55 / 49);
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation('Bb[13]3');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getStartPitchNotation(), 'Bb[13]3');
+    assert.strictEqual(jint.getEndPitchNotation(), "B'[143/49]3");
+    var peoStart = jint.getStartPeo();
+    assert.strictEqual(peoStart.getAsFractionText(), '208/243');
+    var peoEnd = jint.getEndPeo();
+    assert.strictEqual(peoEnd.getAsFractionText(), '11440/11907');
+    var jint2 = new JInterval(6 / 7);
+    assert(!jint2.hasPos());
+    jint2.setStartPeo(peoStart);
+    assert(jint2.hasPos());
+    assert.strictEqual(jint2.getStartPitchNotation(), 'Bb[13]3');
+    assert.strictEqual(jint2.getEndPitchNotation(), 'G[13/7]3');
+  });
+
+  it('cover edge case of getStartPeo when pos is not already set', function () {
+    var jint = new JInterval(55 / 49);
+    var peo = jint.getStartPeo();
+    assert.strictEqual(peo.getAsDecimal(), 1);
+  });
 });

@@ -134,6 +134,24 @@ jint.getEndPitchNotation(startNotation)      // Returns pitch notation for end o
 jint.getEndPitchClassNotation(startNotation) // Returns pitch class of end of interval - pitch class is a notation without an octave value - and sets start notation
 ```
 
+Parsing notation is slow. In the situation where you have many JIntervals with the same setup options (e.g. tuning), and each of them have the same start notation, there is a more efficient method to get the end notations:
+
+```js
+var jint = new JInterval(1)        // Use a single JInterval...
+jint.setStartPitchNotation('B#6')  // ...to parse the shared start notation
+var peo = jint.getStartPeo()       // Obtain internal format for output of parsing
+// Suppose there are now lots of otherPeo to set start notation for... do this:
+otherPeo.setStartPeo(peo)
+```
+
+Here are the relevant API calls:
+
+``` js
+jint.getStartPeo()    // Get internal format for start of JInterval
+jint.getEndPeo(peo)   // Get internal format for end of JInterval
+jint.setStartPeo(peo) // Set start of JInterval using internal format (obtained from getStartPeo)
+```
+
 ### Maths
 
 Create a new `JInterval` using mathematical operations on existing intervals. Any extra constructor options will be taken from `jint`.
