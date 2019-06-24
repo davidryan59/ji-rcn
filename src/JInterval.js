@@ -75,5 +75,6 @@ JInterval.prototype.levelComma190537Tiny = require('./api/display/levelComma1905
 JInterval.prototype.getCommaMaxUnsplit = require('./api/display/getCommaMaxUnsplit');
 JInterval.prototype.getMaxRepeatChars = require('./api/display/getMaxRepeatChars');
 JInterval.prototype.getSetupDisplayObject = require('./api/display/getSetupDisplayObject');
+JInterval.prototype.setDisplay = require('./api/display/setDisplay');
 
 module.exports = JInterval;

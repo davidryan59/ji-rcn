@@ -174,6 +174,30 @@ jint.setTuning()                   // Remove the tuning for this JInterval, use 
 jint.setTuning(obj)                // Change the tuning, obj format {pitchNotation:'C4', freqHz:256}
 ```
 
+### Display
+
+Display options for formatting a `JInterval` can be specified as an object during construction, or later on using setDisplay. All options are optional:
+
+|Option|Format|Range|Default|Description|
+|-|-|-|-|
+|hide5|boolean|NA|false|Display syntonic commas as [5] if true or ' if false|
+|lev12|integer|0 < value|(off)|Controls if to use Pythagorean comma (12), and which 3-exponent to start at|
+|lev53|integer|0 < value|(off)|Controls if/when to use Mercator comma (53)|
+|lev665|integer|0 < value|(off)|Controls small comma (655)|
+|lev190537|integer|0 < value|(off)|Controls tiny comma (190537)|
+|comMax|integer|0 < value|1000|Max number in comma that displays as-is, without factorisation|
+|reps|integer|0 < value|4|Max times a character is repeated, without using bracket notation|
+
+``` js
+jint.hasDisplay()          // Returns boolean value: false if there are any custom display options, true otherwise
+jint.getSetupDisplayObject()        // Returns an object representing tuning setup
+
+// There are 7 more methods to read individual display options
+
+jint.setDisplay()        // Remove the display options for this JInterval, use defaults
+jint.setDisplay(obj)     // Change the output display format according to supplied options
+```
+
 ## Examples
 
 There are many more examples in the examples directory on GitHub. You can run these using `npm run examples`.

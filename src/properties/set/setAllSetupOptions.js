@@ -5,7 +5,9 @@ var setDisplayPrivate = require('./disp/setDisplayPrivate');
 var setAllSetupOptions = function setAllSetupOptions(jint, theOptions) {
   setAlgPrivate(jint, theOptions.alg);
   setDisplayPrivate(jint, theOptions.display);
-  // MUST do setTuningPrivate after setAlgPrivate
+  // Algorithm affects parsing, which affects tuning,
+  // so algorithm MUST be set before tuning.
+  // Display affects only output format, so can be done independently
   setTuningPrivate(jint, theOptions.tuning);
 };
 
