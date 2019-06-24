@@ -7,6 +7,52 @@ var JInterval = testIndex.JInterval;
 
 var fnName = 'Tuning functions on JInterval';
 describe(fnName, function () {
+  it('removeTuning works', function () {
+    var jint = new JInterval(1);
+    assert(!jint.hasTuning());
+    jint.setTuning();    // Case where there is nothing to remove
+    assert(!jint.hasTuning());
+    jint.setTuning({pitchNotation: "D'4", freqHz: 280});
+    assert(jint.hasTuning());
+    jint.setTuning();    // Case where there is something to remove
+    assert(!jint.hasTuning());
+  });
+
+  it('setTuning works', function () {
+    var jint = new JInterval({ratio: 1 / 3});
+    assert(!jint.hasTuning());
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation('D4');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getEndPitchNotation(), 'G2');
+    assert.strictEqual(jint.getStartFreqText(), '288.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '96.00 Hz');
+    jint.setTuning({pitchNotation: 'G3', freqHz: 196});
+    assert(jint.hasTuning());
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation('D4');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getEndPitchNotation(), 'G2');
+    assert.strictEqual(jint.getStartFreqText(), '294.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '98.00 Hz');
+    jint.setTuning('');
+    assert(!jint.hasTuning());
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation('D4');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getEndPitchNotation(), 'G2');
+    assert.strictEqual(jint.getStartFreqText(), '288.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '96.00 Hz');
+    jint.setTuning({pitchNotation: 'F5', freqHz: 640});
+    assert(jint.hasTuning());
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation('D4');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getEndPitchNotation(), 'G2');
+    assert.strictEqual(jint.getStartFreqText(), '270.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '90.00 Hz');
+  });
+
   // Can initialise correctly using frequencies and tuning equivalent to default
   var testObj1 = {
     startFreqHz: 320,

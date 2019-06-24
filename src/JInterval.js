@@ -63,6 +63,7 @@ JInterval.prototype.getTuningInputPitchNotation = require('./api/tuning/getTunin
 JInterval.prototype.getTuningPitchNotation = require('./api/tuning/getTuningPitchNotation');
 JInterval.prototype.getTuningMultHz = require('./api/tuning/getTuningMultHz');
 JInterval.prototype.getSetupTuningObject = require('./api/tuning/getSetupTuningObject');
+JInterval.prototype.setTuning = require('./api/tuning/setTuning');
 
 // Display
 JInterval.prototype.hasDisplay = require('./api/display/hasDisplay');

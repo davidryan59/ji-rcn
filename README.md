@@ -170,6 +170,8 @@ jint.getTuningInputPitchNotation() // Tuning notation, as input
 jint.getTuningPitchNotation()      // Tuning notation, in standard format
 jint.getTuningMultHz()             // Multiplier representing frequency in  Hz for notation 'C4'
 jint.getSetupTuningObject()        // Returns an object representing tuning setup
+jint.setTuning()                   // Remove the tuning for this JInterval, use default
+jint.setTuning(obj)                // Change the tuning, obj format {pitchNotation:'C4', freqHz:256}
 ```
 
 ## Examples
