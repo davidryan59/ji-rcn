@@ -1,8 +1,8 @@
 /* eslint-disable consistent-return */
 
-var tripleToPeo = require('../maths/tripleToPeo');
-var calcExp2 = require('../maths/calcExp2');
-var calcCents = require('../maths/calcCents');
+var tripleToPeo = require('../../maths/tripleToPeo');
+var calcExp2 = require('../../maths/calcExp2');
+var calcCents = require('../../maths/calcCents');
 
 var getCommaSAG = function getCommaSAG(p) {
   // Calculate a prime comma, according to the SAG algorithm

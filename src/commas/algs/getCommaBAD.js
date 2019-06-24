@@ -1,5 +1,5 @@
 var getCommaDR = require('./getCommaDR');
-var tripleToPeo = require('../maths/tripleToPeo');
+var tripleToPeo = require('../../maths/tripleToPeo');
 
 var getCommaBAD = function getCommaBAD(p) {
   // Multiply a good algorithm by a Pythagorean comma to get a bad algorithm,

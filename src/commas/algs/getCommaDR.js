@@ -1,8 +1,8 @@
 var Peo = require('peo');
 var pf = require('primes-and-factors');
 
-var tripleToPeo = require('../maths/tripleToPeo');
-var calcExp2 = require('../maths/calcExp2');
+var tripleToPeo = require('../../maths/tripleToPeo');
+var calcExp2 = require('../../maths/calcExp2');
 
 var getCommaDR = function getCommaDR(p) {
   // Calculate a prime comma, according to the DR algorithm
