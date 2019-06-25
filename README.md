@@ -197,7 +197,7 @@ jint.setTuning(obj)                // Change the tuning, obj format {pitchNotati
 Display options for formatting a `JInterval` can be specified as an object during construction, or later on using setDisplay. All options are optional:
 
 |Option|Format|Range|Default|Description|
-|-|-|-|-|
+|-|-|-|-|-|
 |hide5|boolean|NA|false|Display syntonic commas as [5] if true or ' if false|
 |lev12|integer|0 < value|(off)|Controls if to use Pythagorean comma (12), and which 3-exponent to start at|
 |lev53|integer|0 < value|(off)|Controls if/when to use Mercator comma (53)|
