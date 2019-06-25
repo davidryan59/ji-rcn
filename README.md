@@ -206,9 +206,13 @@ Create a new `JInterval` using mathematical operations on existing intervals. Ca
 
 ``` js
 jint.get1()            // Returns a new JInterval with unison interval of 1/1
+jint.pow(pow)          // Returns a new JInterval with ratio of jint raised to power pow
+
 jint.mult(jint2)       // Returns a new JInterval formed by multiplying ratios of jint and jint2
 jint.mult(jint2, pow)  // Returns a new JInterval formed by multiplying ratios of jint and jint2^pow
-jint.pow(pow)          // Returns a new JInterval with ratio of jint raised to power pow
+
+jint.mult(peo)         // Returns a new JInterval formed by multiplying ratio of jint by peo
+jint.mult(peo, pow)    // Returns a new JInterval formed by multiplying ratio of jint by peo^pow
 ```
 
 ### Algorithm

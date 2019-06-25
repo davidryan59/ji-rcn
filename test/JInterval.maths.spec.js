@@ -1,6 +1,7 @@
 /* eslint-disable func-names */
 
 var assert = require('assert');
+var Peo = require('peo');
 
 var testIndex = require('./_test_index');
 var JInterval = testIndex.JInterval;
@@ -144,5 +145,18 @@ describe('Maths functions on JInterval', function () {
 
     assert(jint12f.hasPos());
     assert.strictEqual(jint12f.getStartInputPitchNotation(), "B'.[31]5");
+  });
+
+  it('Calling j1.mult(peo) works', function () {
+    var jint3a = new JInterval(3/5);
+    var peo4 = new Peo(4/9)
+    var jint5a = jint3a.mult(peo4)
+    assert.strictEqual(jint5a.ratioFractionText(), "4/15")
+  });
+
+  it('Calling j1.mult() works', function () {
+    var jint3b = new JInterval(3/5);
+    var jint5b = jint3b.mult()
+    assert.strictEqual(jint5b.ratioFractionText(), "3/5")
   });
 });
