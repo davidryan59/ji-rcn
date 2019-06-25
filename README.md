@@ -3,17 +3,17 @@ JI-RCN, `ji-rcn` module. Find [module on npm](https://www.npmjs.com/package/ji-r
 
 [![npm version](https://badge.fury.io/js/ji-rcn.png)](https://badge.fury.io/js/ji-rcn)[![Build status](https://travis-ci.org/davidryan59/ji-rcn.svg?master)](https://travis-ci.org/davidryan59)
 
-**Just Intonation** (JI) tunes musical instruments to have whole number frequency ratios between notes. This is the natural system of tuning for many important musical instruments, including the human voice, stringed instruments, and wind instruments. For such instruments, JI tuning sounds better than tempered tuning. A common example of tempered tuning is 12TET (12 tone equal temperament) which splits the octave into 12 equal semitones.
+**Just Intonation** (JI) tunes musical instruments to have whole number frequency ratios between notes. This is the natural system of tuning for many important musical instruments, including the human voice, stringed instruments, and wind instruments. For such instruments, JI tuning sounds better, more natural, more 'in tune' than tempered tuning. A common example of tempered tuning is 12TET (12 tone equal temperament) which splits the octave into 12 equal semitones; this is the default modern tuning, used for many instruments such as pianos, but noticeably out of tune from pure JI intervals.
 
 JI can also be called Rational Intonation (RI) since its interval ratios are rational numbers of the form `a/b`, or equivalently simple ratios of the form `a:b`. In JI chords with three or more notes make complex ratios of the form `a:b:c`, `a:b:c:d`, etc.
 - Examples of intervals include: an octave (1:2), a perfect fifth (2:3), a perfect fourth (3:4), a major third (4:5)
 - Examples of chords include: a major triad (4:5:6), a minor triad (10:12:15), an extended seventh chord (4:6:7:10)
 
-The tempered tuning 12TET has only 12 notes in the octave. However, Just Intonation has an unlimited number of notes available in the octave. This gives more musical variety, but it poses a greater notational challenge. The whole of 12TET can be notated with less than 100 notations of the form `'C4'`, `'Bb7'`, `'E0'`, etc. However, how is it possible to notate the whole of JI, where there are a potentially infinite number of different notes and chords?
+The tempered tuning 12TET has only 12 notes in the octave. However, Just Intonation has an unlimited number of notes available in the octave. This gives more musical variety, but it poses a greater notational challenge. The whole of 12TET can be notated with less than 100 notations of the form `C4`, `Bb7`, `E0`, etc. However, how is it possible to notate the whole of JI, where there are a potentially infinite number of different notes and chords?
 
 **Rational Comma Notation** (RCN) was designed to solve this problem. It was developed by David Ryan between 2015 and 2017, and [is documented in this paper](https://arxiv.org/abs/1612.01860).
 
-For RCN it is necessary to specify an algorithm which maps any prime `p` to its prime comma `n/m`. For example, primes `5` and `7` are usually given commas `80/81` and `63/64` respectively. The primes used in the comma for `p` are usually `2`, `3` and `p` only (since limiting commas to these three prime components reduces computational complexity). Even with that constraint, algorithms tend to vary for higher primes. Three algorithms which have been developed are: `'DR'`, `'SAG'`, and `'KG2'`; these are each described in the paper above.
+For RCN it is necessary to specify an algorithm which maps any prime `p` to its prime comma `n/m`. For example, primes `5` and `7` are usually given commas `80/81` and `63/64` respectively. The primes used in the comma for `p` are usually `2`, `3` and `p` only (since limiting commas to these three prime components reduces computational complexity). Even with that constraint, algorithms tend to vary for higher primes. Three algorithms which have been developed are: `DR`, `SAG`, and `KG2`; these are each described in the paper above.
 
 The purpose of the `ji-rcn` npm package is to help convert between:
 - A musical interval with a frequency ratio expressed as a rational number
@@ -38,25 +38,7 @@ Note that the `JInterval` class is built upon the `Peo` class, which stands for 
 
 ## Constructors for JInterval
 
-### General constructors using objects
-``` js
-new JInterval({startPitchNotation:txt1, endPitchNotation:txt2}) // Create a new JInterval between two (RCN) notations txt1 and txt2
-new JInterval({startFreqHz:freq1, endFreqHz:freq2})             // Create interval between two numeric frequencies freq1 and freq2 in Hz
-new JInterval({jint:otherJint})                                 // Create interval using same interval ratio as otherJint
-new JInterval({peo:peo})                                        // Create interval with ratio peo
-new JInterval({num:num, denom:denom})                           // Create interval with ratio num/denom, where num, denom are positive integers
-new JInterval({ratio:ratio})                                    // Create interval of size ratio (any positive number)
-```
-
-### Constructor object extra options
-``` js
-{alg: txt}                                    // Specify an comma algorithm by text acronym txt. Values include DR, SAG, KG2. Default is DR.
-{alg: someFn}                                 // Specify a comma algorithm function directly. Function must return a Peo, given an inputted prime number p, and output peo must have highest prime p with exponent 1.
-{alg: {txt: txt, fn: someFn}}                 // Both acronym and function can be specified together.
-{tuning: {pitchNotation: txt1, freqHz: num1}} // Specifies that a notation txt1 maps to a frequency in Hz num1. Default is notation C4 maps to 256 Hz.
-```
-
-Add any options to the object, then pass into `new JInterval({...})`.
+Two types of constructors are available: shorthand constructors taking parameters in separate arguments, and the general constructor which takes all parameters inside one argument which is an object.
 
 ### Shorthand constructors
 ``` js
@@ -74,6 +56,55 @@ A `JInterval` instance stores its interval frequency ratio internally as a `Peo`
 
 The shorthand constructors above can have an extra argument to specify an algorithm, which may be given as a string acronym, a function, or an object combining these (as described above), e.g. `new JInterval(peo, algAcronym)`, `new JInterval(num, denom, algFn)` etc.
 
+### General constructors using objects
+``` js
+new JInterval({startPitchNotation:txt1, endPitchNotation:txt2}) // Create a new JInterval between two (RCN) notations txt1 and txt2
+new JInterval({startFreqHz:freq1, endFreqHz:freq2})             // Create interval between two numeric frequencies freq1 and freq2 in Hz
+new JInterval({jint:otherJint})                                 // Create interval using same interval ratio as otherJint
+new JInterval({peo:peo})                                        // Create interval with ratio peo
+new JInterval({num:num, denom:denom})                           // Create interval with ratio num/denom, where num, denom are positive integers
+new JInterval({ratio:ratio})                                    // Create interval of size ratio (any positive number)
+```
+
+### Constructor object extra options
+``` js
+{alg: txt}                                    // Specify an comma algorithm by text acronym txt. Values include DR, SAG, KG2. Default is DR.
+{alg: someFn}                                 // Specify a comma algorithm function directly. Function must return a Peo, given an inputted prime number p, and output peo must have highest prime p with exponent 1.
+{alg: {txt: txt, fn: someFn}}                 // Both acronym and function can be specified together.
+{tuning: {pitchNotation: txt1, freqHz: num1}} // Specifies that a notation txt1 maps to a frequency in Hz num1. Default is notation C4 maps to 256 Hz.
+{display: {...options}}                       // Specify non-standard notation options
+```
+
+Add any options to the object, then pass into `new JInterval({...})`. Here are the display options:
+
+|Option|Format|Default|Description|
+|-|-|-|-|
+|hide5|boolean|false|Syntonic comma 80/81 displayed as ' if false, or [5] if true. Inverse syntonic comma 81/80 displayed as . if false, or [1/5] if true.|
+|lev12|positive integer|undefined|Pythagorean comma 531441/524288 = 3^12/2^19 (23.46 cents) displayed as p, its inverse as d, if this option is set with a positive integer. The integer is the minimum 3-exponent which gets p or d in its notation. Default (undefined) is to not use p or d notation.|
+|lev53|positive integer|undefined|Mercator comma 3^53/2^84 (3.615c) displayed as m, its inverse as w|
+|lev665|positive integer|undefined|Small comma 3^665/2^1054 (0.07558c) displayed as s, its inverse as r|
+|lev190537|positive integer|undefined|Tiny comma 3^190537/2^301994 (0.0001117c) displayed as t, its inverse as y|
+|comMax|positive integer|1000|Max number in comma that displays as-is, without factorisation. For example, [1001] is displayed as [7 11 13] if comMax is lower than 1001. Set comMax to 1 to fully factorise every comma.|
+|reps|positive integer|4|Max times a character is repeated, without using bracket notation. For example, #### and (#5) are default notations for 4 and 5 sharps respectively.|
+
+Example of using general constructor:
+
+``` js
+var ji = new JInterval({
+  ratio: 6/5,
+  alg: 'SAG',
+  tuning: {
+    pitchNotation: 'G4',
+    freqHz: 385
+  },
+  display: {
+    hide5: true, 
+    lev53: 40, 
+    comMax: 360
+  }
+})
+```
+
 ## JInterval API - Static or Class methods
 ``` js
 JInterval.getComma     // Returns the getComma function, which calculates a comma in Peo format for each prime p. Uses either default or specified algorithm.
@@ -90,12 +121,12 @@ Examples for using `getComma` are given below. Format is either `getComma(p)` or
 jint.compress()       // Remove all cached information on a JInterval. This includes: absolute position, cache on peo.
 jint.copy()           // Returns a deep copy of a JInterval
 jint.toString()       // Returns a text description of JInterval
-jint.getSetupObject() // Returns an object describing the setup options of JInterval
+jint.getSetupObject() // Returns an object describing the setup options of JInterval: algorithm, tuning, display options.
 ```
 
 ### Interval Frequency Ratio
 
-(Also known as interval width, size, relative position)
+(Also known as interval width, size, relative size, relative position)
 
 ``` js
 jint.ratioPeo()          // Returns the Peo instance describing ratio of this JInterval.
@@ -109,32 +140,37 @@ jint.ratioFractionText() // Returns the interval frequency ratio as a fraction i
 
 ### Absolute Position
 
-Every `JInterval` has a relative size, which a rational number describing the interval's frequency ratio; this is stored as a `Peo`, and stays constant after construction. Each `JInterval` also has a cached absolute position which stores start and end frequencies in Hz, and start and end notations in RCN. Frequencies and notations are related, based on a tuning which can be specified during `JInterval` construction. The tuning is fixed after construction, however the cache of absolute position (frequencies + notations) can be updated at any time using the functions below.
+Every `JInterval` has a relative size, which a rational number describing the interval's frequency ratio; this is stored as a `Peo`. Each `JInterval` may also store a cache of its absolute position, including start and end frequencies in Hz, and start and end notations in RCN. Each `JInterval` uses either the default tuning `{pitchNotation: 'C4', freqHz: 256}` or a custom tuning, to convert between frequency and notation. Via the tuning, once one of these (frequency or notation) is known, the other can be calculated too.
 
-The `get...` functions below have versions both with parameters (`startFreqHz`, `startNotation`) and without parameters. Specifying a parameter will recalculate the cache, if the parameter value has changed. Not specifying a parameter will return the previous cached value, or for the first call, calculate the cache based on default parameters of `256` Hz and `'C4'` notation.
-
-Calculating notation is computationally quite expensive, so caching in this way allows efficient access to frequency and notation values for a `JInterval`.
+The set of functions below generate frequency and notation for absolute position. Since parsing notation is slow, and generating notation may be slow, for efficiency the last generated values are cached. When calling the functions below, they return the cached value if it is still available. Any change to the `JInterval` which might change the absolute position should thus wipe the cache.
 
 ``` js
-jint.hasPos()                                // Returns boolean value: true if an absolute position has been calculated and cached, false otherwise
+jint.hasPos()    // Return true if cached values are available, false otherwise
 
-jint.getStartFreqHz()                        // Returns cached numeric start frequency in Hz (*first call will calculate the cache)
-jint.getStartFreqText()                      // Returns cached formatted string 'NNN.NN Hz' for start frequency (*)
-jint.getStartInputPitchNotation()            // Returns cached pitch notation for start of interval, as inputted (*)
-jint.getStartPitchNotation()                 // Returns cached pitch notation for start of interval in standard notation (*)
-jint.getStartPitchClassNotation()            // Returns cached pitch class of start of interval (*)
+jint.setStartFreqHz(startFreqHz)          // Calculate absolute position based on a start frequency in Hz (and the current tuning)
+jint.setStartPitchNotation(startNotation) // Calculate based on a starting notation
 
-jint.setStartFreqHz(startFreqHz)             // Recalculate position cache based on specified frequency (and tuning specified at construction)
-jint.setStartPitchNotation(startNotation)    // Recalculate position cache based on specified notation (and tuning specified at construction)
+jint.getStartFreqHz()             // Return the start frequency in Hz (and recalculate if necessary, same for functions below)
+jint.getStartFreqText()           // Return the start frequency as text, e.g. `256.00 Hz`
+jint.getStartInputPitchNotation() // Return the start notation, as previously input
+jint.getStartPitchNotation()      // Return the start notation, after checking (e.g. parse and recalculate)
+jint.getStartPitchClassNotation() // Return the start pitch class notation, which is the notation minus octave information
 
-jint.getEndFreqHz(startFreqHz)               // Returns numeric end frequency in Hz - and sets (cached) start frequency
-jint.getEndFreqText(startFreqHz)             // Returns formatted string 'NNN.NN Hz' for end frequency - and sets start frequency
-jint.getEndInputPitchNotation(startNotation) // Returns pitch notation for end of interval, as inputted - and sets (cached) start notation
-jint.getEndPitchNotation(startNotation)      // Returns pitch notation for end of interval in standard notation - and sets start notation
-jint.getEndPitchClassNotation(startNotation) // Returns pitch class of end of interval - pitch class is a notation without an octave value - and sets start notation
+jint.getEndFreqHz()             // Return the end frequency in Hz. (Start frequency is either from the cache, or the default value of 256 Hz.)
+jint.getEndFreqText()           // Return the end frequency in text format, e.g. '384.00 Hz'
+jint.getEndInputPitchNotation() // Return the end notation, as previously input (e.g. when initialising a JInterval from two notations)
+jint.getEndPitchNotation()      // Return the end notation, after checking
+jint.getEndPitchClassNotation() // Return the end pitch class notation
+
+// These five functions are also available with a parameter specifying the start frequency or notation, which for new values will recalculate the cache
+jint.getEndFreqHz(startFreqHz)
+jint.getEndFreqText(startFreqHz)
+jint.getEndInputPitchNotation(startNotation)
+jint.getEndPitchNotation(startNotation)
+jint.getEndPitchClassNotation(startNotation)
 ```
 
-Parsing notation is slow. In the situation where you have many JIntervals with the same setup options (e.g. tuning), and each of them have the same start notation, there is a more efficient method to get the end notations:
+Parsing notation is slow. In the situation where you have many JIntervals with the same setup options (e.g. tuning), and each of them have the same start notation, there is a more efficient method to recalculate the absolute position:
 
 ```js
 var jint = new JInterval(1)        // Use a single JInterval...
@@ -148,72 +184,76 @@ Here are the relevant API calls:
 
 ``` js
 jint.getStartPeo()    // Get internal format for start of JInterval
-jint.getEndPeo(peo)   // Get internal format for end of JInterval
+jint.getEndPeo()      // Get internal format for end of JInterval
+jint.getEndPeo(peo)   // Get internal format for end of JInterval (changing the start value)
+
 jint.setStartPeo(peo) // Set start of JInterval using internal format (obtained from getStartPeo)
 ```
 
 ### Maths
 
-Create a new `JInterval` using mathematical operations on existing intervals. Any extra constructor options will be taken from `jint`.
+Create a new `JInterval` using mathematical operations on existing intervals. Can be used to quickly generate new JIntervals with same setup as `jint`:
 
 ``` js
-jint.get1()              // Returns a new JInterval with unison interval of 1/1
-jint.mult(jint2)         // Returns a new JInterval formed by multiplying ratios of jint and jint2
-jint.mult(jint2, pow)    // Returns a new JInterval formed by multiplying ratios of jint and jint2^pow
-jint.pow(pow)            // Returns a new JInterval with ratio of jint raised to power pow
+jint.get1()            // Returns a new JInterval with unison interval of 1/1
+jint.mult(jint2)       // Returns a new JInterval formed by multiplying ratios of jint and jint2
+jint.mult(jint2, pow)  // Returns a new JInterval formed by multiplying ratios of jint and jint2^pow
+jint.pow(pow)          // Returns a new JInterval with ratio of jint raised to power pow
 ```
 
 ### Algorithm
 
-An algorithm can be specified on a `JInterval` during construction. Default algorithm is `{txt: 'DR', fn: getCommaDR}` where `getCommaDR(p)` is equivalent to `getComma(p)` or `getComma(p, 'DR')`.
+An algorithm can be specified on a `JInterval` during construction, or later on. In `ji-rcn`, the default algorithm has text acronym `DR`, and has an associated (internal) comma function `getCommaDR`. The format for specifying an algorithm as an object is `{txt: 'ABC', fn: getCommaFn}`, and this format can be obtained from a `JInterval` using `getSetupAlgObject`. If `txt` is one of `DR`, `SAG`, `KG2` then the function can be omitted since three functions are already internally available for these comma algorithms.
 
 ``` js
-jint.hasAlg()            // Returns boolean value: false for default comma algorithm, true otherwise
-jint.getAlgText()        // Returns text acronym for algorithm, or blank for default algorithm. (Custom algorithms supplied without a text acronym also return blank here.)
-jint.getAlgFn()          // Returns the algorithm function which takes in a prime and outputs a comma in Peo format
-jint.getSetupAlgObject() // Returns an object representing algorithm setup
+jint.hasAlg()            // Return true if a custom algorithm has been set, false if using default
+
+jint.getAlgText()        // Return text acronym for algorithm.
+                         // Return blank for either default algorithm or custom algorithm supplied without a text acronym.
+jint.getAlgFn()          // Return the algorithm function, which takes in a prime and outputs a comma in Peo format
+jint.getSetupAlgObject() // Return an object {txt: 'ABC', fn: getCommaFn} representing algorithm setup
+
 jint.setAlg()            // Remove the algorithm for this JInterval, use default
-jint.setAlg(obj)         // Change the algorithm, obj has 3 formats (text acronym, function, object)
-                         // getSetupAlgObject on another JInterval can be used as a template for object format
+jint.setAlg(txt)         // Change the algorithm, using recognised text acronym such as 'SAG' or 'KG2'
+jint.setAlg(fn)          // Change the algorithm, using function such as {p => p/2}
+jint.setAlg(obj)         // Change the algorithm, specifying text acronym and function via obj = {txt: 'ABC', fn: getCommaFn}
 ```
 
 ### Tuning
 
-A tuning can be specified on a `JInterval` during construction. Default tuning is `{pitchNotation: 'C4', freqHz: 256}`.
+A tuning can be specified on a `JInterval` during construction, or later on. Default tuning is `{pitchNotation: 'C4', freqHz: 256}`.
 
 ``` js
-jint.hasTuning()                   // Returns boolean value: false for default tuning, true otherwise
+jint.hasTuning()                   // Return true if a custom tuning is set, false if using default tuning
+
 jint.getTuningFreqHz()             // Tuning frequency, in Hz
 jint.getTuningInputPitchNotation() // Tuning notation, as input
 jint.getTuningPitchNotation()      // Tuning notation, in standard format
-jint.getTuningMultHz()             // Multiplier representing frequency in  Hz for notation 'C4'
-jint.getSetupTuningObject()        // Returns an object representing tuning setup
+jint.getTuningMultHz()             // Multiplier representing frequency in Hz for notation 'C4'
+jint.getSetupTuningObject()        // Returns an object {pitchNotation:'X4', freqHz:NNN} representing tuning setup
+
 jint.setTuning()                   // Remove the tuning for this JInterval, use default
-jint.setTuning(obj)                // Change the tuning, obj format {pitchNotation:'C4', freqHz:256}
+jint.setTuning(obj)                // Change the tuning via obj = {pitchNotation:'X4', freqHz:NNN}
 ```
 
 ### Display
 
-Display options for formatting a `JInterval` can be specified as an object during construction, or later on using setDisplay. All options are optional:
-
-|Option|Format|Range|Default|Description|
-|-|-|-|-|-|
-|hide5|boolean|NA|false|Display syntonic commas as [5] if true or ' if false|
-|lev12|integer|0 < value|(off)|Controls if to use Pythagorean comma (12), and which 3-exponent to start at|
-|lev53|integer|0 < value|(off)|Controls if/when to use Mercator comma (53)|
-|lev665|integer|0 < value|(off)|Controls small comma (655)|
-|lev190537|integer|0 < value|(off)|Controls tiny comma (190537)|
-|comMax|integer|0 < value|1000|Max number in comma that displays as-is, without factorisation|
-|reps|integer|0 < value|4|Max times a character is repeated, without using bracket notation|
-
 ``` js
-jint.hasDisplay()          // Returns boolean value: false if there are any custom display options, true otherwise
-jint.getSetupDisplayObject()        // Returns an object representing tuning setup
+jint.hasDisplay()            // Return true if custom display options are supplied, false if using defaults
+jint.getSetupDisplayObject() // Returns an object representing display setup, see table in constructor setup above
 
-// There are 7 more methods to read individual display options
+// Each of these returns false if options is not specified:
+jint.getCommaMaxUnsplit()   // Return integer, largest comma numerator or denominator that is not factorised
+jint.getMaxRepeatChars()    // Return integer, maximum number of repeated characters in notation
+jint.hideComma5Syntonic()   // Return true if format [5] and [1/5] is used for syntonic commas
+jint.levelComma12Pythag()   // Return integer, 3-exponent at which p and d are used for Pythagorean commas
+jint.levelComma53Mercator() // Return integer, 3-exponent at which m and w are used for Mercator commas
+jint.levelComma665Small()   // Return integer, 3-exponent at which s and r are used for small commas
+jint.levelComma190537Tiny() // Return integer, 3-exponent at which t and y are used for tiny commas
 
-jint.setDisplay()        // Remove the display options for this JInterval, use defaults
-jint.setDisplay(obj)     // Change the output display format according to supplied options
+jint.setDisplay()    // Remove the display options for this JInterval, use defaults
+jint.setDisplay(obj) // Change the output display format according to supplied options
+                     // Can use object from getSetupDisplayObject as a template
 ```
 
 ## Examples
@@ -294,6 +334,6 @@ getComma(2499949, 'KG2')   // returns 67498623/67108864
 
 ## Epilogue
 
-These higher prime commas and notations are being made available to enable writing beautiful JI music that goes way outside the 12 notes of the standard scale. A piece of music written at the prime limit of 2499949 is available [here](https://soundcloud.com/davidryan59/ryan-example-primenumberedblues) (which used the `'DR'` comma given above), and the rest of the author's music is available [here](https://soundcloud.com/davidryan59/tracks).
+These higher prime commas and notations are being made available to enable writing beautiful JI music that goes way outside the 12 notes of the standard scale. A piece of music written at the prime limit of 2499949 is available [here](https://soundcloud.com/davidryan59/ryan-example-primenumberedblues) (which used the `DR` comma given above), and the rest of the author's music is available [here](https://soundcloud.com/davidryan59/tracks).
 
 *Hope you will enjoy the infinite possibilities of justly intoned music!*
