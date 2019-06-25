@@ -114,7 +114,7 @@ JInterval.getComma     // Returns the getComma function, which calculates a comm
 JInterval.getCommaAlgs // Returns an object which maps algorithm acronyms to algorithm functions, e.g. maps 'SAG' to the SAG comma algorithm function.
 ```
 
-Some examples of using `getComma` are given below. Format is either `getComma(p)` or `getComma(p, alg)`, which both return a `Peo`; alg can be a valid text acronym or a function.
+Some examples of using `getComma` are given below. Format is either `getComma(p)` or `getComma(p, alg)`, which both return a `Peo`. The argument `alg` can be any of the valid formats, including a recognised text acronym, a function, or an object.
 
 ## JInterval API - Instance Methods
 
