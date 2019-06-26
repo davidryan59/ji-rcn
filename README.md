@@ -80,7 +80,7 @@ Example of using an extra option: `var jint = new JInterval({ratio: 7/3, alg: 'S
 For `display` above, you need a sub-object with any or all of these options set:
 
 |Option|Format|Default|Description|
-|-|-|-|-|
+|:-:|:-:|:-:|---|
 |hide5|boolean|false|Syntonic comma 80/81 displayed as ' if false or [5] if true. Inverse syntonic comma 81/80 displayed as . if false or [1/5] if true.|
 |lev12|positive integer|undefined|Pythagorean comma 531441/524288 = 3^12/2^19 (23.46 cents) displayed as p, its inverse as d, if this option is set with a positive integer. The integer is the minimum 3-exponent which gets p or d in its notation. Default (undefined) is to not use p or d notation.|
 |lev53|positive integer|undefined|Mercator comma 3^53/2^84 (3.615 cents) displayed as m, its inverse as w|

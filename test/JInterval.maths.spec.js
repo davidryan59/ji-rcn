@@ -148,15 +148,15 @@ describe('Maths functions on JInterval', function () {
   });
 
   it('Calling j1.mult(peo) works', function () {
-    var jint3a = new JInterval(3/5);
-    var peo4 = new Peo(4/9)
-    var jint5a = jint3a.mult(peo4)
-    assert.strictEqual(jint5a.ratioFractionText(), "4/15")
+    var jint3a = new JInterval(3 / 5);
+    var peo4 = new Peo(4 / 9);
+    var jint5a = jint3a.mult(peo4);
+    assert.strictEqual(jint5a.ratioFractionText(), '4/15');
   });
 
   it('Calling j1.mult() works', function () {
-    var jint3b = new JInterval(3/5);
-    var jint5b = jint3b.mult()
-    assert.strictEqual(jint5b.ratioFractionText(), "3/5")
+    var jint3b = new JInterval(3 / 5);
+    var jint5b = jint3b.mult();
+    assert.strictEqual(jint5b.ratioFractionText(), '3/5');
   });
 });

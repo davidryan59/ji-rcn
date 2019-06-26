@@ -18,11 +18,11 @@ var canInitialiseFromObject = function canInitialiseFromObject(obj) {
 
 
 var initialise = function initialise(jint, argumentArray) {
-  // Standard way of initialising a JInterval is via an object in various ways,
-  // see initialiseFromObject method.
-
-  // Most of the cases below are shortcut methods, to initialise directly on a number, fraction, etc.
+  // General way of initialising a JInterval is via an object in various ways, see initialiseFromObject method.
+  // Specific cases also exist to initialise JInterval ratio on a number, fraction, peo, etc.
   // optionally specifying the algorithm too
+
+  // Compare the cases below with setRatioPrivate
 
   var arg0 = argumentArray[0];
   var arg1 = argumentArray[1];
