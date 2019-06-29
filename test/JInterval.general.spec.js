@@ -29,10 +29,10 @@ describe(fnName, function () {
     var peo = new Peo(14, 15);
     var jint1 = new JInterval(peo, 'SAG');
     var jint2 = new JInterval(jint1);
-    var ob1 = jint1.ratioPeo().getPrimeExps();
-    var ob2 = jint2.ratioPeo().getPrimeExps();
+    var peo1 = jint1.ratioPeo();
+    var peo2 = jint2.ratioPeo();
     assert(jint1 !== jint2, 'Different JInterval objects');
-    assert.deepStrictEqual(ob1, ob2, 'Represent same note');
+    assert(peo1.equals(peo2), 'Same interval');
     assert.strictEqual(jint2.getAlgText(), 'SAG');
   });
 
@@ -67,13 +67,13 @@ describe(fnName, function () {
   it('can initialise from new JInterval("3/4", "SAG")', function () {
     var jint = new JInterval('3/4', 'SAG');
     assert.strictEqual(jint.getAlgText(), 'SAG');
-    assert.deepStrictEqual(jint.peo.getPrimeExps(), {2: -2, 3: 1});
+    assert(jint.peo.equals(3 / 4));
   });
 
   it('can initialise from new JInterval(0.75, "KG2")', function () {
     var jint = new JInterval(0.75, 'KG2');
     assert.strictEqual(jint.getAlgText(), 'KG2');
-    assert.deepStrictEqual(jint.peo.getPrimeExps(), {2: -2, 3: 1});
+    assert(jint.peo.equals(3 / 4));
   });
 
   it('can provide a deep copy', function () {

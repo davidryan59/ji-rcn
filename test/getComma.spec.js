@@ -60,27 +60,27 @@ describe(fnName, function () {
 
   // Test an algorithm that produces commas with primes other than 2, 3, p
   it('test ADJ algorithm on p=43 (follows DR alg)', function () {
-    var result = getComma(43, 'ADJ');
-    assert.deepStrictEqual(result.getPrimeExps(), {2: -7, 3: 1, 43: 1});
+    var result = getComma(43, 'ADJ');  // its a Peo
+    assert(result.equals(129 / 128));
   });
 
   it('test ADJ algorithm on p=47 (diverges from DR alg)', function () {
     var result = getComma(47, 'ADJ');
-    assert.deepStrictEqual(result.getPrimeExps(), {2: -4, 3: -1, 47: 1});
+    assert(result.equals(47 / 48));
   });
 
   it('test ADJ algorithm on p=59 (uses 2, 3, 5, 59)', function () {
     var result = getComma(59, 'ADJ');
-    assert.deepStrictEqual(result.getPrimeExps(),  {2: -2, 3: -1, 5: -1, 59: 1});
+    assert(result.equals(59 / 60));
   });
 
   it('test ADJ algorithm on p=77 (not prime))', function () {
     var result = getComma(77, 'ADJ');
-    assert.deepStrictEqual(result.getPrimeExps(), {});
+    assert(result.is1());
   });
 
   it('test ADJ algorithm on p=463 (uses 2, 3, 7, 11, 463)', function () {
     var result = getComma(463, 'ADJ');
-    assert.deepStrictEqual(result.getPrimeExps(), {2: -1, 3: -1, 7: -1, 11: -1, 463: 1});
+    assert(result.equals(463 / 462));
   });
 });
