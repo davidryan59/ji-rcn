@@ -141,6 +141,11 @@ jint.ratio()             // Returns a positive number representing the frequency
 
 jint.ratioFractionText() // Returns the interval frequency ratio as a fraction in string format 'NN/NN'
                          // Shortcut for jint.ratioPeo().getAsFractionText()
+
+jint.setRatio(args)      // Update the ratio of a JInterval, args (supply 1 or 2) can be
+                         // any format recognised by new JInterval(args)
+                         // except general object format e.g. {ratio: 42, ...other options}
+                         // such as setRatio(1.4), setRatio(42), setRatio(7/6), setRatio("2/3"), etc
 ```
 
 ### Absolute Position

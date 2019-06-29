@@ -25,6 +25,7 @@ JInterval.prototype.getSetupObject = require('./api/general/getSetupObject');
 JInterval.prototype.ratio = require('./api/freqRatio/ratio');
 JInterval.prototype.ratioFractionText = require('./api/freqRatio/ratioFractionText');
 JInterval.prototype.ratioPeo = require('./api/freqRatio/ratioPeo');
+JInterval.prototype.setRatio = require('./api/freqRatio/setRatio');
 
 // Absolute Position
 JInterval.prototype.hasPos = require('./api/pos/hasPos');
