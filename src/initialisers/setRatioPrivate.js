@@ -14,6 +14,11 @@ var setRatioPrivate = function setRatioPrivate(jint, argumentArray) {
   // Specific cases also exist to initialise JInterval ratio on a number, fraction, peo, etc.
   // optionally specifying the algorithm too
 
+  // Returns invalidBool.
+  // true: if position info might be out of date
+  // false: if position info is updated in this method
+  var invalidBool = true;
+
   // Compare the cases below with initialise
 
   var arg0 = argumentArray[0];
@@ -45,6 +50,7 @@ var setRatioPrivate = function setRatioPrivate(jint, argumentArray) {
       // Case: jint.setRatio(startNotation, endNotation)
       // (Force arg0 and arg1 to strings)
       initialiseUsingNotations(jint, arg0, arg1);
+      invalidBool = false;
     } else {
       // First character of string is a number.
       // Use Peo to parse it fully.
@@ -57,13 +63,16 @@ var setRatioPrivate = function setRatioPrivate(jint, argumentArray) {
       // Case: jint.setRatio(options)
       // This case has been disallowed, it updates many things,
       // but only want to update ratio in this method.
+      invalidBool = false;
     } else {
       // Case: jint.setRatio({p1:e1, ...pi:ei})
       initialiseUsingPeo(jint, new Peo(arg0));
     }
   } else {
     // For setRatio, do nothing by default
+    invalidBool = false;
   }
+  return invalidBool;
 };
 
 module.exports = setRatioPrivate;
