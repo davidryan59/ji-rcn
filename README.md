@@ -144,8 +144,10 @@ jint.ratioFractionText() // Returns the interval frequency ratio as a fraction i
 
 jint.setRatio(args)      // Update the ratio of a JInterval, args (supply 1 or 2) can be
                          // any format recognised by new JInterval(args)
-                         // except general object format e.g. {ratio: 42, ...other options}
-                         // such as setRatio(1.4), setRatio(42), setRatio(7/6), setRatio("2/3"), etc
+                         // such as setRatio(1.4), setRatio(2, 3), setRatio(7/6), setRatio("2/3"),
+                         // setRatio(new Peo(5, 6)), setRatio('G4', 'Bb[7]5'), etc.
+                         // but not general object format e.g. {ratio: 42, ...other options}
+                         // Only the ratio changes, no setup (alg, display, tuning) will change.
 ```
 
 ### Absolute Position
@@ -210,14 +212,21 @@ For this internal format, `C4` is represented by `1/1`, so with `jint.setStartPe
 Create a new `JInterval` using mathematical operations on existing intervals. Can be used to quickly generate new JIntervals with same setup as `jint`:
 
 ``` js
-jint.get1()            // Returns a new JInterval with unison interval of 1/1
-jint.pow(pow)          // Returns a new JInterval with ratio of jint raised to power pow
+// These all return a new JInterval with ratio as described in the comment:
+jint.get1()            // ratio 1/1
+jint.pow(pow)          // ratio of jint raised to integer (+/-) power pow
 
-jint.mult(jint2)       // Returns a new JInterval formed by multiplying ratios of jint and jint2
-jint.mult(jint2, pow)  // Returns a new JInterval formed by multiplying ratios of jint and jint2^pow
+jint.mult(jint2)       // ratio of jint multiplied by ratio of jint2
+jint.mult(num, denom)  // ratio of jint multiplied by fraction num/denom
+                       // We get this case if num is any positive integer
+                       // Also, denom is optional
+jint.mult(anyInput)    // ratio of jint multiplied by new Peo(anyInput)
+                       // Example inputs that work: 3.1, '3.1', '3', '3/4', new Peo(3)
 
-jint.mult(peo)         // Returns a new JInterval formed by multiplying ratio of jint by peo
-jint.mult(peo, pow)    // Returns a new JInterval formed by multiplying ratio of jint by peo^pow
+// The multiplying factor can be raised to an integer power at the same time:
+jint.mult(jint2, pow)
+jint.mult(num, denom, pow)
+jint.mult(anyInput, pow)
 ```
 
 ### Algorithm
@@ -295,7 +304,7 @@ getComma(59)               // returns 236/243
 getComma(59, 'DR')         // returns 236/243
 getComma(59, 'SAG')        // returns 531/512
 getComma(59, 'KG2')        // returns 236/243
-getComma(139, 'DR')        // returns 2224/2187
+getComma(139, 'DR')        // returns 2224/2187 - 139 is first prime to have 3 different commas under DR, SAG, KG2
 getComma(139, 'SAG')       // returns 139/144
 getComma(139, 'KG2')       // returns 33777/32768
 getComma(139, p => new Peo(p/2)) // returns 139/2 using a custom algorithm
