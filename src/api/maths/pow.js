@@ -1,9 +1,9 @@
-var mathsFnJIntervalCreator = require('../../maths/mathsFnJIntervalCreator');
+var createJIntervalWithSetup = require('../../initialisers/createJIntervalWithSetup');
 
 // Return JInterval with frequency ratio to a specified power
 // Use .pow on Peo to achieve the power
 var pow = function pow(power) {
-  return mathsFnJIntervalCreator(this, {peo: this.ratioPeo().pow(power)});
+  return createJIntervalWithSetup(this, {peo: this.ratioPeo().pow(power)});
 };
 
 module.exports = pow;

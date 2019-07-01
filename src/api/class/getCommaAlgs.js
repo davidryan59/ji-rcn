@@ -1,5 +1,5 @@
 // Take a shallow copy of the algorithm index
-var theResult = Object.assign({}, require('../../commas/algIndex'));
+var theResult = Object.assign({}, require('../../notation/algs/algIndex'));
 
 // Return all valid algorithms.
 // NUL is an invalid value for testing only,

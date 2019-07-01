@@ -1,4 +1,4 @@
-var setupPosFromFrequency = require('../../pos/setupPosFromFrequency');
+var setupPosFromFrequency = require('../../properties/pos/setupPosFromFrequency');
 
 var getStartFreqText = function getStartFreqText() {
   setupPosFromFrequency(this);

@@ -1,7 +1,7 @@
 // Algorithm index.
-// Look up algorithms by text strings (outputted from parseCommaAlgText)
+// Look up algorithms by text strings (outputted from parseAlgText)
 
-var consts = require('../constants/consts');
+var consts = require('../../constants/consts');
 
 var getCommaDR = require('./getCommaDR');
 var getCommaSAG = require('./getCommaSAG');
@@ -22,6 +22,5 @@ theObject[consts.ALG_SAG] = getCommaSAG;
 theObject[consts.ALG_KG] = getCommaKG2;
 theObject[consts.ALG_BAD] = getCommaBAD;
 theObject[consts.ALG_ADJ] = getCommaADJ;   // Uses some prime commas with 5+ in them (between 3 and p)
-
 
 module.exports = theObject;

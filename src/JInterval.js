@@ -25,6 +25,7 @@ JInterval.prototype.getSetupObject = require('./api/general/getSetupObject');
 JInterval.prototype.ratio = require('./api/freqRatio/ratio');
 JInterval.prototype.ratioFractionText = require('./api/freqRatio/ratioFractionText');
 JInterval.prototype.ratioPeo = require('./api/freqRatio/ratioPeo');
+JInterval.prototype.setRatio = require('./api/freqRatio/setRatio');
 
 // Absolute Position
 JInterval.prototype.hasPos = require('./api/pos/hasPos');
@@ -44,6 +45,10 @@ JInterval.prototype.getEndInputPitchNotation = require('./api/pos/getEndInputPit
 JInterval.prototype.getEndPitchNotation = require('./api/pos/getEndPitchNotation');
 JInterval.prototype.getEndPitchClassNotation = require('./api/pos/getEndPitchClassNotation');
 
+JInterval.prototype.getStartPeo = require('./api/pos/getStartPeo');
+JInterval.prototype.getEndPeo = require('./api/pos/getEndPeo');
+JInterval.prototype.setStartPeo = require('./api/pos/setStartPeo');
+
 // Maths
 JInterval.prototype.get1 = require('./api/maths/get1');
 JInterval.prototype.mult = require('./api/maths/mult');
@@ -54,6 +59,7 @@ JInterval.prototype.hasAlg = require('./api/alg/hasAlg');
 JInterval.prototype.getAlgFn = require('./api/alg/getAlgFn');
 JInterval.prototype.getAlgText = require('./api/alg/getAlgText');
 JInterval.prototype.getSetupAlgObject = require('./api/alg/getSetupAlgObject');
+JInterval.prototype.setAlg = require('./api/alg/setAlg');
 
 // Tuning
 JInterval.prototype.hasTuning = require('./api/tuning/hasTuning');
@@ -62,6 +68,7 @@ JInterval.prototype.getTuningInputPitchNotation = require('./api/tuning/getTunin
 JInterval.prototype.getTuningPitchNotation = require('./api/tuning/getTuningPitchNotation');
 JInterval.prototype.getTuningMultHz = require('./api/tuning/getTuningMultHz');
 JInterval.prototype.getSetupTuningObject = require('./api/tuning/getSetupTuningObject');
+JInterval.prototype.setTuning = require('./api/tuning/setTuning');
 
 // Display
 JInterval.prototype.hasDisplay = require('./api/display/hasDisplay');
@@ -73,5 +80,6 @@ JInterval.prototype.levelComma190537Tiny = require('./api/display/levelComma1905
 JInterval.prototype.getCommaMaxUnsplit = require('./api/display/getCommaMaxUnsplit');
 JInterval.prototype.getMaxRepeatChars = require('./api/display/getMaxRepeatChars');
 JInterval.prototype.getSetupDisplayObject = require('./api/display/getSetupDisplayObject');
+JInterval.prototype.setDisplay = require('./api/display/setDisplay');
 
 module.exports = JInterval;

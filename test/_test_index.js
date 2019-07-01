@@ -12,5 +12,5 @@ module.exports = {
   consts: require('../' + testDir + '/constants/consts'),
   peos: require('../' + testDir + '/constants/peos'),
   parseNotation: require('../' + testDir + '/notation/parseNotation'),
-  parseCommaAlgText: require('../' + testDir + '/commas/parseCommaAlgText')
+  parseAlgText: require('../' + testDir + '/notation/algs/parseAlgText')
 };

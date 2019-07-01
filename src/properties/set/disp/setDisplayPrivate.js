@@ -12,18 +12,7 @@ var checkLevel = function checkLevel(input, defaultLevel) {
   return defaultLevel;
 };
 
-var setDisplay = function setDisplay(jint, theDisplay) {
-  // Format:
-  // {
-  //   hide5: boolean,
-  //   lev12: integer > 0,
-  //   lev53: integer > 0,
-  //   lev665: integer > 0,
-  //   lev190537: integer > 0,
-  //   comMax: integer > 0,
-  //   reps: integer > 0,
-  // }
-
+var setDisplayPrivate = function setDisplayPrivate(jint, theDisplay) {
   // Return if no options supplied
   if (!theDisplay) return;
 
@@ -61,4 +50,4 @@ var setDisplay = function setDisplay(jint, theDisplay) {
   if (Number.isInteger(reps) && reps > 0) disp.rps = reps;
 };
 
-module.exports = setDisplay;
+module.exports = setDisplayPrivate;

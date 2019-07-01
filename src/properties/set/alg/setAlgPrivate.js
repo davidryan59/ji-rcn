@@ -1,8 +1,8 @@
-var parseCommaAlgText = require('../commas/parseCommaAlgText');
-var algIndex = require('../commas/algIndex');
-var consts = require('../constants/consts');
+var parseAlgText = require('../../../notation/algs/parseAlgText');
+var algIndex = require('../../../notation/algs/algIndex');
+var consts = require('../../../constants/consts');
 
-var setAlg = function setAlg(jint, theAlg) {
+var setAlgPrivate = function setAlgPrivate(jint, theAlg) {
   // Format - 3 cases
   // Case 1 Text:        theAlg = "ALG"
   // Case 2 Function:    theAlg = aFunction
@@ -14,7 +14,7 @@ var setAlg = function setAlg(jint, theAlg) {
   // Have algorithm here. Make a new blank property.
   jint.set.alg = {};
 
-  var inputAlgText = parseCommaAlgText(theAlg);
+  var inputAlgText = parseAlgText(theAlg);
   if (inputAlgText) {
     // Case 1: theAlg = 'ALG'
     jint.set.alg.txt = inputAlgText;
@@ -32,7 +32,7 @@ var setAlg = function setAlg(jint, theAlg) {
       jint.set.alg.txt = theAlg.txt || consts.ALG_CUSTOM;
     }
     // Copy the text second, and overwrite the function if it is available
-    var inputAlgTxtText = parseCommaAlgText(theAlg.txt);
+    var inputAlgTxtText = parseAlgText(theAlg.txt);
     if (inputAlgTxtText) {
       jint.set.alg.txt = inputAlgTxtText;
       var inputAlgTxtFn = algIndex[inputAlgTxtText];
@@ -41,4 +41,4 @@ var setAlg = function setAlg(jint, theAlg) {
   }
 };
 
-module.exports = setAlg;
+module.exports = setAlgPrivate;

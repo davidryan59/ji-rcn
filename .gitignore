@@ -3,4 +3,4 @@
 .sonarlint
 node_modules
 removed
-temp*.md
+temp*

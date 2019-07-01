@@ -1,8 +1,6 @@
-// var setAlg = require('../setup/setAlg');
-// var setTuning = require('../setup/setTuning');
-var setAllSetupOptions = require('../setup/setAllSetupOptions');
+var setAllSetupOptions = require('../properties/set/setAllSetupOptions');
 
-var setupPosFromNotation = require('../pos/setupPosFromNotation');
+var setupPosFromNotation = require('../properties/pos/setupPosFromNotation');
 
 var initialiseUsingAnotherJInterval = function initialiseUsingAnotherJInterval(jint, otherJint) {
   // Construct the correct setup object

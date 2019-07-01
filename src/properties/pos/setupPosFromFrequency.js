@@ -1,7 +1,7 @@
 var Peo = require('peo');
 
 var setPos = require('./setPos');
-var consts = require('../constants/consts');
+var consts = require('../../constants/consts');
 
 var smallLimit = 1e-12;
 var largeLimit = 1e15;

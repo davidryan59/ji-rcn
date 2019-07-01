@@ -1,6 +1,6 @@
 var consts = require('../constants/consts');
 var parseNotation = require('../notation/parseNotation');
-var setupPosFromNotation = require('../pos/setupPosFromNotation');
+var setupPosFromNotation = require('../properties/pos/setupPosFromNotation');
 
 var initialiseUsingNotations = function initialiseUsingNotations(jint, startNInput, endNInput) {
   var startNote = (endNInput) ? startNInput : consts.DEFAULT_PITCH_NOTATION;

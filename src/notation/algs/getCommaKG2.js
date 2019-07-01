@@ -1,5 +1,5 @@
-var tripleToPeo = require('../maths/tripleToPeo');
-var calcExp2 = require('../maths/calcExp2');
+var tripleToPeo = require('./calcs/tripleToPeo');
+var calcExp2 = require('./calcs/calcExp2');
 
 var getCommaKG2 = function getCommaKG2(p) {
   // Calculate a prime comma, according to the KG2 algorithm

@@ -1,4 +1,4 @@
-var removePos = require('../../pos/removePos');
+var removePos = require('../../properties/pos/removePos');
 
 var compress = function compress() {
   // Clear all cached information, reset object stores, make JInterval smaller in size.

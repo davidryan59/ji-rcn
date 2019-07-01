@@ -8,6 +8,56 @@ var JInterval = testIndex.JInterval;
 
 
 describe('Display functions on JInterval', function () {
+  it('removeDisplay works', function () {
+    var jint = new JInterval(1);
+    assert(!jint.hasDisplay());
+    jint.setDisplay();    // Case where there is nothing to remove
+    assert(!jint.hasDisplay());
+    jint.setDisplay({comMax: 100});
+    assert(jint.hasDisplay());
+    jint.setDisplay();    // Case where there is something to remove
+    assert(!jint.hasDisplay());
+  });
+
+  it('setDisplay works', function () {
+    var jint = new JInterval({ratio: 35 / 32});
+    assert(!jint.hasDisplay());
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation("E'3");
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getStartPitchNotation(), "E'3");
+    assert.strictEqual(jint.getEndPitchNotation(), "F#''[7]3");
+    assert.strictEqual(jint.getStartFreqText(), '160.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '175.00 Hz');
+    jint.setDisplay({hide5: true});
+    assert(jint.hasDisplay());
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation("E'3");
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getStartPitchNotation(), 'E[5]3');
+    assert.strictEqual(jint.getEndPitchNotation(), 'F#[175]3');
+    assert.strictEqual(jint.getStartFreqText(), '160.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '175.00 Hz');
+    jint.setDisplay('');
+    assert(!jint.hasDisplay());
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation("E'3");
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getStartPitchNotation(), "E'3");
+    assert.strictEqual(jint.getEndPitchNotation(), "F#''[7]3");
+    assert.strictEqual(jint.getStartFreqText(), '160.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '175.00 Hz');
+    jint.setDisplay({hide5: true, comMax: 1});
+    assert(jint.hasDisplay());
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation("E'3");
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getStartPitchNotation(), 'E[5]3');
+    assert.strictEqual(jint.getEndPitchNotation(), 'F#3 [25 7]');
+    assert.strictEqual(jint.getStartFreqText(), '160.00 Hz');
+    assert.strictEqual(jint.getEndFreqText(), '175.00 Hz');
+  });
+
   it('Test several options switched on', function () {
     var jint = new JInterval({
       display: {hide5: true, lev12: true, lev53: true, lev665: true, lev190537: true},

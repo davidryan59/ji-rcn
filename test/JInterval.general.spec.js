@@ -8,8 +8,7 @@ var JInterval = testIndex.JInterval;
 
 var identityFn = function identityFn(p) {return new Peo(p);};
 
-var fnName = 'JInterval general tests';
-describe(fnName, function () {
+describe('JInterval general tests', function () {
   it('can initialise from new JInterval(new Peo(14, 15)), and objects get copied correctly', function () {
     var origPeo = new Peo(14, 15);
     var jint = new JInterval(origPeo, 'KG2');
@@ -29,10 +28,10 @@ describe(fnName, function () {
     var peo = new Peo(14, 15);
     var jint1 = new JInterval(peo, 'SAG');
     var jint2 = new JInterval(jint1);
-    var ob1 = jint1.ratioPeo().getPrimeExps();
-    var ob2 = jint2.ratioPeo().getPrimeExps();
+    var peo1 = jint1.ratioPeo();
+    var peo2 = jint2.ratioPeo();
     assert(jint1 !== jint2, 'Different JInterval objects');
-    assert.deepStrictEqual(ob1, ob2, 'Represent same note');
+    assert(peo1.equals(peo2), 'Same interval');
     assert.strictEqual(jint2.getAlgText(), 'SAG');
   });
 
@@ -67,13 +66,13 @@ describe(fnName, function () {
   it('can initialise from new JInterval("3/4", "SAG")', function () {
     var jint = new JInterval('3/4', 'SAG');
     assert.strictEqual(jint.getAlgText(), 'SAG');
-    assert.deepStrictEqual(jint.peo.getPrimeExps(), {2: -2, 3: 1});
+    assert(jint.peo.equals(3 / 4));
   });
 
   it('can initialise from new JInterval(0.75, "KG2")', function () {
     var jint = new JInterval(0.75, 'KG2');
     assert.strictEqual(jint.getAlgText(), 'KG2');
-    assert.deepStrictEqual(jint.peo.getPrimeExps(), {2: -2, 3: 1});
+    assert(jint.peo.equals(3 / 4));
   });
 
   it('can provide a deep copy', function () {
@@ -131,23 +130,6 @@ describe(fnName, function () {
     var toStringText = jint.toString();
     assert(toStringText.includes(startNotation));
     assert(toStringText.includes(endNotation));
-  });
-
-  it('can raise to a power', function () {
-    var jint = new JInterval(3, 2);              // G4
-    assert.strictEqual(jint.pow(3).getEndPitchNotation(), 'A5');   // 27/8
-  });
-
-  it('can multiply', function () {
-    var jint1 = new JInterval(5, 3);              // A'5
-    var jint2 = new JInterval(9, 4);              // D5
-    assert.strictEqual(jint1.mult(jint2).getEndPitchNotation(), "B'5");   // 15/4
-  });
-
-  it('can multiply by a power', function () {
-    var jint1 = new JInterval(5, 4);              // E'4
-    var jint2 = new JInterval(3, 2);              // G4
-    assert.strictEqual(jint1.mult(jint2, 2).getEndPitchNotation(), "F#'5");   // 45/16
   });
 
   it('default JInterval has frequency Hz and text of 256.00 Hz', function () {
@@ -372,5 +354,118 @@ describe(fnName, function () {
     assert.strictEqual(jint.getStartPitchNotation(), "E'5");
     assert.strictEqual(jint.getStartInputPitchNotation(), "E'#b5");
     assert.strictEqual(jint.getEndPitchNotation(), 'G6');
+  });
+
+  it('get/set peo API works', function () {
+    var jint = new JInterval(55 / 49);
+    assert(!jint.hasPos());
+    jint.setStartPitchNotation('Bb[13]3');
+    assert(jint.hasPos());
+    assert.strictEqual(jint.getStartPitchNotation(), 'Bb[13]3');
+    assert.strictEqual(jint.getEndPitchNotation(), "B'[143/49]3");
+    var peoStart = jint.getStartPeo();
+    assert.strictEqual(peoStart.getAsFractionText(), '208/243');
+    var peoEnd = jint.getEndPeo();
+    assert.strictEqual(peoEnd.getAsFractionText(), '11440/11907');
+    var jint2 = new JInterval(6 / 7);
+    assert(!jint2.hasPos());
+    jint2.setStartPeo(peoStart);
+    assert(jint2.hasPos());
+    assert.strictEqual(jint2.getStartPitchNotation(), 'Bb[13]3');
+    assert.strictEqual(jint2.getEndPitchNotation(), 'G[13/7]3');
+  });
+
+  it('cover edge case of getStartPeo when pos is not already set', function () {
+    var jint = new JInterval(55 / 49);
+    var peo = jint.getStartPeo();
+    assert.strictEqual(peo.getAsDecimal(), 1);
+  });
+
+  it('can raise interval 3/2 to power 3', function () {
+    var jint1 = new JInterval(3, 2);
+    var jint2 = jint1.pow(3);
+    assert.strictEqual(jint2.ratioFractionText(), '27/8');
+  });
+
+  it('can raise interval 6/7 to power -2', function () {
+    var jint1 = new JInterval(6 / 7);
+    var jint2 = jint1.pow(-2);
+    assert.strictEqual(jint2.ratioFractionText(), '49/36');
+  });
+
+  it('can raise interval 7/5 to power 0', function () {
+    var jint1 = new JInterval(7 / 5);
+    var jint2 = jint1.pow(0);
+    assert.strictEqual(jint2.ratioFractionText(), '1');
+  });
+
+  it('can raise interval 36/7 to power 1, returns different JInterval, with same ratio', function () {
+    var jint1 = new JInterval('36/7');
+    var jint2 = jint1.pow(1);
+    assert(jint1 !== jint2);
+    assert.strictEqual(jint2.ratioFractionText(), '36/7');
+  });
+
+  it('raising 4/13 to invalid power returns different JInterval, with same ratio', function () {
+    var jint1 = new JInterval('4/13');
+    var jint2 = jint1.pow(0.5);
+    assert(jint1 !== jint2);
+    assert.strictEqual(jint2.ratioFractionText(), '4/13');
+  });
+
+  it('can multiply jint 5/3 by another jint 9/4', function () {
+    var jint1 = new JInterval(5, 3);
+    var jint2 = new JInterval(9, 4);
+    var jint3 = jint1.mult(jint2);
+    assert.strictEqual(jint3.ratioFractionText(), '15/4');
+  });
+
+  it('can multiply jint 5/4 by another jint 3/2 to power 2', function () {
+    var jint1 = new JInterval(5, 4);
+    var jint2 = new JInterval(3, 2);
+    var jint3 = jint1.mult(jint2, 2);
+    assert.strictEqual(jint3.ratioFractionText(), '45/16');
+  });
+
+  it('can multiply jint 7/3 by peo 5/11 to power 4', function () {
+    var jint = new JInterval(7, 3);
+    var peo = new Peo(5, 11);
+    assert.strictEqual(jint.mult(peo, 4).ratioFractionText(), '4375/43923');
+  });
+
+  it('can multiply jint 2/9 by integer 3', function () {
+    var jint1 = new JInterval(2 / 9);
+    var jint2 = jint1.mult(3);
+    assert.strictEqual(jint2.ratioFractionText(), '2/3');
+  });
+
+  it('can multiply jint 2/9 by fraction 3/7', function () {
+    var jint1 = new JInterval(2 / 9);
+    var jint2 = jint1.mult(3, 7);
+    assert.strictEqual(jint2.ratioFractionText(), '2/21');
+  });
+
+  it('can multiply jint 2/9 by integer 3 to power -2', function () {
+    var jint1 = new JInterval(2 / 9);
+    var jint2 = jint1.mult(3, null, -2);
+    assert.strictEqual(jint2.ratioFractionText(), '2/81');
+  });
+
+  it('can multiply jint 2/9 by fraction 4/5 to power -3', function () {
+    var jint1 = new JInterval('2/9');
+    var jint2 = jint1.mult(4, 5, -3);
+    assert.strictEqual(jint2.ratioFractionText(), '125/288');
+  });
+
+  it('can multiply jint 2/9 by decimal 3.1', function () {
+    var jint1 = new JInterval(2 / 9);
+    var jint2 = jint1.mult(3.1);
+    assert.strictEqual(jint2.ratioFractionText(), '31/45');
+  });
+
+  it('can multiply jint 2/9 by decimal 3.1 to power -4', function () {
+    var jint1 = new JInterval('2/9');
+    var jint2 = jint1.mult(3.1, -4);
+    assert.strictEqual(jint2.ratioFractionText(), '20000/8311689');
   });
 });
