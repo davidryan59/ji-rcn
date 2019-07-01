@@ -52,7 +52,7 @@ describe('Performance of JInterval', function () {
   var jint3 = new JInterval(2);
   var arr3 = ['D##b#bb(p2)4', 'E...\'\'\'(d2)4'];
   jint1.getEndPitchClassNotation('F[77/77]#b(p2)4');
-  runTest(1, 200, 760, 'average < 760us for recalculating complex notations', function (i) {
+  runTest(1, 200, 860, 'average < 860us for recalculating complex notations', function (i) {
     return jint3.getEndPitchClassNotation(arr3[i % 2]); // Swap between two simple end notations
   });
 });
