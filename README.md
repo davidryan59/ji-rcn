@@ -1,7 +1,9 @@
 # Just Intonation - Rational Comma Notation
 JI-RCN, `ji-rcn` module. Find [module on npm](https://www.npmjs.com/package/ji-rcn) and [code repo with examples on GitHub](https://github.com/davidryan59/ji-rcn).
 
-[![npm version](https://badge.fury.io/js/ji-rcn.svg)](https://badge.fury.io/js/ji-rcn)[![Build status](https://travis-ci.org/davidryan59/ji-rcn.svg?master)](https://travis-ci.org/davidryan59)
+[![npm version](https://badge.fury.io/js/ji-rcn.svg)](https://badge.fury.io/js/ji-rcn)
+[![Downloads per month](https://img.shields.io/npm/dy/ji-rcn.svg?maxAge=31536000)](https://github.com/davidryan59/ji-rcn)
+[![Build status](https://travis-ci.org/davidryan59/ji-rcn.svg?master)](https://travis-ci.org/davidryan59)
 
 **Just Intonation** (JI) tunes musical instruments to have whole number frequency ratios between notes. This is the natural system of tuning for many important musical instruments, including the human voice, stringed instruments, and wind instruments. For such instruments, JI tuning sounds better, more natural, more 'in tune' than tempered tuning. A common example of tempered tuning is 12TET (12 tone equal temperament) which splits the octave into 12 equal semitones; this is the default modern tuning, used for many instruments such as pianos, but noticeably out of tune from pure JI intervals.
 
